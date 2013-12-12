@@ -213,3 +213,27 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#############
+## Ignore Folders
+#############
+Forge/*
+Forge/client/*
+Forge/common/*
+Forge/fml/*
+Forge/patches/*
+Forge/mcp/bin/*
+Forge/mcp/conf/*
+Forge/mcp/docs/*
+Forge/mcp/eclipse/*
+Forge/mcp/jars/*
+Forge/mcp/lib/*
+Forge/mcp/logs/*
+Forge/mcp/modsrc/*
+Forge/mcp/reobf/*
+Forge/mcp/runtime/*
+Forge/mcp/src/minecraft/cpw/*
+Forge/mcp/src/minecraft/ibxm/*
+Forge/mcp/src/minecraft/net/*
+Forge/mcp/src/minecraft/paulscode/*
+Forge/mcp/temp/*
