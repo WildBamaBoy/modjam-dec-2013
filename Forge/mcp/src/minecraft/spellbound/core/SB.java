@@ -29,6 +29,9 @@ import spellbound.effects.EffectFireLvl3;
 import spellbound.effects.EffectLightningLvl1;
 import spellbound.effects.EffectLightningLvl2;
 import spellbound.effects.EffectLightningLvl3;
+import spellbound.effects.EffectSummonLvl1;
+import spellbound.effects.EffectSummonLvl2;
+import spellbound.effects.EffectSummonLvl3;
 import spellbound.effects.EffectUltimateDisintegrate;
 import spellbound.effects.EffectUltimateElementalFury;
 import spellbound.effects.EffectUltimateWailOfTheBanshee;
@@ -142,20 +145,21 @@ public class SB
 		itemTabletColdLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl2, "tabletcoldlvl2", new EffectColdLvl2(), 2);
 		itemTabletLightningLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl2, "tabletlightninglvl2", new EffectLightningLvl2(), 2);
 		
-		itemTabletFireLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl3, "tabletfirelvl3", new EffectFireLvl3());
-		itemTabletColdLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl3, "tabletcoldlvl3", new EffectColdLvl3());
-		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new EffectLightningLvl3());
+		itemTabletFireLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl3, "tabletfirelvl3", new EffectFireLvl3(), 3);
+		itemTabletColdLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl3, "tabletcoldlvl3", new EffectColdLvl3(), 3);
+		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new EffectLightningLvl3(), 3);
 		
-		itemTabletUltWailOfTheBanshee = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateWailOfTheBanshee, "tabletwailofthebanshee", new EffectUltimateWailOfTheBanshee());
-		itemTabletUltElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateElementalFury, "tabletelementalfury", new EffectUltimateElementalFury());
-		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new EffectUltimateDisintegrate());
+		itemTabletUltWailOfTheBanshee = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateWailOfTheBanshee, "tabletwailofthebanshee", new EffectUltimateWailOfTheBanshee(), 4);
+		itemTabletUltElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateElementalFury, "tabletelementalfury", new EffectUltimateElementalFury(), 4);
+		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new EffectUltimateDisintegrate(), 4);
 		
 		//TODO first level
-		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl1", new EffectUltimateDisintegrate());
-		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl2", new EffectUltimateDisintegrate());
-		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl3", new EffectUltimateDisintegrate());
+		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl1, "tabletsummonlvl1", new EffectSummonLvl1(), 1);
+		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl2, "tabletsummonlvl2", new EffectSummonLvl2(), 2);
+		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl3, "tabletsummonlvl3", new EffectSummonLvl3(), 3);
+
 		//Register blocks
-		//TODO Move?
+		//TODO Move to abstract block?
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomPinkOrange, ItemBlockMushroomRedOrange.class, "PinkOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
@@ -175,13 +179,12 @@ public class SB
 		//Register Recipes
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
 				" O ", "OTO", " O ", 'O', blockHybridMushroomOrange, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase); //>>>>>>>Lapis lazuli dmg is 4<<<<<<<<
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 

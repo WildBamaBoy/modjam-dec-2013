@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import spellbound.enums.EnumSpellType;
 import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class AbstractEffect 
@@ -11,4 +12,6 @@ public abstract class AbstractEffect
 	public abstract void doSpellEffect();
 	
 	public abstract void updateSpellEffect();
+	
+	public abstract EnumSpellType getSpellType();
 }
