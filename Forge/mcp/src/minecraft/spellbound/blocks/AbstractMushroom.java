@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
 
 public abstract class AbstractMushroom extends BlockFlower
@@ -15,9 +16,22 @@ public abstract class AbstractMushroom extends BlockFlower
 		super(itemId);
 		this.setBlockBounds(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 2.0F, 0.5F + 0.2F);
 		this.setTickRandomly(true);
+		this.setCreativeTab(SB.instance.spellboundTab);
+		
+		this.setName();
+		this.setTexture();
 	}
 
 	public abstract AbstractEffect getMushroomEffect();
+	
+	public abstract void setName();
+	
+	/**
+	 * SKIP PREFIX
+	 * @param textureName
+	 * @return
+	 */
+	public abstract void setTexture();
 	
     /**
      * Ticks the block if it's been scheduled
