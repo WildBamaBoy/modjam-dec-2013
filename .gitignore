@@ -237,3 +237,5 @@ Forge/mcp/src/minecraft/ibxm/*
 Forge/mcp/src/minecraft/net/*
 Forge/mcp/src/minecraft/paulscode/*
 Forge/mcp/temp/*
+
+!Forge/mcp/src/minecraft/spellbound/*
