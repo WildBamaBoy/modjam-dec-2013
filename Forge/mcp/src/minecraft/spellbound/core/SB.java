@@ -98,15 +98,16 @@ public class SB
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
 		
 		//Declare items
-		itemTabletBase = new Item(propertiesManager.propertiesList.itemID_TabletBase).setTextureName("spellbound:tabletbase");
+		itemTabletBase = new Item(propertiesManager.propertiesList.itemID_TabletBase).setTextureName("spellbound:tabletbase").setUnlocalizedName("tabletbase");
 		
-		itemTabletFireBase = new Item(propertiesManager.propertiesList.itemID_TabletFire).setTextureName("spellbound:tabletfirelvl1");
-		itemTabletColdBase = new Item(propertiesManager.propertiesList.itemID_TabletCold).setTextureName("spellbound:tabletcoldlvl1");
-		itemTabletLightningBase = new Item(propertiesManager.propertiesList.itemID_TabletLightning).setTextureName("spellbound:tabletlightninglvl1");;
+		itemTabletFireBase = new Item(propertiesManager.propertiesList.itemID_TabletFireBase).setTextureName("spellbound:tabletfirebase").setUnlocalizedName("tabletfirebase");
+		itemTabletColdBase = new Item(propertiesManager.propertiesList.itemID_TabletColdBase).setTextureName("spellbound:tabletcoldbase").setUnlocalizedName("tabletcoldbase");
+		itemTabletLightningBase = new Item(propertiesManager.propertiesList.itemID_TabletLightningBase).setTextureName("spellbound:tabletlightningbase").setUnlocalizedName("tabletlightningbase");
 		
-		itemTabletFireLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletFire).setTextureName("spellbound:tabletfirelvl1");
-		itemTabletColdLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletCold).setTextureName("spellbound:tabletcoldlvl1");
-		itemTabletLightningLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletLightning).setTextureName("spellbound:tabletlightninglvl1");
+		//>>>>>>>>>>>>>>>>>>>>>>>> Make new item, override haseffect & information <<<<<<<<<<<<<<<<<<<<<<<<
+		itemTabletFireLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletFireLvl1).setTextureName("spellbound:tabletfirelvl1").setUnlocalizedName("tabletfirelvl1");
+		itemTabletColdLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletColdLvl1).setTextureName("spellbound:tabletcoldlvl1").setUnlocalizedName("tabletcoldlvl1");
+		itemTabletLightningLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletLightningLvl1).setTextureName("spellbound:tabletlightninglvl1").setUnlocalizedName("tabletlightninglvl1");
 		
 		//Do recipes 
 		
@@ -129,17 +130,31 @@ public class SB
 		//TODO
 		
 		LanguageRegistry.addName(itemTabletBase, "Blank Tablet");
-		LanguageRegistry.addName(itemTabletFireLvl1, "Fire Tablet");
-		LanguageRegistry.addName(itemTabletColdLvl1, "Cold Tablet");
-		LanguageRegistry.addName(itemTabletLightningLvl1, "Lightning Tablet");
+		
+		LanguageRegistry.addName(itemTabletFireBase, "Fire Tablet");
+		LanguageRegistry.addName(itemTabletColdBase, "Cold Tablet");
+		LanguageRegistry.addName(itemTabletLightningBase, "Lightning Tablet");
+		
+		LanguageRegistry.addName(itemTabletFireLvl1, "Flaming Hands");
+		LanguageRegistry.addName(itemTabletColdLvl1, "Icy Grip");
+		LanguageRegistry.addName(itemTabletLightningLvl1, "Tazer");
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
+				" O ", "OTO", " O ", 'O', blockHybridMushroomOrange, 'T', itemTabletBase);
+//TODO
+//		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
+//				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
+//		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
+//				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+//		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
-				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletBase);
+				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
-				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
+				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
 	}
 }
