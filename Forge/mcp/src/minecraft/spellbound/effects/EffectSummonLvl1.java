@@ -7,8 +7,7 @@ public class EffectSummonLvl1 extends AbstractEffect
 	@Override
 	public String getSpellDisplayName() 
 	{
-		//TODO: Name this spell
-		return "Summon ??";
+		return "Summon Wolf";
 	}
 
 	@Override

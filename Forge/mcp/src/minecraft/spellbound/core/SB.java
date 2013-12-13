@@ -20,21 +20,46 @@ import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomPinkOrange;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
+import spellbound.effects.EffectAdvanceTime;
+import spellbound.effects.EffectAllSeeingEye;
+import spellbound.effects.EffectBlink;
+import spellbound.effects.EffectBreach;
+import spellbound.effects.EffectChangeWeather;
+import spellbound.effects.EffectChaos;
 import spellbound.effects.EffectColdLvl1;
 import spellbound.effects.EffectColdLvl2;
 import spellbound.effects.EffectColdLvl3;
+import spellbound.effects.EffectColdShield;
+import spellbound.effects.EffectColorSpray;
+import spellbound.effects.EffectDimensionDoor;
 import spellbound.effects.EffectFireLvl1;
 import spellbound.effects.EffectFireLvl2;
 import spellbound.effects.EffectFireLvl3;
+import spellbound.effects.EffectFireShield;
+import spellbound.effects.EffectFishForm;
+import spellbound.effects.EffectFlight;
+import spellbound.effects.EffectGrease;
+import spellbound.effects.EffectGreaterScrying;
+import spellbound.effects.EffectHaste;
 import spellbound.effects.EffectLightningLvl1;
 import spellbound.effects.EffectLightningLvl2;
 import spellbound.effects.EffectLightningLvl3;
+import spellbound.effects.EffectLightningShield;
+import spellbound.effects.EffectMinorScrying;
+import spellbound.effects.EffectMiscastMagic;
+import spellbound.effects.EffectPush;
+import spellbound.effects.EffectShieldOfInvulnerability;
 import spellbound.effects.EffectSummonLvl1;
 import spellbound.effects.EffectSummonLvl2;
 import spellbound.effects.EffectSummonLvl3;
+import spellbound.effects.EffectSurgeShield;
+import spellbound.effects.EffectTransport;
 import spellbound.effects.EffectUltimateDisintegrate;
 import spellbound.effects.EffectUltimateElementalFury;
 import spellbound.effects.EffectUltimateWailOfTheBanshee;
+import spellbound.effects.EffectWallOfBedrock;
+import spellbound.effects.EffectWallOfObsidian;
+import spellbound.effects.EffectWallOfStone;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
@@ -199,40 +224,40 @@ public class SB
 		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl2, "tabletsummonlvl2", new EffectSummonLvl2(), 2);
 		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl3, "tabletsummonlvl3", new EffectSummonLvl3(), 3);
 
-		itemTabletFireShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireShield, "tabletfireshield", new EffectSummonLvl3(), 3);
-		itemTabletIceShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletIceShield, "tableticeshield", new EffectSummonLvl3(), 3);
-		itemTabletLightningShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningShield, "tabletlightningshield", new EffectSummonLvl3(), 3);
-		itemTabletSurgeShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSurgeShield, "tabletsurgeshield", new EffectSummonLvl3(), 3);
-		itemTabletShieldOfInvulnerability = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletShieldOfInvulnerability, "tabletshieldofinvulnerability", new EffectSummonLvl3(), 3);
+		itemTabletFireShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireShield, "tabletfireshield", new EffectFireShield(), 1);
+		itemTabletIceShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletIceShield, "tableticeshield", new EffectColdShield(), 1);
+		itemTabletLightningShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningShield, "tabletlightningshield", new EffectLightningShield(), 1);
+		itemTabletSurgeShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSurgeShield, "tabletsurgeshield", new EffectSurgeShield(), 1);
+		itemTabletShieldOfInvulnerability = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletShieldOfInvulnerability, "tabletshieldofinvulnerability", new EffectShieldOfInvulnerability(), 4);
 
-		itemTabletWallOfStone = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfStone, "tabletwallofstone", new EffectSummonLvl3(), 3);
-		itemTabletWallOfObsidian = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfObsidian, "tabletwallofobsidian", new EffectSummonLvl3(), 3);
-		itemTabletWallOfBedrock = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfBedrock, "tabletwallofbedrock", new EffectSummonLvl3(), 3);
+		itemTabletWallOfStone = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfStone, "tabletwallofstone", new EffectWallOfStone(), 1);
+		itemTabletWallOfObsidian = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfObsidian, "tabletwallofobsidian", new EffectWallOfObsidian(), 2);
+		itemTabletWallOfBedrock = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfBedrock, "tabletwallofbedrock", new EffectWallOfBedrock(), 3);
 
-		itemTabletPush = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletPush, "tabletpush", new EffectSummonLvl3(), 3);
-		itemTabletColorSpray = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColorSpray, "tabletcolorspray", new EffectSummonLvl3(), 3);
-		itemTabletGrease = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGrease, "tabletgrease", new EffectSummonLvl3(), 3);
-		itemTabletBlink = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBlink, "tabletblink", new EffectSummonLvl3(), 3);
+		itemTabletPush = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletPush, "tabletpush", new EffectPush(), 1);
+		itemTabletColorSpray = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColorSpray, "tabletcolorspray", new EffectColorSpray(), 1);
+		itemTabletGrease = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGrease, "tabletgrease", new EffectGrease(), 1);
+		itemTabletBlink = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBlink, "tabletblink", new EffectBlink(), 1);
 		
-		itemTabletTransport = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletTransport, "tablettransport", new EffectSummonLvl3(), 3);
-		itemTabletDimensionDoor = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDimensionDoor, "tablettransport", new EffectSummonLvl3(), 3);
+		itemTabletTransport = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletTransport, "tablettransport", new EffectTransport(), 1);
+		itemTabletDimensionDoor = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDimensionDoor, "tabletdimensiondoor", new EffectDimensionDoor(), 2);
 		
-		itemTabletHaste = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletHaste, "tablethaste", new EffectSummonLvl3(), 3);
-		itemTabletAdvanceTime = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAdvanceTime, "tabletadvancetime", new EffectSummonLvl3(), 3);
-		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new EffectSummonLvl3(), 3);
-		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new EffectSummonLvl3(), 3);
-		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new EffectSummonLvl3(), 3);
+		itemTabletHaste = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletHaste, "tablethaste", new EffectHaste(), 1);
+		itemTabletAdvanceTime = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAdvanceTime, "tabletadvancetime", new EffectAdvanceTime(), 1);
+		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new EffectChangeWeather(), 1);
+		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new EffectFlight(), 1);
+		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new EffectFishForm(), 1);
 		
 		//Foresight
 		
-		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new EffectSummonLvl3(), 3);
-		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new EffectSummonLvl3(), 3);
-		itemTabletAllSeeingeye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectSummonLvl3(), 3);
+		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new EffectMinorScrying(), 1);
+		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new EffectGreaterScrying(), 2);
+		itemTabletAllSeeingeye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectAllSeeingEye(), 3);
 		
 		//Disruptive Magic
-		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new EffectSummonLvl3(), 3);
-		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new EffectSummonLvl3(), 3);
-		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new EffectSummonLvl3(), 3);
+		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new EffectBreach(), 1);
+		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new EffectMiscastMagic(), 2);
+		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new EffectChaos(), 3);
 		
 		//Register blocks
 		//TODO Move to abstract block?

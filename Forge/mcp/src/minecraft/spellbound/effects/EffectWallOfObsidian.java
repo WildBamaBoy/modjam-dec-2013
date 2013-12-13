@@ -1,13 +1,14 @@
 package spellbound.effects;
 
+import net.minecraft.block.Block;
 import spellbound.enums.EnumSpellType;
 
-public class EffectLightningShield extends AbstractEffect
+public class EffectWallOfObsidian extends AbstractEffectWall
 {
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Lightning Shield";
+		return "Wall of Obsidian";
 	}
 
 	@Override
@@ -25,6 +26,12 @@ public class EffectLightningShield extends AbstractEffect
 	@Override
 	public EnumSpellType getSpellType() 
 	{
-		return EnumSpellType.SELF;
+		return EnumSpellType.FRONT;
+	}
+	
+	@Override
+	public int getWallBlockId() 
+	{
+		return Block.obsidian.blockID;
 	}
 }

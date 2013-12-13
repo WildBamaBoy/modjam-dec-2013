@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import spellbound.effects.AbstractEffect;
 import spellbound.util.Color;
 import cpw.mods.fml.relauncher.Side;
@@ -34,5 +35,13 @@ public class ItemSpellTablet extends SBItem
 	{
 		infoList.add(Color.BLUE + "Lvl. " + level);
 		infoList.add(Color.BLUE + "@(" + spellEffect.getSpellType() + ")");
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) 
+	{
+		par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
+		spellEffect.doSpellEffect();
+		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 }

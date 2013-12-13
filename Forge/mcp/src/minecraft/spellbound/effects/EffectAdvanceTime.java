@@ -2,12 +2,12 @@ package spellbound.effects;
 
 import spellbound.enums.EnumSpellType;
 
-public class EffectLightningShield extends AbstractEffect
+public class EffectAdvanceTime extends AbstractEffect
 {
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Lightning Shield";
+		return "Advance Time";
 	}
 
 	@Override
