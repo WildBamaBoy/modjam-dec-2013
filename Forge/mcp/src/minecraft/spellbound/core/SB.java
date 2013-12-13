@@ -22,6 +22,7 @@ import spellbound.effects.EffectFireLvl1;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
+import spellbound.item.SBItem;
 import spellbound.itemblocks.ItemBlockMushroomRedOrange;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -97,20 +98,18 @@ public class SB
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
 		
 		//Declare items
-		itemTabletBase = new AbstractItem(propertiesManager.propertiesList.itemID_TabletBase,);
+		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
 		
-		itemTabletFireBase = new Item(propertiesManager.propertiesList.itemID_TabletFireBase).setTextureName("spellbound:tabletfirebase").setUnlocalizedName("tabletfirebase");
-		itemTabletColdBase = new Item(propertiesManager.propertiesList.itemID_TabletColdBase).setTextureName("spellbound:tabletcoldbase").setUnlocalizedName("tabletcoldbase");
-		itemTabletLightningBase = new Item(propertiesManager.propertiesList.itemID_TabletLightningBase).setTextureName("spellbound:tabletlightningbase").setUnlocalizedName("tabletlightningbase");
+		itemTabletFireBase = new SBItem(propertiesManager.propertiesList.itemID_TabletFireBase, "tabletfirebase", "Fire Tablet");
+		itemTabletColdBase = new SBItem(propertiesManager.propertiesList.itemID_TabletColdBase, "tabletcoldbase", "Cold Tablet");
+		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
 		
-		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, new EffectFireLvl1()).setTextureName("spellbound:tabletfirelvl1").setUnlocalizedName("tabletfirelvl1");
-		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1).setTextureName("spellbound:tabletcoldlvl1").setUnlocalizedName("tabletcoldlvl1");
-		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1).setTextureName("spellbound:tabletlightninglvl1").setUnlocalizedName("tabletlightninglvl1");
-		
-		//Do recipes 
+		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1());
+		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
+		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
 		
 		//Register blocks
-		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>YOU USED THE SAME CLASS FOR ITEMBLOCK!!!1
+		//TODO Move?
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomPinkOrange, ItemBlockMushroomRedOrange.class, "PinkOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
@@ -142,12 +141,11 @@ public class SB
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
 				" O ", "OTO", " O ", 'O', blockHybridMushroomOrange, 'T', itemTabletBase);
-//TODO
-//		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
-//				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
-//		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
-//				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
-//		
+		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
+				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
+				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
