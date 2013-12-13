@@ -20,7 +20,9 @@ import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomPinkOrange;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
+import spellbound.effects.EffectColdLvl1;
 import spellbound.effects.EffectFireLvl1;
+import spellbound.effects.EffectLightningLvl1;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
@@ -54,15 +56,15 @@ public class SB
 	//Items here
 	
 	//Blocks here
-	//-------------- PRIMARY
+	
+	//Primary Mushrooms
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
 	public Block blockPrimaryMushroomBlueGrey;
 	
-	//Hybrid
+	//Hybrid Mushrooms
 	public Block blockHybridMushroomOrange;
 	public Block blockHybridMushroomWhite;
-	
 	
 	//Tablets
 	public Item itemTabletBase;
@@ -74,6 +76,18 @@ public class SB
 	public ItemSpellTablet itemTabletFireLvl1;
 	public ItemSpellTablet itemTabletColdLvl1;
 	public ItemSpellTablet itemTabletLightningLvl1;
+	
+	public ItemSpellTablet itemTabletFireLvl2;
+	public ItemSpellTablet itemTabletColdLvl2;
+	public ItemSpellTablet itemTabletLightningLvl2;
+	
+	public ItemSpellTablet itemTabletFireLvl3;
+	public ItemSpellTablet itemTabletColdLvl3;
+	public ItemSpellTablet itemTabletLightningLvl3;
+	
+	public ItemSpellTablet itemTabletUltWailOfTheBanshee;
+	public ItemSpellTablet itemTabletUltElementalFury;
+	public ItemSpellTablet itemTabletUltDisintegrate;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -108,9 +122,17 @@ public class SB
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
 		
 		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1());
-//		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
-//		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
-//		
+		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
+		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
+		
+		itemTabletFireLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl2, "tabletfirelvl2", new EffectFireLvl2());
+		itemTabletColdLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl2, "tabletcoldlvl2", new EffectColdLvl2());
+		itemTabletLightningLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl2, "tabletlightninglvl2", new EffectLightningLvl2());
+		
+		itemTabletFireLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl3, "tabletfirelvl3", new EffectFireLvl3());
+		itemTabletColdLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl3, "tabletcoldlvl3", new EffectColdLvl3());
+		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new EffectLightningLvl3());
+		
 		
 		//Register blocks
 		//TODO Move?

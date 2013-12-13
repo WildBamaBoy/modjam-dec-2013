@@ -28,41 +28,33 @@ public abstract class AbstractMushroom extends BlockFlower
 
 	public abstract void setName();
 
-	/**
-	 * SKIP PREFIX
-	 * @param textureName
-	 * @return
-	 */
 	public abstract void setTexture();
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
 	public void updateTick(World world, int x, int y, int z, Random worldRandom)
 	{
 		Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
 
 		if (nearbyPrimary != null)
 		{
-			Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+			Coordinates hybridSpawn = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
 			
-			if (hybridSpawnLocation == null)
+			if (hybridSpawn == null)
 			{
-				hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
+				hybridSpawn = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
 			}
 			
-			if (hybridSpawnLocation != null)
+			if (hybridSpawn != null)
 			{
 				boolean spawnOrange = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
 				
 				if (spawnOrange)
 				{
-					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
+					world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, SB.instance.blockHybridMushroomOrange.blockID);
 				}
 				
 				else
 				{
-					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
+					world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, SB.instance.blockHybridMushroomWhite.blockID);
 				}
 			}
 		}
