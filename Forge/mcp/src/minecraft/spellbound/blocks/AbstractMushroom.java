@@ -38,56 +38,7 @@ public abstract class AbstractMushroom extends BlockFlower
      */
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-        if (par5Random.nextInt(25) == 0)
-        {
-            byte b0 = 4;
-            int l = 5;
-            int i1;
-            int j1;
-            int k1;
-
-            for (i1 = par2 - b0; i1 <= par2 + b0; ++i1)
-            {
-                for (j1 = par4 - b0; j1 <= par4 + b0; ++j1)
-                {
-                    for (k1 = par3 - 1; k1 <= par3 + 1; ++k1)
-                    {
-                        if (par1World.getBlockId(i1, k1, j1) == this.blockID)
-                        {
-                            --l;
-
-                            if (l <= 0)
-                            {
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            i1 = par2 + par5Random.nextInt(3) - 1;
-            j1 = par3 + par5Random.nextInt(2) - par5Random.nextInt(2);
-            k1 = par4 + par5Random.nextInt(3) - 1;
-
-            for (int l1 = 0; l1 < 4; ++l1)
-            {
-                if (par1World.isAirBlock(i1, j1, k1) && this.canBlockStay(par1World, i1, j1, k1))
-                {
-                    par2 = i1;
-                    par3 = j1;
-                    par4 = k1;
-                }
-
-                i1 = par2 + par5Random.nextInt(3) - 1;
-                j1 = par3 + par5Random.nextInt(2) - par5Random.nextInt(2);
-                k1 = par4 + par5Random.nextInt(3) - 1;
-            }
-
-            if (par1World.isAirBlock(i1, j1, k1) && this.canBlockStay(par1World, i1, j1, k1))
-            {
-                par1World.setBlock(i1, j1, k1, this.blockID, 0, 2);
-            }
-        }
+    	//TODO: Check for colors.
     }
 
     /**
@@ -95,7 +46,7 @@ public abstract class AbstractMushroom extends BlockFlower
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
+    	return par1World.getBlockId(par2, par3, par4) == Block.grass.blockID;
     }
 
     /**
@@ -112,17 +63,7 @@ public abstract class AbstractMushroom extends BlockFlower
      */
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
-        if (par3 >= 0 && par3 < 256)
-        {
-            int l = par1World.getBlockId(par2, par3 - 1, par4);
-            Block soil = Block.blocksList[l];
-            return (l == Block.mycelium.blockID || par1World.getFullBlockLightValue(par2, par3, par4) < 13) &&
-                   (soil != null && soil.canSustainPlant(par1World, par2, par3 - 1, par4, ForgeDirection.UP, this));
-        }
-        
-        else
-        {
-            return false;
-        }
+    	return true;
+        //TODO: THIS
     }
 }

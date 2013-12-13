@@ -2,6 +2,8 @@ package spellbound.gen;
 
 import java.util.Random;
 
+import spellbound.core.SB;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -19,8 +21,11 @@ public class WorldGenMushrooms implements IWorldGenerator
 			int genX = chunkX * 16 + random.nextInt(16);
 			int genY = random.nextInt(90); //TODO CHECK
 			int genZ = chunkZ * 16 + random.nextInt(16);
-			
-			new WorldGenMagicMushrooms()
+
+			if (world.getBlockId(genX, genY, genZ) == Block.grass.blockID)
+			{
+				world.setBlock(genX, genY + 1, genZ, SB.instance.blockPrimaryMushroomRedOrange.blockID);
+			}
 		}
 	}
 }
