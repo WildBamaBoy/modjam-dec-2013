@@ -14,16 +14,15 @@ public final class Logic
 
 		while (true)
 		{
-			final int blockId = worldObj.getBlockId(startX + movementX, startY + movementY, startZ + movementZ);
-			int coordsX = startX + movementX;
-			int coordsY = startY + movementY;
-			int coordsZ = startZ + movementZ;
-			
+			final int coordsX = startX + movementX;
+			final int coordsY = startY + movementY;
+			final int coordsZ = startZ + movementZ;
+			final int blockId = worldObj.getBlockId(coordsX, coordsY, coordsZ);
+
 			if (blockId == searchId)
 			{
 				//Only for mushrooms. Check if block above is clear of obstruction.
-				if (worldObj.getBlockId(coordsX, coordsY + 1, coordsZ) == 0 &&
-					coordsX != startX && coordsY != startY && coordsZ != startZ)
+				if (worldObj.getBlockId(coordsX, coordsY + 1, coordsZ) == 0)
 				{
 					return new Coordinates(coordsX, coordsY + 1, coordsZ);
 				}
@@ -34,24 +33,24 @@ public final class Logic
 				//Will be done. None will be found.
 				return null;
 			}
-			
+
 			if (movementX == maxDistanceAway && movementZ == maxDistanceAway)
 			{
 				//Reset for next level
 				movementX = 0 - maxDistanceAway;
 				movementY--;
 				movementZ = 0 - maxDistanceAway;
-				
+
 				continue;
 			}
-			
+
 			if (movementX == maxDistanceAway)
 			{
 				movementX = 0 - maxDistanceAway;
 				movementZ++;
 				continue;
 			}
-			
+
 			movementX++;
 		}
 	}

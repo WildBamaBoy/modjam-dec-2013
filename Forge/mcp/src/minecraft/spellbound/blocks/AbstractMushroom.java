@@ -38,49 +38,43 @@ public abstract class AbstractMushroom extends BlockFlower
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int x, int y, int z, Random worldRandom)
 	{
+		Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
 
+		if (nearbyPrimary != null)
+		{
+			Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+			
+			if (hybridSpawnLocation == null)
+			{
+				hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
+			}
+			
+			if (hybridSpawnLocation != null)
+			{
+				boolean spawnOrange = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
+				
+				if (spawnOrange)
+				{
+					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
+				}
+				
+				else
+				{
+					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
+				}
+			}
+		}
 	}
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
-		int myId = world.getBlockId(x, y, z);
-
-		if (!world.isRemote)
-		{
-			Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
-			
-			if (nearbyPrimary != null)
-			{
-				Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
-				
-				if (hybridSpawnLocation == null)
-				{
-					hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
-				}
-				
-				if (hybridSpawnLocation != null)
-				{
-					boolean spawnOrange = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
-					
-					if (spawnOrange)
-					{
-						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
-					}
-					
-					else
-					{
-						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
-					}
-				}
-			}
-		}
-		
-		return true;
+	{	
+		int blockId = world.getBlockId(x, y, z);
+		return blockId == Block.grass.blockID || blockId == Block.dirt.blockID;
 	}
 
 	/**
