@@ -28,6 +28,8 @@ public class SB
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
 	
+	//Items here
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
