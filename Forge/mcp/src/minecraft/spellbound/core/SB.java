@@ -57,6 +57,10 @@ public class SB
 	public Block blockHybridMushroomOrange;
 	public Block blockHybridMushroomWhite;
 	
+	
+	//Tablets
+	public Item itemTabletBase;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -84,7 +88,10 @@ public class SB
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.itemID_MushroomBlueGrey);
 		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.itemID_MushroomOrange);
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
-				
+		
+		//Declare items
+		itemTabletBase = new Item(propertiesManager.propertiesList.itemID_TabletBase).setTextureName("spellbound:tabletbase");
+		
 		//Do recipes 
 		
 		//Register blocks

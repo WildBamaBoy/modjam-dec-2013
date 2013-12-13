@@ -17,4 +17,7 @@ public class PropertiesList
 	public int itemID_MushroomBlueGrey = 3590;
 	public int itemID_MushroomOrange = 3591;
 	public int itemID_MushroomWhite = 3592;
+	//TODO change to block ID ^
+	
+	public int itemID_TabletBase = 26747;
 }
