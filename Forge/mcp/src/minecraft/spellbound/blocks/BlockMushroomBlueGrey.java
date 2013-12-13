@@ -24,7 +24,6 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 	@Override
 	public void setTexture() 
 	{
-		System.out.println("DO SET");
 		this.setTextureName("spellbound:mushroom_bluegrey");
 	}
 }

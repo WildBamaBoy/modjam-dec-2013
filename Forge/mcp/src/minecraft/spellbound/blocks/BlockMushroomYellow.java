@@ -18,12 +18,12 @@ public class BlockMushroomYellow extends AbstractMushroom
 	@Override
 	public void setName() 
 	{
-		this.setUnlocalizedName("GREY ORANGE HYBRID");
+		this.setUnlocalizedName("YellowHybrid");
 	}
 
 	@Override
 	public void setTexture() 
 	{
-		this.setTextureName("spellbound:mushroom_greyorange");
+		this.setTextureName("spellbound:mushroom_yellow");
 	}
 }

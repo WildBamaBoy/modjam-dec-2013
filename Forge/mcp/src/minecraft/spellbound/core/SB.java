@@ -202,13 +202,14 @@ public class SB
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);
 		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.blockID_MushroomOrange);
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite);
-		blockHybridMushroomGreyOrange = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Orange + BlueGrey
-		blockHybridMushroomLightBlue = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //GreyOrange + BlueGrey //COLD!
-		blockHybridMushroomGrey = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //GreyOrange + BlueGrey >>>Also
-		blockHybridMushroomYellow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //OrangeGrey + Grey //LIGHTNING!
-		blockHybridMushroomRainbow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Red Orange + Yellow //RANDOM! //2nd LEVEL
-		blockHybridMushroomGold = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Rainbow + Yellow //2nd level
-		blockHybridMushroomBlack = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Blue Grey + Grey //2nd level
+
+		blockHybridMushroomGreyOrange = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGreyOrange); //Orange + BlueGrey
+		blockHybridMushroomLightBlue = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomLightBlue); //GreyOrange + BlueGrey //COLD!
+		blockHybridMushroomGrey = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGrey); //GreyOrange + BlueGrey >>>Also
+		blockHybridMushroomYellow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomYellow); //OrangeGrey + Grey //LIGHTNING!
+		blockHybridMushroomRainbow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomRainbow); //Red Orange + Yellow //RANDOM! //2nd LEVEL
+		blockHybridMushroomGold = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGold); //Rainbow + Yellow //2nd level
+		blockHybridMushroomBlack = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
 		
 		//Declare items
 		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
@@ -280,6 +281,13 @@ public class SB
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
 		GameRegistry.registerBlock(blockHybridMushroomOrange, ItemBlockMushroomRedOrange.class, "OrangeHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomWhite, ItemBlockMushroomRedOrange.class, "WhiteHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomLightBlue, ItemBlockMushroomRedOrange.class, "LightBlueHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomGrey, ItemBlockMushroomRedOrange.class, "GreyHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomYellow, ItemBlockMushroomRedOrange.class, "YellowHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomRainbow, ItemBlockMushroomRedOrange.class, "RainbowHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomGold, ItemBlockMushroomRedOrange.class, "GoldHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomBlack, ItemBlockMushroomRedOrange.class, "BlackHybrid");
+		
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 		
 		//Add localizations
@@ -289,6 +297,12 @@ public class SB
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
+		GameRegistry.registerBlock(blockHybridMushroomLightBlue, ItemBlockMushroomRedOrange.class, "LightBlueHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomGrey, ItemBlockMushroomRedOrange.class, "GreyHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomYellow, ItemBlockMushroomRedOrange.class, "YellowHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomRainbow, ItemBlockMushroomRedOrange.class, "RainbowHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomGold, ItemBlockMushroomRedOrange.class, "GoldHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomBlack, ItemBlockMushroomRedOrange.class, "BlackHybrid");
 		//TODO
 		
 		//Register Recipes
