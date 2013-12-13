@@ -25,10 +25,12 @@ public class SB
 {
 	@Instance("Spellbound")
 	public static SB instance;
+
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
 	
 	//Items here
+	
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -36,5 +38,7 @@ public class SB
 		instance = this;
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
+		
+		//
 	}
 }

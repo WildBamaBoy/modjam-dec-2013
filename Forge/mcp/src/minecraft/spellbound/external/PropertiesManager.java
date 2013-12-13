@@ -63,13 +63,17 @@ public class PropertiesManager
 
 				if (fieldType.contains("int"))
 				{
-					properties.put(f.getName(), f.get(properties).toString());
+					properties.put(f.getName(), f.get(propertiesList).toString());
 				}
 
 				//TODO EXTEND!!!
 			}
 			
 			FileOutputStream fos = new FileOutputStream(propertiesFile);
+			properties.store(fos, "Change item IDs");
+			fos.close();
+			
+			System.out.println("Saved :)");
 		}
 
 		catch (IllegalAccessException e)
@@ -82,6 +86,12 @@ public class PropertiesManager
 		{
 			//TODO Crash handler
 			System.out.println("FILE NOT FOUND");
+		} 
+		
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
