@@ -12,6 +12,6 @@ package spellbound.external;
 public class PropertiesList 
 {
 	//Put item IDs here.
-	public int itemID_mushroom = 6587;
+	public int itemID_MushroomRed = 6587;
 	
 }

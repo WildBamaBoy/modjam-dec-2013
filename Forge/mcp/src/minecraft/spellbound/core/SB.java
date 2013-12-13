@@ -9,6 +9,8 @@
 
 package spellbound.core;
 
+import net.minecraft.block.Block;
+import spellbound.blocks.BlockMushroomRed;
 import spellbound.external.PropertiesManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -33,6 +35,7 @@ public class SB
 	//Items here
 	
 	//Blocks here
+	public Block blockMushroomRed;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -41,6 +44,9 @@ public class SB
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
 		
-		//
+		//Declare items
+		
+		//Declare blocks
+		blockMushroomRed = new BlockMushroomRed(propertiesManager.propertiesList.itemID_MushroomRed);
 	}
 }
