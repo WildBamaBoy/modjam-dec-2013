@@ -10,7 +10,7 @@
 package spellbound.core;
 
 import net.minecraft.block.Block;
-import spellbound.blocks.BlockMushroomRed;
+import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.external.PropertiesManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -35,7 +35,7 @@ public class SB
 	//Items here
 	
 	//Blocks here
-	public Block blockMushroomRed;
+	public Block blockMushroomRedOrange;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -47,6 +47,6 @@ public class SB
 		//Declare items
 		
 		//Declare blocks
-		blockMushroomRed = new BlockMushroomRed(propertiesManager.propertiesList.itemID_MushroomRed);
+		blockMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.itemID_MushroomRed);
 	}
 }

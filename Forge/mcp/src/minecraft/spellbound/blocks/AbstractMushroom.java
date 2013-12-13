@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import spellbound.spells.AbstractEffect;
+import spellbound.effects.AbstractEffect;
 
 public abstract class AbstractMushroom extends BlockFlower
 {
