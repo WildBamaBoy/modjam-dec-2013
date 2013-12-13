@@ -46,7 +46,6 @@ public abstract class AbstractMushroom extends BlockFlower
 	 */
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		System.out.println("AA");
 		int myId = par1World.getBlockId(par2, par3, par4);
 
 		int squareCounter = -1;
@@ -60,31 +59,52 @@ public abstract class AbstractMushroom extends BlockFlower
 				{
 					//TODO Move rand to SB
 					Random rand = new Random();
-					
+
 					//Search for possible location.
-					int searchCounter = 0
-					while (squareCounter < 2)
+					int searchCounter = 0;
+
+					boolean spawnPointFound = false;
+					int spawnX = 0;
+					int spawnY = 0;
+					int spawnZ = 0;
+
+					while (searchCounter < 2)
 					{
-						for (int i = -1; i < 2; i++)
+						for (int j = -1; j < 2; j++)
 						{
+							spawnPointFound = par1World.getBlockId(par2 + searchCounter, par3, par4 + j) == 0;
+
+							if (spawnPointFound)
+							{
+								spawnX = par2 + searchCounter;
+								spawnY = par3;
+								spawnZ = par4 + j;
+								break;
+							}
+						}
 						
+						if (spawnPointFound)
+						{
+							searchCounter++;
 						}
 					}
-					
-					if (rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean())
+
+					if (spawnPointFound)
 					{
-						SB.instance.blockHybridMushroomOrange;
+						if (rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean())
+						{
+							par1World.setBlock(spawnX, spawnY, spawnZ, SB.instance.blockHybridMushroomOrange.blockID);
+						}
+
+						else
+						{
+							par1World.setBlock(spawnX, spawnY, spawnZ, SB.instance.blockHybridMushroomWhite.blockID);
+						}
 					}
-					
-					else
-					{
-						SB.instance.blockHybridMushroomWhite;
-					}
-					
 					break;
 				}
 			}
-			
+
 			squareCounter++;
 		}
 
