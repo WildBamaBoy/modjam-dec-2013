@@ -91,7 +91,7 @@ public class SB
 		
 		//Declare items
 		itemTabletBase = new Item(propertiesManager.propertiesList.itemID_TabletBase).setTextureName("spellbound:tabletbase");
-		
+		itemFireTablet = new Item(propertiesManager.propertiesList.item)
 		//Do recipes 
 		
 		//Register blocks
@@ -110,5 +110,12 @@ public class SB
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
+		//TODO
+		
+		LanguageRegistry.addName(itemTabletBase, "Blank Tablet");
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
+				" C ", "C C", " C ", 'C', Item.clay);
+		GameR
 	}
 }
