@@ -6,7 +6,7 @@ public class BlockMushroomRedOrange extends AbstractMushroom
 {
 	public BlockMushroomRedOrange(int itemId) 
 	{
-		super(itemId, "RED OR");
+		super(itemId);
 	}
 
 	@Override
@@ -24,6 +24,6 @@ public class BlockMushroomRedOrange extends AbstractMushroom
 	@Override
 	public void setTexture() 
 	{
-		this.setTexture("Spellbound:mushroom_redorange");
+		this.setTextureName("spellbound:mushroom_redorange");
 	}
 }

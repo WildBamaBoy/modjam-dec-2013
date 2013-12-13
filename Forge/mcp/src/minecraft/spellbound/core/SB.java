@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.external.PropertiesManager;
+import spellbound.itemblocks.ItemBlockMushroomRedOrange;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -23,7 +24,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid="Spellbound", name="Spellbound", version="1.0.0")
+@Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
 channels={"CHANNEL"}
 //packethandler = Packethandler.class //*
@@ -59,18 +60,22 @@ public class SB
 				return new ItemStack(Item.appleRed, 1, 0);
 			}
 		};
+		LanguageRegistry.instance().addStringLocalization("tabSpellbound", "Spellbound");
+		
 		
 		//Declare items
 		
+		
 		//Declare blocks
 		blockMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.itemID_MushroomRedOrange);
-
+		
 		//Do recipes
 		
-
-		LanguageRegistry.instance().addStringLocalization("tabSpellbound", "Spellbound");
 		
 		//Register blocks
-		GameRegistry.registerBlock(blockMushroomRedOrange, "RRRR");
+		GameRegistry.registerBlock(blockMushroomRedOrange, ItemBlockMushroomRedOrange.class);
+		
+		//Add localizations
+		LanguageRegistry.addName(blockMushroomRedOrange, "Red Orange Mushroom");
 	}
 }
