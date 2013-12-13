@@ -18,8 +18,10 @@ import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomPinkOrange;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
+import spellbound.effects.EffectFireLvl1;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
+import spellbound.item.ItemSpellTablet;
 import spellbound.itemblocks.ItemBlockMushroomRedOrange;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -65,9 +67,9 @@ public class SB
 	public Item itemTabletColdBase;
 	public Item itemTabletLightningBase;
 	
-	public Item itemTabletFireLvl1;
-	public Item itemTabletColdLvl1;
-	public Item itemTabletLightningLvl1;
+	public ItemSpellTablet itemTabletFireLvl1;
+	public ItemSpellTablet itemTabletColdLvl1;
+	public ItemSpellTablet itemTabletLightningLvl1;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -81,14 +83,11 @@ public class SB
 		{
 			public ItemStack getIconItemStack()
 			{
+				//TODO Change tab icon
 				return new ItemStack(Item.appleRed, 1, 0);
 			}
 		};
 		LanguageRegistry.instance().addStringLocalization("tabSpellbound", "Spellbound");
-		
-		
-		//Declare items
-		
 		
 		//Declare blocks
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.itemID_MushroomRedOrange);
@@ -98,16 +97,15 @@ public class SB
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
 		
 		//Declare items
-		itemTabletBase = new Item(propertiesManager.propertiesList.itemID_TabletBase).setTextureName("spellbound:tabletbase").setUnlocalizedName("tabletbase");
+		itemTabletBase = new AbstractItem(propertiesManager.propertiesList.itemID_TabletBase,);
 		
 		itemTabletFireBase = new Item(propertiesManager.propertiesList.itemID_TabletFireBase).setTextureName("spellbound:tabletfirebase").setUnlocalizedName("tabletfirebase");
 		itemTabletColdBase = new Item(propertiesManager.propertiesList.itemID_TabletColdBase).setTextureName("spellbound:tabletcoldbase").setUnlocalizedName("tabletcoldbase");
 		itemTabletLightningBase = new Item(propertiesManager.propertiesList.itemID_TabletLightningBase).setTextureName("spellbound:tabletlightningbase").setUnlocalizedName("tabletlightningbase");
 		
-		//>>>>>>>>>>>>>>>>>>>>>>>> Make new item, override haseffect & information <<<<<<<<<<<<<<<<<<<<<<<<
-		itemTabletFireLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletFireLvl1).setTextureName("spellbound:tabletfirelvl1").setUnlocalizedName("tabletfirelvl1");
-		itemTabletColdLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletColdLvl1).setTextureName("spellbound:tabletcoldlvl1").setUnlocalizedName("tabletcoldlvl1");
-		itemTabletLightningLvl1 = new Item(propertiesManager.propertiesList.itemID_TabletLightningLvl1).setTextureName("spellbound:tabletlightninglvl1").setUnlocalizedName("tabletlightninglvl1");
+		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, new EffectFireLvl1()).setTextureName("spellbound:tabletfirelvl1").setUnlocalizedName("tabletfirelvl1");
+		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1).setTextureName("spellbound:tabletcoldlvl1").setUnlocalizedName("tabletcoldlvl1");
+		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1).setTextureName("spellbound:tabletlightninglvl1").setUnlocalizedName("tabletlightninglvl1");
 		
 		//Do recipes 
 		
