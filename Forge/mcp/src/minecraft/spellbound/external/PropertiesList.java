@@ -13,5 +13,6 @@ public class PropertiesList
 {
 	//Put item IDs here.
 	public int itemID_MushroomRedOrange = 3588;
+	public int itemID_MushroomPinkOrange = 3589;
 	
 }
