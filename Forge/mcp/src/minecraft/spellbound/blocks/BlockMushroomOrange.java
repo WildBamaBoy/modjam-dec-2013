@@ -2,9 +2,9 @@ package spellbound.blocks;
 
 import spellbound.effects.AbstractEffect;
 
-public class BlockMushroomBlueGrey extends AbstractMushroom
+public class BlockMushroomOrange extends AbstractMushroom
 {
-	public BlockMushroomBlueGrey(int itemId) 
+	public BlockMushroomOrange(int itemId) 
 	{
 		super(itemId);
 	}
@@ -18,13 +18,12 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 	@Override
 	public void setName() 
 	{
-		this.setUnlocalizedName("BLUEGREYPRIMARY");
+		this.setUnlocalizedName("ORANGE HYBRID");
 	}
 
 	@Override
 	public void setTexture() 
 	{
-		System.out.println("DO SET");
-		this.setTextureName("spellbound:mushroom_bluegrey");
+		this.setTextureName("spellbound:mushroom_orange");
 	}
 }

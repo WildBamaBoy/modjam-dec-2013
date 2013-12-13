@@ -15,5 +15,6 @@ public class PropertiesList
 	public int itemID_MushroomRedOrange = 3588;
 	public int itemID_MushroomPinkOrange = 3589;
 	public int itemID_MushroomBlueGrey = 3590;
-	
+	public int itemID_MushroomOrange = 3591;
+	public int itemID_MushroomWhite = 3592;
 }

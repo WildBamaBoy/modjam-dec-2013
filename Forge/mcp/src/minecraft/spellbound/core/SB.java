@@ -14,8 +14,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import spellbound.blocks.BlockMushroomBlueGrey;
+import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomPinkOrange;
 import spellbound.blocks.BlockMushroomRedOrange;
+import spellbound.blocks.BlockMushroomWhite;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.itemblocks.ItemBlockMushroomRedOrange;
@@ -46,9 +48,14 @@ public class SB
 	//Items here
 	
 	//Blocks here
+	//-------------- PRIMARY
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
 	public Block blockPrimaryMushroomBlueGrey;
+	
+	//Hybrid
+	public Block blockHybridMushroomOrange;
+	public Block blockHybridMushroomWhite;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -75,17 +82,21 @@ public class SB
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.itemID_MushroomRedOrange);
 		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.itemID_MushroomPinkOrange);
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.itemID_MushroomBlueGrey);
-		
+		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.itemID_MushroomOrange);
+		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
+				
 		//Do recipes 
 		
 		//Register blocks
-		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class);
+		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");
+		GameRegistry.registerBlock(blockPrimaryMushroomPinkOrange, ItemBlockMushroomRedOrange.class, "PinkOrangePrimary");
+		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 		
 		//Add localizations
 		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Red Orange Mushroom");
-		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Pink Orange Mushroom");
-		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Blue Grey Mushroom");
+		LanguageRegistry.addName(blockPrimaryMushroomPinkOrange, "Pink Orange Mushroom");
+		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
 		
 	}
 }
