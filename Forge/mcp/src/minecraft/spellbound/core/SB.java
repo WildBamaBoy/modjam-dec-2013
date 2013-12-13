@@ -44,6 +44,7 @@ public class SB
 	
 	//Blocks here
 	public Block blockMushroomRedOrange;
+	public Block blockMushroomPinkOrange;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -77,5 +78,6 @@ public class SB
 		
 		//Add localizations
 		LanguageRegistry.addName(blockMushroomRedOrange, "Red Orange Mushroom");
+		
 	}
 }
