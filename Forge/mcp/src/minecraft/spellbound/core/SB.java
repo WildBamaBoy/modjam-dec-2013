@@ -9,6 +9,7 @@
 
 package spellbound.core;
 
+import spellbound.external.PropertiesManager;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,10 +25,14 @@ public class SB
 {
 	@Instance("Spellbound")
 	public static SB instance;
+	public static PropertiesManager propertiesManager;
+	public static String runningDirectory;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		instance = this;
+		runningDirectory = System.getProperty("user.dir");
+		propertiesManager = new PropertiesManager();
 	}
 }

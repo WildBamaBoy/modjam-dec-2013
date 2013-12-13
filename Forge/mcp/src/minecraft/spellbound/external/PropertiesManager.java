@@ -9,7 +9,25 @@
 
 package spellbound.external;
 
+import java.io.File;
+
+import spellbound.core.SB;
+
 public class PropertiesManager 
 {
-	public PropertiesList
+	public PropertiesList propertiesList = new PropertiesList();
+	
+	public File propertiesFile;
+	public File storageFolder;
+	
+	public PropertiesManager()
+	{
+		storageFolder = new File(SB.runningDirectory + "/config/Spellbound");
+		propertiesFile = new File(SB.runningDirectory + "/config/Spellbound/ModProps.properties");
+		
+		if (!storageFolder.exists())
+		{
+			storageFolder.mkdirs();
+		}
+	}
 }
