@@ -2,11 +2,19 @@
 *.bat
 *.txt
 *.properties
+*.cfg
+*.info
+*.sh
+*.lzma
+
+Forge/mcp/src/minecraft/forge_logo.png
+Forge/mcp/src/minecraft/Start.java
 
 #############
 ## Ignore Folders
 #############
-Forge/*
+Forge/*.*
+Forge/mcp/CHANGELOG
 Forge/client/*
 Forge/common/*
 Forge/fml/*
