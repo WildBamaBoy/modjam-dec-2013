@@ -14,21 +14,21 @@ public class ItemSpellTablet extends SBItem
 {
 	public final AbstractEffect spellEffect;
 	public final int level;
-	
+
 	public ItemSpellTablet(int itemId, String unlocalizedName, AbstractEffect spellEffect, int level)
 	{
 		super(itemId, unlocalizedName, spellEffect.getSpellDisplayName());
 		this.spellEffect = spellEffect;
 		this.level = level;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack itemStack, int renderPass)
+	public boolean hasEffect(ItemStack itemStack, int renderPass)
 	{
 		return true;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean unknown) 
@@ -40,8 +40,12 @@ public class ItemSpellTablet extends SBItem
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) 
 	{
-		par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
-		spellEffect.doSpellEffect();
+		if (!par3EntityPlayer.worldObj.isRemote)
+		{
+			par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
+			spellEffect.doSpellEffect(par3EntityPlayer);
+		}
+		
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 }

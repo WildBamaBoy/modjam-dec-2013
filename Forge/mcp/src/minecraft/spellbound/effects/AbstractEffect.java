@@ -1,7 +1,7 @@
 package spellbound.effects;
 
-import spellbound.enums.EnumSpellType;
 import net.minecraft.entity.player.EntityPlayer;
+import spellbound.enums.EnumSpellType;
 
 public abstract class AbstractEffect 
 {
@@ -9,7 +9,7 @@ public abstract class AbstractEffect
 	
 	public abstract String getSpellDisplayName();
 	
-	public abstract void doSpellEffect();
+	public abstract void doSpellEffect(EntityPlayer caster);
 	
 	public abstract void updateSpellEffect();
 	

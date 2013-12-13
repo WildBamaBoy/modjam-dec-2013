@@ -1,6 +1,7 @@
 package spellbound.effects;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import spellbound.enums.EnumSpellType;
 
 public class EffectWallOfObsidian extends AbstractEffectWall
@@ -12,7 +13,7 @@ public class EffectWallOfObsidian extends AbstractEffectWall
 	}
 
 	@Override
-	public void doSpellEffect() 
+	public void doSpellEffect(EntityPlayer caster) 
 	{
 		
 	}

@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import net.minecraft.entity.player.EntityPlayer;
 import spellbound.enums.EnumSpellType;
 
 public class EffectMiscastMagic extends AbstractEffect
@@ -11,7 +12,7 @@ public class EffectMiscastMagic extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellEffect() 
+	public void doSpellEffect(EntityPlayer caster) 
 	{
 		
 	}

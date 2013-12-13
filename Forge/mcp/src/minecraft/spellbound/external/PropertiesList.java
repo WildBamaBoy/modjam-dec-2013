@@ -9,9 +9,6 @@
 
 package spellbound.external;
 
-import spellbound.effects.EffectSummonLvl3;
-import spellbound.item.ItemSpellTablet;
-
 public class PropertiesList 
 {
 	//Put item IDs here.
@@ -20,7 +17,13 @@ public class PropertiesList
 	public int blockID_MushroomBlueGrey = 3590;
 	public int blockID_MushroomOrange = 3591;
 	public int blockID_MushroomWhite = 3592;
-	//TODO change to block ID ^
+	public int blockID_MushroomGreyOrange = 3593;
+	public int blockID_MushroomLightBlue = 3594;
+	public int blockID_MushroomGrey = 3595;
+	public int blockID_MushroomYellow = 3596;
+	public int blockID_MushroomRainbow = 3597;
+	public int blockID_MushroomGold = 3598;
+	public int blockID_MushroomBlack = 3599;
 	
 	public int itemID_TabletBase = 26747;
 	public int itemID_TabletFireBase = 26748;

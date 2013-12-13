@@ -98,6 +98,13 @@ public class SB
 	//Hybrid Mushrooms
 	public Block blockHybridMushroomOrange;
 	public Block blockHybridMushroomWhite;
+	public Block blockHybridMushroomGreyOrange; //Orange + BlueGrey
+	public Block blockHybridMushroomLightBlue; //GreyOrange + BlueGrey //COLD!
+	public Block blockHybridMushroomGrey; //GreyOrange + BlueGrey >>>Also
+	public Block blockHybridMushroomYellow; //OrangeGrey + Grey //LIGHTNING!
+	public Block blockHybridMushroomRainbow; //Red Orange + Yellow //RANDOM! //2nd LEVEL
+	public Block blockHybridMushroomGold; //Rainbow + Yellow //2nd level
+	public Block blockHybridMushroomBlack; //Blue Grey + Grey //2nd level
 	
 	//Tablets
 	public Item itemTabletBase;
@@ -195,6 +202,13 @@ public class SB
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);
 		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.blockID_MushroomOrange);
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite);
+		blockHybridMushroomGreyOrange = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Orange + BlueGrey
+		blockHybridMushroomLightBlue = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //GreyOrange + BlueGrey //COLD!
+		blockHybridMushroomGrey = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //GreyOrange + BlueGrey >>>Also
+		blockHybridMushroomYellow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //OrangeGrey + Grey //LIGHTNING!
+		blockHybridMushroomRainbow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Red Orange + Yellow //RANDOM! //2nd LEVEL
+		blockHybridMushroomGold = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Rainbow + Yellow //2nd level
+		blockHybridMushroomBlack = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite); //Blue Grey + Grey //2nd level
 		
 		//Declare items
 		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");

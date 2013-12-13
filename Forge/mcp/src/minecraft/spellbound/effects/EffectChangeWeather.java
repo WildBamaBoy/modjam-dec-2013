@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import spellbound.enums.EnumSpellType;
 
@@ -12,7 +13,7 @@ public class EffectChangeWeather extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellEffect() 
+	public void doSpellEffect(EntityPlayer caster) 
 	{
         MinecraftServer.getServer().worldServers[0].toggleRain();
         MinecraftServer.getServer().worldServers[0].getWorldInfo().setThundering(true);

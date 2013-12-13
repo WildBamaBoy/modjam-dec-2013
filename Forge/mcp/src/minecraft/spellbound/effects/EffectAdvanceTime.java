@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import net.minecraft.entity.player.EntityPlayer;
 import spellbound.enums.EnumSpellType;
 
 public class EffectAdvanceTime extends AbstractEffect
@@ -11,7 +12,7 @@ public class EffectAdvanceTime extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellEffect() 
+	public void doSpellEffect(EntityPlayer caster) 
 	{
 		
 	}
