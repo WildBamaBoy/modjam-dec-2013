@@ -6,8 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import spellbound.core.Logic;
 import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
+import spellbound.util.Coordinates;
 
 public abstract class AbstractMushroom extends BlockFlower
 {
@@ -44,71 +46,26 @@ public abstract class AbstractMushroom extends BlockFlower
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
-	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		int myId = par1World.getBlockId(par2, par3, par4);
+		int myId = world.getBlockId(x, y, z);
 
-		int squareCounter = -1;
-
-		//TODO RENAME
-		while (squareCounter < 2)
+		//Test!!
 		{
-			for (int i = -1; i < 2; i++)
+			Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
+
+			if (nearbyPrimary != null)
 			{
-				if (par1World.getBlockId(par2 + squareCounter, par3, par4 + i) == SB.instance.blockPrimaryMushroomPinkOrange.blockID)
+				Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+				
+				if (hybridSpawnLocation != null)
 				{
-					//TODO Move rand to SB
-					Random rand = new Random();
-
-					//Search for possible location.
-					int searchCounter = 0;
-
-					boolean spawnPointFound = false;
-					int spawnX = 0;
-					int spawnY = 0;
-					int spawnZ = 0;
-
-					while (searchCounter < 2)
-					{
-						for (int j = -1; j < 2; j++)
-						{
-							spawnPointFound = par1World.getBlockId(par2 + searchCounter, par3, par4 + j) == 0;
-
-							if (spawnPointFound)
-							{
-								spawnX = par2 + searchCounter;
-								spawnY = par3;
-								spawnZ = par4 + j;
-								break;
-							}
-						}
-						
-						if (spawnPointFound)
-						{
-							searchCounter++;
-						}
-					}
-
-					if (spawnPointFound)
-					{
-						if (rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean() && rand.nextBoolean())
-						{
-							par1World.setBlock(spawnX, spawnY, spawnZ, SB.instance.blockHybridMushroomOrange.blockID);
-						}
-
-						else
-						{
-							par1World.setBlock(spawnX, spawnY, spawnZ, SB.instance.blockHybridMushroomWhite.blockID);
-						}
-					}
-					break;
+					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, par4);
 				}
 			}
-
-			squareCounter++;
 		}
-
-		return par1World.getBlockId(par2, par3 - 1, par4) == Block.grass.blockID;
+		
+		return true;
 	}
 
 	/**

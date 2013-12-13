@@ -9,6 +9,8 @@
 
 package spellbound.core;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -43,6 +45,7 @@ public class SB
 	@Instance("Spellbound")
 	public static SB instance;
 
+	public static Random rand = new Random();
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
 	
