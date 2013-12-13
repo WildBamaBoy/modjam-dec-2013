@@ -21,6 +21,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 channels={"CHANNEL"}
 //packethandler = Packethandler.class //*
 )
+
 public class SB 
 {
 	@Instance("Spellbound")
@@ -31,6 +32,7 @@ public class SB
 	
 	//Items here
 	
+	//Blocks here
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
