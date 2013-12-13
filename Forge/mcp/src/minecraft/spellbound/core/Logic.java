@@ -15,12 +15,18 @@ public final class Logic
 		while (true)
 		{
 			final int blockId = worldObj.getBlockId(startX + movementX, startY + movementY, startZ + movementZ);
-			worldObj.setBlock(startX + movementX, startY + movementY, startZ + movementZ, Block.stone.blockID);
+			int coordsX = startX + movementX;
+			int coordsY = startY + movementY;
+			int coordsZ = startZ + movementZ;
 			
 			if (blockId == searchId)
 			{
-				//Return coordinates
-				return new Coordinates(startX + movementX, startY + movementY, startZ + movementZ);
+				//Only for mushrooms. Check if block above is clear of obstruction.
+				if (worldObj.getBlockId(coordsX, coordsY + 1, coordsZ) == 0 &&
+					coordsX != startX && coordsY != startY && coordsZ != startZ)
+				{
+					return new Coordinates(coordsX, coordsY + 1, coordsZ);
+				}
 			}
 
 			if (movementX == maxDistanceAway && movementZ == maxDistanceAway && movementY == -1)
@@ -43,6 +49,7 @@ public final class Logic
 			{
 				movementX = 0 - maxDistanceAway;
 				movementZ++;
+				continue;
 			}
 			
 			movementX++;

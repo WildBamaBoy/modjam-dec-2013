@@ -50,29 +50,31 @@ public abstract class AbstractMushroom extends BlockFlower
 	{
 		int myId = world.getBlockId(x, y, z);
 
-		//Test!!
+		if (!world.isRemote)
 		{
 			Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
-
-			System.out.println(nearbyPrimary);
 			
 			if (nearbyPrimary != null)
 			{
 				Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
 				
-				boolean spawnWhite = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
-				System.out.println("A");
+				if (hybridSpawnLocation == null)
+				{
+					hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
+				}
 				
 				if (hybridSpawnLocation != null)
 				{
-					if (spawnWhite)
+					boolean spawnOrange = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
+					
+					if (spawnOrange)
 					{
-						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
+						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
 					}
 					
 					else
 					{
-						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
+						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
 					}
 				}
 			}
