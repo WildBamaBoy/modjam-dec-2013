@@ -15,11 +15,18 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import spellbound.blocks.BlockMushroomBlack;
 import spellbound.blocks.BlockMushroomBlueGrey;
+import spellbound.blocks.BlockMushroomGold;
+import spellbound.blocks.BlockMushroomGrey;
+import spellbound.blocks.BlockMushroomGreyOrange;
+import spellbound.blocks.BlockMushroomLightBlue;
 import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomPinkOrange;
+import spellbound.blocks.BlockMushroomRainbow;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
+import spellbound.blocks.BlockMushroomYellow;
 import spellbound.effects.EffectAdvanceTime;
 import spellbound.effects.EffectAllSeeingEye;
 import spellbound.effects.EffectBlink;
@@ -203,13 +210,13 @@ public class SB
 		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.blockID_MushroomOrange);
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite);
 
-		blockHybridMushroomGreyOrange = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGreyOrange); //Orange + BlueGrey
-		blockHybridMushroomLightBlue = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomLightBlue); //GreyOrange + BlueGrey //COLD!
-		blockHybridMushroomGrey = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGrey); //GreyOrange + BlueGrey >>>Also
-		blockHybridMushroomYellow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomYellow); //OrangeGrey + Grey //LIGHTNING!
-		blockHybridMushroomRainbow = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomRainbow); //Red Orange + Yellow //RANDOM! //2nd LEVEL
-		blockHybridMushroomGold = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomGold); //Rainbow + Yellow //2nd level
-		blockHybridMushroomBlack = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
+		blockHybridMushroomGreyOrange = new BlockMushroomGreyOrange(propertiesManager.propertiesList.blockID_MushroomGreyOrange); //Orange + BlueGrey
+		blockHybridMushroomLightBlue = new BlockMushroomLightBlue(propertiesManager.propertiesList.blockID_MushroomLightBlue); //GreyOrange + BlueGrey //COLD!
+		blockHybridMushroomGrey = new BlockMushroomGrey(propertiesManager.propertiesList.blockID_MushroomGrey); //GreyOrange + BlueGrey >>>Also
+		blockHybridMushroomYellow = new BlockMushroomYellow(propertiesManager.propertiesList.blockID_MushroomYellow); //OrangeGrey + Grey //LIGHTNING!
+		blockHybridMushroomRainbow = new BlockMushroomRainbow(propertiesManager.propertiesList.blockID_MushroomRainbow); //Red Orange + Yellow //RANDOM! //2nd LEVEL
+		blockHybridMushroomGold = new BlockMushroomGold(propertiesManager.propertiesList.blockID_MushroomGold); //Rainbow + Yellow //2nd level
+		blockHybridMushroomBlack = new BlockMushroomBlack(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
 		
 		//Declare items
 		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
@@ -297,12 +304,12 @@ public class SB
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
-		GameRegistry.registerBlock(blockHybridMushroomLightBlue, ItemBlockMushroomRedOrange.class, "LightBlueHybrid");
-		GameRegistry.registerBlock(blockHybridMushroomGrey, ItemBlockMushroomRedOrange.class, "GreyHybrid");
-		GameRegistry.registerBlock(blockHybridMushroomYellow, ItemBlockMushroomRedOrange.class, "YellowHybrid");
-		GameRegistry.registerBlock(blockHybridMushroomRainbow, ItemBlockMushroomRedOrange.class, "RainbowHybrid");
-		GameRegistry.registerBlock(blockHybridMushroomGold, ItemBlockMushroomRedOrange.class, "GoldHybrid");
-		GameRegistry.registerBlock(blockHybridMushroomBlack, ItemBlockMushroomRedOrange.class, "BlackHybrid");
+		LanguageRegistry.addName(blockHybridMushroomLightBlue, "Light Blue Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomGrey, "Grey Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomYellow, "Yellow Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
 		//TODO
 		
 		//Register Recipes

@@ -65,7 +65,7 @@ public abstract class AbstractMushroom extends BlockFlower
 	 */
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{	
-		int blockId = world.getBlockId(x, y, z);
+		int blockId = world.getBlockId(x, y - 1, z);
 		return blockId == Block.grass.blockID || blockId == Block.dirt.blockID;
 	}
 
