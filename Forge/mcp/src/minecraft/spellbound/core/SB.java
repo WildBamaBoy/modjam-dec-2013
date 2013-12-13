@@ -21,8 +21,17 @@ import spellbound.blocks.BlockMushroomPinkOrange;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
 import spellbound.effects.EffectColdLvl1;
+import spellbound.effects.EffectColdLvl2;
+import spellbound.effects.EffectColdLvl3;
 import spellbound.effects.EffectFireLvl1;
+import spellbound.effects.EffectFireLvl2;
+import spellbound.effects.EffectFireLvl3;
 import spellbound.effects.EffectLightningLvl1;
+import spellbound.effects.EffectLightningLvl2;
+import spellbound.effects.EffectLightningLvl3;
+import spellbound.effects.EffectUltimateDisintegrate;
+import spellbound.effects.EffectUltimateElementalFury;
+import spellbound.effects.EffectUltimateWailOfTheBanshee;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
@@ -85,6 +94,10 @@ public class SB
 	public ItemSpellTablet itemTabletColdLvl3;
 	public ItemSpellTablet itemTabletLightningLvl3;
 	
+	public ItemSpellTablet itemTabletSummonLvl1;
+	public ItemSpellTablet itemTabletSummonLvl2;
+	public ItemSpellTablet itemTabletSummonLvl3;
+	
 	public ItemSpellTablet itemTabletUltWailOfTheBanshee;
 	public ItemSpellTablet itemTabletUltElementalFury;
 	public ItemSpellTablet itemTabletUltDisintegrate;
@@ -121,19 +134,26 @@ public class SB
 		itemTabletColdBase = new SBItem(propertiesManager.propertiesList.itemID_TabletColdBase, "tabletcoldbase", "Cold Tablet");
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
 		
-		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1());
-		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
-		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
+		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1(), 1);
+		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1(), 1);
+		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1(), 1);
 		
-		itemTabletFireLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl2, "tabletfirelvl2", new EffectFireLvl2());
-		itemTabletColdLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl2, "tabletcoldlvl2", new EffectColdLvl2());
-		itemTabletLightningLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl2, "tabletlightninglvl2", new EffectLightningLvl2());
+		itemTabletFireLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl2, "tabletfirelvl2", new EffectFireLvl2(), 2);
+		itemTabletColdLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl2, "tabletcoldlvl2", new EffectColdLvl2(), 2);
+		itemTabletLightningLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl2, "tabletlightninglvl2", new EffectLightningLvl2(), 2);
 		
 		itemTabletFireLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl3, "tabletfirelvl3", new EffectFireLvl3());
 		itemTabletColdLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl3, "tabletcoldlvl3", new EffectColdLvl3());
 		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new EffectLightningLvl3());
 		
+		itemTabletUltWailOfTheBanshee = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateWailOfTheBanshee, "tabletwailofthebanshee", new EffectUltimateWailOfTheBanshee());
+		itemTabletUltElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateElementalFury, "tabletelementalfury", new EffectUltimateElementalFury());
+		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new EffectUltimateDisintegrate());
 		
+		//TODO first level
+		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl1", new EffectUltimateDisintegrate());
+		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl2", new EffectUltimateDisintegrate());
+		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletsummonlvl3", new EffectUltimateDisintegrate());
 		//Register blocks
 		//TODO Move?
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");
@@ -152,16 +172,7 @@ public class SB
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
 		//TODO
 		
-		LanguageRegistry.addName(itemTabletBase, "Blank Tablet");
-		
-		LanguageRegistry.addName(itemTabletFireBase, "Fire Tablet");
-		LanguageRegistry.addName(itemTabletColdBase, "Cold Tablet");
-		LanguageRegistry.addName(itemTabletLightningBase, "Lightning Tablet");
-		
-		LanguageRegistry.addName(itemTabletFireLvl1, "Flaming Hands");
-//		LanguageRegistry.addName(itemTabletColdLvl1, "Icy Grip");
-//		LanguageRegistry.addName(itemTabletLightningLvl1, "Tazer");
-		
+		//Register Recipes
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
 		
@@ -171,12 +182,11 @@ public class SB
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
-//		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
-//				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
-//		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
-//				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
+				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
+				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
 	}
 }

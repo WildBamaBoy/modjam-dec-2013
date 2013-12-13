@@ -26,4 +26,13 @@ public class PropertiesList
 	public int itemID_TabletFireLvl1 = 26751;
 	public int itemID_TabletColdLvl1 = 26752;
 	public int itemID_TabletLightningLvl1 = 26753;
+	public int itemID_TabletFireLvl2 = 26754;
+	public int itemID_TabletColdLvl2 = 26755;
+	public int itemID_TabletLightningLvl2 = 26756;
+	public int itemID_TabletFireLvl3 = 26757;
+	public int itemID_TabletColdLvl3 = 26758;
+	public int itemID_TabletLightningLvl3 = 26759;
+	public int itemID_TabletUltimateWailOfTheBanshee = 26760;
+	public int itemID_TabletUltimateElementalFury = 26761;
+	public int itemID_TabletUltimateDisintegrate = 26762;
 }

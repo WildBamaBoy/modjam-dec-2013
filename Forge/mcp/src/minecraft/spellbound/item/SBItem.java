@@ -1,8 +1,12 @@
 package spellbound.item;
 
+import java.util.List;
+
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import spellbound.core.SB;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class SBItem extends Item
 {

@@ -1,11 +1,11 @@
 package spellbound.effects;
 
-public class EffectUltimateWailOfTheBanshee extends AbstractEffect
+public class EffectColdLvl2 extends AbstractEffect
 {
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Wail of the Banshee";
+		return "Icicle";
 	}
 
 	@Override
