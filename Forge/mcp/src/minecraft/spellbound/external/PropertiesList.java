@@ -20,4 +20,10 @@ public class PropertiesList
 	//TODO change to block ID ^
 	
 	public int itemID_TabletBase = 26747;
+	public int itemID_TabletFireBase = 26748;
+	public int itemID_TabletColdBase = 26749;
+	public int itemID_TabletLightningBase = 26750;
+	public int itemID_TabletFireLvl1 = 26751;
+	public int itemID_TabletColdLvl1 = 26752;
+	public int itemID_TabletLightningLvl1 = 26753;
 }
