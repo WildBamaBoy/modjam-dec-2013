@@ -108,8 +108,9 @@ public class SB
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
 		
 		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1());
-		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
-		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
+//		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1());
+//		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new EffectLightningLvl1());
+//		
 		
 		//Register blocks
 		//TODO Move?
@@ -136,8 +137,8 @@ public class SB
 		LanguageRegistry.addName(itemTabletLightningBase, "Lightning Tablet");
 		
 		LanguageRegistry.addName(itemTabletFireLvl1, "Flaming Hands");
-		LanguageRegistry.addName(itemTabletColdLvl1, "Icy Grip");
-		LanguageRegistry.addName(itemTabletLightningLvl1, "Tazer");
+//		LanguageRegistry.addName(itemTabletColdLvl1, "Icy Grip");
+//		LanguageRegistry.addName(itemTabletLightningLvl1, "Tazer");
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
@@ -151,9 +152,9 @@ public class SB
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
-		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
-				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
-		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
+//		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
+//				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
+//		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
+//				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
 	}
 }

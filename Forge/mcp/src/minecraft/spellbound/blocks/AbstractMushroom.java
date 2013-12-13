@@ -54,13 +54,26 @@ public abstract class AbstractMushroom extends BlockFlower
 		{
 			Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
 
+			System.out.println(nearbyPrimary);
+			
 			if (nearbyPrimary != null)
 			{
 				Coordinates hybridSpawnLocation = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
 				
+				boolean spawnWhite = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
+				System.out.println("A");
+				
 				if (hybridSpawnLocation != null)
 				{
-					world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, par4);
+					if (spawnWhite)
+					{
+						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomWhite.blockID);
+					}
+					
+					else
+					{
+						world.setBlock(hybridSpawnLocation.x, hybridSpawnLocation.y, hybridSpawnLocation.z, SB.instance.blockHybridMushroomOrange.blockID);
+					}
 				}
 			}
 		}

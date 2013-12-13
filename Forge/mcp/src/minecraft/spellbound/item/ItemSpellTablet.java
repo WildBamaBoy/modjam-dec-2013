@@ -15,7 +15,7 @@ public class ItemSpellTablet extends SBItem
 	
 	public ItemSpellTablet(int itemId, String unlocalizedName, AbstractEffect spellEffect)
 	{
-		super(itemId, unlocalizedName);
+		super(itemId, unlocalizedName, spellEffect.getSpellDisplayName());
 		this.spellEffect = spellEffect;
 	}
 

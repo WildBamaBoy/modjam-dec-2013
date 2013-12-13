@@ -1,5 +1,6 @@
 package spellbound.core;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import spellbound.util.Coordinates;
 
@@ -13,8 +14,9 @@ public final class Logic
 
 		while (true)
 		{
-			final int blockId = worldObj.getBlockId(movementX, movementY, movementZ);
-
+			final int blockId = worldObj.getBlockId(startX + movementX, startY + movementY, startZ + movementZ);
+			worldObj.setBlock(startX + movementX, startY + movementY, startZ + movementZ, Block.stone.blockID);
+			
 			if (blockId == searchId)
 			{
 				//Return coordinates
@@ -39,7 +41,7 @@ public final class Logic
 			
 			if (movementX == maxDistanceAway)
 			{
-				movementX = 0;
+				movementX = 0 - maxDistanceAway;
 				movementZ++;
 			}
 			
