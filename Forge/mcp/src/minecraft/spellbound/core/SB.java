@@ -88,15 +88,20 @@ public class SB
 		//Do recipes 
 		
 		//Register blocks
+		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>YOU USED THE SAME CLASS FOR ITEMBLOCK!!!1
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomPinkOrange, ItemBlockMushroomRedOrange.class, "PinkOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
+		GameRegistry.registerBlock(blockHybridMushroomOrange, ItemBlockMushroomRedOrange.class, "OrangeHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomWhite, ItemBlockMushroomRedOrange.class, "WhiteHybrid");
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 		
 		//Add localizations
+		//TODO Move to abstractmushroom
 		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Red Orange Mushroom");
 		LanguageRegistry.addName(blockPrimaryMushroomPinkOrange, "Pink Orange Mushroom");
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
-		
+		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
 	}
 }

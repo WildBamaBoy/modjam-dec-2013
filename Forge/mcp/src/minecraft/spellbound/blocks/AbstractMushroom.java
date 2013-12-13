@@ -38,8 +38,20 @@ public abstract class AbstractMushroom extends BlockFlower
      */
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
-    	System.out.println("Update!");
-    	//TODO: Check for colors.
+    	//TODO Random gneeration
+    	//TODO Learn to spell
+    	if (true)
+    	{
+    		int myId = par1World.getBlockId(par2, par3, par4);
+    		
+    		if (myId == SB.instance.blockPrimaryMushroomRedOrange.blockID)
+    		{
+    			for (int i = -1; i < 1; i++)
+    			{
+    				par1World.setBlock(par2 + i, par3, par4 + i, Block.stone.blockID);
+    			}
+    		}
+    	}
     }
 
     /**
