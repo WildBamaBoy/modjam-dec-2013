@@ -4,5 +4,6 @@ public enum EnumSpellType
 {
 	TARGET,
 	SELF,
-	FRONT
+	FRONT,
+	AREA
 }

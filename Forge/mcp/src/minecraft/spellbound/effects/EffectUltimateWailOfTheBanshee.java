@@ -1,5 +1,7 @@
 package spellbound.effects;
 
+import spellbound.enums.EnumSpellType;
+
 public class EffectUltimateWailOfTheBanshee extends AbstractEffect
 {
 	@Override
@@ -18,5 +20,11 @@ public class EffectUltimateWailOfTheBanshee extends AbstractEffect
 	public void updateSpellEffect() 
 	{
 		
+	}
+	
+	@Override
+	public EnumSpellType getSpellType() 
+	{
+		return EnumSpellType.AREA;
 	}
 }

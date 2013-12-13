@@ -32,7 +32,7 @@ public class ItemSpellTablet extends SBItem
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean unknown) 
 	{
-		infoList.add("Lvl. " + level + "\n" +
-					"@(" + spellEffect.getSpellType() + ")");
+		infoList.add("Lvl. " + level);
+		infoList.add("@(" + spellEffect.getSpellType() + ")");
 	}
 }

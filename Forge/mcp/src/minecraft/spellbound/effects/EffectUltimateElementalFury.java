@@ -1,5 +1,7 @@
 package spellbound.effects;
 
+import spellbound.enums.EnumSpellType;
+
 public class EffectUltimateElementalFury extends AbstractEffect 
 {
 	@Override
@@ -20,4 +22,9 @@ public class EffectUltimateElementalFury extends AbstractEffect
 		
 	}
 
+	@Override
+	public EnumSpellType getSpellType() 
+	{
+		return EnumSpellType.FRONT;
+	}
 }

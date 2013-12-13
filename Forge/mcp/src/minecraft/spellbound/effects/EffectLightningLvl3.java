@@ -1,5 +1,7 @@
 package spellbound.effects;
 
+import spellbound.enums.EnumSpellType;
+
 public class EffectLightningLvl3 extends AbstractEffect
 {
 	@Override
@@ -18,5 +20,11 @@ public class EffectLightningLvl3 extends AbstractEffect
 	public void updateSpellEffect() 
 	{
 		
+	}
+	
+	@Override
+	public EnumSpellType getSpellType() 
+	{
+		return EnumSpellType.AREA;
 	}
 }

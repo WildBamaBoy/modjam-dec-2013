@@ -1,11 +1,14 @@
 package spellbound.effects;
 
+import spellbound.enums.EnumSpellType;
+
 public class EffectSummonLvl1 extends AbstractEffect
 {
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Icy Grip";
+		//TODO: Name this spell
+		return "Summon ??";
 	}
 
 	@Override
@@ -18,5 +21,11 @@ public class EffectSummonLvl1 extends AbstractEffect
 	public void updateSpellEffect() 
 	{
 		
+	}
+	
+	@Override
+	public EnumSpellType getSpellType() 
+	{
+		return EnumSpellType.SELF;
 	}
 }
