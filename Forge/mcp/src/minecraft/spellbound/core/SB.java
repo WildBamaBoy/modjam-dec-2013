@@ -65,10 +65,6 @@ public class SB
 	
 	public CreativeTabs spellboundTab;
 	
-	//Items here
-	
-	//Blocks here
-	
 	//Primary Mushrooms
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
@@ -84,7 +80,9 @@ public class SB
 	public Item itemTabletFireBase;
 	public Item itemTabletColdBase;
 	public Item itemTabletLightningBase;
+	public Item itemTabletForesightBase;
 	
+	//Offensive spells
 	public ItemSpellTablet itemTabletFireLvl1;
 	public ItemSpellTablet itemTabletColdLvl1;
 	public ItemSpellTablet itemTabletLightningLvl1;
@@ -105,6 +103,49 @@ public class SB
 	public ItemSpellTablet itemTabletUltElementalFury;
 	public ItemSpellTablet itemTabletUltDisintegrate;
 	
+	//Defensive spells
+	public ItemSpellTablet itemTabletFireShield;
+	public ItemSpellTablet itemTabletIceShield;
+	public ItemSpellTablet itemTabletLightningShield;
+	public ItemSpellTablet itemTabletSurgeShield;
+	public ItemSpellTablet itemTabletShieldOfInvulnerability;
+
+	public ItemSpellTablet itemTabletWallOfStone;
+	public ItemSpellTablet itemTabletWallOfObsidian;
+	public ItemSpellTablet itemTabletWallOfBedrock;
+
+	public ItemSpellTablet itemTabletPush;
+	public ItemSpellTablet itemTabletColorSpray;
+	public ItemSpellTablet itemTabletGrease;
+	public ItemSpellTablet itemTabletBlink;
+
+	public ItemSpellTablet itemTabletSummonMagicalArmor; //TODO Omit?
+	
+	//Helpful spells
+	public ItemSpellTablet itemTabletTransport;
+	public ItemSpellTablet itemTabletDimensionDoor;
+	
+	public ItemSpellTablet itemTabletHaste;
+	public ItemSpellTablet itemTabletAdvanceTime;
+	public ItemSpellTablet itemTabletChangeWeather;
+	public ItemSpellTablet itemTabletFlight;
+	public ItemSpellTablet itemTabletFishForm;
+	
+	//>>>>>>>>>>>>>>> Foresight <<<<<<<<<<<<<<<<<<
+//	public ItemSpellTablet itemTablet;
+//	public ItemSpellTablet itemTabletAdvanceTime;
+//	public ItemSpellTablet itemTabletChangeWeather;
+//	public ItemSpellTablet itemTabletFlight;
+	
+	public ItemSpellTablet itemTabletMinorScrying;
+	public ItemSpellTablet itemTabletGreaterScrying;
+	public ItemSpellTablet itemTabletAllSeeingeye;
+	
+	//Disruptive Magic
+	public ItemSpellTablet itemTabletBreach;
+	public ItemSpellTablet itemTabletMiscastMagic;
+	public ItemSpellTablet itemTabletChaos;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -124,11 +165,11 @@ public class SB
 		LanguageRegistry.instance().addStringLocalization("tabSpellbound", "Spellbound");
 		
 		//Declare blocks
-		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.itemID_MushroomRedOrange);
-		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.itemID_MushroomPinkOrange);
-		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.itemID_MushroomBlueGrey);
-		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.itemID_MushroomOrange);
-		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.itemID_MushroomWhite);
+		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.blockID_MushroomRedOrange);
+		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.blockID_MushroomPinkOrange);
+		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);
+		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.blockID_MushroomOrange);
+		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite);
 		
 		//Declare items
 		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
@@ -158,6 +199,41 @@ public class SB
 		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl2, "tabletsummonlvl2", new EffectSummonLvl2(), 2);
 		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl3, "tabletsummonlvl3", new EffectSummonLvl3(), 3);
 
+		itemTabletFireShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireShield, "tabletfireshield", new EffectSummonLvl3(), 3);
+		itemTabletIceShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletIceShield, "tableticeshield", new EffectSummonLvl3(), 3);
+		itemTabletLightningShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningShield, "tabletlightningshield", new EffectSummonLvl3(), 3);
+		itemTabletSurgeShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSurgeShield, "tabletsurgeshield", new EffectSummonLvl3(), 3);
+		itemTabletShieldOfInvulnerability = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletShieldOfInvulnerability, "tabletshieldofinvulnerability", new EffectSummonLvl3(), 3);
+
+		itemTabletWallOfStone = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfStone, "tabletwallofstone", new EffectSummonLvl3(), 3);
+		itemTabletWallOfObsidian = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfObsidian, "tabletwallofobsidian", new EffectSummonLvl3(), 3);
+		itemTabletWallOfBedrock = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfBedrock, "tabletwallofbedrock", new EffectSummonLvl3(), 3);
+
+		itemTabletPush = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletPush, "tabletpush", new EffectSummonLvl3(), 3);
+		itemTabletColorSpray = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColorSpray, "tabletcolorspray", new EffectSummonLvl3(), 3);
+		itemTabletGrease = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGrease, "tabletgrease", new EffectSummonLvl3(), 3);
+		itemTabletBlink = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBlink, "tabletblink", new EffectSummonLvl3(), 3);
+		
+		itemTabletTransport = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletTransport, "tablettransport", new EffectSummonLvl3(), 3);
+		itemTabletDimensionDoor = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDimensionDoor, "tablettransport", new EffectSummonLvl3(), 3);
+		
+		itemTabletHaste = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletHaste, "tablethaste", new EffectSummonLvl3(), 3);
+		itemTabletAdvanceTime = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAdvanceTime, "tabletadvancetime", new EffectSummonLvl3(), 3);
+		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new EffectSummonLvl3(), 3);
+		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new EffectSummonLvl3(), 3);
+		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new EffectSummonLvl3(), 3);
+		
+		//Foresight
+		
+		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new EffectSummonLvl3(), 3);
+		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new EffectSummonLvl3(), 3);
+		itemTabletAllSeeingeye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectSummonLvl3(), 3);
+		
+		//Disruptive Magic
+		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new EffectSummonLvl3(), 3);
+		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new EffectSummonLvl3(), 3);
+		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new EffectSummonLvl3(), 3);
+		
 		//Register blocks
 		//TODO Move to abstract block?
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, ItemBlockMushroomRedOrange.class, "RedOrangePrimary");

@@ -9,14 +9,17 @@
 
 package spellbound.external;
 
+import spellbound.effects.EffectSummonLvl3;
+import spellbound.item.ItemSpellTablet;
+
 public class PropertiesList 
 {
 	//Put item IDs here.
-	public int itemID_MushroomRedOrange = 3588;
-	public int itemID_MushroomPinkOrange = 3589;
-	public int itemID_MushroomBlueGrey = 3590;
-	public int itemID_MushroomOrange = 3591;
-	public int itemID_MushroomWhite = 3592;
+	public int blockID_MushroomRedOrange = 3588;
+	public int blockID_MushroomPinkOrange = 3589;
+	public int blockID_MushroomBlueGrey = 3590;
+	public int blockID_MushroomOrange = 3591;
+	public int blockID_MushroomWhite = 3592;
 	//TODO change to block ID ^
 	
 	public int itemID_TabletBase = 26747;
@@ -38,4 +41,39 @@ public class PropertiesList
 	public int itemID_TabletUltimateWailOfTheBanshee = 26763;
 	public int itemID_TabletUltimateElementalFury = 26764;
 	public int itemID_TabletUltimateDisintegrate = 26765;
+	
+	public int itemID_TabletFireShield = 26766;
+	public int itemID_TabletIceShield = 26767;
+	public int itemID_TabletLightningShield = 26768; 
+	public int itemID_TabletSurgeShield = 26769;
+	public int itemID_TabletShieldOfInvulnerability = 26770;
+
+	public int itemID_TabletWallOfStone = 26771;
+	public int itemID_TabletWallOfObsidian = 26772;
+	public int itemID_TabletWallOfBedrock = 26773;
+
+	public int itemID_TabletPush = 26774;
+	public int itemID_TabletColorSpray = 26775; 
+	public int itemID_TabletGrease = 26776;
+	public int itemID_TabletBlink = 26777;
+	
+	public int itemID_TabletTransport = 26778;
+	public int itemID_TabletDimensionDoor = 26779;
+	
+	public int itemID_TabletHaste = 26780;
+	public int itemID_TabletAdvanceTime = 26781;
+	public int itemID_TabletChangeWeather = 26782;
+	public int itemID_TabletFlight = 26783;
+	public int itemID_TabletFishForm = 26784;
+	
+	//Foresight
+	
+	public int itemID_TabletMinorScrying = 26785;
+	public int itemID_TabletGreaterScrying = 26786;
+	public int itemID_TabletAllSeeingEye = 26787;
+	
+	//Disruptive Magic
+	public int itemID_TabletBreach = 26788;
+	public int itemID_TabletMiscastMagic = 26789;
+	public int itemID_TabletChaos = 26790;
 }

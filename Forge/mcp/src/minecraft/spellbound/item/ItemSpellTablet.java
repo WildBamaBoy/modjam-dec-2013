@@ -2,12 +2,12 @@ package spellbound.item;
 
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import spellbound.effects.AbstractEffect;
+import spellbound.util.Color;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ItemSpellTablet extends SBItem
 {
@@ -32,7 +32,7 @@ public class ItemSpellTablet extends SBItem
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean unknown) 
 	{
-		infoList.add("Lvl. " + level);
-		infoList.add("@(" + spellEffect.getSpellType() + ")");
+		infoList.add(Color.BLUE + "Lvl. " + level);
+		infoList.add(Color.BLUE + "@(" + spellEffect.getSpellType() + ")");
 	}
 }
