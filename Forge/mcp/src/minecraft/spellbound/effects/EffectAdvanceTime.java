@@ -29,22 +29,22 @@ public class EffectAdvanceTime extends AbstractEffect
 		
 		for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.carrot.blockID))
 		{
-			
+			caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
 		}
 		
 		for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.potato.blockID))
 		{
-			
+			caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
 		}
 		
 		for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.melonStem.blockID))
 		{
-			
+			caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
 		}
 		
 		for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.pumpkinStem.blockID))
 		{
-			
+			caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
 		}
 	}
 

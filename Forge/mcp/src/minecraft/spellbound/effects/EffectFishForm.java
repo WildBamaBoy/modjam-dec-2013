@@ -1,6 +1,8 @@
 package spellbound.effects;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
@@ -15,7 +17,7 @@ public class EffectFishForm extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		
+		caster.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 1200));
 	}
 
 	@Override
