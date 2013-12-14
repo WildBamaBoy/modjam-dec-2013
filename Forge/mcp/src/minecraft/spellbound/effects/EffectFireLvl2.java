@@ -1,10 +1,15 @@
 package spellbound.effects;
 
+import java.util.Random;
+
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.util.MathHelper;
-import spellbound.core.SB;
-import spellbound.entity.EntityFireball;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
 public class EffectFireLvl2 extends AbstractEffect
@@ -21,10 +26,20 @@ public class EffectFireLvl2 extends AbstractEffect
 		caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 		
-        EntityFireball fireball = new EntityFireball(caster.worldObj, caster, 2.0F);
+		//EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
         
-        //EntityArrow arrow = new EntityArrow(caster.worldObj, caster.posX, caster.posY, caster.posZ);
-		caster.worldObj.spawnEntityInWorld(fireball);
+		EnumFacing enumfacing = BlockDispenser.getFacing(1);
+        double d0 = caster.posX;
+        double d1 = caster.posY + 2;
+        double d2 = caster.posZ;
+        World world = caster.worldObj;
+        Random random = world.rand;
+        double d3 = caster.posX; //random.nextGaussian() * 0.05D + (double)enumfacing.getFrontOffsetX();
+        double d4 = caster.posY + 10; //random.nextGaussian() * 0.05D + (double)enumfacing.getFrontOffsetY();
+        double d5 = caster.posZ; //random.nextGaussian() * 0.05D + (double)enumfacing.getFrontOffsetZ();
+        world.spawnEntityInWorld(new EntitySmallFireball(world, d0, d1, d2, d3, d4, d5));
+        
+//        caster.worldObj.spawnEntityInWorld(fireball);
 	}
 
 	@Override
@@ -38,27 +53,4 @@ public class EffectFireLvl2 extends AbstractEffect
 	{
 		return EnumSpellType.TARGET;
 	}
-	
-    /**
-     * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-     */
-    public void setThrowableHeading(EntityFireball fireball, double par1, double par3, double par5, float par7, float par8)
-    {
-        float f2 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-        par1 /= (double)f2;
-        par3 /= (double)f2;
-        par5 /= (double)f2;
-        par1 += SB.rand.nextGaussian() * (double)(SB.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
-        par3 += SB.rand.nextGaussian() * (double)(SB.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
-        par5 += SB.rand.nextGaussian() * (double)(SB.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)par8;
-        par1 *= (double)par7;
-        par3 *= (double)par7;
-        par5 *= (double)par7;
-        fireball.motionX = par1;
-        fireball.motionY = par3;
-        fireball.motionZ = par5;
-        float f3 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-        fireball.prevRotationYaw = fireball.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-        fireball.prevRotationPitch = fireball.rotationPitch = (float)(Math.atan2(par3, (double)f3) * 180.0D / Math.PI);
-    }
 }
