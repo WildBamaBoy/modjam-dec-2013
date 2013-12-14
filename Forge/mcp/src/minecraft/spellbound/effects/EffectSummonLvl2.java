@@ -1,9 +1,9 @@
 package spellbound.effects;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.SB;
@@ -43,7 +43,7 @@ public class EffectSummonLvl2 extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit); {
 		// TODO Auto-generated method stub
 		
 	}

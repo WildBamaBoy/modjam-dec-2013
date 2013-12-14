@@ -18,7 +18,7 @@ public class EntityTargetSpell extends EntityFireball
 	@Override
 	protected void onImpact(MovingObjectPosition pos) 
 	{
-		effect.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ);
+		effect.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ, pos.entityHit);
 		setDead();
 	}
 }

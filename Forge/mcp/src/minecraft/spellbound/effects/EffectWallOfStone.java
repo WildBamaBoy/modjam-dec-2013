@@ -1,12 +1,10 @@
 package spellbound.effects;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import spellbound.core.SB;
 import spellbound.enums.EnumSpellType;
 
 public class EffectWallOfStone extends AbstractEffectWall
@@ -102,7 +100,7 @@ public class EffectWallOfStone extends AbstractEffectWall
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit); {
 		// TODO Auto-generated method stub
 
 	}

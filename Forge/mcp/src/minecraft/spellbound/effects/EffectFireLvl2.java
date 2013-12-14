@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.util.Vec3;
@@ -44,7 +45,7 @@ public class EffectFireLvl2 extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit); {
 		// TODO Auto-generated method stub
 		
 	}

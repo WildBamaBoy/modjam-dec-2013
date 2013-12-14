@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -34,7 +35,7 @@ public class EffectHaste extends AbstractEffect
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit); {
 		// TODO Auto-generated method stub
 		
 	}
