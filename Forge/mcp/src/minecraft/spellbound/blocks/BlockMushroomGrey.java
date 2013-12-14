@@ -33,7 +33,7 @@ public class BlockMushroomGrey extends AbstractMushroom
 	{
 		return new int[]
 				{
-			SB.instance.blockHybridMushroomGreyOrange.blockID,
+			SB.instance.blockHybridMushroomOrangeGrey.blockID,
 			SB.instance.blockPrimaryMushroomBlueGrey.blockID
 				};
 	}
@@ -41,7 +41,7 @@ public class BlockMushroomGrey extends AbstractMushroom
 	@Override
 	public int getOffspringId(int mateId) 
 	{
-		if (mateId == SB.instance.blockHybridMushroomGreyOrange.blockID)
+		if (mateId == SB.instance.blockHybridMushroomOrangeGrey.blockID)
 		{
 			return SB.instance.blockHybridMushroomYellow.blockID;
 		}

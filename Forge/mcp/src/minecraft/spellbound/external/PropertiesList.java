@@ -17,7 +17,7 @@ public class PropertiesList
 	public int blockID_MushroomBlueGrey = 3590;
 	public int blockID_MushroomOrange = 3591;
 	public int blockID_MushroomWhite = 3592;
-	public int blockID_MushroomGreyOrange = 3593;
+	public int blockID_MushroomOrangeGrey = 3593;
 	public int blockID_MushroomLightBlue = 3594;
 	public int blockID_MushroomGrey = 3595;
 	public int blockID_MushroomYellow = 3596;

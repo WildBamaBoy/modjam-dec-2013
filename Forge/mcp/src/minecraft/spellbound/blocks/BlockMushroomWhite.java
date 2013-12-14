@@ -37,7 +37,7 @@ public class BlockMushroomWhite extends AbstractMushroom
 				SB.instance.blockHybridMushroomBlack.blockID,
 				SB.instance.blockHybridMushroomOrange.blockID,
 				SB.instance.blockHybridMushroomWhite.blockID,
-				SB.instance.blockHybridMushroomGreyOrange.blockID, //Orange + BlueGrey
+				SB.instance.blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
 				SB.instance.blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
 				SB.instance.blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
 				SB.instance.blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!

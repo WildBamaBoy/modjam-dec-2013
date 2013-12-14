@@ -3,9 +3,9 @@ package spellbound.blocks;
 import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
 
-public class BlockMushroomGreyOrange extends AbstractMushroom
+public class BlockMushroomOrangeGrey extends AbstractMushroom
 {
-	public BlockMushroomGreyOrange(int itemId) 
+	public BlockMushroomOrangeGrey(int itemId) 
 	{
 		super(itemId);
 	}

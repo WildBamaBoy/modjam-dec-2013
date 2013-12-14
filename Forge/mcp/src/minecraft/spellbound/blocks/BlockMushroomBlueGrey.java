@@ -35,7 +35,7 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 		return new int[]
 				{
 				SB.instance.blockHybridMushroomGrey.blockID, 
-				SB.instance.blockHybridMushroomGreyOrange.blockID, 
+				SB.instance.blockHybridMushroomOrangeGrey.blockID, 
 				SB.instance.blockHybridMushroomOrange.blockID
 				};
 	}
@@ -48,14 +48,14 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 			return SB.instance.blockHybridMushroomBlack.blockID;
 		}
 		
-		else if (mateId == SB.instance.blockHybridMushroomGreyOrange.blockID)
+		else if (mateId == SB.instance.blockHybridMushroomOrangeGrey.blockID)
 		{
 			return SB.rand.nextBoolean() ? SB.instance.blockHybridMushroomGrey.blockID : SB.instance.blockHybridMushroomLightBlue.blockID;
 		}
 		
 		else if (mateId == SB.instance.blockHybridMushroomOrange.blockID)
 		{
-			return SB.instance.blockHybridMushroomGreyOrange.blockID;
+			return SB.instance.blockHybridMushroomOrangeGrey.blockID;
 		}
 		
 		else

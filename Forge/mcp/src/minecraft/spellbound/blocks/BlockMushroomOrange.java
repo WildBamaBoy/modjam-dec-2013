@@ -42,7 +42,7 @@ public class BlockMushroomOrange extends AbstractMushroom
 	{
 		if (mateId == SB.instance.blockPrimaryMushroomBlueGrey.blockID)
 		{
-			return SB.instance.blockHybridMushroomGreyOrange.blockID;
+			return SB.instance.blockHybridMushroomOrangeGrey.blockID;
 		}
 		
 		else
