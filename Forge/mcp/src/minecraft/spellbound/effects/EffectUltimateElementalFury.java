@@ -53,7 +53,7 @@ public class EffectUltimateElementalFury extends AbstractEffect
 	@Override
 	public EnumSpellType getSpellType() 
 	{
-		return EnumSpellType.FRONT;
+		return EnumSpellType.TARGET;
 	}
 
 	@Override
