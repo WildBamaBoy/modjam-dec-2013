@@ -76,6 +76,7 @@ import spellbound.itemblocks.ItemBlockMushroomRedOrange;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -92,6 +93,9 @@ public class SB
 	@Instance("Spellbound")
 	public static SB instance;
 
+	@SidedProxy(clientSide="spellbound.core.ClientProxy", serverSide="spellbound.core.CommonProxy")
+	public static CommonProxy proxy;
+	
 	public static Random rand = new Random();
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
@@ -113,8 +117,6 @@ public class SB
 	public Block blockHybridMushroomRainbow; //Red Orange + Yellow //RANDOM! //2nd LEVEL
 	public Block blockHybridMushroomGold; //Rainbow + Yellow //2nd level
 	public Block blockHybridMushroomBlack; //Blue Grey + Grey //2nd level
-	
-
 	
 	//Tablets
 	public Item itemTabletBase;
@@ -194,6 +196,7 @@ public class SB
 		instance = this;
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
+		proxy.registerRenderers();
 		
 		MinecraftForge.EVENT_BUS.register(new SBEventHandler());
 		
@@ -276,7 +279,6 @@ public class SB
 		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new EffectFishForm(), 1);
 		
 		//Foresight
-		
 		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new EffectMinorScrying(), 1);
 		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new EffectGreaterScrying(), 2);
 		itemTabletAllSeeingeye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectAllSeeingEye(), 3);

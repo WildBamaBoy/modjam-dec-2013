@@ -1,12 +1,10 @@
 package spellbound.effects;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFireball;
-import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import spellbound.core.SB;
+import spellbound.entity.EntityFireball;
 import spellbound.enums.EnumSpellType;
 
 public class EffectFireLvl2 extends AbstractEffect
@@ -23,25 +21,10 @@ public class EffectFireLvl2 extends AbstractEffect
 		caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 		
-        EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
-
-        fireball.setLocationAndAngles(caster.posX, caster.posY + (double)caster.getEyeHeight(), caster.posZ, caster.rotationYaw, caster.rotationPitch);
+        EntityFireball fireball = new EntityFireball(caster.worldObj, caster, 2.0F);
         
-        fireball.posX -= (double)(MathHelper.cos(caster.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-        fireball.posY -= 0.10000000149011612D;
-        fireball.posZ -= (double)(MathHelper.sin(caster.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
-        
-        fireball.setPosition(fireball.posX, fireball.posY, fireball.posZ);
-        
-        fireball.yOffset = 0.0F;
-        
-        fireball.motionX = (double)(-MathHelper.sin(caster.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(caster.rotationPitch / 180.0F * (float)Math.PI));
-        fireball.motionY = (double)(-MathHelper.sin(caster.rotationPitch / 180.0F * (float)Math.PI));
-        fireball.motionZ = (double)(MathHelper.cos(caster.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(caster.rotationPitch / 180.0F * (float)Math.PI));
-        
-        setThrowableHeading(fireball, fireball.motionX, fireball.motionY, fireball.motionZ, 1.0F * 1.5F, 1.0F);
-        
-        caster.worldObj.spawnEntityInWorld(fireball);
+        //EntityArrow arrow = new EntityArrow(caster.worldObj, caster.posX, caster.posY, caster.posZ);
+		caster.worldObj.spawnEntityInWorld(fireball);
 	}
 
 	@Override
