@@ -2,6 +2,7 @@ package spellbound.effects;
 
 import java.util.List;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
@@ -55,13 +56,17 @@ public class EffectUltimateElementalFury extends AbstractEffect
 	{
 		int radius = 3;
 
-		List entitiesList = entityHit == null ? 
-				worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius)) : 
-					worldObj.getEntitiesWithinAABBExcludingEntity(entityHit, AxisAlignedBB.getBoundingBox(entityHit.posX - radius, entityHit.posY - radius, entityHit.posZ - radius, entityHit.posX + radius, entityHit.posY + radius, entityHit.posZ + radius));
-
-				for (Object obj : entitiesList)
-				{
-					EntityLivingBase livingEntity = (EntityLivingBase)obj;
-				}
+//		List entitiesList = entityHit == null ? 
+//				worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius)) : 
+//					worldObj.getEntitiesWithinAABB(AxisAlignedBB.getBoundingBox(entityHit.posX - radius, entityHit.posY - radius, entityHit.posZ - radius, entityHit.posX + radius, entityHit.posY + radius, entityHit.posZ + radius));
+//
+//				for (Object obj : entitiesList)
+//				{
+//					if (obj instanceof EntityLivingBase)
+//					{
+//						EntityLivingBase livingEntity = (EntityLivingBase)obj;
+//						System.out.println(obj);
+//					}
+//				}
 	}
 }

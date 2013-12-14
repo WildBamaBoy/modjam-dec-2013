@@ -79,4 +79,7 @@ public class PropertiesList
 	public int itemID_TabletBreach = 26788;
 	public int itemID_TabletMiscastMagic = 26789;
 	public int itemID_TabletChaos = 26790;
+	
+	//Unique Magic
+	public int itemID_TabletCookies = 26791;
 }

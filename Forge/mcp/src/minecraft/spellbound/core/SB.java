@@ -57,6 +57,7 @@ import spellbound.effects.EffectMinorScrying;
 import spellbound.effects.EffectMiscastMagic;
 import spellbound.effects.EffectPush;
 import spellbound.effects.EffectShieldOfInvulnerability;
+import spellbound.effects.EffectSummonChestFullOfCookies;
 import spellbound.effects.EffectSummonLvl1;
 import spellbound.effects.EffectSummonLvl2;
 import spellbound.effects.EffectSummonLvl3;
@@ -190,6 +191,9 @@ public class SB
 	public ItemSpellTablet itemTabletMiscastMagic;
 	public ItemSpellTablet itemTabletChaos;
 	
+	//"Unique" Magic
+	public ItemSpellTablet itemTabletSummonChestFullOfCookies;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -287,6 +291,9 @@ public class SB
 		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new EffectBreach(), 1);
 		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new EffectMiscastMagic(), 2);
 		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new EffectChaos(), 3);
+		
+		//Unique Magic
+		itemTabletSummonChestFullOfCookies = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletCookies, "tabletsummonchestfullofcookies", new EffectSummonChestFullOfCookies(), 1);
 		
 		//Register blocks
 		//TODO Move to abstract block?
