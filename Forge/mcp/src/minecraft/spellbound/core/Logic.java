@@ -111,7 +111,7 @@ public final class Logic
 			movementX++;
 		}
 	}
-	
+
 	public static List<Coordinates> getNearbyBlocks(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int searchId)
 	{
 		List<Coordinates> returnList = new ArrayList<Coordinates>();
@@ -155,7 +155,57 @@ public final class Logic
 
 			movementX++;
 		}
-		
+
+		return returnList;
+	}
+
+	public static List<Coordinates> getNearbyBlocks(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int[] searchIDs)
+	{
+		List<Coordinates> returnList = new ArrayList<Coordinates>();
+		int movementX = 0 - maxDistanceAway;
+		int movementY = 3;
+		int movementZ = 0 - maxDistanceAway;
+
+		while (true)
+		{
+			final int coordsX = startX + movementX;
+			final int coordsY = startY + movementY;
+			final int coordsZ = startZ + movementZ;
+			final int blockId = worldObj.getBlockId(coordsX, coordsY, coordsZ);
+
+			for (int searchId : searchIDs)
+			{
+				if (blockId == searchId)
+				{
+					returnList.add(new Coordinates(coordsX, coordsY, coordsZ));
+				}
+			}
+			
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway && movementY == -1)
+			{
+				break;
+			}
+
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway)
+			{
+				//Reset for next level
+				movementX = 0 - maxDistanceAway;
+				movementY--;
+				movementZ = 0 - maxDistanceAway;
+
+				continue;
+			}
+
+			if (movementX == maxDistanceAway)
+			{
+				movementX = 0 - maxDistanceAway;
+				movementZ++;
+				continue;
+			}
+
+			movementX++;
+		}
+
 		return returnList;
 	}
 }
