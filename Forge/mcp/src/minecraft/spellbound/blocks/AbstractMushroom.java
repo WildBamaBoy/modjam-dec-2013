@@ -43,15 +43,15 @@ public abstract class AbstractMushroom extends BlockFlower
 	 */
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{		
-		MushroomCoordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(this, world, x, y, z, 1, this.getMateIds());
+		MushroomCoordinates nearbyPrimary = Logic.getNearbyMushroomMate(this, world, x, y, z, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
 		{
-			MushroomCoordinates hybridSpawn = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+			MushroomCoordinates hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
 			
 			if (hybridSpawn == null)
 			{
-				hybridSpawn = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, Block.grass.blockID);
+				hybridSpawn = Logic.getNearbyMushroomSpawn(world, x, y, z, 1, Block.grass.blockID);
 			}
 			
 			if (hybridSpawn != null)

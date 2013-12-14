@@ -1,13 +1,17 @@
 package spellbound.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import spellbound.blocks.AbstractMushroom;
+import spellbound.util.Coordinates;
 import spellbound.util.MushroomCoordinates;
 
 public final class Logic 
 {
-	public static MushroomCoordinates getNearbyBlockTopBottom(AbstractMushroom mushroom, World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int[] searchIds)
+	public static MushroomCoordinates getNearbyMushroomMate(AbstractMushroom mushroom, World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int[] searchIds)
 	{
 		int movementX = 0 - maxDistanceAway;
 		int movementY = 1;
@@ -59,7 +63,7 @@ public final class Logic
 		}
 	}
 
-	public static MushroomCoordinates getNearbyBlockTopBottom(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int searchId)
+	public static MushroomCoordinates getNearbyMushroomSpawn(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int searchId)
 	{
 		int movementX = 0 - maxDistanceAway;
 		int movementY = 1;
@@ -106,5 +110,52 @@ public final class Logic
 
 			movementX++;
 		}
+	}
+	
+	public static List<Coordinates> getNearbyBlocks(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int searchId)
+	{
+		List<Coordinates> returnList = new ArrayList<Coordinates>();
+		int movementX = 0 - maxDistanceAway;
+		int movementY = 3;
+		int movementZ = 0 - maxDistanceAway;
+
+		while (true)
+		{
+			final int coordsX = startX + movementX;
+			final int coordsY = startY + movementY;
+			final int coordsZ = startZ + movementZ;
+			final int blockId = worldObj.getBlockId(coordsX, coordsY, coordsZ);
+
+			if (blockId == searchId)
+			{
+				returnList.add(new Coordinates(coordsX, coordsY, coordsZ));
+			}
+
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway && movementY == -1)
+			{
+				break;
+			}
+
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway)
+			{
+				//Reset for next level
+				movementX = 0 - maxDistanceAway;
+				movementY--;
+				movementZ = 0 - maxDistanceAway;
+
+				continue;
+			}
+
+			if (movementX == maxDistanceAway)
+			{
+				movementX = 0 - maxDistanceAway;
+				movementZ++;
+				continue;
+			}
+
+			movementX++;
+		}
+		
+		return returnList;
 	}
 }
