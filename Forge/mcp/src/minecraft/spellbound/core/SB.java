@@ -290,6 +290,7 @@ public class SB
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, ItemBlockMushroomRedOrange.class, "BlueGreyPrimary");
 		GameRegistry.registerBlock(blockHybridMushroomOrange, ItemBlockMushroomRedOrange.class, "OrangeHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomWhite, ItemBlockMushroomRedOrange.class, "WhiteHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomGreyOrange, ItemBlockMushroomRedOrange.class, "GreyOrangeHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomLightBlue, ItemBlockMushroomRedOrange.class, "LightBlueHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomGrey, ItemBlockMushroomRedOrange.class, "GreyHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomYellow, ItemBlockMushroomRedOrange.class, "YellowHybrid");
@@ -306,6 +307,7 @@ public class SB
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomGreyOrange, "Grey Orange Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomLightBlue, "Light Blue Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGrey, "Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomYellow, "Yellow Mushroom");
