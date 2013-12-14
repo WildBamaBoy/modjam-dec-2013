@@ -22,7 +22,6 @@ public class EffectUltimateWailOfTheBanshee extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		System.out.println(FMLCommonHandler.instance().getSide());
 		caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.spawn", 1.0F, 1.0F);
 		caster.worldObj.playSoundAtEntity(caster, "spellbound:banshee", 1.0F, 1.0F);
