@@ -30,30 +30,30 @@ public class EffectWallOfStone extends AbstractEffectWall
 
 		if (heading == 0)
 		{
-			wallCenterX = (int) caster.posX;
-			wallCenterY = (int) caster.posY;
-			wallCenterZ = (int) (caster.posZ + 3);
+			wallCenterX = (int) MathHelper.floor_double(caster.posX);
+			wallCenterY = (int) MathHelper.floor_double(caster.posY);
+			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ + 3));
 		}
 
 		else if (heading == 1)
 		{
-			wallCenterX = (int) (caster.posX - 3);
-			wallCenterY = (int) caster.posY;
-			wallCenterZ = (int) caster.posZ;
+			wallCenterX = (int) (MathHelper.floor_double(caster.posX - 3));
+			wallCenterY = (int) MathHelper.floor_double(caster.posY);
+			wallCenterZ = (int) MathHelper.floor_double(caster.posZ);
 		}
 
 		else if (heading == 2)
 		{
-			wallCenterX = (int) caster.posX;
-			wallCenterY = (int) caster.posY;
-			wallCenterZ = (int) (caster.posZ - 3);
+			wallCenterX = (int) (MathHelper.floor_double(caster.posX));
+			wallCenterY = (int) (MathHelper.floor_double(caster.posY));
+			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ - 3));
 		}
 
 		else if (heading == 3)
 		{
-			wallCenterX = (int) (caster.posX + 3);
-			wallCenterY = (int) caster.posY;
-			wallCenterZ = (int) caster.posZ;
+			wallCenterX = (int) (MathHelper.floor_double(caster.posX + 3));
+			wallCenterY = (int) (MathHelper.floor_double(caster.posY));
+			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ));
 		}
 		
 		for (int i = -3; i < 4; i++)

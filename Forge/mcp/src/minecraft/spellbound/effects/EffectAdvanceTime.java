@@ -2,6 +2,7 @@ package spellbound.effects;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.SB;
 import spellbound.enums.EnumSpellType;
 
 public class EffectAdvanceTime extends AbstractEffect
@@ -15,7 +16,8 @@ public class EffectAdvanceTime extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		
+		long newWorldTime = caster.worldObj.getWorldTime() + (SB.rand.nextInt(5000) + 5000);
+		caster.worldObj.setWorldTime(newWorldTime);
 	}
 
 	@Override
