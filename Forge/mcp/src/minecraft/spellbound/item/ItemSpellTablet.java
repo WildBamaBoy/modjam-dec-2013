@@ -44,9 +44,9 @@ public class ItemSpellTablet extends SBItem
 		if (!par3EntityPlayer.worldObj.isRemote)
 		{
 			spellEffect.doSpellEffect(par3EntityPlayer);
+			par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
 		}
-		
-		par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
+
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 }

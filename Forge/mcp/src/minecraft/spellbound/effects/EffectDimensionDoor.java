@@ -1,7 +1,9 @@
 package spellbound.effects;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SB;
@@ -20,6 +22,8 @@ public class EffectDimensionDoor extends AbstractEffect
 	{
 		if (!caster.worldObj.isRemote)
 		{
+			caster.worldObj.playSoundAtEntity(caster, "mob.endermen.portal", 1.0F, 1.0F);
+			
 			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 			int transportAmount = SB.rand.nextInt(50) + 50;
 			
@@ -34,32 +38,36 @@ public class EffectDimensionDoor extends AbstractEffect
 				newPlayerZ = caster.posZ + transportAmount;
 			}
 			
-			if (heading == 1)
+			else if (heading == 1)
 			{
 				newPlayerX = caster.posX - transportAmount;
 				newPlayerY = 255;
 				newPlayerZ = caster.posZ;
 			}
 			
-			if (heading == 2)
+			else if (heading == 2)
 			{
 				newPlayerX = caster.posX;
 				newPlayerY = 255;
 				newPlayerZ = caster.posZ - transportAmount;
 			}
 			
-			if (heading == 3)
+			else if (heading == 3)
 			{
 				newPlayerX = caster.posX + transportAmount;
 				newPlayerY = 255;
 				newPlayerZ = caster.posZ;
 			}
 			
-			//Find first obstruction free block
-			while (caster.worldObj.getBlockId((int)newPlayerX, (int)newPlayerY, (int)newPlayerZ) != 0)
+			while (caster.worldObj.getBlockId((int)newPlayerX, (int)newPlayerY, (int)newPlayerZ) == 0 && newPlayerY != 0)
 			{
-				
+				newPlayerY--;
 			}
+			
+			EntityPlayerMP casterMP = (EntityPlayerMP)caster;
+			casterMP.mountEntity((Entity)null);
+			casterMP.playerNetServerHandler.setPlayerLocation(newPlayerX, newPlayerY, newPlayerZ, caster.rotationYaw, caster.rotationPitch);
+			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
 		}
 	}
 
