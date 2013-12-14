@@ -15,7 +15,10 @@ public class EffectFlight extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		
+		caster.capabilities.allowFlying = true;
+		caster.fallDistance = 0;
+		caster.motionY += 1.0D;
+		caster.capabilities.isFlying = true;
 	}
 
 	@Override
