@@ -5,11 +5,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import spellbound.core.Logic;
 import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
-import spellbound.util.Coordinates;
+import spellbound.util.MushroomCoordinates;
 
 public abstract class AbstractMushroom extends BlockFlower
 {
@@ -36,11 +35,19 @@ public abstract class AbstractMushroom extends BlockFlower
 	
 	public void updateTick(World world, int x, int y, int z, Random worldRandom)
 	{
-		Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);
+
+	}
+
+	/**
+	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+	 */
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{	
+		MushroomCoordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(this, world, x, y, z, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
 		{
-			Coordinates hybridSpawn = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+			MushroomCoordinates hybridSpawn = Logic.getNearbyBlockTopBottom(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
 			
 			if (hybridSpawn == null)
 			{
@@ -49,26 +56,10 @@ public abstract class AbstractMushroom extends BlockFlower
 			
 			if (hybridSpawn != null)
 			{
-				boolean spawnOrange = SB.rand.nextBoolean() && SB.rand.nextBoolean() && SB.rand.nextBoolean();
-				
-				if (spawnOrange)
-				{
-					world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, SB.instance.blockHybridMushroomOrange.blockID);
-				}
-				
-				else
-				{
-					world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, SB.instance.blockHybridMushroomWhite.blockID);
-				}
+				world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, nearbyPrimary.spawnId);
 			}
 		}
-	}
-
-	/**
-	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-	 */
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{	
+		
 		int blockId = world.getBlockId(x, y - 1, z);
 		return blockId == Block.grass.blockID || blockId == Block.dirt.blockID;
 	}
