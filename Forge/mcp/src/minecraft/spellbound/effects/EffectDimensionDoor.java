@@ -1,6 +1,7 @@
 package spellbound.effects;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
 public class EffectDimensionDoor extends AbstractEffect
@@ -27,5 +28,11 @@ public class EffectDimensionDoor extends AbstractEffect
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
+	}
+
+	@Override
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+		// TODO Auto-generated method stub
+		
 	}
 }

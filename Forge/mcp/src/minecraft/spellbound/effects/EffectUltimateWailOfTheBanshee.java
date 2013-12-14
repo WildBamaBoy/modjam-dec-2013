@@ -2,13 +2,12 @@ package spellbound.effects;
 
 import java.util.List;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import spellbound.core.SB;
+import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
 public class EffectUltimateWailOfTheBanshee extends AbstractEffect
@@ -49,5 +48,11 @@ public class EffectUltimateWailOfTheBanshee extends AbstractEffect
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.AREA;
+	}
+
+	@Override
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+		// TODO Auto-generated method stub
+		
 	}
 }

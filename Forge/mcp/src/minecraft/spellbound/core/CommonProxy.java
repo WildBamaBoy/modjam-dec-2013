@@ -4,6 +4,6 @@ public class CommonProxy
 {
 	public void registerRenderers()
 	{
-		//Server side.
+		//Server-side.
 	}
 }

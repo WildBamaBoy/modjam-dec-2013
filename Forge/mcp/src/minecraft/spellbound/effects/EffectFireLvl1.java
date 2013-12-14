@@ -1,15 +1,9 @@
 package spellbound.effects;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
 public class EffectFireLvl1 extends AbstractEffect
@@ -87,5 +81,11 @@ public class EffectFireLvl1 extends AbstractEffect
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.FRONT;
+	}
+
+	@Override
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ) {
+		// TODO Auto-generated method stub
+		
 	}
 }
