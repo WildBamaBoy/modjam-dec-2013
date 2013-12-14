@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.effects.AbstractEffect;
 import spellbound.util.Color;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -42,10 +43,10 @@ public class ItemSpellTablet extends SBItem
 	{
 		if (!par3EntityPlayer.worldObj.isRemote)
 		{
-			par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
 			spellEffect.doSpellEffect(par3EntityPlayer);
 		}
 		
+		par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
 	}
 }

@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import spellbound.blocks.BlockMushroomBlack;
 import spellbound.blocks.BlockMushroomBlueGrey;
 import spellbound.blocks.BlockMushroomGold;
@@ -194,6 +195,8 @@ public class SB
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
 		
+		MinecraftForge.EVENT_BUS.register(new SBEventHandler());
+		
 		//Declare tab.
 		spellboundTab = new CreativeTabs("tabSpellbound")
 		{
@@ -331,5 +334,7 @@ public class SB
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
+		
+		//
 	}
 }

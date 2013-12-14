@@ -42,7 +42,7 @@ public abstract class AbstractMushroom extends BlockFlower
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{	
+	{		
 		MushroomCoordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(this, world, x, y, z, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
