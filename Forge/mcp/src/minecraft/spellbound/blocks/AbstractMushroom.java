@@ -30,6 +30,10 @@ public abstract class AbstractMushroom extends BlockFlower
 
 	public abstract void setTexture();
 
+	public abstract int[] getMateIds();
+	
+	public abstract int getOffspringId(int mateId);
+	
 	public void updateTick(World world, int x, int y, int z, Random worldRandom)
 	{
 		Coordinates nearbyPrimary = Logic.getNearbyBlockTopBottom(world, x, y, z, 1, SB.instance.blockPrimaryMushroomPinkOrange.blockID);

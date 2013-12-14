@@ -26,4 +26,16 @@ public class BlockMushroomLightBlue extends AbstractMushroom
 	{
 		this.setTextureName("spellbound:mushroom_lightblue");
 	}
+
+	@Override
+	public int[] getMateIds() 
+	{
+		return null;
+	}
+
+	@Override
+	public int getOffspringId(int mateId) 
+	{
+		return -1;
+	}
 }

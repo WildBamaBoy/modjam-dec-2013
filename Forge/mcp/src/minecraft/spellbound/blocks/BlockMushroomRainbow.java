@@ -1,5 +1,6 @@
 package spellbound.blocks;
 
+import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
 
 public class BlockMushroomRainbow extends AbstractMushroom
@@ -25,5 +26,28 @@ public class BlockMushroomRainbow extends AbstractMushroom
 	public void setTexture() 
 	{
 		this.setTextureName("spellbound:mushroom_rainbow");
+	}
+
+	@Override
+	public int[] getMateIds() 
+	{
+		return new int[]
+			{
+			SB.instance.blockHybridMushroomYellow.blockID	
+			};
+	}
+
+	@Override
+	public int getOffspringId(int mateId) 
+	{
+		if (mateId == SB.instance.blockHybridMushroomYellow.blockID)
+		{
+			return SB.instance.blockHybridMushroomGold.blockID;
+		}
+		
+		else
+		{
+			return -1;
+		}
 	}
 }

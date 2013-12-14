@@ -26,4 +26,16 @@ public class BlockMushroomGold extends AbstractMushroom
 	{
 		this.setTextureName("spellbound:mushroom_gold");
 	}
+
+	@Override
+	public int[] getMateIds() 
+	{
+		return null;
+	}
+
+	@Override
+	public int getOffspringId(int mateId) 
+	{
+		return -1;
+	}
 }
