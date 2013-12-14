@@ -52,12 +52,12 @@ public class EffectFireLvl3 extends AbstractEffect
 	{
 		if (entityHit != null)
 		{
-			worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 20.0F, true);
+			worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, true);
 		}
 		
 		else
 		{
-			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 20.0F, true);
+			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
 		}
 	}
 }
