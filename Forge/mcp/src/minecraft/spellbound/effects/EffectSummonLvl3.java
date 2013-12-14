@@ -1,7 +1,11 @@
 package spellbound.effects;
 
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.SB;
 import spellbound.enums.EnumSpellType;
 
 public class EffectSummonLvl3 extends AbstractEffect
@@ -15,7 +19,14 @@ public class EffectSummonLvl3 extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
+		if (!caster.worldObj.isRemote)
+		{
+//			EntityInvisibleWarrior warrior = new EntityInvisibleWarrior();
+//			warrior.setPosition(caster.posX, caster.posY, caster.posZ);
+//			caster.worldObj.spawnEntityInWorld(warrior);
+		}
 		
+		//TODO Particles
 	}
 
 	@Override
