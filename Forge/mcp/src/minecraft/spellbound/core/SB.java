@@ -395,7 +395,7 @@ public class SB
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl2),
 				"LLL", "LTL", "LLL", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1, 4), 'T', itemTabletLightningLvl2);
+				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1), 'T', itemTabletLightningLvl2);
 
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltElementalFury), 
 				" F ", "CRL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone);
