@@ -21,30 +21,33 @@ public class EffectFireShield extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		this.caster = caster;
-		
-		List<EffectEntry> activeEffectsForCaster = SB.activeSpellEffects.get(caster);
+		if (!caster.worldObj.isRemote)
+		{
+			this.caster = caster;
 
-		if (activeEffectsForCaster == null)
-		{
-			List<EffectEntry> entryList = new ArrayList<EffectEntry>();
-			entryList.add(new EffectEntry(this, 1200));
-			SB.activeSpellEffects.put(caster, entryList);
-		}
-		
-		else
-		{
-			activeEffectsForCaster.add(new EffectEntry(this, 40));
-			SB.activeSpellEffects.put(caster, activeEffectsForCaster);
+			List<EffectEntry> activeEffectsForCaster = SB.activeSpellEffects.get(caster);
+
+			if (activeEffectsForCaster == null)
+			{
+				List<EffectEntry> entryList = new ArrayList<EffectEntry>();
+				entryList.add(new EffectEntry(this, 1200));
+				SB.activeSpellEffects.put(caster, entryList);
+			}
+
+			else
+			{
+				activeEffectsForCaster.add(new EffectEntry(this, 40));
+				SB.activeSpellEffects.put(caster, activeEffectsForCaster);
+			}
 		}
 	}
 
 	@Override
 	public void updateSpellEffect() 
 	{
-		
+
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{

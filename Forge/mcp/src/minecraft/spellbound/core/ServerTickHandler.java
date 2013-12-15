@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -49,7 +50,6 @@ public class ServerTickHandler implements ITickHandler
 			
 			for (EffectEntry entry : entryList)
 			{
-				System.out.println("ENTRY!");
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))
@@ -60,8 +60,8 @@ public class ServerTickHandler implements ITickHandler
 				if (entry.durationCounter >= entry.maxDuration)
 				{
 					oldEntries.put(player, entryList.indexOf(entry));
+					player.addChatMessage(entry.effect.getSpellDisplayName() + " has dispelled!");
 				}
-				System.out.println("ENTRY END");
 			}
 		}
 		
@@ -70,8 +70,6 @@ public class ServerTickHandler implements ITickHandler
 		{
 			List<EffectEntry> effects = SB.activeSpellEffects.get(oldEntry.getKey());
 			effects.remove(effects.get(oldEntry.getValue()));
-
-			System.out.println("A");//oldEntry.getKey().addChatMessage(oldEntry.effect.getSpellDisplayName() + " has dispelled!");
 		}
 	}
 }
