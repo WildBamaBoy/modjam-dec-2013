@@ -9,10 +9,14 @@
 
 package spellbound.core;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,6 +32,7 @@ import spellbound.blocks.BlockMushroomRainbow;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
 import spellbound.blocks.BlockMushroomYellow;
+import spellbound.effects.AbstractEffect;
 import spellbound.effects.EffectAdvanceTime;
 import spellbound.effects.EffectAllSeeingEye;
 import spellbound.effects.EffectBlink;
@@ -97,6 +102,8 @@ public class SB
 	@SidedProxy(clientSide="spellbound.core.ClientProxy", serverSide="spellbound.core.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static Map<EntityPlayer, List<EffectEntry>> activeSpellEffects = new LinkedHashMap<EntityPlayer, List<EffectEntry>>();
+	
 	public static Random rand = new Random();
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
@@ -163,8 +170,6 @@ public class SB
 	public ItemSpellTablet itemTabletColorSpray;
 	public ItemSpellTablet itemTabletGrease;
 	public ItemSpellTablet itemTabletBlink;
-
-	public ItemSpellTablet itemTabletSummonMagicalArmor; //TODO Omit?
 	
 	//Helpful spells
 	public ItemSpellTablet itemTabletTransport;

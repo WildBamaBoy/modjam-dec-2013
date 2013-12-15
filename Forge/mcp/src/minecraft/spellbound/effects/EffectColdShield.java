@@ -1,8 +1,12 @@
 package spellbound.effects;
 
+import java.util.List;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.EffectEntry;
+import spellbound.core.SB;
 import spellbound.enums.EnumSpellType;
 
 public class EffectColdShield extends AbstractEffect
@@ -16,7 +20,12 @@ public class EffectColdShield extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
+		this.caster = caster;
 		
+		List<EffectEntry> activeEffectsForCaster = SB.activeSpellEffects.get(caster);
+		activeEffectsForCaster.add(new EffectEntry(this, 1200));
+		
+		SB.activeSpellEffects.put(caster, activeEffectsForCaster);
 	}
 
 	@Override
