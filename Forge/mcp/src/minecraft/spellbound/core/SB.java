@@ -132,7 +132,11 @@ public class SB
 	public Item itemTabletFireBase;
 	public Item itemTabletColdBase;
 	public Item itemTabletLightningBase;
-	public Item itemTabletForesightBase;
+	public Item itemTabletSummonBase;
+	public Item itemTabletProtectionBase;
+	public Item itemTabletDivinationBase;
+	public Item itemTabletMundaneBase;
+	public Item itemTabletDisruptionBase;
 	
 	//Offensive spells
 	public ItemSpellTablet itemTabletFireLvl1;
@@ -237,11 +241,27 @@ public class SB
 		blockHybridMushroomBlack = new BlockMushroomBlack(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
 		
 		//Declare items
+		//TODO Base Tablets
+		//Fire
+		//Cold
+		//Lightning
+		//NEED Summon
+		//NEED Protection
+		//NEED Divination
+		//NEED Mundane
+		//NEED Disruption
+		
 		itemTabletBase = new SBItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
 		
 		itemTabletFireBase = new SBItem(propertiesManager.propertiesList.itemID_TabletFireBase, "tabletfirebase", "Fire Tablet");
 		itemTabletColdBase = new SBItem(propertiesManager.propertiesList.itemID_TabletColdBase, "tabletcoldbase", "Cold Tablet");
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
+		itemTabletSummonBase = new SBItem(propertiesManager.propertiesList.itemID_TabletSummonBase, "tabletlightningbase", "Lightning Tablet");
+		itemTabletProtectionBase = new SBItem(propertiesManager.propertiesList.itemID_TabletProtectionBase, "tabletprotectionbase", "Protection Tablet");
+		itemTabletDivinationBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
+		itemTabletMundaneBase = new SBItem(propertiesManager.propertiesList.itemID_TabletMundaneBase, "tabletmundanebase", "Mundane Tablet");
+		itemTabletDisruptionBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDisruptionBase, "tabletdisruptionbase", "Disruption Tablet");
+		
 		
 		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new EffectFireLvl1(), 1);
 		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new EffectColdLvl1(), 1);
@@ -333,21 +353,25 @@ public class SB
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
 		//TODO
 		
+
+		
 		//Register Recipes
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
-				" O ", "OTO", " O ", 'O', blockHybridMushroomOrange, 'T', itemTabletBase);
-		
+				" M ", "MTM", " M ", 'M', blockHybridMushroomOrange, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
-				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
-		
+				" M ", "MTM", " M ", 'S', blockHybridMushroomLightBlue, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+				" M ", "MTM", " M ", 'M', blockHybridMushroomYellow, 'T', itemTabletBase);
 
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl2), 
+				"RRR", "RTR", "RRR", 'R', Item.redstone, 'T', itemTabletFireLvl1);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl3), 
+				" R ", "RTR", " R ", 'R', Block.blockRedstone, 'T', itemTabletFireLvl2);
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
@@ -358,5 +382,9 @@ public class SB
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl2),
+				"LLL", "LTL", "LLL", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningLvl1);
+		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
+				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1, 4), 'T', itemTabletLightningLvl2);
 	}
 }
