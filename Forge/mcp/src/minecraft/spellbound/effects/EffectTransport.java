@@ -29,7 +29,7 @@ public class EffectTransport extends AbstractEffect
 
 			Vec3 vec = caster.getLookVec();
 			EntityTargetSpell spell = new EntityTargetSpell(caster.worldObj, this);
-			spell.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
+			spell.setPosition(caster.posX + vec.xCoord * 5, caster.posY + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
 
 			spell.accelerationX = vec.xCoord * 0.3;
 			spell.accelerationY = vec.yCoord * 0.3;

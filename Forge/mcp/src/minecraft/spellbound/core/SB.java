@@ -431,6 +431,8 @@ public class SB
 	
 		GameRegistry.addRecipe(new ItemStack(itemTabletColorSpray), 
 				" R ", "BTY", " G ", 'T', itemTabletProtectionBase, 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 4), 'Y', new ItemStack(Item.dyePowder, 1,11), 'G', new ItemStack(Item.dyePowder, 1, 2));
+		GameRegistry.addRecipe(new ItemStack(itemTabletPush),
+				" P ", "-T-", " R ", 'P', Block.pistonBase, '-', Block.torchRedstoneActive, 'T', itemTabletProtectionBase, 'R', Item.redstone);
 
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
