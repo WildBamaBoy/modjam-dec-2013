@@ -49,6 +49,7 @@ public class ServerTickHandler implements ITickHandler
 			
 			for (EffectEntry entry : entryList)
 			{
+				System.out.println("ENTRY!");
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))
@@ -60,6 +61,7 @@ public class ServerTickHandler implements ITickHandler
 				{
 					oldEntries.put(player, entryList.indexOf(entry));
 				}
+				System.out.println("ENTRY END");
 			}
 		}
 		
