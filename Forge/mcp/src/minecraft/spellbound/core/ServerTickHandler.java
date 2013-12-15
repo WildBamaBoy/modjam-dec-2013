@@ -48,12 +48,14 @@ public class ServerTickHandler implements ITickHandler
 			{
 				entry.durationCounter--;
 				
+				System.out.println(entry.durationCounter);
+				
 				if (entry.durationCounter == (entry.durationCounter / 2))
 				{
 					player.addChatMessage(entry.effect.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
 				}
 				
-				if (entry.durationCounter == 0)
+				if (entry.durationCounter <= 0)
 				{
 					player.addChatMessage(entry.effect.getSpellDisplayName() + " has dispelled!");
 				}

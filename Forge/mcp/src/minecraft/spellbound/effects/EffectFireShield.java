@@ -1,5 +1,6 @@
 package spellbound.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -23,9 +24,19 @@ public class EffectFireShield extends AbstractEffect
 		this.caster = caster;
 		
 		List<EffectEntry> activeEffectsForCaster = SB.activeSpellEffects.get(caster);
-		activeEffectsForCaster.add(new EffectEntry(this, 1200));
+
+		if (activeEffectsForCaster == null)
+		{
+			List<EffectEntry> entryList = new ArrayList<EffectEntry>();
+			entryList.add(new EffectEntry(this, 1200));
+			SB.activeSpellEffects.put(caster, entryList);
+		}
 		
-		SB.activeSpellEffects.put(caster, activeEffectsForCaster);
+		else
+		{
+			activeEffectsForCaster.add(new EffectEntry(this, 1200));
+			SB.activeSpellEffects.put(caster, activeEffectsForCaster);
+		}
 	}
 
 	@Override
