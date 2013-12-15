@@ -66,7 +66,7 @@ public class EffectDimensionDoor extends AbstractEffect
 
 			EntityPlayerMP casterMP = (EntityPlayerMP)caster;
 			casterMP.mountEntity((Entity)null);
-			casterMP.playerNetServerHandler.setPlayerLocation(newPlayerX, newPlayerY, newPlayerZ, caster.rotationYaw, caster.rotationPitch);
+			casterMP.playerNetServerHandler.setPlayerLocation(newPlayerX, newPlayerY + 1, newPlayerZ, caster.rotationYaw, caster.rotationPitch);
 			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
 		}
 	}

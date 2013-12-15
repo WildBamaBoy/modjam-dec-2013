@@ -422,6 +422,13 @@ public class SB
 		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfBedrock), 
 				" Q ", "QTQ", " Q ", 'T', itemTabletWallOfObsidian, 'Q', Item.netherQuartz);
 
+		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl1), 
+				"BMB", " T ", 'T', itemTabletSummonBase, 'B', Item.bone, 'M', Item.porkRaw);
+		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl2), 
+				"AOA", "BTB", "FFF", 'A', Item.arrow, 'O', Item.bow, 'B', Item.bone, 'T', itemTabletSummonLvl1, 'F', Item.rottenFlesh);
+		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl3),
+				"SOA", " T ", "HCL", 'S', Item.swordIron, 'O', Item.bow, 'A', Item.arrow, 'T', itemTabletSummonLvl2, 'H', Item.helmetIron, 'C', Item.plateIron, 'L', Item.legsIron);
+	
 		GameRegistry.addRecipe(new ItemStack(itemTabletColorSpray), 
 				" R ", "BTY", " G ", 'T', itemTabletProtectionBase, 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 4), 'Y', new ItemStack(Item.dyePowder, 1,11), 'G', new ItemStack(Item.dyePowder, 1, 2));
 

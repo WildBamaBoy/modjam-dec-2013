@@ -17,16 +17,19 @@ public class EffectChangeWeather extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-        MinecraftServer.getServer().worldServers[0].toggleRain();
-        MinecraftServer.getServer().worldServers[0].getWorldInfo().setThundering(true);
+		if (!caster.worldObj.isRemote)
+		{
+			MinecraftServer.getServer().worldServers[0].toggleRain();
+			MinecraftServer.getServer().worldServers[0].getWorldInfo().setThundering(true);
+		}
 	}
 
 	@Override
 	public void updateSpellEffect() 
 	{
-		
+
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{
@@ -36,6 +39,6 @@ public class EffectChangeWeather extends AbstractEffect
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
