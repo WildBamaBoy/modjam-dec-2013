@@ -256,7 +256,7 @@ public class SB
 		itemTabletFireBase = new SBItem(propertiesManager.propertiesList.itemID_TabletFireBase, "tabletfirebase", "Fire Tablet");
 		itemTabletColdBase = new SBItem(propertiesManager.propertiesList.itemID_TabletColdBase, "tabletcoldbase", "Cold Tablet");
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
-		itemTabletSummonBase = new SBItem(propertiesManager.propertiesList.itemID_TabletSummonBase, "tabletlightningbase", "Lightning Tablet");
+		itemTabletSummonBase = new SBItem(propertiesManager.propertiesList.itemID_TabletSummonBase, "tabletsummonbase", "Summon Tablet");
 		itemTabletProtectionBase = new SBItem(propertiesManager.propertiesList.itemID_TabletProtectionBase, "tabletprotectionbase", "Protection Tablet");
 		itemTabletDivinationBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
 		itemTabletMundaneBase = new SBItem(propertiesManager.propertiesList.itemID_TabletMundaneBase, "tabletmundanebase", "Mundane Tablet");
