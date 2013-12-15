@@ -336,19 +336,27 @@ public class SB
 		//Register Recipes
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
 				" O ", "OTO", " O ", 'O', blockHybridMushroomOrange, 'T', itemTabletBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
-				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase); //>>>>>>>Lapis lazuli dmg is 4<<<<<<<<
+				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletBase);
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl2), 
+				"SSS", "STS", "SSS", 'S', Item.snowball, 'T', itemTabletColdLvl1);
+		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl3), 
+				" B ", "BTB", " B ", 'B', Block.blockSnow, 'T', itemTabletColdLvl2);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
-		
-		//
 	}
 }
