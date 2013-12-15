@@ -6,10 +6,8 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import spellbound.core.SB;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
 
@@ -50,7 +48,7 @@ public class EffectGrease extends AbstractEffect
 	@Override
 	public EnumSpellType getSpellType() 
 	{
-		return EnumSpellType.FRONT;
+		return EnumSpellType.TARGET;
 	}
 
 	@Override

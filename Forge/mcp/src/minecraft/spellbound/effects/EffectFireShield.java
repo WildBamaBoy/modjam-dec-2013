@@ -36,7 +36,7 @@ public class EffectFireShield extends AbstractEffect
 
 			else
 			{
-				activeEffectsForCaster.add(new EffectEntry(this, 40));
+				activeEffectsForCaster.add(new EffectEntry(this, 1200));
 				SB.activeSpellEffects.put(caster, activeEffectsForCaster);
 			}
 		}
