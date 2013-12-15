@@ -43,7 +43,7 @@ public class EffectColdLvl3 extends AbstractEffect
 
 							caster.worldObj.setBlock((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
 
-							for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
+							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 							{
 								if (obj instanceof EntityLivingBase)
 								{
@@ -66,6 +66,18 @@ public class EffectColdLvl3 extends AbstractEffect
 						int blockId = caster.worldObj.getBlockId((int)caster.posX - i, (int)caster.posY, (int)caster.posZ - j);
 						if (blockId == Block.snow.blockID || blockId == 0)
 						{
+							int radius = 2;
+
+							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - i, (int)caster.posY - 3, (int)caster.posZ - j - radius, (int)caster.posX + radius - i, (int)caster.posY + 3, (int)caster.posZ - j + radius)))
+							{
+								if (obj instanceof EntityLivingBase)
+								{
+									EntityLivingBase hitEntity = (EntityLivingBase)obj;
+									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+								}
+							}
+							
 							caster.worldObj.setBlock((int)caster.posX - i, (int)caster.posY, (int)caster.posZ - j, Block.snow.blockID);
 						}
 					}
@@ -81,6 +93,18 @@ public class EffectColdLvl3 extends AbstractEffect
 						int blockId = caster.worldObj.getBlockId((int)caster.posX + j, (int)caster.posY, (int)caster.posZ - i);
 						if (blockId == Block.snow.blockID || blockId == 0)
 						{
+							int radius = 2;
+
+							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + j, (int)caster.posY - 3, (int)caster.posZ - i - radius, (int)caster.posX + radius + j, (int)caster.posY + 3, (int)caster.posZ - i + radius)))
+							{
+								if (obj instanceof EntityLivingBase)
+								{
+									EntityLivingBase hitEntity = (EntityLivingBase)obj;
+									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+								}
+							}
+							
 							caster.worldObj.setBlock((int)caster.posX + j, (int)caster.posY, (int)caster.posZ - i, Block.snow.blockID);
 						}
 					}
@@ -96,6 +120,18 @@ public class EffectColdLvl3 extends AbstractEffect
 						int blockId = caster.worldObj.getBlockId((int)caster.posX + i, (int)caster.posY, (int)caster.posZ + j);
 						if (blockId == Block.snow.blockID || blockId == 0)
 						{
+							int radius = 2;
+
+							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + i, (int)caster.posY - 3, (int)caster.posZ + j - radius, (int)caster.posX + radius + i, (int)caster.posY + 3, (int)caster.posZ + j + radius)))
+							{
+								if (obj instanceof EntityLivingBase)
+								{
+									EntityLivingBase hitEntity = (EntityLivingBase)obj;
+									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+								}
+							}
+							
 							caster.worldObj.setBlock((int)caster.posX + i, (int)caster.posY, (int)caster.posZ + j, Block.snow.blockID);
 						}
 					}

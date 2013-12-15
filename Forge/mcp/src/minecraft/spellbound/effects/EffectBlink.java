@@ -2,6 +2,8 @@ package spellbound.effects;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import spellbound.enums.EnumSpellType;
 
@@ -16,7 +18,7 @@ public class EffectBlink extends AbstractEffect
 	@Override
 	public void doSpellEffect(EntityPlayer caster) 
 	{
-		
+		caster.addPotionEffect(new PotionEffect(Potion.invisibility.id, 100));
 	}
 
 	@Override
