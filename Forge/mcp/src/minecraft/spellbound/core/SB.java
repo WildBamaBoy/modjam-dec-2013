@@ -365,7 +365,17 @@ public class SB
 				" M ", "MTM", " M ", 'S', blockHybridMushroomLightBlue, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomYellow, 'T', itemTabletBase);
-
+		//GameRegistry.addRecipe(new ItemStack(itemTabletSummonBase), 
+		//		" M ", "MTM", " M ", 'M', blockHybridMushroomPurple, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletProtectionBase), 
+				" M ", "MTM", " M ", 'M', blockHybridMushroomGrey, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletDivinationBase), 
+				" M ", "MTM", " M ", 'M', blockHybridMushroomBlack, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletMundaneBase), 
+				" M ", "MTM", " M ", 'M', blockHybridMushroomRainbow, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletDisruptionBase), 
+				" M ", "MTM", " M ", 'M', blockHybridMushroomGold, 'T', itemTabletBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl2), 
@@ -386,5 +396,16 @@ public class SB
 				"LLL", "LTL", "LLL", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1, 4), 'T', itemTabletLightningLvl2);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
+				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletIceShield), 
+				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletColdBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletLightningShield), 
+				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletLightningBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletSurgeShield), 
+				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', Item.swordGold);
+		GameRegistry.addRecipe(new ItemStack(itemTabletShieldOfInvulnerability), 
+				" F ", "CRL", " S ", 'F', itemTabletFireShield, 'C', itemTabletIceShield, 'R', Item.redstone, 'L', itemTabletLightningShield, 'S', itemTabletSurgeShield);
 	}
 }
