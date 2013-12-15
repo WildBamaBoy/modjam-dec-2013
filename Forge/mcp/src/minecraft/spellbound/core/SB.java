@@ -407,5 +407,16 @@ public class SB
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', Item.swordGold);
 		GameRegistry.addRecipe(new ItemStack(itemTabletShieldOfInvulnerability), 
 				" F ", "CRL", " S ", 'F', itemTabletFireShield, 'C', itemTabletIceShield, 'R', Item.redstone, 'L', itemTabletLightningShield, 'S', itemTabletSurgeShield);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfStone), 
+				" B ", "BTB", " B ", 'T', itemTabletProtectionBase, 'B', Block.stone);
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfObsidian), 
+				" B ", "BTB", " B ", 'T', itemTabletWallOfStone, 'B', Block.obsidian);
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfBedrock), 
+				" Q ", "QTQ", " Q ", 'T', itemTabletWallOfObsidian, 'Q', Item.netherQuartz);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
+				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
+		
 	}
 }
