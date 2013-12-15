@@ -342,12 +342,12 @@ public class SB
 		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Red Orange Mushroom");
 		LanguageRegistry.addName(blockPrimaryMushroomPinkOrange, "Pink Orange Mushroom");
 		LanguageRegistry.addName(blockPrimaryMushroomBlueGrey, "Blue Grey Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomOrange, "Orange Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomOrange, "Fire Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrangeGrey, "Orange Grey Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomLightBlue, "Light Blue Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomLightBlue, "Cold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGrey, "Grey Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomYellow, "Yellow Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomYellow, "Lightning Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
@@ -397,6 +397,13 @@ public class SB
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1, 4), 'T', itemTabletLightningLvl2);
 
+		GameRegistry.addRecipe(new ItemStack(itemTabletUltElementalFury), 
+				" F ", "CRL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone);
+		GameRegistry.addRecipe(new ItemStack(itemTabletUltWailOfTheBanshee), 
+				" F ", "CRL", " E ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'E', Block.enderChest);
+		GameRegistry.addRecipe(new ItemStack(itemTabletUltDisintegrate), 
+				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletIceShield), 
