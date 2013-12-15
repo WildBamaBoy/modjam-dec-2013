@@ -1,6 +1,7 @@
 package spellbound.core;
 
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,8 @@ public class ServerTickHandler implements ITickHandler
 	
 	private void onTick()
 	{
+		Map<EntityPlayer, Integer> oldEntries = new HashMap<EntityPlayer, Integer>();
+		
 		for (Map.Entry<EntityPlayer,List<EffectEntry>> entrySet : SB.activeSpellEffects.entrySet())
 		{
 			EntityPlayer player = entrySet.getKey();
@@ -46,18 +49,27 @@ public class ServerTickHandler implements ITickHandler
 			
 			for (EffectEntry entry : entryList)
 			{
-				entry.durationCounter--;
+				entry.durationCounter++;
 				
-				if (entry.durationCounter == (entry.durationCounter / 2))
+				if (entry.durationCounter == (entry.maxDuration / 2))
 				{
 					player.addChatMessage(entry.effect.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
 				}
 				
-				if (entry.durationCounter <= 0)
+				if (entry.durationCounter >= entry.maxDuration)
 				{
-					player.addChatMessage(entry.effect.getSpellDisplayName() + " has dispelled!");
+					oldEntries.put(player, entryList.indexOf(entry));
 				}
 			}
+		}
+		
+		//Clean up old entries.
+		for (Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
+		{
+			List<EffectEntry> effects = SB.activeSpellEffects.get(oldEntry.getKey());
+			effects.remove(effects.get(oldEntry.getValue()));
+
+			System.out.println("A");//oldEntry.getKey().addChatMessage(oldEntry.effect.getSpellDisplayName() + " has dispelled!");
 		}
 	}
 }
