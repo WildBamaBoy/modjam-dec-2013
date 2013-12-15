@@ -205,10 +205,11 @@ public class SB
 		instance = this;
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
-		proxy.registerRenderers();
 		
 		MinecraftForge.EVENT_BUS.register(new SBEventHandler());
-		
+		proxy.registerRenderers();
+		proxy.registerTickHandlers();
+
 		//Declare tab.
 		spellboundTab = new CreativeTabs("tabSpellbound")
 		{
