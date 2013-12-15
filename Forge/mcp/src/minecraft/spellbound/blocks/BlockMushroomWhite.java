@@ -1,6 +1,5 @@
 package spellbound.blocks;
 
-import net.minecraft.block.Block;
 import spellbound.core.SB;
 import spellbound.effects.AbstractEffect;
 

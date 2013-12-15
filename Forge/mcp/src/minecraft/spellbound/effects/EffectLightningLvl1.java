@@ -1,6 +1,5 @@
 package spellbound.effects;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -8,10 +7,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import spellbound.core.Logic;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
-import spellbound.util.Coordinates;
 
 public class EffectLightningLvl1 extends AbstractEffect
 {

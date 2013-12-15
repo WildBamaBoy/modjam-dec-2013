@@ -1,10 +1,10 @@
 package spellbound.entity;
 
-import spellbound.effects.AbstractEffect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import spellbound.effects.AbstractEffect;
 
 public class EntityTargetSpell extends EntityFireball
 {

@@ -3,7 +3,6 @@ package spellbound.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import spellbound.blocks.AbstractMushroom;
 import spellbound.util.Coordinates;
