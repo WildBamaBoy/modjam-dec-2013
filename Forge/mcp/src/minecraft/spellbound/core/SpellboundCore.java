@@ -31,6 +31,7 @@ import spellbound.blocks.BlockMushroomRainbow;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
 import spellbound.blocks.BlockMushroomYellow;
+import spellbound.entity.EntityAllSeeingEye;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
@@ -82,6 +83,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -201,6 +203,7 @@ public class SpellboundCore
 		registerRecipes();
 		
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
+		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
 	}
 	
 	private void registerCreativeTab()
