@@ -12,11 +12,15 @@ import spellbound.spells.AbstractSpellScrying;
 import spellbound.spells.SpellAllSeeingEye;
 import spellbound.spells.SpellGreaterScrying;
 import spellbound.spells.SpellMinorScrying;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler
@@ -34,6 +38,11 @@ public class PacketHandler implements IPacketHandler
 			else if (packet.channel.equals("SB_GETNEXTEYE"))
 			{
 				handleGetNextEyePacket(packet, player);
+			}
+
+			else if (packet.channel.equals("SB_NEXTEYE"))
+			{
+				handleNextEyePacket(packet, player);
 			}
 		}
 
@@ -130,8 +139,9 @@ public class PacketHandler implements IPacketHandler
 
 		for (int index = currentEyeIndex == -1 ? 0 : currentEyeIndex ; index < spellEntries.size(); index++)
 		{
+			System.out.println("AAA");
 			SpellEntry entry = spellEntries.get(index);
-	
+
 			if (entry.spell instanceof AbstractSpellScrying)
 			{
 				nextSpell = (AbstractSpellScrying)entry.spell;
@@ -140,15 +150,15 @@ public class PacketHandler implements IPacketHandler
 
 		if (nextSpell == null)
 		{
-			createNextEyePacket(-1);
+			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(-1), player);
 		}
 
 		else
 		{
-			createNextEyePacket(nextSpell.eye.entityId);
+			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(nextSpell.eye.entityId), player);
 		}
 	}
-	
+
 	public static Packet250CustomPayload createNextEyePacket(int eyeEntityId)
 	{
 		try
@@ -182,7 +192,28 @@ public class PacketHandler implements IPacketHandler
 
 		ByteArrayInputStream input = new ByteArrayInputStream(data);
 		ObjectInputStream objectInput = new ObjectInputStream(input);
-		
-		int currentEyeIndex = (Integer)objectInput.readObject();
+
+		int nextEyeId = (Integer)objectInput.readObject();
+
+		if (nextEyeId == -1)
+		{
+			System.out.println("PLAYER!");
+			Minecraft.getMinecraft().renderViewEntity = Minecraft.getMinecraft().thePlayer;
+		}
+
+		else
+		{
+			Entity entity = entityPlayer.worldObj.getEntityByID(nextEyeId);
+
+			if (entity != null)
+			{
+				Minecraft.getMinecraft().renderViewEntity = (EntityLivingBase) (entity);
+			}
+
+			else
+			{
+				System.out.println("Next eye could not be found.");
+			}
+		}
 	}
 }

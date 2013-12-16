@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class KeyBindHandler extends KeyHandler
 {
@@ -50,7 +51,7 @@ public class KeyBindHandler extends KeyHandler
 
 	private void handleNextEye()
 	{
-		
+		PacketDispatcher.sendPacketToServer(PacketHandler.createGetNextEyePacket(Minecraft.getMinecraft().thePlayer.entityId, SpellboundCore.instance.currentEyeIndex));
 	}
 
 	private void handlePreviousEye()

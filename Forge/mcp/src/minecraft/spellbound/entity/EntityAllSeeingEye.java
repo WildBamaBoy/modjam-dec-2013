@@ -3,13 +3,14 @@ package spellbound.entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityAllSeeingEye extends Entity
+public class EntityAllSeeingEye extends EntityLivingBase
 {
 	private int despawnCounter;
     private int despawnPoint;
@@ -44,8 +45,6 @@ public class EntityAllSeeingEye extends Entity
      */
     public void onUpdate()
     {
-        super.onUpdate();
-
         this.worldObj.spawnParticle("portal", this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ);
 
         if (!this.worldObj.isRemote)
@@ -93,5 +92,34 @@ public class EntityAllSeeingEye extends Entity
     public boolean canAttackWithItem()
     {
         return false;
+    }
+
+	@Override
+	public ItemStack getHeldItem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemStack getCurrentItemOrArmor(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCurrentItemOrArmor(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ItemStack[] getLastActiveItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void setHealth(float par1)
+    {
     }
 }

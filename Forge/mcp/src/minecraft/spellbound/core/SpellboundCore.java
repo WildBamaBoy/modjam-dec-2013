@@ -190,9 +190,9 @@ public class SpellboundCore
 	public ItemSpellTablet itemTabletFlight;
 	public ItemSpellTablet itemTabletFishForm;
 
-	public ItemSpellTablet itemTabletMinorScrying;
-	public ItemSpellTablet itemTabletGreaterScrying;
-	public ItemSpellTablet itemTabletAllSeeingEye;
+	//public ItemSpellTablet itemTabletMinorScrying;
+	//public ItemSpellTablet itemTabletGreaterScrying;
+	//public ItemSpellTablet itemTabletAllSeeingEye;
 
 	public ItemSpellTablet itemTabletBreach;
 	public ItemSpellTablet itemTabletMiscastMagic;
@@ -298,9 +298,9 @@ public class SpellboundCore
 		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new SpellChangeWeather(), 1);
 		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new SpellFlight(), 1);
 		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new SpellFishForm(), 1);
-		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new SpellMinorScrying(), 1);
-		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new SpellGreaterScrying(), 2);
-		itemTabletAllSeeingEye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new SpellAllSeeingEye(), 3);
+		//itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new SpellMinorScrying(), 1);
+		//itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new SpellGreaterScrying(), 2);
+		//itemTabletAllSeeingEye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new SpellAllSeeingEye(), 3);
 		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new SpellBreach(), 1);
 		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new SpellMiscastMagic(), 2);
 		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new SpellChaos(), 3);
@@ -434,12 +434,12 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
 
-		GameRegistry.addRecipe(new ItemStack(itemTabletMinorScrying),
-				" P ", "QTQ", " Q ", 'T', itemTabletDivinationBase, 'P', Item.enderPearl, 'Q', Item.netherQuartz);
-		GameRegistry.addRecipe(new ItemStack(itemTabletGreaterScrying),
-				" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
-		GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
-				" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
+		//GameRegistry.addRecipe(new ItemStack(itemTabletMinorScrying),
+		//		" P ", "QTQ", " Q ", 'T', itemTabletDivinationBase, 'P', Item.enderPearl, 'Q', Item.netherQuartz);
+		//GameRegistry.addRecipe(new ItemStack(itemTabletGreaterScrying),
+		//		" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
+		//GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
+		//		" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
 
 		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),
 				" P ", "ATA", " A ", 'T', itemTabletDisruptionBase, 'P', itemTabletProtectionBase, 'A', Item.arrow);
