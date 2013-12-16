@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellFireLvl2 extends AbstractSpell
@@ -45,5 +46,11 @@ public class SpellFireLvl2 extends AbstractSpell
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

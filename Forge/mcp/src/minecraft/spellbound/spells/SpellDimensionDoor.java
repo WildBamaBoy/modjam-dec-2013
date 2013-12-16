@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellDimensionDoor extends AbstractSpell
@@ -72,12 +73,6 @@ public class SpellDimensionDoor extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
@@ -86,5 +81,11 @@ public class SpellDimensionDoor extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.FOUR_SECONDS;
 	}
 }

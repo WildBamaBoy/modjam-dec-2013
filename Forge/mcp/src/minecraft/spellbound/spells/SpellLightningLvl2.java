@@ -7,6 +7,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import spellbound.core.PacketHandler;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -25,7 +26,7 @@ public class SpellLightningLvl2 extends AbstractSpell
 		{
 			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster.worldObj, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
 		}
 	}
 
@@ -46,5 +47,11 @@ public class SpellLightningLvl2 extends AbstractSpell
 		worldObj.spawnEntityInWorld(lightning);
 		
 		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

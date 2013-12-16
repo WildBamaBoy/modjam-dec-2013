@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.Logic;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import spellbound.util.Coordinates;
 
@@ -55,5 +56,11 @@ public class SpellColdLvl2 extends AbstractSpell
 			entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
 			entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 		}
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

@@ -10,6 +10,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellUltimateDisintegrate extends AbstractSpell
@@ -54,5 +55,11 @@ public class SpellUltimateDisintegrate extends AbstractSpell
 				entityHit.attackEntityFrom(DamageSource.magic, 10.0F);
 			}
 		}
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.FIVE_SECONDS;
 	}
 }

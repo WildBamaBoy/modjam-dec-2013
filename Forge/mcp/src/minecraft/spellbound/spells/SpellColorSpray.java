@@ -7,6 +7,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellColorSpray extends AbstractSpell
@@ -119,5 +120,11 @@ public class SpellColorSpray extends AbstractSpell
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

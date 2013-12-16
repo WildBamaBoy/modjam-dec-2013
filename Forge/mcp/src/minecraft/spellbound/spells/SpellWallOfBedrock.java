@@ -1,5 +1,6 @@
 package spellbound.spells;
 
+import spellbound.enums.EnumItemInUseTime;
 import net.minecraft.block.Block;
 
 public class SpellWallOfBedrock extends AbstractSpellWall
@@ -14,5 +15,11 @@ public class SpellWallOfBedrock extends AbstractSpellWall
 	public int getWallBlockId() 
 	{
 		return Block.bedrock.blockID;
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.FOUR_SECONDS;
 	}
 }

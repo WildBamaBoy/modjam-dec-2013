@@ -30,9 +30,9 @@ public abstract class AbstractSpellWall extends AbstractSpell
 			default: break;
 			}
 
-			wallCenterX = MathHelper.floor_double(caster.posX);
-			wallCenterY = MathHelper.floor_double(caster.posY);
-			wallCenterZ = MathHelper.floor_double(caster.posZ);
+			wallCenterX = MathHelper.floor_double(wallCenterX);
+			wallCenterY = MathHelper.floor_double(wallCenterY);
+			wallCenterZ = MathHelper.floor_double(wallCenterZ);
 
 			for (int currentWidth = -3; currentWidth < 4; currentWidth++)
 			{

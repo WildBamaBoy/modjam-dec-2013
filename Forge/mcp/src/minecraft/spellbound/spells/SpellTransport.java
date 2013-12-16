@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellTransport extends AbstractSpell
@@ -54,5 +55,11 @@ public class SpellTransport extends AbstractSpell
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import spellbound.util.Coordinates;
 
@@ -55,5 +56,11 @@ public class SpellSummonChestFullOfCookies extends AbstractSpell
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.FIVE_SECONDS;
 	}
 }

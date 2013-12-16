@@ -7,6 +7,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellSummonLvl2 extends AbstractSpell
@@ -40,5 +41,11 @@ public class SpellSummonLvl2 extends AbstractSpell
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.TWO_SECONDS;
 	}
 }

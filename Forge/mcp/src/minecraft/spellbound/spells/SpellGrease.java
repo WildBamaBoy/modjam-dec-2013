@@ -10,6 +10,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public class SpellGrease extends AbstractSpell
@@ -47,5 +48,11 @@ public class SpellGrease extends AbstractSpell
 			EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.porkCooked, SpellboundCore.rand.nextInt(2) + 3, 15));
 			worldObj.spawnEntityInWorld(item);
 		}
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.INSTANT;
 	}
 }

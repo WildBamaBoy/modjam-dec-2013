@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import spellbound.core.PacketHandler;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpell;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
@@ -84,5 +85,11 @@ public class SpellElementalFury extends AbstractSpell
 				}
 			}
 		}
+	}
+	
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.FIVE_SECONDS;
 	}
 }

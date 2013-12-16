@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import spellbound.util.Coordinates;
 
@@ -45,5 +46,11 @@ public class SpellAdvanceTime extends AbstractSpell
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
 		//No target effect.
+	}
+
+	@Override
+	public EnumItemInUseTime getSpellDuration() 
+	{
+		return EnumItemInUseTime.THREE_SECONDS;
 	}
 }

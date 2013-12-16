@@ -3,19 +3,36 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.Constants;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public abstract class AbstractSpell 
 {
 	public EntityPlayer caster;
+
+	public String getSpellChargeSound()
+	{
+		switch (getSpellDuration())
+		{
+		case INSTANT: return "null";
+		case ONE_SECOND: return "spellbound:spellcharge1second";
+		case TWO_SECONDS: return "spellbound:spellcharge2seconds";
+		case THREE_SECONDS: return "spellbound:spellcharge3seconds";
+		case FOUR_SECONDS: return "spellbound:spellcharge4seconds";
+		case FIVE_SECONDS: return "spellbound:spellcharge5seconds";
+		default: return "spellbound:spellcharge5seconds";
+		}
+	}
 	
 	public boolean doMagicSurge()
 	{
-		//TODO
 		return false;
 	}
-	
+
 	public abstract String getSpellDisplayName();
+	
+	public abstract EnumItemInUseTime getSpellDuration();
 	
 	public abstract void doSpellCasterEffect(EntityPlayer caster);
 	
