@@ -225,9 +225,10 @@ public class SpellboundCore
 		registerBlocks();
 		registerLocalizations();
 		registerRecipes();
-
+		
 		proxy.registerRenderers();
 
+		GameRegistry.registerCraftingHandler(new CraftingHandler());
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);

@@ -1,10 +1,11 @@
 package spellbound.item;
 
-import spellbound.core.SpellboundCore;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemEditableBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import spellbound.core.SpellboundCore;
 
 public class ItemBookOfSpells extends ItemEditableBook
 {
@@ -13,10 +14,11 @@ public class ItemBookOfSpells extends ItemEditableBook
 		super(itemId);
 		this.setCreativeTab(SpellboundCore.instance.spellboundTab);
 	}
-	
-	public static void addBookInfoToStack(ItemStack bookStack)
+
+	public static ItemStack addBookInfoToStack(ItemStack bookStack)
 	{
 		NBTTagList bookPages = new NBTTagList("pages");
+		
 		bookPages.appendTag(new NBTTagString("1", "Content pg1"));
 		bookPages.appendTag(new NBTTagString("2", "Content pg2"));
 		bookPages.appendTag(new NBTTagString("3", "Content pg3"));
@@ -26,5 +28,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookStack.setTagInfo("pages", bookPages);
 		bookStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
 		bookStack.setTagInfo("title", new NBTTagString("title", "The Book of Spells"));
+		bookStack.itemID = Item.writtenBook.itemID;
+		
+		return bookStack;
 	}
 }
