@@ -21,6 +21,8 @@ public class SpellSummonLvl2 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
+		
 		if (!caster.worldObj.isRemote)
 		{
 			EntityMob mob = SpellboundCore.rand.nextBoolean() ? new EntitySkeleton(caster.worldObj) : new EntityZombie(caster.worldObj);

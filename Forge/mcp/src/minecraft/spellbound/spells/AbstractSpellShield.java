@@ -17,6 +17,16 @@ public abstract class AbstractSpellShield extends AbstractSpell
 	{
 		this.caster = caster;
 
+		if (this instanceof SpellShieldOfInvulnerability)
+		{
+			caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
+		}
+
+		else
+		{
+			caster.worldObj.playSoundAtEntity(caster, "spellbound:shield", 1.0F, 1.0F);
+		}
+		
 		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
 
 		if (activeSpellsForCaster == null)

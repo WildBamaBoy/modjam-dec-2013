@@ -18,6 +18,8 @@ public class SpellSummonLvl1 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
+		
 		if (!caster.worldObj.isRemote)
 		{
 			EntityWolf wolf = new EntityWolf(caster.worldObj);
