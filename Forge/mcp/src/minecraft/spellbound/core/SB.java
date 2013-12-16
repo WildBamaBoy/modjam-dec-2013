@@ -193,7 +193,7 @@ public class SB
 
 	public ItemSpellTablet itemTabletMinorScrying;
 	public ItemSpellTablet itemTabletGreaterScrying;
-	public ItemSpellTablet itemTabletAllSeeingeye;
+	public ItemSpellTablet itemTabletAllSeeingEye;
 
 	//Disruptive Magic
 	public ItemSpellTablet itemTabletBreach;
@@ -310,7 +310,7 @@ public class SB
 		//Foresight
 		itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new EffectMinorScrying(), 1);
 		itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new EffectGreaterScrying(), 2);
-		itemTabletAllSeeingeye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectAllSeeingEye(), 3);
+		itemTabletAllSeeingEye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new EffectAllSeeingEye(), 3);
 
 		//Disruptive Magic
 		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new EffectBreach(), 1);
@@ -447,6 +447,30 @@ public class SB
 				" M ", "RT-", 'M', Item.minecartEmpty, 'R', Block.railPowered, 'T', itemTabletMundaneBase, '-', Block.torchRedstoneActive);
 		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
 				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
+				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletChangeWeather),
+				" B ", "STS", " F ", 'B', Item.bucketWater, 'S', Block.blockSnow, 'T', itemTabletMundaneBase, 'F', Block.plantYellow);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFlight),
+				" F ", "FTF", " F ", 'T', itemTabletMundaneBase, 'F', Item.feather);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
+				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
+				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletMinorScrying),
+				" P ", "QTQ", " Q ", 'T', itemTabletDivinationBase, 'P', Item.enderPearl, 'Q', Item.netherQuartz);
+		GameRegistry.addRecipe(new ItemStack(itemTabletGreaterScrying),
+				" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
+		GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
+				" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
+		
+		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),
+				" P ", "ATA", " A ", 'T', itemTabletDisruptionBase, 'P', itemTabletProtectionBase, 'A', Item.arrow);
+		GameRegistry.addRecipe(new ItemStack(itemTabletMiscastMagic),
+				" P ", "PTP", " P ", 'T', itemTabletBreach, 'P', Item.blazePowder);
+		GameRegistry.addRecipe(new ItemStack(itemTabletChaos),
+				" R ", "RTR", " R ", 'T', itemTabletMiscastMagic, 'R', Item.blazeRod);
 		
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
