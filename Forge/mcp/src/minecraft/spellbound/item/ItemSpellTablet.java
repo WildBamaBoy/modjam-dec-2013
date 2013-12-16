@@ -78,13 +78,26 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer, int inUseCount)
 	{
-		entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
-				
 		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue())
 		{
-			if (!worldObj.isRemote && SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
+			entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+			
+			if (!worldObj.isRemote)
 			{
-				spell.doSpellCasterEffect(entityPlayer);
+				if (SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
+				{
+					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "You're under the effects of Miscast Magic!");
+				}
+				
+				else if (spell.doMagicSurge())
+				{
+					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Magic surge!");
+				}
+				
+				else
+				{
+					spell.doSpellCasterEffect(entityPlayer);
+				}
 			}
 			
 			super.onPlayerStoppedUsing(itemStack, worldObj, entityPlayer, inUseCount);

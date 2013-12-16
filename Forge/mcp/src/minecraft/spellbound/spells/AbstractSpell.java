@@ -32,9 +32,9 @@ public abstract class AbstractSpell
 	public abstract String getSpellDisplayName();
 	
 	public abstract EnumItemInUseTime getSpellCastDuration();
-	
+
 	public abstract void doSpellCasterEffect(EntityPlayer caster);
-	
+
 	public abstract void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit);
 	
 	public abstract EnumSpellType getSpellType();

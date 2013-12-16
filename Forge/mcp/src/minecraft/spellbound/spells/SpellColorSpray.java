@@ -7,6 +7,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -38,10 +39,19 @@ public class SpellColorSpray extends AbstractSpell
 
 						for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 						{
-							if (obj instanceof EntityLivingBase)
+							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 							{
 								EntityLivingBase hitEntity = (EntityLivingBase)obj;
-								hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 1200));
+								hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));
+							}
+							
+							else if (obj instanceof EntityPlayer)
+							{
+								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "Shield of Invulnerability"))
+								{
+									EntityLivingBase hitEntity = (EntityLivingBase)obj;
+									hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));	
+								}
 							}
 						}
 					}

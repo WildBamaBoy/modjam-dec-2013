@@ -15,27 +15,24 @@ public abstract class AbstractSpellShield extends AbstractSpell
 	@Override
 	public final void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		if (!caster.worldObj.isRemote)
+		this.caster = caster;
+
+		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+
+		if (activeSpellsForCaster == null)
 		{
-			this.caster = caster;
+			List<SpellEntry> entryList = new ArrayList<SpellEntry>();
+			entryList.add(new SpellEntry(this, getShieldDuration()));
+			SpellboundCore.activeSpells.put(caster, entryList);
+		}
 
-			List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
-
-			if (activeSpellsForCaster == null)
-			{
-				List<SpellEntry> entryList = new ArrayList<SpellEntry>();
-				entryList.add(new SpellEntry(this, 1200));
-				SpellboundCore.activeSpells.put(caster, entryList);
-			}
-
-			else
-			{
-				activeSpellsForCaster.add(new SpellEntry(this, 1200));
-				SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
-			}
+		else
+		{
+			activeSpellsForCaster.add(new SpellEntry(this, getShieldDuration()));
+			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
 		}
 	}
-	
+
 	@Override
 	public final void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{

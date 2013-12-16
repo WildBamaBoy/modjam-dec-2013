@@ -10,6 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -26,7 +27,7 @@ public class SpellColdLvl1 extends AbstractSpell
 	{
 		caster.inventory.decrStackSize(caster.inventory.currentItem, 1);
 		caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
-		
+
 		//TODO Redo.
 		if (!caster.worldObj.isRemote)
 		{
@@ -40,16 +41,24 @@ public class SpellColdLvl1 extends AbstractSpell
 					if (blockId == Block.snow.blockID || blockId == 0)
 					{
 						int radius = 2;
-						
+
 						caster.worldObj.setBlock((int)caster.posX, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
-						
+
 						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 						{
-							if (obj instanceof EntityLivingBase)
+							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 							{
 								EntityLivingBase hitEntity = (EntityLivingBase)obj;
 								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 								hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
+							}
+
+							else if (obj instanceof EntityPlayer)
+							{
+								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+								{							
+									SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
+								}
 							}
 						}
 					}
@@ -105,7 +114,7 @@ public class SpellColdLvl1 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

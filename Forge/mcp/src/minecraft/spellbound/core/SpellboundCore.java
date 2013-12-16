@@ -115,10 +115,10 @@ public class SpellboundCore
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
 
-//	public static KeyBindHandler keyBindHandler;
-//	public static KeyBinding keyNextEye;
-//	public static KeyBinding keyPreviousEye;
-//	public static KeyBinding keyDismissEye;
+	//	public static KeyBindHandler keyBindHandler;
+	//	public static KeyBinding keyNextEye;
+	//	public static KeyBinding keyPreviousEye;
+	//	public static KeyBinding keyDismissEye;
 
 	public CreativeTabs spellboundTab;
 
@@ -202,7 +202,7 @@ public class SpellboundCore
 
 	@SideOnly(Side.CLIENT)
 	public int currentEyeIndex = -1;
-	
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -220,9 +220,9 @@ public class SpellboundCore
 		registerRecipes();
 
 		proxy.registerRenderers();
-		
+
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
-		
+
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellFire.class, EntityTargetSpellFire.class.getSimpleName(), 9, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellCold.class, EntityTargetSpellCold.class.getSimpleName(), 10, this, 50, 2, true);
@@ -232,19 +232,19 @@ public class SpellboundCore
 		EntityRegistry.registerModEntity(EntityTargetSpellMundane.class, EntityTargetSpellMundane.class.getSimpleName(), 14, this, 50, 2, true);
 	}
 
-//	@EventHandler
-//	public void init(FMLInitializationEvent event)
-//	{
-//		KeyBinding[] keys = new KeyBinding[]
-//				{
-//				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
-//						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
-//						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
-//				};
-//
-//		keyBindHandler = new KeyBindHandler(keys);
-//		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
-//	}
+	//	@EventHandler
+	//	public void init(FMLInitializationEvent event)
+	//	{
+	//		KeyBinding[] keys = new KeyBinding[]
+	//				{
+	//				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
+	//						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
+	//						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
+	//				};
+	//
+	//		keyBindHandler = new KeyBindHandler(keys);
+	//		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
+	//	}
 
 	private void registerCreativeTab()
 	{
@@ -475,7 +475,7 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
 	}
-	
+
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
 	{
 		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
@@ -493,26 +493,29 @@ public class SpellboundCore
 			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
 		}
 	}
-	
+
 	public boolean playerHasActiveSpell(EntityPlayer caster, String className)
 	{
 		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
 
-		for (SpellEntry entry : activeSpellsForCaster)
+		if (activeSpellsForCaster != null)
 		{
-			if (entry.spell.getClass().getSimpleName().equals(className))
+			for (SpellEntry entry : activeSpellsForCaster)
 			{
-				return true;
+				if (entry.spell.getClass().getSimpleName().equals(className))
+				{
+					return true;
+				}
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public void removeActiveSpellFromPlayer(EntityPlayer caster, String className)
 	{
 		Map<EntityPlayer, Integer> badEntries = new HashMap<EntityPlayer, Integer>();
-		
+
 		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
 
 		int i = 0;
@@ -522,10 +525,10 @@ public class SpellboundCore
 			{
 				badEntries.put(caster, i);
 			}
-			
+
 			i++;
 		}
-		
+
 		//Clean up old entries.
 		for (Map.Entry<EntityPlayer, Integer> badEntry : badEntries.entrySet())
 		{
@@ -535,14 +538,14 @@ public class SpellboundCore
 			spells.remove(spells.get(badEntry.getValue()));
 		}
 	}
-	
+
 	public void sendMessageToPlayer(EntityPlayer player, String message)
 	{
 		if (player.worldObj.isRemote)
 		{
 			player.addChatMessage(message);
 		}
-		
+
 		else
 		{
 			PacketDispatcher.sendPacketToPlayer(PacketHandler.createChatMessagePacket(message), (Player)player);

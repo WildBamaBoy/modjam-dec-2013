@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.entity.EntityTargetSpellMundane;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -19,12 +20,8 @@ public class SpellBreach extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		if (!caster.worldObj.isRemote)
-		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
-			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellMundane(caster, this));
-		}
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDisruption(caster, this));
 	}
 
 	@Override
@@ -38,10 +35,13 @@ public class SpellBreach extends AbstractSpell
 	{
 		if (entityHit != null && entityHit instanceof EntityPlayer)
 		{
-			SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellFireShield");
-			SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellColdShield");
-			SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellLightningShield");
-			SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellSurgeShield");
+			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "Shield of Invulnerability"))
+			{
+				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellFireShield");
+				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellColdShield");
+				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellLightningShield");
+				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellSurgeShield");
+			}
 		}
 	}
 

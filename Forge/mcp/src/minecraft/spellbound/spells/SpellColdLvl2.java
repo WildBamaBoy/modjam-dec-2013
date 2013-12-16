@@ -9,6 +9,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.Logic;
+import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellCold;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -52,12 +53,24 @@ public class SpellColdLvl2 extends AbstractSpell
 					worldObj.setBlock(c.x, c.y + 1, c.z, Block.snow.blockID);
 				}
 			}
-			
-			entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
-			entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+
+			if (!(entityHit instanceof EntityPlayer))
+			{
+				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+				entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+			}
+
+			else
+			{
+				if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellColdShield"))
+				{							
+					entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+					entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+				}
+			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

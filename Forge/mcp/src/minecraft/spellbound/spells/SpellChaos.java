@@ -2,7 +2,11 @@ package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
+import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -17,9 +21,10 @@ public class SpellChaos extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		//TODO
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDisruption(caster, this));
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{
@@ -29,9 +34,15 @@ public class SpellChaos extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		//TODO
+		if (entityHit != null && entityHit instanceof EntityPlayer)
+		{
+			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "Shield of Invulnerability"))
+			{
+				SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
+			}
+		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{
