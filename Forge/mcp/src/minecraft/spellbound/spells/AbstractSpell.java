@@ -3,6 +3,8 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.Constants;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -24,9 +26,31 @@ public abstract class AbstractSpell
 		}
 	}
 	
-	public AbstractSurge doMagicSurge()
+	public AbstractSurge doMagicSurge(EntityPlayer caster)
 	{
-		return false;
+		this.caster = caster;
+		
+		int chanceOfSurge = 1;
+		
+		if (SpellboundCore.instance.playerHasActiveSpell(caster, "SpellChaos"))
+		{
+			chanceOfSurge = 80;
+		}
+		
+		if (SpellboundCore.instance.playerHasActiveSpell(caster, "SpellSurgeShield") || SpellboundCore.instance.playerHasActiveSpell(caster, "SpellShieldOfInvulnerability"))
+		{
+			chanceOfSurge = 0;
+		}
+		
+		if (SpellboundCore.getBooleanWithProbability(chanceOfSurge))
+		{
+			return Constants.SURGES[SpellboundCore.rand.nextInt(Constants.SURGES.length)];
+		}
+		
+		else
+		{
+			return null;
+		}
 	}
 
 	public abstract String getSpellDisplayName();

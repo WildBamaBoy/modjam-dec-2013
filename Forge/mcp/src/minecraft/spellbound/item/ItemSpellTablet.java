@@ -84,7 +84,7 @@ public class ItemSpellTablet extends SpellboundItem
 			
 			if (!worldObj.isRemote)
 			{
-				AbstractSurge surge = spell.doMagicSurge();
+				AbstractSurge surge = spell.doMagicSurge(entityPlayer);
 				
 				if (SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
 				{

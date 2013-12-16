@@ -1,11 +1,17 @@
 package spellbound.core;
 
+import spellbound.spells.AbstractSurge;
+import spellbound.spells.SurgeRiches;
 import net.minecraft.block.Block;
 
 public final class Constants 
 {
 	public static final String VERSION = "ModJam 3 Beta";
 	
+	public static final AbstractSurge[] SURGES = new AbstractSurge[]
+			{
+		new SurgeRiches()
+			};
 	public static final int[] CROP_IDS = new int[]
 			{
 		Block.crops.blockID, 

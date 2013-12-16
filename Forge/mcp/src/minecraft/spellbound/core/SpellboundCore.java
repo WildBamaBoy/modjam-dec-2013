@@ -126,7 +126,7 @@ public class SpellboundCore
 
 	public Block blockFalseObsidian;
 	public Block blockFalseBedrock;
-	
+
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
 	public Block blockPrimaryMushroomBlueGrey;
@@ -324,7 +324,7 @@ public class SpellboundCore
 	{
 		blockFalseBedrock = new BlockFalseBedrock(propertiesManager.propertiesList.blockID_BlockFalseBedrock);
 		blockFalseObsidian = new BlockFalseObsidian(propertiesManager.propertiesList.blockID_BlockFalseObsidian);
-		
+
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.blockID_MushroomRedOrange);
 		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.blockID_MushroomPinkOrange);
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);
@@ -557,6 +557,19 @@ public class SpellboundCore
 		else
 		{
 			PacketDispatcher.sendPacketToPlayer(PacketHandler.createChatMessagePacket(message), (Player)player);
+		}
+	}
+
+	public static boolean getBooleanWithProbability(int probability)
+	{
+		if (probability <= 0)
+		{
+			return false;
+		}
+
+		else
+		{
+			return rand.nextInt(100) + 1 <= probability;
 		}
 	}
 }
