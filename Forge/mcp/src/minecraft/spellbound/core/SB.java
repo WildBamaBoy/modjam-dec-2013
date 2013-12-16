@@ -214,17 +214,18 @@ public class SB
 		proxy.registerRenderers();
 		proxy.registerTickHandlers();
 
-		//Declare tab.
+		//Declare tab & tab icon item.
+		itemTabletDivinationBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
 		spellboundTab = new CreativeTabs("tabSpellbound")
 		{
 			public ItemStack getIconItemStack()
 			{
-				//TODO Change tab icon
-				return new ItemStack(Item.appleRed, 1, 0);
+				return new ItemStack(itemTabletDivinationBase, 1, 0);
 			}
 		};
-		LanguageRegistry.instance().addStringLocalization("tabSpellbound", "Spellbound");
-
+		LanguageRegistry.instance().addStringLocalization("itemGroup.tabSpellbound", "Spellbound");
+		itemTabletDivinationBase.setCreativeTab(spellboundTab);
+		
 		//Declare blocks
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.blockID_MushroomRedOrange);
 		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.blockID_MushroomPinkOrange);
@@ -258,7 +259,6 @@ public class SB
 		itemTabletLightningBase = new SBItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
 		itemTabletSummonBase = new SBItem(propertiesManager.propertiesList.itemID_TabletSummonBase, "tabletsummonbase", "Summon Tablet");
 		itemTabletProtectionBase = new SBItem(propertiesManager.propertiesList.itemID_TabletProtectionBase, "tabletprotectionbase", "Protection Tablet");
-		itemTabletDivinationBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
 		itemTabletMundaneBase = new SBItem(propertiesManager.propertiesList.itemID_TabletMundaneBase, "tabletmundanebase", "Mundane Tablet");
 		itemTabletDisruptionBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDisruptionBase, "tabletdisruptionbase", "Disruption Tablet");
 
@@ -353,12 +353,9 @@ public class SB
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
 		//TODO
 
-
-
 		//Register Recipes
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomOrange, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdBase), 
@@ -375,35 +372,30 @@ public class SB
 				" M ", "MTM", " M ", 'M', blockHybridMushroomRainbow, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDisruptionBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomGold, 'T', itemTabletBase);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl2), 
 				"RRR", "RTR", "RRR", 'R', Item.redstone, 'T', itemTabletFireLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl3), 
 				" R ", "RTR", " R ", 'R', Block.blockRedstone, 'T', itemTabletFireLvl2);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl1), 
 				" S ", "STS", " S ", 'S', Item.snowball, 'T', itemTabletColdBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl2), 
 				"SSS", "STS", "SSS", 'S', Item.snowball, 'T', itemTabletColdLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColdLvl3), 
 				" B ", "BTB", " B ", 'B', Block.blockSnow, 'T', itemTabletColdLvl2);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl1), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl2),
 				"LLL", "LTL", "LLL", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1), 'T', itemTabletLightningLvl2);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltElementalFury), 
 				" F ", "CRL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone);
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltWailOfTheBanshee), 
 				" F ", "CRL", " E ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'E', Block.enderChest);
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltDisintegrate), 
 				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletIceShield), 
@@ -414,21 +406,18 @@ public class SB
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', Item.swordGold);
 		GameRegistry.addRecipe(new ItemStack(itemTabletShieldOfInvulnerability), 
 				" F ", "CRL", " S ", 'F', itemTabletFireShield, 'C', itemTabletIceShield, 'R', Item.redstone, 'L', itemTabletLightningShield, 'S', itemTabletSurgeShield);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfStone), 
 				" B ", "BTB", " B ", 'T', itemTabletProtectionBase, 'B', Block.stone);
 		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfObsidian), 
 				" B ", "BTB", " B ", 'T', itemTabletWallOfStone, 'B', Block.obsidian);
 		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfBedrock), 
 				" Q ", "QTQ", " Q ", 'T', itemTabletWallOfObsidian, 'Q', Item.netherQuartz);
-
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl1), 
 				"BMB", " T ", 'T', itemTabletSummonBase, 'B', Item.bone, 'M', Item.porkRaw);
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl2), 
 				"AOA", "BTB", "FFF", 'A', Item.arrow, 'O', Item.bow, 'B', Item.bone, 'T', itemTabletSummonLvl1, 'F', Item.rottenFlesh);
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl3),
 				"SOA", " T ", "HCL", 'S', Item.swordIron, 'O', Item.bow, 'A', Item.arrow, 'T', itemTabletSummonLvl2, 'H', Item.helmetIron, 'C', Item.plateIron, 'L', Item.legsIron);
-	
 		GameRegistry.addRecipe(new ItemStack(itemTabletColorSpray), 
 				" R ", "BTY", " G ", 'T', itemTabletProtectionBase, 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 4), 'Y', new ItemStack(Item.dyePowder, 1,11), 'G', new ItemStack(Item.dyePowder, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(itemTabletPush),
@@ -457,21 +446,18 @@ public class SB
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletMinorScrying),
 				" P ", "QTQ", " Q ", 'T', itemTabletDivinationBase, 'P', Item.enderPearl, 'Q', Item.netherQuartz);
 		GameRegistry.addRecipe(new ItemStack(itemTabletGreaterScrying),
 				" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
 		GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
 				" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),
 				" P ", "ATA", " A ", 'T', itemTabletDisruptionBase, 'P', itemTabletProtectionBase, 'A', Item.arrow);
 		GameRegistry.addRecipe(new ItemStack(itemTabletMiscastMagic),
 				" P ", "PTP", " P ", 'T', itemTabletBreach, 'P', Item.blazePowder);
 		GameRegistry.addRecipe(new ItemStack(itemTabletChaos),
 				" R ", "RTR", " R ", 'T', itemTabletMiscastMagic, 'R', Item.blazeRod);
-		
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
 	}
