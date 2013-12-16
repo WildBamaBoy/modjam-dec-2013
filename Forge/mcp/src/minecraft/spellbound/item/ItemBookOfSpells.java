@@ -481,6 +481,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 				"Grey Mushroom"
 				+ "\n+ Orange Grey = Lightning"
 				+ "\n+ Blue Grey = Black"
+				+ "\n+ Rainbow = Purple"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("12", 
@@ -492,6 +493,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("13", 
 				"Rainbow Mushroom"
 				+ "\n+ Yellow = Gold"
+				+ "\n+ Grey = Purple"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("14", 

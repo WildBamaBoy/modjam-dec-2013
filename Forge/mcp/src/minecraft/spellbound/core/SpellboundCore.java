@@ -374,8 +374,8 @@ public class SpellboundCore
 				" M ", "MTM", " M ", 'M', blockHybridMushroomLightBlue, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomYellow, 'T', itemTabletBase);
-		//GameRegistry.addRecipe(new ItemStack(itemTabletSummonBase), 
-		//		" M ", "MTM", " M ", 'M', blockHybridMushroomPurple, 'T', itemTabletBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletSummonBase), 
+				" M ", "MTM", " M ", 'M', blockHybridMushroomPurple, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletProtectionBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomGrey, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDivinationBase), 
@@ -494,7 +494,7 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomPurple, "Purple Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomPurple, "Protection Mushroom");
 	}
 
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
