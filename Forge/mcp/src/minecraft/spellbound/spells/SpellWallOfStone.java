@@ -18,7 +18,7 @@ public class SpellWallOfStone extends AbstractSpellWall
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.INSTANT;
 	}

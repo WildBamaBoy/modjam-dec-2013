@@ -10,6 +10,7 @@
 package spellbound.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,10 +116,10 @@ public class SpellboundCore
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
 
-	public static KeyBindHandler keyBindHandler;
-	public static KeyBinding keyNextEye;
-	public static KeyBinding keyPreviousEye;
-	public static KeyBinding keyDismissEye;
+//	public static KeyBindHandler keyBindHandler;
+//	public static KeyBinding keyNextEye;
+//	public static KeyBinding keyPreviousEye;
+//	public static KeyBinding keyDismissEye;
 
 	public CreativeTabs spellboundTab;
 
@@ -224,19 +225,19 @@ public class SpellboundCore
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
 	}
 
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
-		KeyBinding[] keys = new KeyBinding[]
-				{
-				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
-						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
-						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
-				};
-
-		keyBindHandler = new KeyBindHandler(keys);
-		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
-	}
+//	@EventHandler
+//	public void init(FMLInitializationEvent event)
+//	{
+//		KeyBinding[] keys = new KeyBinding[]
+//				{
+//				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
+//						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
+//						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
+//				};
+//
+//		keyBindHandler = new KeyBindHandler(keys);
+//		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
+//	}
 
 	private void registerCreativeTab()
 	{
@@ -483,6 +484,48 @@ public class SpellboundCore
 		{
 			activeSpellsForCaster.add(new SpellEntry(spell, 1200));
 			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
+		}
+	}
+	
+	public boolean playerHasActiveSpell(EntityPlayer caster, String className)
+	{
+		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+
+		for (SpellEntry entry : activeSpellsForCaster)
+		{
+			if (entry.spell.getClass().getSimpleName().equals(className))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void removeActiveSpellFromPlayer(EntityPlayer caster, String className)
+	{
+		Map<EntityPlayer, Integer> badEntries = new HashMap<EntityPlayer, Integer>();
+		
+		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+
+		int i = 0;
+		for (SpellEntry entry : activeSpellsForCaster)
+		{
+			if (entry.spell.getClass().getSimpleName().equals(className))
+			{
+				badEntries.put(caster, i);
+			}
+			
+			i++;
+		}
+		
+		//Clean up old entries.
+		for (Map.Entry<EntityPlayer, Integer> badEntry : badEntries.entrySet())
+		{
+			List<SpellEntry> spells = SpellboundCore.activeSpells.get(badEntry.getKey());
+			AbstractSpell spell = spells.get(badEntry.getValue()).spell;
+			caster.addChatMessage(spell.getSpellDisplayName() + " has been dispelled!");
+			spells.remove(spells.get(badEntry.getValue()));
 		}
 	}
 }

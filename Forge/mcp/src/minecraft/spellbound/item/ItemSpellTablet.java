@@ -37,7 +37,7 @@ public class ItemSpellTablet extends SpellboundItem
 	{
 		infoList.add(Color.BLUE + "Lvl. " + level);
 		infoList.add(Color.BLUE + "@(" + spell.getSpellType() + ")");
-		infoList.add(Color.BLUE + "Cast Time: " + spell.getSpellDuration().getDisplayString());
+		infoList.add(Color.BLUE + "Cast Time: " + spell.getSpellCastDuration().getDisplayString());
 	}
 
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -70,7 +70,7 @@ public class ItemSpellTablet extends SpellboundItem
 
 		System.out.println(count);
 
-		if (count == getMaxItemUseDuration(stack) - spell.getSpellDuration().getValue())
+		if (count == getMaxItemUseDuration(stack) - spell.getSpellCastDuration().getValue())
 		{
 			player.worldObj.playSoundAtEntity(player, "random.orb", 1.0F, 1.0F);
 		}
@@ -79,7 +79,9 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer, int inUseCount)
 	{
-		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellDuration().getValue())
+		entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+		
+		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue())
 		{
 			if (worldObj.isRemote)
 			{

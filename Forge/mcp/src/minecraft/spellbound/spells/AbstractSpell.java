@@ -12,7 +12,7 @@ public abstract class AbstractSpell
 
 	public String getSpellChargeSound()
 	{
-		switch (getSpellDuration())
+		switch (getSpellCastDuration())
 		{
 		case INSTANT: return "null";
 		case ONE_SECOND: return "spellbound:spellcharge1second";
@@ -31,7 +31,7 @@ public abstract class AbstractSpell
 
 	public abstract String getSpellDisplayName();
 	
-	public abstract EnumItemInUseTime getSpellDuration();
+	public abstract EnumItemInUseTime getSpellCastDuration();
 	
 	public abstract void doSpellCasterEffect(EntityPlayer caster);
 	

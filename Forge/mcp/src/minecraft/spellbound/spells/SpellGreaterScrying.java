@@ -33,7 +33,7 @@ public class SpellGreaterScrying extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.THREE_SECONDS;
 	}

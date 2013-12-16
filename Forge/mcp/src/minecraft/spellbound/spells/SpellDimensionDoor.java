@@ -84,7 +84,7 @@ public class SpellDimensionDoor extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.FOUR_SECONDS;
 	}

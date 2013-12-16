@@ -49,7 +49,7 @@ public class SpellFireLvl2 extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.TWO_SECONDS;
 	}

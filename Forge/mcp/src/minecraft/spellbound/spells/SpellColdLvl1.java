@@ -107,7 +107,7 @@ public class SpellColdLvl1 extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.ONE_SECOND;
 	}

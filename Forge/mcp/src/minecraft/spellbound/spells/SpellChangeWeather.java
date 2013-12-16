@@ -38,7 +38,7 @@ public class SpellChangeWeather extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.THREE_SECONDS;
 	}

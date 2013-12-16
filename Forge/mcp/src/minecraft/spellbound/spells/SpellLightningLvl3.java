@@ -1,8 +1,14 @@
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import spellbound.core.PacketHandler;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -11,13 +17,35 @@ public class SpellLightningLvl3 extends AbstractSpell
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Summon Storm";
+		return "Area Lightning";
 	}
 
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		
+		if (!caster.worldObj.isRemote)
+		{
+			for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - 35, caster.posY - 15, caster.posZ - 35, caster.posX + 35, caster.posY + 15, caster.posZ + 35)))
+			{
+				if (obj instanceof EntityLivingBase)
+				{
+					if (SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean())
+					{
+						//Save
+					}
+					
+					else
+					{
+						EntityLivingBase entity = (EntityLivingBase)obj;
+						
+						EntityLightningBolt lightning = new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ);
+						caster.worldObj.spawnEntityInWorld(lightning);
+						
+						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -27,13 +55,13 @@ public class SpellLightningLvl3 extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.THREE_SECONDS;
 	}

@@ -49,7 +49,7 @@ public class SpellAdvanceTime extends AbstractSpell
 	}
 
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.THREE_SECONDS;
 	}

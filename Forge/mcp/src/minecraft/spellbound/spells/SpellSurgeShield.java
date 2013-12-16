@@ -11,7 +11,7 @@ import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
-public class SpellSurgeShield extends AbstractSpell
+public class SpellSurgeShield extends AbstractSpellShield
 {
 	@Override
 	public String getSpellDisplayName() 
@@ -20,43 +20,13 @@ public class SpellSurgeShield extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellCasterEffect(EntityPlayer caster) 
+	public int getShieldDuration() 
 	{
-		if (!caster.worldObj.isRemote)
-		{
-			this.caster = caster;
-
-			List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
-
-			if (activeSpellsForCaster == null)
-			{
-				List<SpellEntry> entryList = new ArrayList<SpellEntry>();
-				entryList.add(new SpellEntry(this, 1200));
-				SpellboundCore.activeSpells.put(caster, entryList);
-			}
-
-			else
-			{
-				activeSpellsForCaster.add(new SpellEntry(this, 1200));
-				SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
-			}
-		}
-	}
-	
-	@Override
-	public EnumSpellType getSpellType() 
-	{
-		return EnumSpellType.SELF;
+		return 1200;
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.ONE_SECOND;
 	}

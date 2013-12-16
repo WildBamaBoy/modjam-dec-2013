@@ -58,7 +58,7 @@ public class SpellTransport extends AbstractSpell
 	}
 	
 	@Override
-	public EnumItemInUseTime getSpellDuration() 
+	public EnumItemInUseTime getSpellCastDuration() 
 	{
 		return EnumItemInUseTime.TWO_SECONDS;
 	}

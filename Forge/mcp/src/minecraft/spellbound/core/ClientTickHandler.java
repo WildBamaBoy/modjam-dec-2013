@@ -15,20 +15,20 @@ public class ClientTickHandler implements ITickHandler
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) 
 	{
-		if (SpellboundCore.keyNextEye.isPressed())
-		{
-			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyNextEye, true, false);
-		}
-		
-		else if (SpellboundCore.keyPreviousEye.isPressed())
-		{
-			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyPreviousEye, true, false);
-		}
-		
-		else if (SpellboundCore.keyDismissEye.isPressed())
-		{
-			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyDismissEye, true, false);
-		}
+//		if (SpellboundCore.keyNextEye.isPressed())
+//		{
+//			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyNextEye, true, false);
+//		}
+//		
+//		else if (SpellboundCore.keyPreviousEye.isPressed())
+//		{
+//			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyPreviousEye, true, false);
+//		}
+//		
+//		else if (SpellboundCore.keyDismissEye.isPressed())
+//		{
+//			SpellboundCore.keyBindHandler.keyDown(type, SpellboundCore.keyDismissEye, true, false);
+//		}
 	}
 
 	@Override

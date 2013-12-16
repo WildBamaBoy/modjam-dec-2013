@@ -47,8 +47,7 @@ public class ServerTickHandler implements ITickHandler
 			List<SpellEntry> entryList = entrySet.getValue();
 			
 			for (SpellEntry entry : entryList)
-			{	
-				System.out.println(entry.durationCounter + ":" + entry.maxDuration);
+			{
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))
