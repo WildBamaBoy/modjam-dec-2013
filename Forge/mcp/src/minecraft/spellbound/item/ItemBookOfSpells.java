@@ -47,6 +47,15 @@ public class ItemBookOfSpells extends ItemEditableBook
 	{
 		NBTTagList bookPages = new NBTTagList("pages");
 
+		bookPages.appendTag(new NBTTagString("25",
+				"Elemental Fury\n\n"
+				+ "  - F -   F = Lvl3 Fire\n"
+				+ "  C R L   C = Lvl3 Cold.\n"
+				+ "  - - -   L = Lvl3 Lght.\n"
+				+ "     R = Redstone \n"
+				+ "\nAll Lvl 3 elemental spells combine into one large explosion"
+				+ "of energy."));
+		
 		bookPages.appendTag(new NBTTagString("1", 
 				"\n   Table of Contents\n"
 				+ "\nMushrooms..........................2"
@@ -213,6 +222,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  - B -   T = Fire Tab.\n\n"
 				+ "Protects from fire and fire spells."));
 		
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n"));
+		
 		bookPages.appendTag(new NBTTagString("24",
 				"Icy Grip (Lvl1)\n"
 				+ "  - S -\n"
@@ -233,6 +244,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  - B -   T = Cold Tab.\n\n"
 				+ "Protects from cold spells."));
 		
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n     Lightning Spells\n"));
+		
 		bookPages.appendTag(new NBTTagString("24",
 				"Tazer (Lvl1)\n"
 				+ "  - L -\n"
@@ -247,11 +260,23 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  B T B   B = Lapis Blk.\n"
 				+ "  - B -   T = Lvl2 Lght.\n\n"));
 		bookPages.appendTag(new NBTTagString("25",
-				"Cold Shield (Lvl1)\n"
+				"Lightning Shield (Lvl1)\n"
 				+ "  B B B\n"
 				+ "  B C B   B = Blank Tab.\n"
-				+ "  - B -   T = Cold Tab.\n\n"
-				+ "Protects from cold spells."));
+				+ "  - B -   T = Lght. Tab.\n\n"
+				+ "Protects from lightning spells."));
+		
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n   Ultimate Spells\n"));
+		
+		bookPages.appendTag(new NBTTagString("25",
+				"Wail of the Banshee\n\n"
+				+ "  - F -   F = Lvl3 Fire\n"
+				+ "  C R L   C = Lvl3 Cold.\n"
+				+ "  - E -   L = Lvl3 Lght.\n"
+				+ "     R = Redstone \n"
+				+ "     E = Ender Chest\n"
+				+ "\nEnergies release from the ender chest with a horrifying scream. All enemies in the area die."));
+
 		
 		par1ItemStack.setTagInfo("pages", bookPages);
 		par1ItemStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
