@@ -94,10 +94,12 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"SB_LIGHTNING", "SB_GETNEXTEYE"},
+channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE"},
 packetHandler = PacketHandler.class)
 public class SpellboundCore 
 {
@@ -198,6 +200,9 @@ public class SpellboundCore
 
 	public ItemSpellTablet itemTabletSummonChestFullOfCookies;
 
+	@SideOnly(Side.CLIENT)
+	public int currentEyeIndex = -1;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{

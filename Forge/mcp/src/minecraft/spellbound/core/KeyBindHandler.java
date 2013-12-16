@@ -50,6 +50,7 @@ public class KeyBindHandler extends KeyHandler
 
 	private void handleNextEye()
 	{
+		
 	}
 
 	private void handlePreviousEye()

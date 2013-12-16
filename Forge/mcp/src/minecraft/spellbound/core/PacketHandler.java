@@ -5,7 +5,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
+import spellbound.spells.AbstractSpell;
+import spellbound.spells.AbstractSpellScrying;
+import spellbound.spells.SpellAllSeeingEye;
+import spellbound.spells.SpellGreaterScrying;
+import spellbound.spells.SpellMinorScrying;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
@@ -25,9 +31,9 @@ public class PacketHandler implements IPacketHandler
 				handleLightningPacket(packet, player);
 			}
 
-			else if (packet.channel.equals(""))
+			else if (packet.channel.equals("SB_GETNEXTEYE"))
 			{
-
+				handleGetNextEyePacket(packet, player);
 			}
 		}
 
@@ -79,5 +85,104 @@ public class PacketHandler implements IPacketHandler
 
 		EntityLightningBolt lightning = new EntityLightningBolt(entityPlayer.worldObj, x, y, z);
 		entityPlayer.worldObj.spawnEntityInWorld(lightning);
+	}
+
+	public static Packet250CustomPayload createGetNextEyePacket(int playerId, int currentEyeIndex)
+	{
+		try
+		{
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ObjectOutputStream objOut = new ObjectOutputStream(out);
+
+			Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = "SB_GETNEXTEYE";
+
+			objOut.writeObject(playerId);
+			objOut.writeObject(SpellboundCore.instance.currentEyeIndex);
+
+			packet.data = out.toByteArray();
+			packet.length = packet.data.length;
+
+			return packet;
+		}
+
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private void handleGetNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+	{
+		EntityPlayer entityPlayer = (EntityPlayer)player;
+
+		byte[] data = packet.data;
+
+		ByteArrayInputStream input = new ByteArrayInputStream(data);
+		ObjectInputStream objectInput = new ObjectInputStream(input);
+
+		int playerId = (Integer)objectInput.readObject();
+		int currentEyeIndex = (Integer)objectInput.readObject();
+
+		List<SpellEntry> spellEntries = SpellboundCore.activeSpells.get(entityPlayer);
+		AbstractSpellScrying nextSpell = null;
+
+		for (int index = currentEyeIndex == -1 ? 0 : currentEyeIndex ; index < spellEntries.size(); index++)
+		{
+			SpellEntry entry = spellEntries.get(index);
+	
+			if (entry.spell instanceof AbstractSpellScrying)
+			{
+				nextSpell = (AbstractSpellScrying)entry.spell;
+			}
+		}
+
+		if (nextSpell == null)
+		{
+			createNextEyePacket(-1);
+		}
+
+		else
+		{
+			createNextEyePacket(nextSpell.eye.entityId);
+		}
+	}
+	
+	public static Packet250CustomPayload createNextEyePacket(int eyeEntityId)
+	{
+		try
+		{
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ObjectOutputStream objOut = new ObjectOutputStream(out);
+
+			Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = "SB_NEXTEYE";
+
+			objOut.writeObject(eyeEntityId);
+
+			packet.data = out.toByteArray();
+			packet.length = packet.data.length;
+
+			return packet;
+		}
+
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private void handleNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+	{
+		EntityPlayer entityPlayer = (EntityPlayer)player;
+
+		byte[] data = packet.data;
+
+		ByteArrayInputStream input = new ByteArrayInputStream(data);
+		ObjectInputStream objectInput = new ObjectInputStream(input);
+		
+		int currentEyeIndex = (Integer)objectInput.readObject();
 	}
 }
