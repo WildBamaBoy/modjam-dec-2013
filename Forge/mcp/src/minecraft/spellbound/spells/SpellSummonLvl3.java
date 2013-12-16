@@ -11,7 +11,7 @@ public class SpellSummonLvl3 extends AbstractSpell
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Summon Invisible Warrior";
+		return "Summon Wither Skeleton";
 	}
 
 	@Override
@@ -23,8 +23,6 @@ public class SpellSummonLvl3 extends AbstractSpell
 //			warrior.setPosition(caster.posX, caster.posY, caster.posZ);
 //			caster.worldObj.spawnEntityInWorld(warrior);
 		}
-		
-		//TODO Particles
 	}
 
 	@Override
@@ -34,9 +32,9 @@ public class SpellSummonLvl3 extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 	
 	@Override

@@ -294,6 +294,59 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "     S = Surge Shld.\n"
 				+ "\nNo offensive spells can affect you, even those that disable shields."));
 		
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n   Protection Spells\n"));
+		
+		bookPages.appendTag(new NBTTagString("24",
+				"Wall of Stone (Lvl1)\n"
+				+ "  S S S\n"
+				+ "  S T S   S = Stone\n"
+				+ "  S S S   T = Prot Tab.\n\n"
+				+ "Wall of Obsidian (Lvl2)\n"
+				+ "  O O O\n"
+				+ "  O T O   O = Obsidian\n"
+				+ "  O O O   T = Lvl1 Wall\n\n"
+				+ "Wall of Bedrock\n"
+				+ "  - Q -\n"
+				+ "  Q T Q   Q = Quartz\n"
+				+ "  - Q -   T = Lvl2 Wall\n\n"));
+		bookPages.appendTag(new NBTTagString("25",
+				"Push\n\n"
+				+ "  - P -   P = Piston\n"
+				+ "  O T O   O = Red Tch.\n"
+				+ "  - R -   T = Prot Tab.\n"
+				+ "     R = Redstone \n"
+				+ "\n\nEnemies around you are pushed away. Can not push players."));
+		bookPages.appendTag(new NBTTagString("25",
+				"Color Spray\n\n"
+				+ "  - R -   R = Red\n"
+				+ "  B T Y   B = Blue\n"
+				+ "  - G -   Y = Yellow\n"
+				+ "     G = Green \n"
+				+ "     T = Prot Tab.\n"
+				+ "\nEnemies in front of you are blinded."));
+		bookPages.appendTag(new NBTTagString("25",
+				"Blink\n\n"
+				+ "  - E -   E = End Pearl\n"
+				+ "  G T G   T = Prot Tab.\n"
+				+ "  - G -   G = Gla. Pane\n"
+				+ "\nYou become invisible for a short time."));
+		
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n    Divination Spells\n"));
+		
+		bookPages.appendTag(new NBTTagString("25",
+				"Transport\n\n"
+				+ "  R R R \n"
+				+ "  R T R   T = Div. Tab.\n"
+				+ "  R R R   R = Rail\n"
+				+ "\n\nYou are granted super speed for a fraction of a second, allowing you to reach your destination in the blink of an eye."));
+
+		bookPages.appendTag(new NBTTagString("25",
+				"Dimension Door\n\n"
+				+ "  O O O   O = Obsidian\n"
+				+ "  O T O   T = Lvl1 Div.\n"
+				+ "  O F O   F = Flnt/Stl.\n"
+				+ "\n\nYou create a Nether portal and step inside, only to appear out of the other side a several hundred blocks away."));
+		
 		par1ItemStack.setTagInfo("pages", bookPages);
 		par1ItemStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
 		par1ItemStack.setTagInfo("title", new NBTTagString("title", "The Book of Spells"));
