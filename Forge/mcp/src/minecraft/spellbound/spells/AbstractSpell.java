@@ -29,7 +29,6 @@ public abstract class AbstractSpell
 	public AbstractSurge doMagicSurge(EntityPlayer caster)
 	{
 		this.caster = caster;
-		
 		int chanceOfSurge = 1;
 		
 		if (SpellboundCore.instance.playerHasActiveSpell(caster, "SpellChaos"))
@@ -44,6 +43,12 @@ public abstract class AbstractSpell
 		
 		if (SpellboundCore.getBooleanWithProbability(chanceOfSurge))
 		{
+			if (chanceOfSurge == 1 && SpellboundCore.rand.nextBoolean())
+			{
+				//Save
+				return null;
+			}
+			
 			return Constants.SURGES[SpellboundCore.rand.nextInt(Constants.SURGES.length)];
 		}
 		

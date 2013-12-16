@@ -94,6 +94,7 @@ public class ItemSpellTablet extends SpellboundItem
 				else if (surge != null)
 				{
 					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Magic surge! " + surge.getSpellDisplayName());
+					surge.doSpellCasterEffect(entityPlayer);
 				}
 				
 				else

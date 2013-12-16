@@ -19,40 +19,35 @@ public class SurgeRiches extends AbstractSurge
 	{
 		for (int i = 0; i < caster.inventory.mainInventory.length; i++)
 		{
-			if (SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean())
+			if (SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean())
 			{
-				caster.inventory.mainInventory[i] = new ItemStack(Item.ingotGold);
+				caster.inventory.setInventorySlotContents(i, new ItemStack(Item.ingotGold));
 			}
 		}
 
 		for (int i = 0; i < 3; i++)
 		{
-			if (i == 0)
+			if (caster.inventory.armorInventory[i] != null)
 			{
-				caster.inventory.armorInventory[i] = new ItemStack(Item.helmetGold);
-			}
+				if (i == 3)
+				{
+					caster.inventory.armorInventory[i] = new ItemStack(Item.helmetGold);
+				}
 
-			else if (i == 1)
-			{
-				caster.inventory.armorInventory[i] = new ItemStack(Item.plateGold);	
-			}
+				else if (i == 2)
+				{
+					caster.inventory.armorInventory[i] = new ItemStack(Item.plateGold);	
+				}
 
-			else if (i == 2)
-			{
-				caster.inventory.armorInventory[i] = new ItemStack(Item.legsGold);
-			}
+				else if (i == 1)
+				{
+					caster.inventory.armorInventory[i] = new ItemStack(Item.legsGold);
+				}
 
-			else if (i == 3)
-			{
-				caster.inventory.armorInventory[i] = new ItemStack(Item.bootsGold);
-			}
-		}
-
-		for (ItemStack stack : caster.inventory.armorInventory)
-		{
-			if (stack.getItem() instanceof ItemArmor)
-			{
-				stack.itemID = Item.ingotGold.itemID;
+				else if (i == 0)
+				{
+					caster.inventory.armorInventory[i] = new ItemStack(Item.bootsGold);
+				}
 			}
 		}
 	}
