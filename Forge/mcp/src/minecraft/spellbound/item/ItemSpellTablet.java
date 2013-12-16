@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
+import spellbound.spells.AbstractSurge;
 import spellbound.util.Color;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -83,14 +84,16 @@ public class ItemSpellTablet extends SpellboundItem
 			
 			if (!worldObj.isRemote)
 			{
+				AbstractSurge surge = spell.doMagicSurge();
+				
 				if (SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
 				{
 					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "You're under the effects of Miscast Magic!");
 				}
 				
-				else if (spell.doMagicSurge())
+				else if (surge != null)
 				{
-					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Magic surge!");
+					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Magic surge! " + surge.getSpellDisplayName());
 				}
 				
 				else

@@ -24,7 +24,7 @@ public abstract class AbstractSpell
 		}
 	}
 	
-	public boolean doMagicSurge()
+	public AbstractSurge doMagicSurge()
 	{
 		return false;
 	}
