@@ -35,7 +35,7 @@ public class SpellBreach extends AbstractSpell
 	{
 		if (entityHit != null && entityHit instanceof EntityPlayer)
 		{
-			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "Shield of Invulnerability"))
+			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability"))
 			{
 				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellFireShield");
 				SpellboundCore.instance.removeActiveSpellFromPlayer((EntityPlayer) entityHit, "SpellColdShield");

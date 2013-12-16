@@ -9,6 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -45,11 +46,21 @@ public class SpellColdLvl3 extends AbstractSpell
 
 							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 							{
-								if (obj instanceof EntityLivingBase)
+								if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 								{
 									EntityLivingBase hitEntity = (EntityLivingBase)obj;
 									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+								}
+								
+								else if (obj instanceof EntityPlayer)
+								{
+									if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+									{							
+										EntityLivingBase hitEntity = (EntityLivingBase)obj;
+										hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+										hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+									}
 								}
 							}
 						}

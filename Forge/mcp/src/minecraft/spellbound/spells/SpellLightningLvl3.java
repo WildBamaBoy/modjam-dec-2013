@@ -34,21 +34,35 @@ public class SpellLightningLvl3 extends AbstractSpell
 					{
 						//Save
 					}
-					
+
 					else
 					{
 						EntityLivingBase entity = (EntityLivingBase)obj;
-						
-						EntityLightningBolt lightning = new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ);
-						caster.worldObj.spawnEntityInWorld(lightning);
-						
-						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
+
+						if (entity instanceof EntityPlayer)
+						{
+							if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entity, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entity, "SpellLightningShield"))
+							{
+								EntityLightningBolt lightning = new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ);
+								caster.worldObj.spawnEntityInWorld(lightning);
+
+								PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
+							}
+						}
+
+						else
+						{
+							EntityLightningBolt lightning = new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ);
+							caster.worldObj.spawnEntityInWorld(lightning);
+
+							PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
+						}
 					}
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{
@@ -60,7 +74,7 @@ public class SpellLightningLvl3 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

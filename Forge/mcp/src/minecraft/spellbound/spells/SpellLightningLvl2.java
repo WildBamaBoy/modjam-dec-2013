@@ -5,6 +5,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.PacketHandler;
+import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -23,7 +24,6 @@ public class SpellLightningLvl2 extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellLightning(caster, this));
 		}
@@ -41,13 +41,27 @@ public class SpellLightningLvl2 extends AbstractSpell
 		double spawnX = entityHit != null ? entityHit.posX : posX;
 		double spawnY = entityHit != null ? entityHit.posY : posY;
 		double spawnZ = entityHit != null ? entityHit.posZ : posZ;
-		
-		EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
-		worldObj.spawnEntityInWorld(lightning);
-		
-		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+
+		if (entityHit != null && entityHit instanceof EntityPlayer)
+		{
+			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellLightningShield"))
+			{
+				EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
+				worldObj.spawnEntityInWorld(lightning);
+
+				PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+			}
+		}
+
+		else
+		{
+			EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
+			worldObj.spawnEntityInWorld(lightning);
+
+			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

@@ -2,7 +2,11 @@ package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -25,7 +29,7 @@ public class SpellFireLvl3 extends AbstractSpell
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
 		}
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{
@@ -39,13 +43,24 @@ public class SpellFireLvl3 extends AbstractSpell
 		{
 			worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, true);
 		}
-		
+
 		else
 		{
-			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+			if (entityHit instanceof EntityPlayer)
+			{
+				if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellFireShield"))
+				{							
+					worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+				}
+			}
+
+			else
+			{
+				worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

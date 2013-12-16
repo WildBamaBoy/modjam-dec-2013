@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import spellbound.spells.SpellFireShield;
+import spellbound.spells.SpellFlight;
+import spellbound.spells.SpellShieldOfInvulnerability;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -60,14 +63,29 @@ public class ServerTickHandler implements ITickHandler
 					oldEntries.put(player, entryList.indexOf(entry));
 					player.addChatMessage(entry.spell.getSpellDisplayName() + " has dispelled!");
 				}
+				
+				if (entry.spell instanceof SpellFireShield || entry.spell instanceof SpellShieldOfInvulnerability)
+				{
+					player.extinguish();
+				}
 			}
 		}
 		
 		//Clean up old entries.
 		for (Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
 		{
-			List<SpellEntry> Spells = SpellboundCore.activeSpells.get(oldEntry.getKey());
-			Spells.remove(Spells.get(oldEntry.getValue()));
+			List<SpellEntry> activeSpells = SpellboundCore.activeSpells.get(oldEntry.getKey());
+			
+			EntityPlayer entryPlayer = oldEntry.getKey();
+			SpellEntry entry = activeSpells.get(oldEntry.getValue());
+
+			activeSpells.remove(entry);
+			
+			if (entry.spell instanceof SpellFlight)
+			{
+				entryPlayer.capabilities.allowFlying = false;
+				entryPlayer.capabilities.isFlying = false;
+			}
 		}
 	}
 }

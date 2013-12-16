@@ -6,6 +6,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.entity.AbstractTargetSpell;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.enums.EnumItemInUseTime;
@@ -41,11 +42,23 @@ public class SpellLightningLvl1 extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
-			entityHit.addPotionEffect(new PotionEffect(Potion.confusion.id, 1200));
+			if (entityHit instanceof EntityPlayer)
+			{
+				if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellLightningShield"))
+				{							
+					entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+					entityHit.addPotionEffect(new PotionEffect(Potion.confusion.id, 1200));					
+				}
+			}
+
+			else
+			{
+				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+				entityHit.addPotionEffect(new PotionEffect(Potion.confusion.id, 1200));
+			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

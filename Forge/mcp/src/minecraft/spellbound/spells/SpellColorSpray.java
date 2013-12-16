@@ -47,7 +47,7 @@ public class SpellColorSpray extends AbstractSpell
 							
 							else if (obj instanceof EntityPlayer)
 							{
-								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "Shield of Invulnerability"))
+								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability"))
 								{
 									EntityLivingBase hitEntity = (EntityLivingBase)obj;
 									hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));	

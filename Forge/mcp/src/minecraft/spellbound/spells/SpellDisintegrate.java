@@ -42,12 +42,22 @@ public class SpellDisintegrate extends AbstractSpell
 		{
 			if (SpellboundCore.rand.nextBoolean())
 			{
-				entityHit.setDead();
-				
-				EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.dyePowder, 1, 15));
-				worldObj.spawnEntityInWorld(item);
+				if (entityHit instanceof EntityPlayer)
+				{
+					if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability"))
+					{
+						entityHit.attackEntityFrom(DamageSource.magic, 100.0F);
+					}
+				}
+
+				else
+				{
+					entityHit.setDead();
+					EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.dyePowder, 1, 15));
+					worldObj.spawnEntityInWorld(item);
+				}
 			}
-			
+
 			else
 			{
 				entityHit.setFire(10);
@@ -55,7 +65,7 @@ public class SpellDisintegrate extends AbstractSpell
 			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

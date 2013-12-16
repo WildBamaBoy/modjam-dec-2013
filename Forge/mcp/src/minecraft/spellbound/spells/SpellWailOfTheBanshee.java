@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -22,8 +23,6 @@ public class SpellWailOfTheBanshee extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
-
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 		caster.worldObj.playSoundAtEntity(caster, "spellbound:banshee", 1.0F, 1.0F);
 
@@ -31,10 +30,17 @@ public class SpellWailOfTheBanshee extends AbstractSpell
 		
 		for (final Entity entity : entitiesInArea)
 		{
-			//TODO Chance of surviving
-			if (entity instanceof EntityLivingBase)
+			if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer))
 			{
-				entity.attackEntityFrom(DamageSource.magic, 50.0F);
+				entity.attackEntityFrom(DamageSource.magic, 500.0F);
+			}
+			
+			else if (entity instanceof EntityPlayer)
+			{
+				if (!SpellboundCore.instance.playerHasActiveSpell(caster, "SpellShieldOfInvulnerability"))
+				{
+					entity.attackEntityFrom(DamageSource.magic, 500.0F);
+				}
 			}
 		}
 	}

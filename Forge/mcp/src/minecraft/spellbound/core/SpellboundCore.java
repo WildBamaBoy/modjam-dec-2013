@@ -483,13 +483,13 @@ public class SpellboundCore
 		if (activeSpellsForCaster == null)
 		{
 			List<SpellEntry> entryList = new ArrayList<SpellEntry>();
-			entryList.add(new SpellEntry(spell, 1200));
+			entryList.add(new SpellEntry(spell, duration));
 			SpellboundCore.activeSpells.put(caster, entryList);
 		}
 
 		else
 		{
-			activeSpellsForCaster.add(new SpellEntry(spell, 1200));
+			activeSpellsForCaster.add(new SpellEntry(spell, duration));
 			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
 		}
 	}
