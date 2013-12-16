@@ -20,62 +20,65 @@ public class EffectWallOfStone extends AbstractEffectWall
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.endermen.portal", 1.0F, 1.0F);
 
-		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		int wallCenterX = 0;
-		int wallCenterY = 0;
-		int wallCenterZ = 0;
-
-		if (heading == 0)
+		if (!caster.worldObj.isRemote)
 		{
-			wallCenterX = (int) MathHelper.floor_double(caster.posX);
-			wallCenterY = (int) MathHelper.floor_double(caster.posY);
-			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ + 3));
-		}
+			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		else if (heading == 1)
-		{
-			wallCenterX = (int) (MathHelper.floor_double(caster.posX - 3));
-			wallCenterY = (int) MathHelper.floor_double(caster.posY);
-			wallCenterZ = (int) MathHelper.floor_double(caster.posZ);
-		}
+			int wallCenterX = 0;
+			int wallCenterY = 0;
+			int wallCenterZ = 0;
 
-		else if (heading == 2)
-		{
-			wallCenterX = (int) (MathHelper.floor_double(caster.posX));
-			wallCenterY = (int) (MathHelper.floor_double(caster.posY));
-			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ - 3));
-		}
-
-		else if (heading == 3)
-		{
-			wallCenterX = (int) (MathHelper.floor_double(caster.posX + 3));
-			wallCenterY = (int) (MathHelper.floor_double(caster.posY));
-			wallCenterZ = (int) (MathHelper.floor_double(caster.posZ));
-		}
-		
-		for (int i = -3; i < 4; i++)
-		{
-			for (int j = 0; j < 3; j++)
+			if (heading == 0)
 			{
-				if (heading == 0)
-				{
-					caster.worldObj.setBlock(wallCenterX + i, wallCenterY + j, wallCenterZ, getWallBlockId());
-				}
+				wallCenterX = (int) MathHelper.floor_double(caster.posX);
+				wallCenterY = (int) MathHelper.floor_double(caster.posY);
+				wallCenterZ = (int) (MathHelper.floor_double(caster.posZ + 3));
+			}
 
-				else if (heading == 1)
-				{
-					caster.worldObj.setBlock(wallCenterX, wallCenterY + j, wallCenterZ + i, getWallBlockId());
-				}
+			else if (heading == 1)
+			{
+				wallCenterX = (int) (MathHelper.floor_double(caster.posX - 3));
+				wallCenterY = (int) MathHelper.floor_double(caster.posY);
+				wallCenterZ = (int) MathHelper.floor_double(caster.posZ);
+			}
 
-				else if (heading == 2)
-				{
-					caster.worldObj.setBlock(wallCenterX + i, wallCenterY + j, wallCenterZ, getWallBlockId());
-				}
+			else if (heading == 2)
+			{
+				wallCenterX = (int) (MathHelper.floor_double(caster.posX));
+				wallCenterY = (int) (MathHelper.floor_double(caster.posY));
+				wallCenterZ = (int) (MathHelper.floor_double(caster.posZ - 3));
+			}
 
-				else if (heading == 3)
+			else if (heading == 3)
+			{
+				wallCenterX = (int) (MathHelper.floor_double(caster.posX + 3));
+				wallCenterY = (int) (MathHelper.floor_double(caster.posY));
+				wallCenterZ = (int) (MathHelper.floor_double(caster.posZ));
+			}
+
+			for (int i = -3; i < 4; i++)
+			{
+				for (int j = 0; j < 3; j++)
 				{
-					caster.worldObj.setBlock(wallCenterX, wallCenterY + j, wallCenterZ - i, getWallBlockId());
+					if (heading == 0)
+					{
+						caster.worldObj.setBlock(wallCenterX + i, wallCenterY + j, wallCenterZ, getWallBlockId());
+					}
+
+					else if (heading == 1)
+					{
+						caster.worldObj.setBlock(wallCenterX, wallCenterY + j, wallCenterZ + i, getWallBlockId());
+					}
+
+					else if (heading == 2)
+					{
+						caster.worldObj.setBlock(wallCenterX + i, wallCenterY + j, wallCenterZ, getWallBlockId());
+					}
+
+					else if (heading == 3)
+					{
+						caster.worldObj.setBlock(wallCenterX, wallCenterY + j, wallCenterZ - i, getWallBlockId());
+					}
 				}
 			}
 		}

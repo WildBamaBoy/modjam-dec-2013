@@ -2,6 +2,7 @@ package spellbound.effects;
 
 import java.util.List;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -12,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.PacketHandler;
 import spellbound.core.SB;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
@@ -75,7 +77,6 @@ public class EffectUltimateElementalFury extends AbstractEffect
 						
 						if (SB.rand.nextBoolean())
 						{
-							//Cold
 							livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
 							livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 						}
@@ -90,9 +91,15 @@ public class EffectUltimateElementalFury extends AbstractEffect
 						else
 						{
 							livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
-							EntityLightningBolt lightning = new EntityLightningBolt(worldObj, posX, posY, posZ);
-							lightning.setPosition(posX, posY, posZ);
+							
+							double spawnX = entityHit != null ? entityHit.posX : posX;
+							double spawnY = entityHit != null ? entityHit.posY : posY;
+							double spawnZ = entityHit != null ? entityHit.posZ : posZ;
+							
+							EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
 							worldObj.spawnEntityInWorld(lightning);
+							
+							PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
 						}
 					}
 				}

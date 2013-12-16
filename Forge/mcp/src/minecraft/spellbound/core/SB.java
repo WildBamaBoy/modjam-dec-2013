@@ -90,9 +90,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"CHANNEL"}
-//packethandler = Packethandler.class //*
-		)
+channels={"SB_LIGHTNING"},
+packetHandler = PacketHandler.class)
 
 public class SB 
 {

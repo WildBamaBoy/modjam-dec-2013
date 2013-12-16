@@ -21,23 +21,26 @@ public class EffectFireLvl2 extends AbstractEffect
 		caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 		
-		Vec3 vec = caster.getLookVec();
-		EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
-		fireball.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
-		
-		fireball.accelerationX = vec.xCoord * 0.3;
-		fireball.accelerationY = vec.yCoord * 0.3;
-		fireball.accelerationZ = vec.zCoord * 0.3;
-		
-		caster.worldObj.spawnEntityInWorld(fireball);
+		if (!caster.worldObj.isRemote)
+		{
+			Vec3 vec = caster.getLookVec();
+			EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
+			fireball.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
+
+			fireball.accelerationX = vec.xCoord * 0.3;
+			fireball.accelerationY = vec.yCoord * 0.3;
+			fireball.accelerationZ = vec.zCoord * 0.3;
+
+			caster.worldObj.spawnEntityInWorld(fireball);
+		}
 	}
 
 	@Override
 	public void updateSpellEffect() 
 	{
-		
+
 	}
-	
+
 	@Override
 	public EnumSpellType getSpellType() 
 	{
@@ -47,6 +50,6 @@ public class EffectFireLvl2 extends AbstractEffect
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

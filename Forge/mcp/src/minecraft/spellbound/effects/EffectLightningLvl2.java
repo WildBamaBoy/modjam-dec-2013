@@ -1,10 +1,12 @@
 package spellbound.effects;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.PacketHandler;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
 
@@ -51,7 +53,13 @@ public class EffectLightningLvl2 extends AbstractEffect
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		EntityLightningBolt lightning = new EntityLightningBolt(worldObj, posX, posY, posZ);
+		double spawnX = entityHit != null ? entityHit.posX : posX;
+		double spawnY = entityHit != null ? entityHit.posY : posY;
+		double spawnZ = entityHit != null ? entityHit.posZ : posZ;
+		
+		EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
 		worldObj.spawnEntityInWorld(lightning);
+		
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
 	}
 }
