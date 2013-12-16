@@ -46,15 +46,6 @@ public class ItemBookOfSpells extends ItemEditableBook
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
 	{
 		NBTTagList bookPages = new NBTTagList("pages");
-
-		bookPages.appendTag(new NBTTagString("25",
-				"Elemental Fury\n\n"
-				+ "  - F -   F = Lvl3 Fire\n"
-				+ "  C R L   C = Lvl3 Cold.\n"
-				+ "  - - -   L = Lvl3 Lght.\n"
-				+ "     R = Redstone \n"
-				+ "\nAll Lvl 3 elemental spells combine into one large explosion"
-				+ "of energy."));
 		
 		bookPages.appendTag(new NBTTagString("1", 
 				"\n   Table of Contents\n"
@@ -277,6 +268,31 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "     E = Ender Chest\n"
 				+ "\nEnergies release from the ender chest with a horrifying scream. All enemies in the area die."));
 
+		bookPages.appendTag(new NBTTagString("25",
+				"Elemental Fury\n\n"
+				+ "  - F -   F = Lvl3 Fire\n"
+				+ "  C R L   C = Lvl3 Cold.\n"
+				+ "  - - -   L = Lvl3 Lght.\n"
+				+ "     R = Redstone \n"
+				+ "\nAll Lvl 3 elemental spells combine into one large explosion of energy."));
+		
+		bookPages.appendTag(new NBTTagString("25",
+				"Disintegrate\n\n"
+				+ "  - F -   F = Lvl3 Fire\n"
+				+ "  C R L   C = Lvl3 Cold.\n"
+				+ "  - L -   L = Lvl3 Lght.\n"
+				+ "     R = Redstone \n"
+				+ "     L = Lava\n"
+				+ "\nEnemies turn into bone meal or catch fire."));
+		
+		bookPages.appendTag(new NBTTagString("25",
+				"Shield of Invulnerability\n\n"
+				+ "  - F -   F = Fire Shld.\n"
+				+ "  C R L   C = Cold Shld.\n"
+				+ "  - S -   L = Lght. Shld\n"
+				+ "     R = Redstone \n"
+				+ "     S = Surge Shld.\n"
+				+ "\nNo offensive spells can affect you, even those that disable shields."));
 		
 		par1ItemStack.setTagInfo("pages", bookPages);
 		par1ItemStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
