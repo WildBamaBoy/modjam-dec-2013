@@ -44,6 +44,7 @@ import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.entity.EntityTargetSpellMundane;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
+import spellbound.item.ItemBookOfSpells;
 import spellbound.item.ItemSpellTablet;
 import spellbound.item.SpellboundItem;
 import spellbound.spells.AbstractSpell;
@@ -141,6 +142,7 @@ public class SpellboundCore
 	public Block blockHybridMushroomGold; //Rainbow + Yellow //2nd level
 	public Block blockHybridMushroomBlack; //Blue Grey + Grey //2nd level
 
+	public Item itemBookOfSpells;
 	public Item itemTabletBase;
 	public Item itemTabletFireBase;
 	public Item itemTabletColdBase;
@@ -267,6 +269,8 @@ public class SpellboundCore
 
 	private void registerItems()
 	{
+		itemBookOfSpells = new ItemBookOfSpells(propertiesManager.propertiesList.itemID_BookOfSpells);
+		
 		itemTabletBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
 
 		itemTabletFireBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletFireBase, "tabletfirebase", "Fire Tablet");

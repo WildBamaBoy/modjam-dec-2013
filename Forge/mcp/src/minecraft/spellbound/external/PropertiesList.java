@@ -26,7 +26,9 @@ public class PropertiesList
 	public int blockID_MushroomRainbow = 3597;
 	public int blockID_MushroomGold = 3598;
 	public int blockID_MushroomBlack = 3599;
-	
+
+	public int itemID_BookOfSpells = 26746; 
+			
 	public int itemID_TabletBase = 26747;
 	public int itemID_TabletFireBase = 26748;
 	public int itemID_TabletColdBase = 26749;
@@ -52,7 +54,7 @@ public class PropertiesList
 	public int itemID_TabletUltimateWailOfTheBanshee = 26777;
 	public int itemID_TabletUltimateElementalFury = 26778;
 	public int itemID_TabletUltimateDisintegrate = 26779;
-	
+
 	public int itemID_TabletFireShield = 26780;
 	public int itemID_TabletIceShield = 26781;
 	public int itemID_TabletLightningShield = 26782; 
