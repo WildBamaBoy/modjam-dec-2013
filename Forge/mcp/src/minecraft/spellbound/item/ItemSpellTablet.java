@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 import spellbound.util.Color;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -68,8 +69,6 @@ public class ItemSpellTablet extends SpellboundItem
 	{
 		super.onUsingItemTick(stack, player, count);
 
-		System.out.println(count);
-
 		if (count == getMaxItemUseDuration(stack) - spell.getSpellCastDuration().getValue())
 		{
 			player.worldObj.playSoundAtEntity(player, "random.orb", 1.0F, 1.0F);
@@ -80,15 +79,14 @@ public class ItemSpellTablet extends SpellboundItem
 	public void onPlayerStoppedUsing(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer, int inUseCount)
 	{
 		entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
-		
+				
 		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue())
 		{
-			if (worldObj.isRemote)
+			if (!worldObj.isRemote && SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
 			{
-				entityPlayer.addChatMessage("You have cast: " + spell.getSpellDisplayName() + ".");
+				spell.doSpellCasterEffect(entityPlayer);
 			}
-
-			spell.doSpellCasterEffect(entityPlayer);
+			
 			super.onPlayerStoppedUsing(itemStack, worldObj, entityPlayer, inUseCount);
 		}
 		

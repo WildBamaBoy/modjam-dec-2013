@@ -44,6 +44,11 @@ public class PacketHandler implements IPacketHandler
 			{
 				handleNextEyePacket(packet, player);
 			}
+			
+			else if (packet.channel.equals("SB_CHATMESSAGE"))
+			{
+				handleChatMessagePacket(packet, player);
+			}
 		}
 
 		catch (Throwable e)
@@ -215,5 +220,44 @@ public class PacketHandler implements IPacketHandler
 				System.out.println("Next eye could not be found.");
 			}
 		}
+	}
+	
+	public static Packet250CustomPayload createChatMessagePacket(String message)
+	{
+		try
+		{
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ObjectOutputStream objOut = new ObjectOutputStream(out);
+
+			Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = "SB_CHATMESSAGE";
+
+			objOut.writeObject(message);
+
+			packet.data = out.toByteArray();
+			packet.length = packet.data.length;
+
+			return packet;
+		}
+
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private void handleChatMessagePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+	{
+		EntityPlayer entityPlayer = (EntityPlayer)player;
+
+		byte[] data = packet.data;
+
+		ByteArrayInputStream input = new ByteArrayInputStream(data);
+		ObjectInputStream objectInput = new ObjectInputStream(input);
+
+		String message = (String) objectInput.readObject();
+
+		entityPlayer.addChatMessage(message);
 	}
 }

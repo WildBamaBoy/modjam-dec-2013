@@ -89,6 +89,8 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -97,7 +99,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE"},
+channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE", "SB_CHATMESSAGE"},
 packetHandler = PacketHandler.class)
 public class SpellboundCore 
 {
@@ -208,7 +210,6 @@ public class SpellboundCore
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
 
-		proxy.registerRenderers();
 		proxy.registerTickHandlers();
 		proxy.registerSounds();
 
@@ -218,6 +219,8 @@ public class SpellboundCore
 		registerLocalizations();
 		registerRecipes();
 
+		proxy.registerRenderers();
+		
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 		
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
@@ -530,6 +533,19 @@ public class SpellboundCore
 			AbstractSpell spell = spells.get(badEntry.getValue()).spell;
 			caster.addChatMessage(spell.getSpellDisplayName() + " has been dispelled!");
 			spells.remove(spells.get(badEntry.getValue()));
+		}
+	}
+	
+	public void sendMessageToPlayer(EntityPlayer player, String message)
+	{
+		if (player.worldObj.isRemote)
+		{
+			player.addChatMessage(message);
+		}
+		
+		else
+		{
+			PacketDispatcher.sendPacketToPlayer(PacketHandler.createChatMessagePacket(message), (Player)player);
 		}
 	}
 }
