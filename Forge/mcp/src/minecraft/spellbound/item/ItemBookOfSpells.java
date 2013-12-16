@@ -50,9 +50,9 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("1", 
 				"\n   Table of Contents\n"
 				+ "\nMushrooms..........................2"
-				+ "\nSpell Basics.......................x"
-				+ "\nRecipes..................................x"
-				+ "\nSurges...................................x"));
+				+ "\nSpell Basics......................17"
+				+ "\nRecipes.................................20"));
+		
 		bookPages.appendTag(new NBTTagString("2", 
 				"       Mushrooms \n\n"
 				+ "   Mushrooms are used in the crafting of base spell tablets. \n\nA spellcaster"
@@ -141,7 +141,19 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "\n           - C - "
 				+ "\nWhere 'C' is a ball of clay."));
 		
-		bookPages.appendTag(new NBTTagString("18", "       Spell Tablets\n\n"
+		bookPages.appendTag(new NBTTagString("18", 
+				"Casting spells is easy. Simply right-click with a spell to allow it to charge."
+				+ "\n\nEach spell has a specified charge time. You will hear a *ping!* when the spell is ready to fire. \n\nRelease the mouse button to do so."));
+		
+		bookPages.appendTag(new NBTTagString("19", 
+				"Be warned, magic energy is unstable. Sometimes, your spell will turn into a magical surge.\n\n"
+				+ "Magical surges are often devastating to the environment and caster.\n\n"
+				+ "There's a reason why surges are undocumented..."));
+		
+		bookPages.appendTag(new NBTTagString("20", 
+				"\n\n\n\n\n           Recipes"));
+		
+		bookPages.appendTag(new NBTTagString("21", "       Spell Tablets\n\n"
 				+ "Fire Tablet\n"
 				+ "  - F -\n"
 				+ "  F T F   F = Fire Msh.\n"
@@ -151,7 +163,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  C T C   C = Cold Msh.\n"
 				+ "  - C -   T = Blank Tab.\n\n"));
 		
-		bookPages.appendTag(new NBTTagString("19",
+		bookPages.appendTag(new NBTTagString("22",
 				"Lightning Tablet\n"
 				+ "  - L -\n"
 				+ "  L T L   L = Lght. Msh.\n"
@@ -165,7 +177,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  P T P   P = Prot. Msh.\n"
 				+ "  - P -   T = Blank Tab.\n\n"));
 
-		bookPages.appendTag(new NBTTagString("20",
+		bookPages.appendTag(new NBTTagString("23",
 				"Divination Tablet\n"
 				+ "  - D -\n"
 				+ "  D T D   D = Div. Msh.\n"
@@ -179,8 +191,67 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "  D T D   D = Dis. Msh.\n"
 				+ "  - D -   T = Blank Tab.\n\n"));
 		
-		bookPages.appendTag(new NBTTagString("19", "Content pg4"));
-		bookPages.appendTag(new NBTTagString("20", "Content pg5"));
+		bookPages.appendTag(new NBTTagString("24", "\n\n\n\n\n        Fire Spells\n"));
+		
+		bookPages.appendTag(new NBTTagString("24",
+				"Flaming Hands (Lvl1)\n"
+				+ "  - R -\n"
+				+ "  R T R   R = Redstone\n"
+				+ "  - R -   T = Fire Tab.\n\n"
+				+ "Fireball (Lvl2)\n"
+				+ "  R R R\n"
+				+ "  R T R   R = Redstone\n"
+				+ "  R R R   T = Lvl1 Fire\n\n"
+				+ "Greater Fireball\n"
+				+ "  - B -\n"
+				+ "  B T B   B = Redst. Blk.\n"
+				+ "  - B -   T = Lvl2 Fire\n\n"));
+		bookPages.appendTag(new NBTTagString("25",
+				"Fire Shield (Lvl1)\n"
+				+ "  B B B\n"
+				+ "  B T B   B = Blank Tab.\n"
+				+ "  - B -   T = Fire Tab.\n\n"
+				+ "Protects from fire and fire spells."));
+		
+		bookPages.appendTag(new NBTTagString("24",
+				"Icy Grip (Lvl1)\n"
+				+ "  - S -\n"
+				+ "  S T S   S = Snowball\n"
+				+ "  - S -   T = Snow Tab.\n\n"
+				+ "Icicle (Lvl2)\n"
+				+ "  S S S\n"
+				+ "  S T S   S = Snowball\n"
+				+ "  S S S   T = Lvl1 Cold\n\n"
+				+ "Cold Blast (Lvl3)\n"
+				+ "  - B -\n"
+				+ "  B T B   B = Snow Blk.\n"
+				+ "  - B -   T = Lvl2 Cold\n\n"));
+		bookPages.appendTag(new NBTTagString("25",
+				"Cold Shield (Lvl1)\n"
+				+ "  B B B\n"
+				+ "  B C B   B = Blank Tab.\n"
+				+ "  - B -   T = Cold Tab.\n\n"
+				+ "Protects from cold spells."));
+		
+		bookPages.appendTag(new NBTTagString("24",
+				"Tazer (Lvl1)\n"
+				+ "  - L -\n"
+				+ "  L T L   L = Lapis Laz.\n"
+				+ "  - L -   T = Lght. Tab.\n\n"
+				+ "Lightning Bolt (Lvl2)\n"
+				+ "  L L L\n"
+				+ "  L T L   L = Lapis Laz.\n"
+				+ "  L L L   T = Lvl1 Lght.\n\n"
+				+ "Area Lightning (Lvl3)\n"
+				+ "  - B -\n"
+				+ "  B T B   B = Lapis Blk.\n"
+				+ "  - B -   T = Lvl2 Lght.\n\n"));
+		bookPages.appendTag(new NBTTagString("25",
+				"Cold Shield (Lvl1)\n"
+				+ "  B B B\n"
+				+ "  B C B   B = Blank Tab.\n"
+				+ "  - B -   T = Cold Tab.\n\n"
+				+ "Protects from cold spells."));
 		
 		par1ItemStack.setTagInfo("pages", bookPages);
 		par1ItemStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
