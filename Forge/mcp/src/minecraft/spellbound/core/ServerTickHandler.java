@@ -11,6 +11,8 @@ import spellbound.spells.SpellFlight;
 import spellbound.spells.SpellShieldOfInvulnerability;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 
 public class ServerTickHandler implements ITickHandler
 {
@@ -85,6 +87,7 @@ public class ServerTickHandler implements ITickHandler
 			{
 				entryPlayer.capabilities.allowFlying = false;
 				entryPlayer.capabilities.isFlying = false;
+				PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
 			}
 		}
 	}

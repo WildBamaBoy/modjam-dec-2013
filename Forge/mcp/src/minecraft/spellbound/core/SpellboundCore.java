@@ -101,7 +101,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE", "SB_CHATMESSAGE"},
+channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE", "SB_CHATMESSAGE", "SB_FLIGHT"},
 packetHandler = PacketHandler.class)
 public class SpellboundCore 
 {

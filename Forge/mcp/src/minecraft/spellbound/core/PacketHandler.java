@@ -45,6 +45,11 @@ public class PacketHandler implements IPacketHandler
 			{
 				handleChatMessagePacket(packet, player);
 			}
+			
+			else if (packet.channel.equals("SB_FLIGHT"))
+			{
+				handleFlightPacket(packet, player);
+			}
 		}
 
 		catch (Throwable e)
@@ -255,5 +260,56 @@ public class PacketHandler implements IPacketHandler
 		String message = (String) objectInput.readObject();
 
 		entityPlayer.addChatMessage(message);
+	}
+	
+	public static Packet250CustomPayload createFlightPacket(Boolean enable)
+	{
+		try
+		{
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ObjectOutputStream objOut = new ObjectOutputStream(out);
+
+			Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = "SB_FLIGHT";
+
+			objOut.writeObject(enable);
+
+			packet.data = out.toByteArray();
+			packet.length = packet.data.length;
+
+			return packet;
+		}
+
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private void handleFlightPacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+	{
+		EntityPlayer entityPlayer = (EntityPlayer)player;
+
+		byte[] data = packet.data;
+
+		ByteArrayInputStream input = new ByteArrayInputStream(data);
+		ObjectInputStream objectInput = new ObjectInputStream(input);
+
+		boolean enable = (Boolean) objectInput.readObject();
+
+		if (enable)
+		{
+			entityPlayer.capabilities.allowFlying = true;
+			entityPlayer.fallDistance = 0;
+			entityPlayer.motionY += 1.0D;
+			entityPlayer.capabilities.isFlying = true;
+		}
+		
+		else
+		{
+			entityPlayer.capabilities.allowFlying = false;
+			entityPlayer.capabilities.isFlying = false;
+		}
 	}
 }
