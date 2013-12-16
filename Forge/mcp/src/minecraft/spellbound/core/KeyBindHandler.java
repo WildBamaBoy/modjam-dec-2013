@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import org.lwjgl.input.Keyboard;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
@@ -49,7 +50,6 @@ public class KeyBindHandler extends KeyHandler
 
 	private void handleNextEye()
 	{
-		System.out.println("Next eye");
 	}
 
 	private void handlePreviousEye()

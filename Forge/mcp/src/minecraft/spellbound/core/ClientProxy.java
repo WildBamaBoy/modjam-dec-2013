@@ -17,14 +17,15 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
-	public void registerSounds()
-	{
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
-	}
-
-	@Override
 	public void registerTickHandlers() 
 	{
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
+	}
+	
+	@Override
+	public void registerSounds()
+	{
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
 	}
 }

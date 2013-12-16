@@ -14,13 +14,11 @@ public class ServerTickHandler implements ITickHandler
 	@Override
 	public void tickStart (EnumSet<TickType> type, Object... tickData)
 	{
-
 	}
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData)
 	{
-		System.out.println("AA");
 		if (type.equals(EnumSet.of(TickType.SERVER)))
 		{
 			onTick();
@@ -50,6 +48,7 @@ public class ServerTickHandler implements ITickHandler
 			
 			for (SpellEntry entry : entryList)
 			{	
+				System.out.println(entry.durationCounter + ":" + entry.maxDuration);
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))
