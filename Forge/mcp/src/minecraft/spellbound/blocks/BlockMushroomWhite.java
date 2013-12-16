@@ -1,7 +1,7 @@
 package spellbound.blocks;
 
-import spellbound.core.SB;
-import spellbound.effects.AbstractEffect;
+import spellbound.core.SpellboundCore;
+import spellbound.spells.AbstractSpell;
 
 public class BlockMushroomWhite extends AbstractMushroom
 {
@@ -11,7 +11,7 @@ public class BlockMushroomWhite extends AbstractMushroom
 	}
 
 	@Override
-	public AbstractEffect getMushroomEffect() 
+	public AbstractSpell getMushroomSpell() 
 	{
 		return null;
 	}
@@ -33,16 +33,16 @@ public class BlockMushroomWhite extends AbstractMushroom
 	{
 		return new int[]
 				{
-				SB.instance.blockHybridMushroomBlack.blockID,
-				SB.instance.blockHybridMushroomOrange.blockID,
-				SB.instance.blockHybridMushroomWhite.blockID,
-				SB.instance.blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
-				SB.instance.blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
-				SB.instance.blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
-				SB.instance.blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
-				SB.instance.blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
-				SB.instance.blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
-				SB.instance.blockHybridMushroomBlack.blockID //Blue Grey + Grey //2nd level
+				SpellboundCore.instance.blockHybridMushroomBlack.blockID,
+				SpellboundCore.instance.blockHybridMushroomOrange.blockID,
+				SpellboundCore.instance.blockHybridMushroomWhite.blockID,
+				SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
+				SpellboundCore.instance.blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
+				SpellboundCore.instance.blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
+				SpellboundCore.instance.blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
+				SpellboundCore.instance.blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
+				SpellboundCore.instance.blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
+				SpellboundCore.instance.blockHybridMushroomBlack.blockID //Blue Grey + Grey //2nd level
 				};
 	}
 

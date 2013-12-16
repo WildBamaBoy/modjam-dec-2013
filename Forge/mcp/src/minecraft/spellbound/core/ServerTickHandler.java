@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -43,24 +42,24 @@ public class ServerTickHandler implements ITickHandler
 	{
 		Map<EntityPlayer, Integer> oldEntries = new HashMap<EntityPlayer, Integer>();
 		
-		for (Map.Entry<EntityPlayer,List<EffectEntry>> entrySet : SB.activeSpellEffects.entrySet())
+		for (Map.Entry<EntityPlayer,List<SpellEntry>> entrySet : SpellboundCore.activeSpells.entrySet())
 		{
 			EntityPlayer player = entrySet.getKey();
-			List<EffectEntry> entryList = entrySet.getValue();
+			List<SpellEntry> entryList = entrySet.getValue();
 			
-			for (EffectEntry entry : entryList)
+			for (SpellEntry entry : entryList)
 			{
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))
 				{
-					player.addChatMessage(entry.effect.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
+					player.addChatMessage(entry.spell.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
 				}
 				
 				if (entry.durationCounter >= entry.maxDuration)
 				{
 					oldEntries.put(player, entryList.indexOf(entry));
-					player.addChatMessage(entry.effect.getSpellDisplayName() + " has dispelled!");
+					player.addChatMessage(entry.spell.getSpellDisplayName() + " has dispelled!");
 				}
 			}
 		}
@@ -68,8 +67,8 @@ public class ServerTickHandler implements ITickHandler
 		//Clean up old entries.
 		for (Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
 		{
-			List<EffectEntry> effects = SB.activeSpellEffects.get(oldEntry.getKey());
-			effects.remove(effects.get(oldEntry.getValue()));
+			List<SpellEntry> Spells = SpellboundCore.activeSpells.get(oldEntry.getKey());
+			Spells.remove(Spells.get(oldEntry.getValue()));
 		}
 	}
 }

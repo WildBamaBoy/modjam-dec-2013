@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import spellbound.core.Logic;
-import spellbound.core.SB;
-import spellbound.effects.AbstractEffect;
+import spellbound.core.SpellboundCore;
+import spellbound.spells.AbstractSpell;
 import spellbound.util.MushroomCoordinates;
 
 public abstract class AbstractMushroom extends BlockFlower
@@ -17,13 +17,13 @@ public abstract class AbstractMushroom extends BlockFlower
 		super(itemId);
 		this.setBlockBounds(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 2.0F, 0.5F + 0.2F);
 		this.setTickRandomly(true);
-		this.setCreativeTab(SB.instance.spellboundTab);
+		this.setCreativeTab(SpellboundCore.instance.spellboundTab);
 
 		this.setName();
 		this.setTexture();
 	}
 
-	public abstract AbstractEffect getMushroomEffect();
+	public abstract AbstractSpell getMushroomSpell();
 
 	public abstract void setName();
 
@@ -68,17 +68,17 @@ public abstract class AbstractMushroom extends BlockFlower
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
 	 * blockID passed in. Args: blockID
 	 */
-	protected boolean canThisPlantGrowOnThisBlockID(int par1)
+	protected boolean canThisPlantGrowOnThisBlockID(int blockID)
 	{
-		return Block.opaqueCubeLookup[par1];
+		return Block.opaqueCubeLookup[blockID];
 	}
 
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return true;
 		//TODO: THIS
+		return true;
 	}
 }

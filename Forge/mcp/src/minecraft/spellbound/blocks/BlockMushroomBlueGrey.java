@@ -1,7 +1,7 @@
 package spellbound.blocks;
 
-import spellbound.core.SB;
-import spellbound.effects.AbstractEffect;
+import spellbound.core.SpellboundCore;
+import spellbound.spells.AbstractSpell;
 
 public class BlockMushroomBlueGrey extends AbstractMushroom
 {
@@ -11,7 +11,7 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 	}
 
 	@Override
-	public AbstractEffect getMushroomEffect() 
+	public AbstractSpell getMushroomSpell() 
 	{
 		return null;
 	}
@@ -34,28 +34,28 @@ public class BlockMushroomBlueGrey extends AbstractMushroom
 		//Grey, GreyOrange, Orange
 		return new int[]
 				{
-				SB.instance.blockHybridMushroomGrey.blockID, 
-				SB.instance.blockHybridMushroomOrangeGrey.blockID, 
-				SB.instance.blockHybridMushroomOrange.blockID
+				SpellboundCore.instance.blockHybridMushroomGrey.blockID, 
+				SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID, 
+				SpellboundCore.instance.blockHybridMushroomOrange.blockID
 				};
 	}
 
 	@Override
 	public int getOffspringId(int mateId) 
 	{
-		if (mateId == SB.instance.blockHybridMushroomGrey.blockID)
+		if (mateId == SpellboundCore.instance.blockHybridMushroomGrey.blockID)
 		{
-			return SB.instance.blockHybridMushroomBlack.blockID;
+			return SpellboundCore.instance.blockHybridMushroomBlack.blockID;
 		}
 		
-		else if (mateId == SB.instance.blockHybridMushroomOrangeGrey.blockID)
+		else if (mateId == SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID)
 		{
-			return SB.rand.nextBoolean() ? SB.instance.blockHybridMushroomGrey.blockID : SB.instance.blockHybridMushroomLightBlue.blockID;
+			return SpellboundCore.rand.nextBoolean() ? SpellboundCore.instance.blockHybridMushroomGrey.blockID : SpellboundCore.instance.blockHybridMushroomLightBlue.blockID;
 		}
 		
-		else if (mateId == SB.instance.blockHybridMushroomOrange.blockID)
+		else if (mateId == SpellboundCore.instance.blockHybridMushroomOrange.blockID)
 		{
-			return SB.instance.blockHybridMushroomOrangeGrey.blockID;
+			return SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID;
 		}
 		
 		else

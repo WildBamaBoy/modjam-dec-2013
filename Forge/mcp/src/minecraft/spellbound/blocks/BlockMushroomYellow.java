@@ -1,7 +1,7 @@
 package spellbound.blocks;
 
-import spellbound.core.SB;
-import spellbound.effects.AbstractEffect;
+import spellbound.core.SpellboundCore;
+import spellbound.spells.AbstractSpell;
 
 public class BlockMushroomYellow extends AbstractMushroom
 {
@@ -11,7 +11,7 @@ public class BlockMushroomYellow extends AbstractMushroom
 	}
 
 	@Override
-	public AbstractEffect getMushroomEffect() 
+	public AbstractSpell getMushroomSpell() 
 	{
 		return null;
 	}
@@ -33,22 +33,22 @@ public class BlockMushroomYellow extends AbstractMushroom
 	{
 		return new int[]
 				{
-				SB.instance.blockHybridMushroomRainbow.blockID,
-				SB.instance.blockPrimaryMushroomRedOrange.blockID
+				SpellboundCore.instance.blockHybridMushroomRainbow.blockID,
+				SpellboundCore.instance.blockPrimaryMushroomRedOrange.blockID
 				};
 	}
 
 	@Override
 	public int getOffspringId(int mateId) 
 	{
-		if (mateId == SB.instance.blockPrimaryMushroomRedOrange.blockID)
+		if (mateId == SpellboundCore.instance.blockPrimaryMushroomRedOrange.blockID)
 		{
-			return SB.instance.blockHybridMushroomRainbow.blockID;
+			return SpellboundCore.instance.blockHybridMushroomRainbow.blockID;
 		}
 		
-		else if (mateId == SB.instance.blockHybridMushroomRainbow.blockID)
+		else if (mateId == SpellboundCore.instance.blockHybridMushroomRainbow.blockID)
 		{
-			return SB.instance.blockHybridMushroomGold.blockID;
+			return SpellboundCore.instance.blockHybridMushroomGold.blockID;
 		}
 		
 		else

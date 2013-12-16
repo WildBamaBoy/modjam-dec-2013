@@ -5,20 +5,21 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import spellbound.effects.AbstractEffect;
+import spellbound.spells.AbstractSpell;
 import spellbound.util.Color;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSpellTablet extends SBItem
+public class ItemSpellTablet extends SpellboundItem
 {
-	public final AbstractEffect spellEffect;
+	public final AbstractSpell spell;
 	public final int level;
 
-	public ItemSpellTablet(int itemId, String unlocalizedName, AbstractEffect spellEffect, int level)
+	public ItemSpellTablet(int itemId, String unlocalizedName, AbstractSpell spell, int level)
 	{
-		super(itemId, unlocalizedName, spellEffect.getSpellDisplayName());
-		this.spellEffect = spellEffect;
+		super(itemId, unlocalizedName, spell.getSpellDisplayName());
+		this.spell = spell;
 		this.level = level;
 	}
 
@@ -34,18 +35,18 @@ public class ItemSpellTablet extends SBItem
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean unknown) 
 	{
 		infoList.add(Color.BLUE + "Lvl. " + level);
-		infoList.add(Color.BLUE + "@(" + spellEffect.getSpellType() + ")");
+		infoList.add(Color.BLUE + "@(" + spell.getSpellType() + ")");
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) 
+	public ItemStack onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer) 
 	{
-		if (!par3EntityPlayer.worldObj.isRemote)
+		if (worldObj.isRemote)
 		{
-			par3EntityPlayer.addChatMessage("You have cast: " + spellEffect.getSpellDisplayName() + ".");
+			entityPlayer.addChatMessage("You have cast: " + spell.getSpellDisplayName() + ".");
 		}
 
-		spellEffect.doSpellEffect(par3EntityPlayer);
-		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
+		spell.doSpellCasterEffect(entityPlayer);
+		return super.onItemRightClick(itemStack, worldObj, entityPlayer);
 	}
 }

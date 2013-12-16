@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
-import spellbound.core.SB;
+import spellbound.core.SpellboundCore;
 
 public class PropertiesManager 
 {
@@ -30,8 +30,8 @@ public class PropertiesManager
 	public PropertiesManager()
 	{
 		properties = new Properties();
-		storageFolder = new File(SB.runningDirectory + "/config/Spellbound");
-		propertiesFile = new File(SB.runningDirectory + "/config/Spellbound/ModProps.properties");
+		storageFolder = new File(SpellboundCore.runningDirectory + "/config/Spellbound");
+		propertiesFile = new File(SpellboundCore.runningDirectory + "/config/Spellbound/ModProps.properties");
 
 		if (!storageFolder.exists())
 		{
@@ -117,14 +117,11 @@ public class PropertiesManager
 
 				//TODO EXTEND!!!
 			}
-			
-			FileOutputStream fos = new FileOutputStream(propertiesFile);
 		}
 
 		catch (IOException e)
 		{
-			//TODO
-			//IOEXCEPTION WHEN NOT EXIST
+			//When the file does not exist.
 			saveProperties();
 		}
 		

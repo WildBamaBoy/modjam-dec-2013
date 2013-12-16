@@ -1,6 +1,6 @@
 package spellbound.blocks;
 
-import spellbound.effects.AbstractEffect;
+import spellbound.spells.AbstractSpell;
 
 public class BlockMushroomLightBlue extends AbstractMushroom
 {
@@ -10,7 +10,7 @@ public class BlockMushroomLightBlue extends AbstractMushroom
 	}
 
 	@Override
-	public AbstractEffect getMushroomEffect() 
+	public AbstractSpell getMushroomSpell() 
 	{
 		return null;
 	}
