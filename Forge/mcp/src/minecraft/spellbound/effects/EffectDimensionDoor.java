@@ -25,7 +25,7 @@ public class EffectDimensionDoor extends AbstractEffect
 		if (!caster.worldObj.isRemote)
 		{
 			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			int transportAmount = SB.rand.nextInt(50) + 50;
+			int transportAmount = SB.rand.nextInt(150) + 50;
 
 			double newPlayerX = 0.0D;
 			double newPlayerY = 0.0D;

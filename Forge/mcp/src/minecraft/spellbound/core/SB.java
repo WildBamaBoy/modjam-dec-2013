@@ -434,7 +434,7 @@ public class SB
 		GameRegistry.addRecipe(new ItemStack(itemTabletPush),
 				" P ", "-T-", " R ", 'P', Block.pistonBase, '-', Block.torchRedstoneActive, 'T', itemTabletProtectionBase, 'R', Item.redstone);
 		GameRegistry.addRecipe(new ItemStack(itemTabletGrease),
-				"FMC", " T ", 'F', Block.furnaceIdle, 'M', Item.porkRaw, 'T', itemTabletProtectionBase, 'C', Item.coal);
+				"FMC", " T ", 'F', Block.furnaceIdle, 'M', Item.porkRaw, 'T', itemTabletMundaneBase, 'C', Item.coal);
 		GameRegistry.addRecipe(new ItemStack(itemTabletBlink),
 				" E ", "GTG", " G ", 'E', Item.enderPearl, 'G', Block.thinGlass, 'T', itemTabletProtectionBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletTransport),
