@@ -3,7 +3,6 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import spellbound.core.PacketHandler;
 import spellbound.entity.EntityTargetSpell;

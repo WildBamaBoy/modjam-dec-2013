@@ -70,7 +70,7 @@ import spellbound.spells.SpellSummonLvl2;
 import spellbound.spells.SpellSummonLvl3;
 import spellbound.spells.SpellSurgeShield;
 import spellbound.spells.SpellTransport;
-import spellbound.spells.SpellUltimateDisintegrate;
+import spellbound.spells.SpellDisintegrate;
 import spellbound.spells.SpellElementalFury;
 import spellbound.spells.SpellWailOfTheBanshee;
 import spellbound.spells.SpellWallOfBedrock;
@@ -240,7 +240,7 @@ public class SpellboundCore
 		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new SpellLightningLvl3(), 3);
 		itemTabletUltWailOfTheBanshee = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateWailOfTheBanshee, "tabletwailofthebanshee", new SpellWailOfTheBanshee(), 4);
 		itemTabletUltElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateElementalFury, "tabletelementalfury", new SpellElementalFury(), 4);
-		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new SpellUltimateDisintegrate(), 4);
+		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new SpellDisintegrate(), 4);
 		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl1, "tabletsummonlvl1", new SpellSummonLvl1(), 1);
 		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl2, "tabletsummonlvl2", new SpellSummonLvl2(), 2);
 		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl3, "tabletsummonlvl3", new SpellSummonLvl3(), 3);

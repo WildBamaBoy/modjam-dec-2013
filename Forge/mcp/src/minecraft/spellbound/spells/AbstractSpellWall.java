@@ -17,9 +17,9 @@ public abstract class AbstractSpellWall extends AbstractSpell
 		{
 			final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-			int wallCenterX = (int) caster.posX;
-			int wallCenterY = (int) caster.posY;
-			int wallCenterZ = (int) caster.posZ;
+			double wallCenterX = caster.posX;
+			double wallCenterY = caster.posY;
+			double wallCenterZ = caster.posZ;
 
 			switch (heading)
 			{
@@ -40,10 +40,10 @@ public abstract class AbstractSpellWall extends AbstractSpell
 				{
 					switch (heading)
 					{
-					case 0: caster.worldObj.setBlock(wallCenterX + currentWidth, wallCenterY + currentHeight, wallCenterZ, getWallBlockId()); break;
-					case 1: caster.worldObj.setBlock(wallCenterX, wallCenterY + currentHeight, wallCenterZ + currentWidth, getWallBlockId()); break;
-					case 2: caster.worldObj.setBlock(wallCenterX + currentWidth, wallCenterY + currentHeight, wallCenterZ, getWallBlockId()); break;
-					case 3: caster.worldObj.setBlock(wallCenterX, wallCenterY + currentHeight, wallCenterZ - currentWidth, getWallBlockId()); break;
+					case 0: caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); break;
+					case 1: caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); break;
+					case 2: caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); break;
+					case 3: caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId()); break;
 					default: break;
 					}
 				}

@@ -1,7 +1,7 @@
 package spellbound.spells;
 
-import spellbound.enums.EnumItemInUseTime;
 import net.minecraft.block.Block;
+import spellbound.enums.EnumItemInUseTime;
 
 public class SpellWallOfStone extends AbstractSpellWall
 {
