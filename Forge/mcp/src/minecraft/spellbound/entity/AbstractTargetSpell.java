@@ -5,13 +5,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import spellbound.spells.AbstractSpell;
 
-public class EntityTargetSpell extends EntityFireball
+public abstract class AbstractTargetSpell extends EntityFireball
 {
 	private final AbstractSpell spell;
 	
-	public EntityTargetSpell(EntityPlayer player, AbstractSpell spell) 
+	//For client rendering
+	public AbstractTargetSpell(World worldObj)
+	{
+		super(worldObj);
+		spell = null;
+	}
+	
+	public AbstractTargetSpell(EntityPlayer player, AbstractSpell spell) 
 	{
 		super(player.worldObj);
 		

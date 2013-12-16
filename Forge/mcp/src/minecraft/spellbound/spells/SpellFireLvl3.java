@@ -3,7 +3,7 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import spellbound.entity.EntityTargetSpell;
+import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -22,7 +22,7 @@ public class SpellFireLvl3 extends AbstractSpell
 		{
 			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
 		}
 	}
 	

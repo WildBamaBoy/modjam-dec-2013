@@ -16,10 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -37,13 +34,18 @@ import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
 import spellbound.blocks.BlockMushroomYellow;
 import spellbound.entity.EntityAllSeeingEye;
+import spellbound.entity.EntityTargetSpellCold;
+import spellbound.entity.EntityTargetSpellDisruption;
+import spellbound.entity.EntityTargetSpellDivination;
+import spellbound.entity.EntityTargetSpellFire;
+import spellbound.entity.EntityTargetSpellLightning;
+import spellbound.entity.EntityTargetSpellMundane;
 import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
 import spellbound.item.SpellboundItem;
 import spellbound.spells.AbstractSpell;
 import spellbound.spells.SpellAdvanceTime;
-import spellbound.spells.SpellAllSeeingEye;
 import spellbound.spells.SpellBlink;
 import spellbound.spells.SpellBreach;
 import spellbound.spells.SpellChangeWeather;
@@ -54,6 +56,8 @@ import spellbound.spells.SpellColdLvl3;
 import spellbound.spells.SpellColdShield;
 import spellbound.spells.SpellColorSpray;
 import spellbound.spells.SpellDimensionDoor;
+import spellbound.spells.SpellDisintegrate;
+import spellbound.spells.SpellElementalFury;
 import spellbound.spells.SpellFireLvl1;
 import spellbound.spells.SpellFireLvl2;
 import spellbound.spells.SpellFireLvl3;
@@ -61,13 +65,11 @@ import spellbound.spells.SpellFireShield;
 import spellbound.spells.SpellFishForm;
 import spellbound.spells.SpellFlight;
 import spellbound.spells.SpellGrease;
-import spellbound.spells.SpellGreaterScrying;
 import spellbound.spells.SpellHaste;
 import spellbound.spells.SpellLightningLvl1;
 import spellbound.spells.SpellLightningLvl2;
 import spellbound.spells.SpellLightningLvl3;
 import spellbound.spells.SpellLightningShield;
-import spellbound.spells.SpellMinorScrying;
 import spellbound.spells.SpellMiscastMagic;
 import spellbound.spells.SpellPush;
 import spellbound.spells.SpellShieldOfInvulnerability;
@@ -77,19 +79,14 @@ import spellbound.spells.SpellSummonLvl2;
 import spellbound.spells.SpellSummonLvl3;
 import spellbound.spells.SpellSurgeShield;
 import spellbound.spells.SpellTransport;
-import spellbound.spells.SpellDisintegrate;
-import spellbound.spells.SpellElementalFury;
 import spellbound.spells.SpellWailOfTheBanshee;
 import spellbound.spells.SpellWallOfBedrock;
 import spellbound.spells.SpellWallOfObsidian;
 import spellbound.spells.SpellWallOfStone;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -222,7 +219,14 @@ public class SpellboundCore
 		registerRecipes();
 
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
+		
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellFire.class, EntityTargetSpellFire.class.getSimpleName(), 9, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellCold.class, EntityTargetSpellCold.class.getSimpleName(), 10, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellLightning.class, EntityTargetSpellLightning.class.getSimpleName(), 11, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellDisruption.class, EntityTargetSpellDisruption.class.getSimpleName(), 12, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellDivination.class, EntityTargetSpellDivination.class.getSimpleName(), 13, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellMundane.class, EntityTargetSpellMundane.class.getSimpleName(), 14, this, 50, 2, true);
 	}
 
 //	@EventHandler

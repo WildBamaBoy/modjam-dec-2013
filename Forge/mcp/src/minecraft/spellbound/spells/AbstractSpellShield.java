@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.SpellEntry;
 import spellbound.core.SpellboundCore;
-import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
 public abstract class AbstractSpellShield extends AbstractSpell

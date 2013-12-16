@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
-import spellbound.entity.EntityTargetSpell;
+import spellbound.entity.EntityTargetSpellMundane;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -27,7 +27,7 @@ public class SpellGrease extends AbstractSpell
 		{
 			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellMundane(caster, this));
 		}
 	}
 

@@ -1,7 +1,5 @@
 package spellbound.spells;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +9,7 @@ import spellbound.core.PacketHandler;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellLightningLvl3 extends AbstractSpell
 {
@@ -23,6 +22,8 @@ public class SpellLightningLvl3 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundEffect(caster.posX, caster.posY, caster.posZ, "ambient.weather.thunder", 10000.0F, 1.0F);
+
 		if (!caster.worldObj.isRemote)
 		{
 			for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - 35, caster.posY - 15, caster.posZ - 35, caster.posX + 35, caster.posY + 15, caster.posZ + 35)))

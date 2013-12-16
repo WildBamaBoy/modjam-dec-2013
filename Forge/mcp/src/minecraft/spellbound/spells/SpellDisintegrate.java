@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
-import spellbound.entity.EntityTargetSpell;
+import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -25,7 +25,7 @@ public class SpellDisintegrate extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
 		}
 	}
 

@@ -9,7 +9,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.Logic;
-import spellbound.entity.EntityTargetSpell;
+import spellbound.entity.EntityTargetSpellCold;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 import spellbound.util.Coordinates;
@@ -30,7 +30,7 @@ public class SpellColdLvl2 extends AbstractSpell
 
 		if (!caster.worldObj.isRemote)
 		{
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellCold(caster, this));
 		}
 	}
 
