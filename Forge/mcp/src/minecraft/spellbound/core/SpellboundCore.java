@@ -9,12 +9,16 @@
 
 package spellbound.core;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -36,6 +40,7 @@ import spellbound.external.PropertiesManager;
 import spellbound.gen.WorldGenMushrooms;
 import spellbound.item.ItemSpellTablet;
 import spellbound.item.SpellboundItem;
+import spellbound.spells.AbstractSpell;
 import spellbound.spells.SpellAdvanceTime;
 import spellbound.spells.SpellAllSeeingEye;
 import spellbound.spells.SpellBlink;
@@ -77,10 +82,13 @@ import spellbound.spells.SpellWailOfTheBanshee;
 import spellbound.spells.SpellWallOfBedrock;
 import spellbound.spells.SpellWallOfObsidian;
 import spellbound.spells.SpellWallOfStone;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -104,6 +112,11 @@ public class SpellboundCore
 	public static Random rand = new Random();
 	public static PropertiesManager propertiesManager;
 	public static String runningDirectory;
+
+	public static KeyBindHandler keyBindHandler;
+	public static KeyBinding keyNextEye;
+	public static KeyBinding keyPreviousEye;
+	public static KeyBinding keyDismissEye;
 
 	public CreativeTabs spellboundTab;
 
@@ -195,17 +208,31 @@ public class SpellboundCore
 		proxy.registerRenderers();
 		proxy.registerTickHandlers();
 		proxy.registerSounds();
-		
+
 		registerCreativeTab();
 		registerItems();
 		registerBlocks();
 		registerLocalizations();
 		registerRecipes();
-		
+
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
 		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
 	}
-	
+
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		KeyBinding[] keys = new KeyBinding[]
+				{
+				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
+						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
+						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
+				};
+
+		keyBindHandler = new KeyBindHandler(keys);
+		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
+	}
+
 	private void registerCreativeTab()
 	{
 		itemTabletDivinationBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
@@ -219,7 +246,7 @@ public class SpellboundCore
 		LanguageRegistry.instance().addStringLocalization("itemGroup.tabSpellbound", "Spellbound");
 		itemTabletDivinationBase.setCreativeTab(spellboundTab);
 	}
-	
+
 	private void registerItems()
 	{
 		itemTabletBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
@@ -274,7 +301,7 @@ public class SpellboundCore
 		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new SpellChaos(), 3);
 		itemTabletSummonChestFullOfCookies = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletCookies, "tabletsummonchestfullofcookies", new SpellSummonChestFullOfCookies(), 1);
 	}
-	
+
 	private void registerBlocks()
 	{
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.blockID_MushroomRedOrange);
@@ -303,7 +330,7 @@ public class SpellboundCore
 		GameRegistry.registerBlock(blockHybridMushroomGold, "GoldHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomBlack, "BlackHybrid");
 	}
-	
+
 	private void registerRecipes()
 	{
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
@@ -324,7 +351,7 @@ public class SpellboundCore
 				" M ", "MTM", " M ", 'M', blockHybridMushroomRainbow, 'T', itemTabletBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDisruptionBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomGold, 'T', itemTabletBase);
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl2), 
@@ -343,14 +370,14 @@ public class SpellboundCore
 				"LLL", "LTL", "LLL", 'L', new ItemStack(Item.dyePowder, 1, 4), 'T', itemTabletLightningLvl1);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1), 'T', itemTabletLightningLvl2);
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltElementalFury), 
 				" F ", "CRL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone);
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltWailOfTheBanshee), 
 				" F ", "CRL", " E ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'E', Block.enderChest);
 		GameRegistry.addRecipe(new ItemStack(itemTabletUltDisintegrate), 
 				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletIceShield), 
@@ -384,7 +411,7 @@ public class SpellboundCore
 				"FMC", " T ", 'F', Block.furnaceIdle, 'M', Item.porkRaw, 'T', itemTabletMundaneBase, 'C', Item.coal);
 		GameRegistry.addRecipe(new ItemStack(itemTabletBlink),
 				" E ", "GTG", " G ", 'E', Item.enderPearl, 'G', Block.thinGlass, 'T', itemTabletProtectionBase);
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletTransport),
 				"RRR", "RTR", "RRR", 'R', Block.rail, 'T', itemTabletDivinationBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDimensionDoor),
@@ -408,18 +435,18 @@ public class SpellboundCore
 				" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
 		GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
 				" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),
 				" P ", "ATA", " A ", 'T', itemTabletDisruptionBase, 'P', itemTabletProtectionBase, 'A', Item.arrow);
 		GameRegistry.addRecipe(new ItemStack(itemTabletMiscastMagic),
 				" P ", "PTP", " P ", 'T', itemTabletBreach, 'P', Item.blazePowder);
 		GameRegistry.addRecipe(new ItemStack(itemTabletChaos),
 				" R ", "RTR", " R ", 'T', itemTabletMiscastMagic, 'R', Item.blazeRod);
-		
+
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
 	}
-	
+
 	private void registerLocalizations()
 	{
 		LanguageRegistry.addName(blockPrimaryMushroomRedOrange, "Red Orange Mushroom");
@@ -434,5 +461,23 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
+	}
+	
+	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
+	{
+		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+
+		if (activeSpellsForCaster == null)
+		{
+			List<SpellEntry> entryList = new ArrayList<SpellEntry>();
+			entryList.add(new SpellEntry(spell, 1200));
+			SpellboundCore.activeSpells.put(caster, entryList);
+		}
+
+		else
+		{
+			activeSpellsForCaster.add(new SpellEntry(spell, 1200));
+			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
+		}
 	}
 }

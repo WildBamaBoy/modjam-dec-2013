@@ -50,10 +50,10 @@ public class EntityAllSeeingEye extends Entity
 
         if (!this.worldObj.isRemote)
         {
-            if (this.despawnCounter >= despawnPoint)
-            {
-                this.setDead();
-            }
+//            if (this.despawnCounter >= despawnPoint)
+//            {
+//                this.setDead();
+//            }
         }
     }
 

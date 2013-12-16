@@ -20,6 +20,7 @@ public class ServerTickHandler implements ITickHandler
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData)
 	{
+		System.out.println("AA");
 		if (type.equals(EnumSet.of(TickType.SERVER)))
 		{
 			onTick();
@@ -35,7 +36,7 @@ public class ServerTickHandler implements ITickHandler
 	@Override
 	public String getLabel()
 	{
-		return "Spellbound Ticks";
+		return "Spellbound - ServerTickHandler";
 	}
 	
 	private void onTick()
@@ -48,7 +49,7 @@ public class ServerTickHandler implements ITickHandler
 			List<SpellEntry> entryList = entrySet.getValue();
 			
 			for (SpellEntry entry : entryList)
-			{
+			{	
 				entry.durationCounter++;
 				
 				if (entry.durationCounter == (entry.maxDuration / 2))

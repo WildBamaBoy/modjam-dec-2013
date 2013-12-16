@@ -12,6 +12,7 @@ public class CommonProxy
 
 	public void registerTickHandlers()
 	{
+		//TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 	}
 
