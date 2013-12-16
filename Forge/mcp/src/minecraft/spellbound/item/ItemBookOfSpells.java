@@ -98,44 +98,41 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("10", 
-				"Light Blue Mushroom"
+				"Cold Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: Makes cold tablets."));
 		
 		bookPages.appendTag(new NBTTagString("11", 
 				"Grey Mushroom"
-				+ "\n+ Orange Grey = Grey or Cold"
-				+ "\n+ Blue Grey = Orange Grey"
-				+ "\n\nNotes: Makes cold tablets."));
+				+ "\n+ Orange Grey = Lightning"
+				+ "\n+ Blue Grey = Black"
+				+ "\n\nNotes: N/A"));
+		
 		bookPages.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
-				+ "\n+ Orange = Orange Grey"
-				+ "\n\nNotes: Makes cold tablets."));
+				+ "\n+ Rainbow = Gold"
+				+ "\n+ Red Orange = Rainbow"
+				+ "\n\nNotes: Makes lightning tablets."));
+		
 		bookPages.appendTag(new NBTTagString("13", 
 				"Rainbow Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
-				+ "\n+ Orange = Orange Grey"
-				+ "\n\nNotes: Makes cold tablets."));
+				+ "\n+ Yellow = Gold"
+				+ "\n\nNotes: N/A"));
+		
 		bookPages.appendTag(new NBTTagString("14", 
 				"Gold Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
-				+ "\n+ Orange = Orange Grey"
-				+ "\n\nNotes: Makes cold tablets."));
-		bookPages.appendTag(new NBTTagString("10", 
-				"Black Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
-				+ "\n+ Orange = Orange Grey"
-				+ "\n\nNotes: Makes cold tablets."));
+				+ "\nNo mates!"
+				+ "\n\nNotes: N/A"));
 		
-		bookPages.appendTag(new NBTTagString("5", 
+		bookPages.appendTag(new NBTTagString("15", 
+				"Black Mushroom"
+				+ "\nNo mates!"
+				+ "\n\nNotes: N/A"));
+		
+		bookPages.appendTag(new NBTTagString("16", 
 				"\n\n\n\n\n       Spell Basics"));
 
-		bookPages.appendTag(new NBTTagString("6", 
+		bookPages.appendTag(new NBTTagString("17", 
 				"Spells are made and cast by crafting spell tablets."
 				+ "\n\nSpell tablets begin with a blank tablet. \n\n"
 				+ "BLANK TABLET"
@@ -143,9 +140,47 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "\n           C - C"
 				+ "\n           - C - "
 				+ "\nWhere 'C' is a ball of clay."));
-		bookPages.appendTag(new NBTTagString("3", "Content pg3"));
-		bookPages.appendTag(new NBTTagString("4", "Content pg4"));
-		bookPages.appendTag(new NBTTagString("5", "Content pg5"));
+		
+		bookPages.appendTag(new NBTTagString("18", "       Spell Tablets\n\n"
+				+ "Fire Tablet\n"
+				+ "  - F -\n"
+				+ "  F T F   F = Fire Msh.\n"
+				+ "  - F -   T = Blank Tab.\n\n"
+				+ "Cold Tablet\n"
+				+ "  - C -\n"
+				+ "  C T C   C = Cold Msh.\n"
+				+ "  - C -   T = Blank Tab.\n\n"));
+		
+		bookPages.appendTag(new NBTTagString("19",
+				"Lightning Tablet\n"
+				+ "  - L -\n"
+				+ "  L T L   L = Lght. Msh.\n"
+				+ "  - L -   T = Blank Tab.\n\n"
+				+ "Summon Tablet\n"
+				+ "  - S -\n"
+				+ "  S T S   S = Summ. Msh.\n"
+				+ "  - S -   T = Blank Tab.\n\n"
+				+ "Protection Tablet\n"
+				+ "  - P -\n"
+				+ "  P T P   P = Prot. Msh.\n"
+				+ "  - P -   T = Blank Tab.\n\n"));
+
+		bookPages.appendTag(new NBTTagString("20",
+				"Divination Tablet\n"
+				+ "  - D -\n"
+				+ "  D T D   D = Div. Msh.\n"
+				+ "  - D -   T = Blank Tab.\n\n"
+				+ "Mundane Tablet\n"
+				+ "  - S -\n"
+				+ "  S T S   S = Mund. Msh.\n"
+				+ "  - S -   T = Blank Tab.\n\n"
+				+ "Disruption Tablet\n"
+				+ "  - D -\n"
+				+ "  D T D   D = Dis. Msh.\n"
+				+ "  - D -   T = Blank Tab.\n\n"));
+		
+		bookPages.appendTag(new NBTTagString("19", "Content pg4"));
+		bookPages.appendTag(new NBTTagString("20", "Content pg5"));
 		
 		par1ItemStack.setTagInfo("pages", bookPages);
 		par1ItemStack.setTagInfo("author", new NBTTagString("author", "Spellbound"));
