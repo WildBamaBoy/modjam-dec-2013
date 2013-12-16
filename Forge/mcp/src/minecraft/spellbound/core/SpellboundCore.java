@@ -489,12 +489,12 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomWhite, "White Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomOrangeGrey, "Orange Grey Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomLightBlue, "Cold Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomGrey, "Grey Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomGrey, "Protection Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomYellow, "Lightning Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
-		LanguageRegistry.addName(blockHybridMushroomPurple, "Protection Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomRainbow, "Mundane Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomGold, "Disruption Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomBlack, "Divination Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomPurple, "Summon Mushroom");
 	}
 
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)

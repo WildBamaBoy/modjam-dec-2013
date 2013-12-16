@@ -1,6 +1,5 @@
 package spellbound.blocks;
 
-import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 
 public class BlockMushroomPurple extends AbstractMushroom

@@ -49,7 +49,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("4", 
 				"Red Orange Mushroom"
 				+ "\n\n+ Pink Orange = Fire or White"
-				+ "\n+ Yellow = Rainbow"
+				+ "\n+ Yellow = Mund."
 				+ "\n\nNotes: Spawns naturally."));
 		
 		bookPages.appendTag(new NBTTagString("5", 
@@ -59,8 +59,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("6", 
 				"Blue Grey Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
+				+ "\n+ Grey = Div."
+				+ "\n+ Orange Grey = Prot. or Cold"
 				+ "\n+ Fire = Orange Grey"
 				+ "\n\nNotes: Spawns naturally."));
 		
@@ -75,7 +75,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
-				+ "\n+ Blue Grey = Grey or Cold"
+				+ "\n+ Blue Grey = Prot. or Cold"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("10", 
@@ -86,29 +86,29 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("11", 
 				"Grey Mushroom"
 				+ "\n+ Orange Grey = Lightning"
-				+ "\n+ Blue Grey = Black"
-				+ "\n+ Rainbow = Purple"
+				+ "\n+ Blue Grey = Div."
+				+ "\n+ Mund. = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-				+ "\n+ Rainbow = Gold"
-				+ "\n+ Red Orange = Rainbow"
+				+ "\n+ Mund. = Dis."
+				+ "\n+ Red Orange = Mund."
 				+ "\n\nNotes: Makes lightning tablets."));
 		
 		bookPages.appendTag(new NBTTagString("13", 
-				"Rainbow Mushroom"
-				+ "\n+ Yellow = Gold"
-				+ "\n+ Grey = Purple"
+				"Mund. Mushroom"
+				+ "\n+ Yellow = Dis."
+				+ "\n+ Grey = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("14", 
-				"Gold Mushroom"
+				"Dis. Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("15", 
-				"Black Mushroom"
+				"Div. Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
@@ -443,7 +443,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("4", 
 				"Red Orange Mushroom"
 				+ "\n\n+ Pink Orange = Fire or White"
-				+ "\n+ Yellow = Rainbow"
+				+ "\n+ Yellow = Mund."
 				+ "\n\nNotes: Spawns naturally."));
 		
 		bookPages.appendTag(new NBTTagString("5", 
@@ -453,8 +453,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("6", 
 				"Blue Grey Mushroom"
-				+ "\n+ Grey = Black"
-				+ "\n+ Orange Grey = Grey or Cold"
+				+ "\n+ Grey = Div."
+				+ "\n+ Orange Grey = Prot. or Cold"
 				+ "\n+ Fire = Orange Grey"
 				+ "\n\nNotes: Spawns naturally."));
 		
@@ -469,7 +469,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
-				+ "\n+ Blue Grey = Grey or Cold"
+				+ "\n+ Blue Grey = Prot. or Cold"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("10", 
@@ -480,29 +480,29 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("11", 
 				"Grey Mushroom"
 				+ "\n+ Orange Grey = Lightning"
-				+ "\n+ Blue Grey = Black"
-				+ "\n+ Rainbow = Purple"
+				+ "\n+ Blue Grey = Div."
+				+ "\n+ Mund. = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-				+ "\n+ Rainbow = Gold"
-				+ "\n+ Red Orange = Rainbow"
+				+ "\n+ Mund. = Dis."
+				+ "\n+ Red Orange = Mund."
 				+ "\n\nNotes: Makes lightning tablets."));
 		
 		bookPages.appendTag(new NBTTagString("13", 
-				"Rainbow Mushroom"
-				+ "\n+ Yellow = Gold"
-				+ "\n+ Grey = Purple"
+				"Mund. Mushroom"
+				+ "\n+ Yellow = Dis."
+				+ "\n+ Grey = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("14", 
-				"Gold Mushroom"
+				"Dis. Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("15", 
-				"Black Mushroom"
+				"Div. Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
