@@ -34,7 +34,8 @@ public class BlockMushroomGrey extends AbstractMushroom
 		return new int[]
 				{
 			SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID,
-			SpellboundCore.instance.blockPrimaryMushroomBlueGrey.blockID
+			SpellboundCore.instance.blockPrimaryMushroomBlueGrey.blockID,
+			SpellboundCore.instance.blockHybridMushroomRainbow.blockID
 				};
 	}
 
@@ -49,6 +50,11 @@ public class BlockMushroomGrey extends AbstractMushroom
 		else if (mateId == SpellboundCore.instance.blockPrimaryMushroomBlueGrey.blockID)
 		{
 			return SpellboundCore.instance.blockHybridMushroomBlack.blockID;
+		}
+		
+		else if (mateId == SpellboundCore.instance.blockHybridMushroomRainbow.blockID)
+		{
+			return SpellboundCore.instance.blockHybridMushroomPurple.blockID;
 		}
 		
 		else

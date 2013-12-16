@@ -30,7 +30,7 @@ public class BlockMushroomGold extends AbstractMushroom
 	@Override
 	public int[] getMateIds() 
 	{
-		return null;
+		return new int[0];
 	}
 
 	@Override

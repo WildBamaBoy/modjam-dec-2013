@@ -26,7 +26,8 @@ public class PropertiesList
 	public int blockID_MushroomRainbow = 3597;
 	public int blockID_MushroomGold = 3598;
 	public int blockID_MushroomBlack = 3599;
-
+	public int blockID_MushroomPurple = 3600;
+	
 	public int itemID_BookOfSpells = 26746; 
 			
 	public int itemID_TabletBase = 26747;

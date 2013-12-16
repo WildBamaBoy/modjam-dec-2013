@@ -31,6 +31,7 @@ import spellbound.blocks.BlockMushroomLightBlue;
 import spellbound.blocks.BlockMushroomOrange;
 import spellbound.blocks.BlockMushroomOrangeGrey;
 import spellbound.blocks.BlockMushroomPinkOrange;
+import spellbound.blocks.BlockMushroomPurple;
 import spellbound.blocks.BlockMushroomRainbow;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
@@ -141,7 +142,8 @@ public class SpellboundCore
 	public Block blockHybridMushroomRainbow; //Red Orange + Yellow //RANDOM! //2nd LEVEL
 	public Block blockHybridMushroomGold; //Rainbow + Yellow //2nd level
 	public Block blockHybridMushroomBlack; //Blue Grey + Grey //2nd level
-
+	public Block blockHybridMushroomPurple;
+	
 	public Item itemBookOfSpells;
 	public Item itemTabletBase;
 	public Item itemTabletFireBase;
@@ -342,7 +344,8 @@ public class SpellboundCore
 		blockHybridMushroomRainbow = new BlockMushroomRainbow(propertiesManager.propertiesList.blockID_MushroomRainbow); //Red Orange + Yellow //RANDOM! //2nd LEVEL
 		blockHybridMushroomGold = new BlockMushroomGold(propertiesManager.propertiesList.blockID_MushroomGold); //Rainbow + Yellow //2nd level
 		blockHybridMushroomBlack = new BlockMushroomBlack(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
-
+		blockHybridMushroomPurple = new BlockMushroomPurple(propertiesManager.propertiesList.blockID_MushroomPurple);
+		
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, "RedOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomPinkOrange, "PinkOrangePrimary");
 		GameRegistry.registerBlock(blockPrimaryMushroomBlueGrey, "BlueGreyPrimary");
@@ -355,6 +358,7 @@ public class SpellboundCore
 		GameRegistry.registerBlock(blockHybridMushroomRainbow, "RainbowHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomGold, "GoldHybrid");
 		GameRegistry.registerBlock(blockHybridMushroomBlack, "BlackHybrid");
+		GameRegistry.registerBlock(blockHybridMushroomPurple, "PurpleHybrid");
 	}
 
 	private void registerRecipes()
@@ -490,6 +494,7 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomRainbow, "Rainbow Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomGold, "Gold Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Black Mushroom");
+		LanguageRegistry.addName(blockHybridMushroomPurple, "Purple Mushroom");
 	}
 
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)

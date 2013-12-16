@@ -1,10 +1,11 @@
 package spellbound.blocks;
 
+import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 
-public class BlockMushroomBlack extends AbstractMushroom
+public class BlockMushroomPurple extends AbstractMushroom
 {
-	public BlockMushroomBlack(int itemId) 
+	public BlockMushroomPurple(int itemId) 
 	{
 		super(itemId);
 	}
@@ -18,13 +19,13 @@ public class BlockMushroomBlack extends AbstractMushroom
 	@Override
 	public void setName() 
 	{
-		this.setUnlocalizedName("BLACK HYBRID");
+		this.setUnlocalizedName("PURPLE HYBRID");
 	}
 
 	@Override
 	public void setTexture() 
 	{
-		this.setTextureName("spellbound:mushroom_black");
+		this.setTextureName("spellbound:mushroom_purple");
 	}
 
 	@Override

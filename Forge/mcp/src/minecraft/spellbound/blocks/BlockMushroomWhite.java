@@ -42,7 +42,8 @@ public class BlockMushroomWhite extends AbstractMushroom
 				SpellboundCore.instance.blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
 				SpellboundCore.instance.blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
 				SpellboundCore.instance.blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
-				SpellboundCore.instance.blockHybridMushroomBlack.blockID //Blue Grey + Grey //2nd level
+				SpellboundCore.instance.blockHybridMushroomBlack.blockID, //Blue Grey + Grey //2nd level
+				SpellboundCore.instance.blockHybridMushroomPurple.blockID
 				};
 	}
 
