@@ -359,6 +359,9 @@ public class SpellboundCore
 
 	private void registerRecipes()
 	{
+		GameRegistry.addRecipe(new ItemStack(itemBookOfSpells),
+				" T ", "TBT", " T ", 'B', Item.book, 'T', itemTabletBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
