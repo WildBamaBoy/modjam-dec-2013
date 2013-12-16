@@ -23,11 +23,12 @@ public class SpellColdLvl1 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.inventory.decrStackSize(caster.inventory.currentItem, 1);
+		caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
+		
+		//TODO Redo.
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
-			caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
-
 			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 			if (heading == 0)
@@ -93,20 +94,14 @@ public class SpellColdLvl1 extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 }

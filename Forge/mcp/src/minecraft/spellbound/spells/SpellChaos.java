@@ -16,13 +16,7 @@ public class SpellChaos extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		
-	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
+		//TODO
 	}
 	
 	@Override
@@ -32,8 +26,8 @@ public class SpellChaos extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//TODO
 	}
 }

@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.Constants;
 import spellbound.core.Logic;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
@@ -24,27 +24,13 @@ public class SpellColdLvl2 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.inventory.decrStackSize(caster.inventory.currentItem, 1);
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
-			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-
-			Vec3 vec = caster.getLookVec();
-			EntityTargetSpell spell = new EntityTargetSpell(caster.worldObj, this);
-			spell.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
-
-			spell.accelerationX = vec.xCoord * 0.3;
-			spell.accelerationY = vec.yCoord * 0.3;
-			spell.accelerationZ = vec.zCoord * 0.3;
-
-			caster.worldObj.spawnEntityInWorld(spell);
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
 		}
-	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-
 	}
 
 	@Override
@@ -58,7 +44,7 @@ public class SpellColdLvl2 extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			for (Coordinates c : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, new int[]{Block.grass.blockID, Block.dirt.blockID, Block.sand.blockID, Block.stone.blockID, Block.cobblestone.blockID}))
+			for (final Coordinates c : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, Constants.BLOCKS_SUPPORTING_SNOW))
 			{
 				if (worldObj.getBlockId(c.x, c.y + 1, c.z) == 0)
 				{

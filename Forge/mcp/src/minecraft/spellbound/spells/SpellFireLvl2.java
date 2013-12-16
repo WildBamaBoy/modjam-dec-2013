@@ -36,12 +36,6 @@ public class SpellFireLvl2 extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.TARGET;

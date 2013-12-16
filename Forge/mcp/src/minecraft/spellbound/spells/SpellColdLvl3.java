@@ -140,20 +140,13 @@ public class SpellColdLvl3 extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.FRONT;
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
 	}
 }

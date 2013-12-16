@@ -9,6 +9,12 @@ public abstract class AbstractSpell
 {
 	public EntityPlayer caster;
 	
+	public boolean doMagicSurge()
+	{
+		//TODO
+		return false;
+	}
+	
 	public abstract String getSpellDisplayName();
 	
 	public abstract void doSpellCasterEffect(EntityPlayer caster);

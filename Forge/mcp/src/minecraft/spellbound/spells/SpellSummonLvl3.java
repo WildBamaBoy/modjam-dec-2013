@@ -27,12 +27,6 @@ public class SpellSummonLvl3 extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
-	
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;

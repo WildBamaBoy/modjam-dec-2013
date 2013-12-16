@@ -28,12 +28,6 @@ public class SpellSummonLvl1 extends AbstractSpell
 		
 		//TODO Particles
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 

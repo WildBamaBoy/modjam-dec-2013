@@ -12,8 +12,8 @@ import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumSpellType;
 import spellbound.util.Coordinates;
 
-public class SpellSummonChestFullOfCookies extends AbstractSpell {
-
+public class SpellSummonChestFullOfCookies extends AbstractSpell 
+{
 	@Override
 	public String getSpellDisplayName() 
 	{
@@ -29,7 +29,7 @@ public class SpellSummonChestFullOfCookies extends AbstractSpell {
 		{
 			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 5, 0))
 			{
-				if (caster.worldObj.getBlockId(c.x, c.y - 1, c.z) != 0 && SpellboundCore.instance.rand.nextBoolean()) 
+				if (caster.worldObj.getBlockId(c.x, c.y - 1, c.z) != 0 && SpellboundCore.rand.nextBoolean()) 
 				{
 					caster.worldObj.setBlock(c.x, c.y, c.z, Block.chest.blockID);
 					IInventory inventory = Block.chest.getInventory(caster.worldObj, c.x, c.y, c.z);
@@ -52,15 +52,8 @@ public class SpellSummonChestFullOfCookies extends AbstractSpell {
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
 	}
-
 }

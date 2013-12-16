@@ -47,48 +47,42 @@ public class SpellElementalFury extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		if (!worldObj.isRemote)
+		final int radius = 8;
+		final List entitiesList = entityHit == null ? worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius)) : worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(entityHit.posX - radius, entityHit.posY - radius, entityHit.posZ - radius, entityHit.posX + radius, entityHit.posY + radius, entityHit.posZ + radius));
+
+		for (final Object obj : entitiesList)
 		{
-			int radius = 8;
+			if (obj instanceof EntityLivingBase)
+			{
+				final EntityLivingBase livingEntity = (EntityLivingBase)obj;
 
-			List entitiesList = entityHit == null ? 
-					worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(posX - radius, posY - radius, posZ - radius, posX + radius, posY + radius, posZ + radius)) : 
-						worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(entityHit.posX - radius, entityHit.posY - radius, entityHit.posZ - radius, entityHit.posX + radius, entityHit.posY + radius, entityHit.posZ + radius));
+				if (SpellboundCore.rand.nextBoolean())
+				{
+					livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
+					livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+				}
 
-					for (Object obj : entitiesList)
-					{
-						if (obj instanceof EntityLivingBase)
-						{
-							EntityLivingBase livingEntity = (EntityLivingBase)obj;
+				else if (SpellboundCore.rand.nextBoolean())
+				{
+					livingEntity.attackEntityFrom(DamageSource.magic, 10.0F);
+					livingEntity.setFire(15);
+					worldObj.createExplosion(livingEntity, livingEntity.posX, livingEntity.posY, livingEntity.posZ, 5.0F, false);
+				}
 
-							if (SpellboundCore.rand.nextBoolean())
-							{
-								livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
-								livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-							}
+				else
+				{
+					livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
 
-							else if (SpellboundCore.rand.nextBoolean())
-							{
-								livingEntity.attackEntityFrom(DamageSource.magic, 10.0F);
-								livingEntity.setFire(15);
-								worldObj.createExplosion(livingEntity, livingEntity.posX, livingEntity.posY, livingEntity.posZ, 5.0F, false);
-							}
+					final double spawnX = livingEntity.posX;
+					final double spawnY = livingEntity.posY;
+					final double spawnZ = livingEntity.posZ;
 
-							else
-							{
-								livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
+					final EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
+					worldObj.spawnEntityInWorld(lightning);
 
-								double spawnX = entityHit != null ? entityHit.posX : posX;
-								double spawnY = entityHit != null ? entityHit.posY : posY;
-								double spawnZ = entityHit != null ? entityHit.posZ : posZ;
-
-								EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
-								worldObj.spawnEntityInWorld(lightning);
-
-								PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
-							}
-						}
-					}
+					PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+				}
+			}
 		}
 	}
 }

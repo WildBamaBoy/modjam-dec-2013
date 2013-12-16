@@ -25,25 +25,8 @@ public class SpellUltimateDisintegrate extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
-			caster.worldObj.playSoundAtEntity(caster, "mob.wither.spawn", 1.0F, 1.0F);
-
-			Vec3 vec = caster.getLookVec();
-			EntityTargetSpell spell = new EntityTargetSpell(caster.worldObj, this);
-			spell.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
-
-			spell.accelerationX = vec.xCoord * 0.3;
-			spell.accelerationY = vec.yCoord * 0.3;
-			spell.accelerationZ = vec.zCoord * 0.3;
-
-			caster.worldObj.spawnEntityInWorld(spell);
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpell(caster, this));
 		}
-	}
-
-	@Override
-	public void updateSpellSpell() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

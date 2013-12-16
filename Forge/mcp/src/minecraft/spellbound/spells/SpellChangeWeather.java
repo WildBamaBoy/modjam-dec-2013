@@ -25,20 +25,14 @@ public class SpellChangeWeather extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-
-	}
-
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 }

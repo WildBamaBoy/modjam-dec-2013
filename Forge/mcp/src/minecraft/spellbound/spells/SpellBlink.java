@@ -20,12 +20,6 @@ public class SpellBlink extends AbstractSpell
 	{
 		caster.addPotionEffect(new PotionEffect(Potion.invisibility.id, 100));
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 
@@ -34,8 +28,8 @@ public class SpellBlink extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 }

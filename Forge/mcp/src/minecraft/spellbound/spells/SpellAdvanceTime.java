@@ -1,9 +1,9 @@
 package spellbound.spells;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.Constants;
 import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumSpellType;
@@ -22,33 +22,15 @@ public class SpellAdvanceTime extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			long newWorldTime = caster.worldObj.getWorldTime() + (SpellboundCore.rand.nextInt(5000) + 5000);
-
+			final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.rand.nextInt(5000) + 5000;
 			caster.worldObj.setWorldTime(newWorldTime);
 
-			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.crops.blockID))
+			for (final int cropID : Constants.CROP_IDS)
 			{
-				caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
-			}
-
-			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.carrot.blockID))
-			{
-				caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
-			}
-
-			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.potato.blockID))
-			{
-				caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
-			}
-
-			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.melonStem.blockID))
-			{
-				caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
-			}
-
-			for (Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, Block.pumpkinStem.blockID))
-			{
-				caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
+				for (final Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, Constants.RADIUS_ADVANCETIME, cropID))
+				{
+					caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
+				}
 			}
 		}
 	}

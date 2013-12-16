@@ -20,12 +20,6 @@ public class SpellFishForm extends AbstractSpell
 	{
 		caster.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 1200));
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 

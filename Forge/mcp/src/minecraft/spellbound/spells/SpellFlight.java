@@ -21,12 +21,6 @@ public class SpellFlight extends AbstractSpell
 		caster.motionY += 1.0D;
 		caster.capabilities.isFlying = true;
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 

@@ -41,12 +41,6 @@ public class SpellSurgeShield extends AbstractSpell
 			}
 		}
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 

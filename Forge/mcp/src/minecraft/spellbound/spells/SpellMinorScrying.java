@@ -20,12 +20,6 @@ public class SpellMinorScrying extends AbstractSpell
 	}
 
 	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
-	
-	@Override
 	public EnumSpellType getSpellType() 
 	{
 		return EnumSpellType.SELF;

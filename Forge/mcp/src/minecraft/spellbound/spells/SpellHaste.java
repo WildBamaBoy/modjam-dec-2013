@@ -21,12 +21,6 @@ public class SpellHaste extends AbstractSpell
 		caster.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 1200));
 		caster.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 1200));
 	}
-
-	@Override
-	public void updateSpellSpell() 
-	{
-		
-	}
 	
 	@Override
 	public EnumSpellType getSpellType() 
