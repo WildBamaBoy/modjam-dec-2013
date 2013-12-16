@@ -21,7 +21,7 @@ public class EffectTransport extends AbstractEffect
 	public void doSpellEffect(EntityPlayer caster) 
 	{
 		this.caster = caster;
-		
+
 		if (!caster.worldObj.isRemote)
 		{
 			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
@@ -56,10 +56,18 @@ public class EffectTransport extends AbstractEffect
 	{
 		if (!worldObj.isRemote && entityHit == null)
 		{
-			EntityPlayerMP casterMP = (EntityPlayerMP)caster;
-			casterMP.mountEntity((Entity)null);
-			casterMP.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, caster.rotationYaw, caster.rotationPitch);
-			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
+			try
+			{
+				EntityPlayerMP casterMP = (EntityPlayerMP)caster;
+				casterMP.mountEntity((Entity)null);
+				casterMP.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, caster.rotationYaw, caster.rotationPitch);
+				caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
+			}
+
+			catch (ClassCastException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 }

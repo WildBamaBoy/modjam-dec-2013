@@ -433,7 +433,21 @@ public class SB
 				" R ", "BTY", " G ", 'T', itemTabletProtectionBase, 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 4), 'Y', new ItemStack(Item.dyePowder, 1,11), 'G', new ItemStack(Item.dyePowder, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(itemTabletPush),
 				" P ", "-T-", " R ", 'P', Block.pistonBase, '-', Block.torchRedstoneActive, 'T', itemTabletProtectionBase, 'R', Item.redstone);
-
+		GameRegistry.addRecipe(new ItemStack(itemTabletGrease),
+				"FMC", " T ", 'F', Block.furnaceIdle, 'M', Item.porkRaw, 'T', itemTabletProtectionBase, 'C', Item.coal);
+		GameRegistry.addRecipe(new ItemStack(itemTabletBlink),
+				" E ", "GTG", " G ", 'E', Item.enderPearl, 'G', Block.thinGlass, 'T', itemTabletProtectionBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletTransport),
+				"RRR", "RTR", "RRR", 'R', Block.rail, 'T', itemTabletDivinationBase);
+		GameRegistry.addRecipe(new ItemStack(itemTabletDimensionDoor),
+				"OOO", "OTO", "OFO", 'O', Block.obsidian, 'T', itemTabletTransport, 'F', Item.flintAndSteel);
+		GameRegistry.addRecipe(new ItemStack(itemTabletHaste),
+				" M ", "RT-", 'M', Item.minecartEmpty, 'R', Block.railPowered, 'T', itemTabletMundaneBase, '-', Block.torchRedstoneActive);
+		GameRegistry.addRecipe(new ItemStack(itemTabletHaste),
+				" M ", "RT-", 'M', Item.minecartEmpty, 'R', Block.railPowered, 'T', itemTabletMundaneBase, '-', Block.torchRedstoneActive);
+		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
+				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
+		
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
 	}

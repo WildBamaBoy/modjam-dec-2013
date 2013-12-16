@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.SB;
 import spellbound.entity.EntityTargetSpell;
 import spellbound.enums.EnumSpellType;
 
@@ -58,7 +59,7 @@ public class EffectGrease extends AbstractEffect
 		{
 			entityHit.setDead();
 
-			EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.porkCooked, 1, 15));
+			EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.porkCooked, SB.rand.nextInt(2) + 3, 15));
 			worldObj.spawnEntityInWorld(item);
 		}
 	}
