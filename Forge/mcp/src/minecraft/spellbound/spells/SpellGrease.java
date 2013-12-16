@@ -25,7 +25,6 @@ public class SpellGrease extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellMundane(caster, this));
 		}

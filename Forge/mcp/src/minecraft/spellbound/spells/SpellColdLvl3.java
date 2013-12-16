@@ -26,7 +26,6 @@ public class SpellColdLvl3 extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
 
 			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;

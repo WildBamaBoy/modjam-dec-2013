@@ -1,8 +1,8 @@
 package spellbound.entity;
 
-import spellbound.spells.AbstractSpell;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.spells.AbstractSpell;
 
 public class EntityTargetSpellDivination extends AbstractTargetSpell
 {

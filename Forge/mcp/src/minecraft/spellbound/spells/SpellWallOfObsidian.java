@@ -1,6 +1,6 @@
 package spellbound.spells;
 
-import net.minecraft.block.Block;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 
 public class SpellWallOfObsidian extends AbstractSpellWall
@@ -14,7 +14,7 @@ public class SpellWallOfObsidian extends AbstractSpellWall
 	@Override
 	public int getWallBlockId() 
 	{
-		return Block.obsidian.blockID;
+		return SpellboundCore.instance.blockFalseObsidian.blockID;
 	}
 	
 	@Override

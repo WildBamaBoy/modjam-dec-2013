@@ -11,7 +11,9 @@ package spellbound.external;
 
 public class PropertiesList 
 {
-	//Put item IDs here.
+	public int blockID_BlockFalseObsidian = 3568;
+	public int blockID_BlockFalseBedrock = 3569;
+	
 	public int blockID_MushroomRedOrange = 3588;
 	public int blockID_MushroomPinkOrange = 3589;
 	public int blockID_MushroomBlueGrey = 3590;

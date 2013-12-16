@@ -7,7 +7,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
-import spellbound.entity.AbstractTargetSpell;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -25,7 +24,6 @@ public class SpellLightningLvl1 extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellLightning(caster, this));
 		}

@@ -21,6 +21,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import spellbound.blocks.BlockFalseBedrock;
+import spellbound.blocks.BlockFalseObsidian;
 import spellbound.blocks.BlockMushroomBlack;
 import spellbound.blocks.BlockMushroomBlueGrey;
 import spellbound.blocks.BlockMushroomGold;
@@ -122,6 +124,9 @@ public class SpellboundCore
 
 	public CreativeTabs spellboundTab;
 
+	public Block blockFalseObsidian;
+	public Block blockFalseBedrock;
+	
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
 	public Block blockPrimaryMushroomBlueGrey;
@@ -317,6 +322,9 @@ public class SpellboundCore
 
 	private void registerBlocks()
 	{
+		blockFalseBedrock = new BlockFalseBedrock(propertiesManager.propertiesList.blockID_BlockFalseBedrock);
+		blockFalseObsidian = new BlockFalseObsidian(propertiesManager.propertiesList.blockID_BlockFalseObsidian);
+		
 		blockPrimaryMushroomRedOrange = new BlockMushroomRedOrange(propertiesManager.propertiesList.blockID_MushroomRedOrange);
 		blockPrimaryMushroomPinkOrange = new BlockMushroomPinkOrange(propertiesManager.propertiesList.blockID_MushroomPinkOrange);
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);

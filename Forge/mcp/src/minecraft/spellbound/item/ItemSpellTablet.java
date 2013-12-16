@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 import spellbound.util.Color;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

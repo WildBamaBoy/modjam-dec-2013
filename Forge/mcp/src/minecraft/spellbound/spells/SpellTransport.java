@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import spellbound.entity.AbstractTargetSpell;
 import spellbound.entity.EntityTargetSpellDivination;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
@@ -25,7 +24,6 @@ public class SpellTransport extends AbstractSpell
 
 		if (!caster.worldObj.isRemote)
 		{
-			caster.inventory.consumeInventoryItem(caster.inventory.currentItem);
 			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDivination(caster, this));

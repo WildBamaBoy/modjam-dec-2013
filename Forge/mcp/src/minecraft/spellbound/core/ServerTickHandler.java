@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.entity.player.EntityPlayer;
 import spellbound.spells.SpellFireShield;
 import spellbound.spells.SpellFlight;
 import spellbound.spells.SpellShieldOfInvulnerability;
-import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
