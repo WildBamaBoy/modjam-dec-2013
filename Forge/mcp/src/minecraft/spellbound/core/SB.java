@@ -209,10 +209,10 @@ public class SB
 		runningDirectory = System.getProperty("user.dir");
 		propertiesManager = new PropertiesManager();
 
-		MinecraftForge.EVENT_BUS.register(new SBEventHandler());
 		proxy.registerRenderers();
 		proxy.registerTickHandlers();
-
+		proxy.registerSounds();
+		
 		//Declare tab & tab icon item.
 		itemTabletDivinationBase = new SBItem(propertiesManager.propertiesList.itemID_TabletDivinationBase, "tabletdivinationbase", "Divination Tablet");
 		spellboundTab = new CreativeTabs("tabSpellbound")
