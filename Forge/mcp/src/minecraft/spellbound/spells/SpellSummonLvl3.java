@@ -1,8 +1,12 @@
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellType;
 
@@ -19,9 +23,10 @@ public class SpellSummonLvl3 extends AbstractSpell
 	{
 		if (!caster.worldObj.isRemote)
 		{
-//			EntityInvisibleWarrior warrior = new EntityInvisibleWarrior();
-//			warrior.setPosition(caster.posX, caster.posY, caster.posZ);
-//			caster.worldObj.spawnEntityInWorld(warrior);
+			EntitySkeleton witherSkeleton = new EntitySkeleton(caster.worldObj);
+			witherSkeleton.setSkeletonType(1);
+			witherSkeleton.setPosition(caster.posX, caster.posY, caster.posZ);
+			caster.worldObj.spawnEntityInWorld(witherSkeleton);
 		}
 	}
 

@@ -49,7 +49,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("4", 
 				"Red Orange Mushroom"
 				+ "\n\n+ Pink Orange = Fire or White"
-				+ "\n+ Yellow = Mund."
+				+ "\n+ Lightning = Mundane"
 				+ "\n\nNotes: Spawns naturally."));
 		
 		bookPages.appendTag(new NBTTagString("5", 
@@ -59,8 +59,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("6", 
 				"Blue Grey Mushroom"
-				+ "\n+ Grey = Div."
-				+ "\n+ Orange Grey = Prot. or Cold"
+				+ "\n+ Protection = Divination"
+				+ "\n+ Orange Grey = Protection or Cold"
 				+ "\n+ Fire = Orange Grey"
 				+ "\n\nNotes: Spawns naturally."));
 		
@@ -75,7 +75,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
-				+ "\n+ Blue Grey = Prot. or Cold"
+				+ "\n+ Blue Grey = Protection or Cold"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("10", 
@@ -84,31 +84,31 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "\n\nNotes: Makes cold tablets."));
 		
 		bookPages.appendTag(new NBTTagString("11", 
-				"Grey Mushroom"
+				"Protection Mushroom"
 				+ "\n+ Orange Grey = Lightning"
-				+ "\n+ Blue Grey = Div."
-				+ "\n+ Mund. = Summon"
+				+ "\n+ Blue Grey = Divination"
+				+ "\n+ Mundane = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-				+ "\n+ Mund. = Dis."
-				+ "\n+ Red Orange = Mund."
+				+ "\n+ Mundane = Disruption"
+				+ "\n+ Red Orange = Mundane"
 				+ "\n\nNotes: Makes lightning tablets."));
 		
 		bookPages.appendTag(new NBTTagString("13", 
-				"Mund. Mushroom"
-				+ "\n+ Yellow = Dis."
+				"Mundane Mushroom"
+				+ "\n+ Yellow = Disruption"
 				+ "\n+ Grey = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("14", 
-				"Dis. Mushroom"
+				"Disruption Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("15", 
-				"Div. Mushroom"
+				"Divination Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
@@ -420,7 +420,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 	@Override
 	public void onUpdate(ItemStack bookStack, World par2World, Entity par3Entity, int par4, boolean par5)
 	{
-		NBTTagList bookPages = new NBTTagList("pages");
+NBTTagList bookPages = new NBTTagList("pages");
 		
 		bookPages.appendTag(new NBTTagString("1", 
 				"\n   Table of Contents\n"
@@ -443,7 +443,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookPages.appendTag(new NBTTagString("4", 
 				"Red Orange Mushroom"
 				+ "\n\n+ Pink Orange = Fire or White"
-				+ "\n+ Yellow = Mund."
+				+ "\n+ Lightning = Mundane"
 				+ "\n\nNotes: Spawns naturally."));
 		
 		bookPages.appendTag(new NBTTagString("5", 
@@ -453,8 +453,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("6", 
 				"Blue Grey Mushroom"
-				+ "\n+ Grey = Div."
-				+ "\n+ Orange Grey = Prot. or Cold"
+				+ "\n+ Protection = Divination"
+				+ "\n+ Orange Grey = Protection or Cold"
 				+ "\n+ Fire = Orange Grey"
 				+ "\n\nNotes: Spawns naturally."));
 		
@@ -469,7 +469,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		
 		bookPages.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
-				+ "\n+ Blue Grey = Prot. or Cold"
+				+ "\n+ Blue Grey = Protection or Cold"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("10", 
@@ -478,31 +478,31 @@ public class ItemBookOfSpells extends ItemEditableBook
 				+ "\n\nNotes: Makes cold tablets."));
 		
 		bookPages.appendTag(new NBTTagString("11", 
-				"Grey Mushroom"
+				"Protection Mushroom"
 				+ "\n+ Orange Grey = Lightning"
-				+ "\n+ Blue Grey = Div."
-				+ "\n+ Mund. = Summon"
+				+ "\n+ Blue Grey = Divination"
+				+ "\n+ Mundane = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-				+ "\n+ Mund. = Dis."
-				+ "\n+ Red Orange = Mund."
+				+ "\n+ Mundane = Disruption"
+				+ "\n+ Red Orange = Mundane"
 				+ "\n\nNotes: Makes lightning tablets."));
 		
 		bookPages.appendTag(new NBTTagString("13", 
-				"Mund. Mushroom"
-				+ "\n+ Yellow = Dis."
+				"Mundane Mushroom"
+				+ "\n+ Yellow = Disruption"
 				+ "\n+ Grey = Summon"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("14", 
-				"Dis. Mushroom"
+				"Disruption Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		
 		bookPages.appendTag(new NBTTagString("15", 
-				"Div. Mushroom"
+				"Divination Mushroom"
 				+ "\nNo mates!"
 				+ "\n\nNotes: N/A"));
 		

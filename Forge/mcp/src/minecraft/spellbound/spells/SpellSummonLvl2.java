@@ -27,8 +27,6 @@ public class SpellSummonLvl2 extends AbstractSpell
 			mob.setPosition(caster.posX, caster.posY, caster.posZ);
 			caster.worldObj.spawnEntityInWorld(mob);
 		}
-		
-		//TODO Particles
 	}
 	
 	@Override
@@ -39,8 +37,6 @@ public class SpellSummonLvl2 extends AbstractSpell
 
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

@@ -11,6 +11,8 @@ package spellbound.external;
 
 public class PropertiesList 
 {
+	public boolean doDisableGreaterFireball = false;
+	
 	public int blockID_BlockFalseObsidian = 3568;
 	public int blockID_BlockFalseBedrock = 3569;
 	

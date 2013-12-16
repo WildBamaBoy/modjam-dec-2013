@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 import spellbound.spells.AbstractSurge;
+import spellbound.spells.SpellFireLvl3;
 import spellbound.util.Color;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -99,7 +100,15 @@ public class ItemSpellTablet extends SpellboundItem
 				
 				else
 				{
-					spell.doSpellCasterEffect(entityPlayer);
+					if (spell instanceof SpellFireLvl3 && SpellboundCore.propertiesManager.propertiesList.doDisableGreaterFireball)
+					{
+						SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Spell disabled by administrators.");
+					}
+					
+					else
+					{
+						spell.doSpellCasterEffect(entityPlayer);
+					}
 				}
 			}
 			
