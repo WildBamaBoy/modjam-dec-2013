@@ -21,6 +21,8 @@ public class SpellFlight extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.enderdragon.wings", 1.0F, 1.0F);
+		
 		caster.capabilities.allowFlying = true;
 		caster.fallDistance = 0;
 		caster.motionY += 1.0D;

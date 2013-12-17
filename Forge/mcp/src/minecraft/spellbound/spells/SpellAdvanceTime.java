@@ -21,6 +21,8 @@ public class SpellAdvanceTime extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
+		
 		if (!caster.worldObj.isRemote)
 		{
 			final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.rand.nextInt(5000) + 5000;

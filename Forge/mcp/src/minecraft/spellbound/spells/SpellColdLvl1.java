@@ -37,12 +37,12 @@ public class SpellColdLvl1 extends AbstractSpell
 			{
 				for (int i = 3; i < 10; i++)
 				{				
-					int blockId = caster.worldObj.getBlockId((int)caster.posX, (int)caster.posY, (int)caster.posZ + i);
+					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
 					if (blockId == Block.snow.blockID || blockId == 0)
 					{
 						int radius = 2;
 
-						caster.worldObj.setBlock((int)caster.posX, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
+						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i), Block.snow.blockID);
 
 						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 						{
@@ -69,10 +69,29 @@ public class SpellColdLvl1 extends AbstractSpell
 			{
 				for (int i = 3; i < 10; i++)
 				{				
-					int blockId = caster.worldObj.getBlockId((int)caster.posX - i, (int)caster.posY, (int)caster.posZ);
+					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 					if (blockId == Block.snow.blockID || blockId == 0)
 					{
-						caster.worldObj.setBlock((int)caster.posX - i, (int)caster.posY, (int)caster.posZ, Block.snow.blockID);
+						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.snow.blockID);
+					}
+					
+					int radius = 2;
+					for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - i, (int)caster.posY - 3, (int)caster.posZ - radius, (int)caster.posX - i + radius, (int)caster.posY + 3, (int)caster.posZ + radius)))
+					{
+						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
+						{
+							EntityLivingBase hitEntity = (EntityLivingBase)obj;
+							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+							hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
+						}
+
+						else if (obj instanceof EntityPlayer)
+						{
+							if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+							{							
+								SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
+							}
+						}
 					}
 				}
 			}
@@ -81,10 +100,29 @@ public class SpellColdLvl1 extends AbstractSpell
 			{
 				for (int i = 3; i < 10; i++)
 				{				
-					int blockId = caster.worldObj.getBlockId((int)caster.posX, (int)caster.posY, (int)caster.posZ - i);
+					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
 					if (blockId == Block.snow.blockID || blockId == 0)
 					{
-						caster.worldObj.setBlock((int)caster.posX, (int)caster.posY, (int)caster.posZ - i, Block.snow.blockID);
+						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i), Block.snow.blockID);
+						
+						int radius = 2;
+						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius, (int)caster.posY - 3, (int)caster.posZ - i - radius, (int)caster.posX + radius, (int)caster.posY + 3, (int)caster.posZ - i + radius)))
+						{
+							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
+							{
+								EntityLivingBase hitEntity = (EntityLivingBase)obj;
+								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+								hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
+							}
+
+							else if (obj instanceof EntityPlayer)
+							{
+								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+								{							
+									SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -93,10 +131,29 @@ public class SpellColdLvl1 extends AbstractSpell
 			{
 				for (int i = 3; i < 10; i++)
 				{				
-					int blockId = caster.worldObj.getBlockId((int)caster.posX + i, (int)caster.posY, (int)caster.posZ);
+					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 					if (blockId == Block.snow.blockID || blockId == 0)
 					{
-						caster.worldObj.setBlock((int)caster.posX + i, (int)caster.posY, (int)caster.posZ, Block.snow.blockID);
+						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.snow.blockID);
+						
+						int radius = 2;
+						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX + i - radius, (int)caster.posY - 3, (int)caster.posZ - radius, (int)caster.posX + i + radius, (int)caster.posY + 3, (int)caster.posZ + radius)))
+						{
+							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
+							{
+								EntityLivingBase hitEntity = (EntityLivingBase)obj;
+								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+								hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
+							}
+
+							else if (obj instanceof EntityPlayer)
+							{
+								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+								{							
+									SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
+								}
+							}
+						}
 					}
 				}
 			}

@@ -19,6 +19,7 @@ public class SpellBlink extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "spellbound:shield", 1.0F, 1.0F);
 		caster.addPotionEffect(new PotionEffect(Potion.invisibility.id, 100));
 	}
 	

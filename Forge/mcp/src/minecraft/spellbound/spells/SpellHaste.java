@@ -19,6 +19,7 @@ public class SpellHaste extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.enderdragon.wings", 1.0F, 1.0F);
 		caster.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 1200));
 		caster.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 1200));
 	}

@@ -19,6 +19,7 @@ public class SpellFishForm extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 		caster.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 1200));
 	}
 	

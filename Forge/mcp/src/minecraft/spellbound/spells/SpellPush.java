@@ -21,6 +21,8 @@ public class SpellPush extends AbstractSpell
 	{
 		int radius = 10;
 		
+		caster.worldObj.playSoundAtEntity(caster, "mob.enderdragon.wings", 1.0F, 1.0F);
+		
 		for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - radius, caster.posY - 3, caster.posZ - radius, caster.posX + radius, caster.posY + 3, caster.posZ + radius)))
 		{
 			if (obj instanceof EntityLivingBase)

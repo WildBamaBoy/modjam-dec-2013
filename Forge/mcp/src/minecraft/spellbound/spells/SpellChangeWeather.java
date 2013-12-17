@@ -18,6 +18,8 @@ public class SpellChangeWeather extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
+		
 		if (!caster.worldObj.isRemote)
 		{
 			MinecraftServer.getServer().worldServers[0].toggleRain();

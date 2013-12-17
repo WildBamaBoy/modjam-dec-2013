@@ -27,10 +27,10 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)caster.posX, (int)caster.posY, (int)caster.posZ + i);
+				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
-					caster.worldObj.setBlock((int)caster.posX, (int)caster.posY, (int)caster.posZ + i, Block.fire.blockID);
+					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i), Block.fire.blockID);
 				}
 			}
 		}
@@ -39,10 +39,10 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)caster.posX - i, (int)caster.posY, (int)caster.posZ);
+				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
-					caster.worldObj.setBlock((int)caster.posX - i, (int)caster.posY, (int)caster.posZ, Block.fire.blockID);
+					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
 				}
 			}
 		}
@@ -51,10 +51,10 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)caster.posX, (int)caster.posY, (int)caster.posZ - i);
+				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
-					caster.worldObj.setBlock((int)caster.posX, (int)caster.posY, (int)caster.posZ - i, Block.fire.blockID);
+					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i), Block.fire.blockID);
 				}
 			}
 		}
@@ -63,10 +63,10 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)caster.posX + i, (int)caster.posY, (int)caster.posZ);
+				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
-					caster.worldObj.setBlock((int)caster.posX + i, (int)caster.posY, (int)caster.posZ, Block.fire.blockID);
+					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
 				}
 			}
 		}
