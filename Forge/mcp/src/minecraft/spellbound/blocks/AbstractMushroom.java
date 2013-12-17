@@ -35,14 +35,6 @@ public abstract class AbstractMushroom extends BlockFlower
 	
 	public void updateTick(World world, int x, int y, int z, Random worldRandom)
 	{
-
-	}
-
-	/**
-	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-	 */
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{		
 		MushroomCoordinates nearbyPrimary = Logic.getNearbyMushroomMate(this, world, x, y, z, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
@@ -59,7 +51,13 @@ public abstract class AbstractMushroom extends BlockFlower
 				world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, nearbyPrimary.spawnId);
 			}
 		}
-		
+	}
+
+	/**
+	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+	 */
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{		
 		int blockId = world.getBlockId(x, y - 1, z);
 		return blockId == Block.grass.blockID || blockId == Block.dirt.blockID;
 	}
@@ -71,14 +69,5 @@ public abstract class AbstractMushroom extends BlockFlower
 	protected boolean canThisPlantGrowOnThisBlockID(int blockID)
 	{
 		return Block.opaqueCubeLookup[blockID];
-	}
-
-	/**
-	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
-	 */
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
-		//TODO: THIS
-		return true;
 	}
 }

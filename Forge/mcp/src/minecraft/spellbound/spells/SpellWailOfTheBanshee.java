@@ -17,7 +17,7 @@ public class SpellWailOfTheBanshee extends AbstractSpell
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Wail of the Banshee";
+		return "Wail of the She Wolf";
 	}
 
 	@Override
