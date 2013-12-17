@@ -209,7 +209,6 @@ public class SpellboundCore
 
 	public ItemSpellTablet itemTabletSummonChestFullOfCookies;
 
-	@SideOnly(Side.CLIENT)
 	public int currentEyeIndex = -1;
 
 	@EventHandler

@@ -7,7 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -33,12 +32,12 @@ public class PacketHandler implements IPacketHandler
 
 			else if (packet.channel.equals("SB_GETNEXTEYE"))
 			{
-				handleGetNextEyePacket(packet, player);
+				//handleGetNextEyePacket(packet, player);
 			}
 
 			else if (packet.channel.equals("SB_NEXTEYE"))
 			{
-				handleNextEyePacket(packet, player);
+				//handleNextEyePacket(packet, player);
 			}
 			
 			else if (packet.channel.equals("SB_CHATMESSAGE"))
@@ -128,100 +127,100 @@ public class PacketHandler implements IPacketHandler
 		}
 	}
 
-	private void handleGetNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
-	{
-		EntityPlayer entityPlayer = (EntityPlayer)player;
-
-		byte[] data = packet.data;
-
-		ByteArrayInputStream input = new ByteArrayInputStream(data);
-		ObjectInputStream objectInput = new ObjectInputStream(input);
-
-		int playerId = (Integer)objectInput.readObject();
-		int currentEyeIndex = (Integer)objectInput.readObject();
-
-		List<SpellEntry> spellEntries = SpellboundCore.activeSpells.get(entityPlayer);
-		AbstractSpellScrying nextSpell = null;
-
-		for (int index = currentEyeIndex == -1 ? 0 : currentEyeIndex ; index < spellEntries.size(); index++)
-		{
-			System.out.println("AAA");
-			SpellEntry entry = spellEntries.get(index);
-
-			if (entry.spell instanceof AbstractSpellScrying)
-			{
-				nextSpell = (AbstractSpellScrying)entry.spell;
-			}
-		}
-
-		if (nextSpell == null)
-		{
-			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(-1), player);
-		}
-
-		else
-		{
-			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(nextSpell.eye.entityId), player);
-		}
-	}
-
-	public static Packet250CustomPayload createNextEyePacket(int eyeEntityId)
-	{
-		try
-		{
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			ObjectOutputStream objOut = new ObjectOutputStream(out);
-
-			Packet250CustomPayload packet = new Packet250CustomPayload();
-			packet.channel = "SB_NEXTEYE";
-
-			objOut.writeObject(eyeEntityId);
-
-			packet.data = out.toByteArray();
-			packet.length = packet.data.length;
-
-			return packet;
-		}
-
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	private void handleNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
-	{
-		EntityPlayer entityPlayer = (EntityPlayer)player;
-
-		byte[] data = packet.data;
-
-		ByteArrayInputStream input = new ByteArrayInputStream(data);
-		ObjectInputStream objectInput = new ObjectInputStream(input);
-
-		int nextEyeId = (Integer)objectInput.readObject();
-
-		if (nextEyeId == -1)
-		{
-			System.out.println("PLAYER!");
-			Minecraft.getMinecraft().renderViewEntity = Minecraft.getMinecraft().thePlayer;
-		}
-
-		else
-		{
-			Entity entity = entityPlayer.worldObj.getEntityByID(nextEyeId);
-
-			if (entity != null)
-			{
-				Minecraft.getMinecraft().renderViewEntity = (EntityLivingBase) (entity);
-			}
-
-			else
-			{
-				System.out.println("Next eye could not be found.");
-			}
-		}
-	}
+//	private void handleGetNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+//	{
+//		EntityPlayer entityPlayer = (EntityPlayer)player;
+//
+//		byte[] data = packet.data;
+//
+//		ByteArrayInputStream input = new ByteArrayInputStream(data);
+//		ObjectInputStream objectInput = new ObjectInputStream(input);
+//
+//		int playerId = (Integer)objectInput.readObject();
+//		int currentEyeIndex = (Integer)objectInput.readObject();
+//
+//		List<SpellEntry> spellEntries = SpellboundCore.activeSpells.get(entityPlayer);
+//		AbstractSpellScrying nextSpell = null;
+//
+//		for (int index = currentEyeIndex == -1 ? 0 : currentEyeIndex ; index < spellEntries.size(); index++)
+//		{
+//			System.out.println("AAA");
+//			SpellEntry entry = spellEntries.get(index);
+//
+//			if (entry.spell instanceof AbstractSpellScrying)
+//			{
+//				nextSpell = (AbstractSpellScrying)entry.spell;
+//			}
+//		}
+//
+//		if (nextSpell == null)
+//		{
+//			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(-1), player);
+//		}
+//
+//		else
+//		{
+//			PacketDispatcher.sendPacketToPlayer(createNextEyePacket(nextSpell.eye.entityId), player);
+//		}
+//	}
+//
+//	public static Packet250CustomPayload createNextEyePacket(int eyeEntityId)
+//	{
+//		try
+//		{
+//			ByteArrayOutputStream out = new ByteArrayOutputStream();
+//			ObjectOutputStream objOut = new ObjectOutputStream(out);
+//
+//			Packet250CustomPayload packet = new Packet250CustomPayload();
+//			packet.channel = "SB_NEXTEYE";
+//
+//			objOut.writeObject(eyeEntityId);
+//
+//			packet.data = out.toByteArray();
+//			packet.length = packet.data.length;
+//
+//			return packet;
+//		}
+//
+//		catch (IOException e)
+//		{
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+//
+//	private void handleNextEyePacket(Packet250CustomPayload packet, Player player) throws IOException, ClassNotFoundException
+//	{
+//		EntityPlayer entityPlayer = (EntityPlayer)player;
+//
+//		byte[] data = packet.data;
+//
+//		ByteArrayInputStream input = new ByteArrayInputStream(data);
+//		ObjectInputStream objectInput = new ObjectInputStream(input);
+//
+//		int nextEyeId = (Integer)objectInput.readObject();
+//
+//		if (nextEyeId == -1)
+//		{
+//			System.out.println("PLAYER!");
+//			Minecraft.getMinecraft().renderViewEntity = Minecraft.getMinecraft().thePlayer;
+//		}
+//
+//		else
+//		{
+//			Entity entity = entityPlayer.worldObj.getEntityByID(nextEyeId);
+//
+//			if (entity != null)
+//			{
+//				net.minecraft.client.Minecraft.getMinecraft().renderViewEntity = (EntityLivingBase) (entity);
+//			}
+//
+//			else
+//			{
+//				System.out.println("Next eye could not be found.");
+//			}
+//		}
+//	}
 	
 	public static Packet250CustomPayload createChatMessagePacket(String message)
 	{

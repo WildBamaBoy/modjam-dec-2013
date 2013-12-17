@@ -1,10 +1,10 @@
 package spellbound.core;
 
+import net.minecraft.block.Block;
 import spellbound.spells.AbstractSurge;
 import spellbound.spells.SurgeBackfire;
 import spellbound.spells.SurgeCow;
 import spellbound.spells.SurgeRiches;
-import net.minecraft.block.Block;
 
 public final class Constants 
 {

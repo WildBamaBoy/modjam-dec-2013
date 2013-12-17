@@ -1,10 +1,9 @@
 package spellbound.spells;
 
-import spellbound.core.SpellboundCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import spellbound.core.SpellboundCore;
 
 public class SurgeRiches extends AbstractSurge
 {
