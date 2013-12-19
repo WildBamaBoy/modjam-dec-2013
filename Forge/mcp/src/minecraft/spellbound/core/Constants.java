@@ -25,6 +25,7 @@ public final class Constants
 		new SurgeBackfire(),
 		new SurgeCow()
 			};
+	
 	public static final int[] CROP_IDS = new int[]
 			{
 		Block.crops.blockID, 
@@ -42,8 +43,6 @@ public final class Constants
 		Block.stone.blockID, 
 		Block.cobblestone.blockID
 			};
-
-	public static final int RAD_ADVANCETIME = 25;
 	
 	//Colors & formatting
 	private static final char SECTION_SIGN = '§';

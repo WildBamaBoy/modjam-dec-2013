@@ -39,7 +39,7 @@ public class SpellAdvanceTime extends AbstractSpell
 
 			for (final int cropID : Constants.CROP_IDS)
 			{
-				for (final Point3D point : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, Constants.RAD_ADVANCETIME, cropID))
+				for (final Point3D point : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, cropID))
 				{
 					caster.worldObj.setBlockMetadataWithNotify(point.posX, point.posY, point.posZ, 7, 2);
 				}
