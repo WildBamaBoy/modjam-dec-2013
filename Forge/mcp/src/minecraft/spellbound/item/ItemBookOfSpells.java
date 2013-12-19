@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ItemBookOfSpells extends ItemEditableBook
@@ -259,7 +260,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - B -   T = Lght. Tab.\n\n"
 						+ "Protects from lightning spells."));
 
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n   Ultimate Spells\n"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n     Ultimate Spells\n"));
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Wail of the She Wolf\n\n"
@@ -295,6 +296,39 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "     R = Redstone \n"
 						+ "     S = Surge Shld.\n"
 						+ "\nNo offensive spells can affect you, even those that disable shields."));
+		return bookTagList;
+	}
+	
+	private NBTTagList putSummonRecipes(NBTTagList bookTagList)
+	{
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n   Summoning Spells\n"));
+
+		bookTagList.appendTag(new NBTTagString("25",
+				"Summon Wolf (Lvl1)\n\n"
+						+ "  B M B   B = Bone\n"
+						+ "  - T -   M = Raw Pork\n"
+						+ "  - - -   T = Sum. Tab.\n"
+						+ "\n"
+						+ "\nAn angry wolf appears at your location."));
+
+		bookTagList.appendTag(new NBTTagString("25",
+				"Summon Mob (Lvl2)\n\n"
+						+ "  A O A   A = Arrow\n"
+						+ "  B T B   O = Bow\n"
+						+ "  F F F   B = Bone\n"
+						+ "     F = Rot. Flesh\n"
+						+ "     T = Lvl1 Summ.\n"
+						+ "\nA zombie or skeleton appears at your location."));
+
+		bookTagList.appendTag(new NBTTagString("25",
+				"Summon Wither Skeleton\n\n"
+						+ "  B S B  S = Wthr. Skull\n"
+						+ "  B T B  T = Lvl2 Summ.\n"
+						+ "  B B B  B = Bone\n"
+						+ "     R = Redstone \n"
+						+ "     L = Lava\n"
+						+ "\nA wither skeleton appears at your location."));
+		
 		return bookTagList;
 	}
 	
@@ -355,7 +389,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  O O O   O = Obsidian\n"
 						+ "  O T O   T = Lvl1 Div.\n"
 						+ "  O F O   F = Flnt/Stl.\n"
-						+ "\n\nYou create a Nether portal and step inside, only to appear out of the other side a several hundred blocks away."));
+						+ "\n\nYou create a Nether portal and step inside, only to appear out of the other side several hundred blocks away."));
 		return bookTagList;
 	}
 	
@@ -459,6 +493,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 		bookTagList = putMushroomInformation(bookTagList);
 		bookTagList = putSpellBasics(bookTagList);
 		bookTagList = putElementalRecipes(bookTagList);
+		bookTagList = putSummonRecipes(bookTagList);
 		bookTagList = putProtectionRecipes(bookTagList);
 		bookTagList = putDivinationRecipes(bookTagList);
 		bookTagList = putMundaneRecipes(bookTagList);
