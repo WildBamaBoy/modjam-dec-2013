@@ -24,4 +24,10 @@ public class EntityTargetSpellFire extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle() 
+	{
+		return "flame";
+	}
 }

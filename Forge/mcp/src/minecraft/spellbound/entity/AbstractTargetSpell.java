@@ -23,6 +23,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -72,6 +73,8 @@ public abstract class AbstractTargetSpell extends Entity
 		this.motionZ = accelerationZ;
 	}
 
+	protected abstract String getDisplayParticle();
+	
 	protected void onImpact(MovingObjectPosition pos) 
 	{
 		if (!worldObj.isRemote)
@@ -247,7 +250,19 @@ public abstract class AbstractTargetSpell extends Entity
 			this.motionX *= (double)f2;
 			this.motionY *= (double)f2;
 			this.motionZ *= (double)f2;
-			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+			
+			if (this.worldObj.isRemote)
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+					double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+					double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+					
+					this.worldObj.spawnParticle(getDisplayParticle(), this.posX + SpellboundCore.modRandom.nextFloat(), this.posY + SpellboundCore.modRandom.nextFloat(), this.posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
+				}
+			}
+			
 			this.setPosition(this.posX, this.posY, this.posZ);
 		}
 	}

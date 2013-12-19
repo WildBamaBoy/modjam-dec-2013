@@ -24,4 +24,10 @@ public class EntityTargetSpellLightning extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle() 
+	{
+		return "smoke";
+	}
 }

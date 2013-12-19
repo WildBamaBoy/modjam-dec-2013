@@ -24,4 +24,10 @@ public class EntityTargetSpellMundane extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle() 
+	{
+		return "explode";
+	}
 }

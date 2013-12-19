@@ -24,4 +24,10 @@ public class EntityTargetSpellDivination extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle()
+	{
+		return "portal";
+	}
 }

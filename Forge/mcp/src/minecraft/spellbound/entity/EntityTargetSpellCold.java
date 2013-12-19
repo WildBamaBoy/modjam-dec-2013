@@ -24,4 +24,10 @@ public class EntityTargetSpellCold extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle() 
+	{
+		return "snowballpoof";
+	}
 }

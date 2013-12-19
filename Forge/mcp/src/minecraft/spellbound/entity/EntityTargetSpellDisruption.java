@@ -24,4 +24,10 @@ public class EntityTargetSpellDisruption extends AbstractTargetSpell
 	{
 		super(player, spell);
 	}
+
+	@Override
+	protected String getDisplayParticle() 
+	{
+		return "largeexplode";
+	}
 }
