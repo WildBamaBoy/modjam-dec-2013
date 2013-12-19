@@ -66,7 +66,7 @@ public final class Constants
 
 	public static final String FORMAT_OBFUSCATED = SECTION_SIGN + "k";
 	public static final String FORMAT_BOLD = SECTION_SIGN + "l";
-	public static final String FORMAT_STRIKETHROUGH = SECTION_SIGN + "m";
+	public static final String FORMAT_STRIKE = SECTION_SIGN + "m";
 	public static final String FORMAT_UNDERLINE = SECTION_SIGN + "n";
 	public static final String FORMAT_ITALIC = SECTION_SIGN + "o";
 	public static final String FORMAT_RESET = SECTION_SIGN + "r";

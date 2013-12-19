@@ -52,8 +52,13 @@ public class PacketHandler implements IPacketHandler
 				handleWallParticlesPacket(packet, entityPlayer);
 			}
 		}
-
-		catch (Exception exception)
+		
+		catch (ClassNotFoundException exception)
+		{
+			exception.printStackTrace();
+		}
+		
+		catch (IOException exception)
 		{
 			exception.printStackTrace();
 		}

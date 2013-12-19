@@ -9,14 +9,14 @@
 
 package spellbound.core.util;
 
-public class PointBlock3D 
+public class Point3DBlock 
 {
 	public int posX;
 	public int posY;
 	public int posZ;
 	public int blockId;
 	
-	public PointBlock3D(int posX, int posY, int posZ, int blockId)
+	public Point3DBlock(int posX, int posY, int posZ, int blockId)
 	{
 		this.posX = posX;
 		this.posY = posY;

@@ -18,7 +18,7 @@ import spellbound.blocks.AbstractMushroom;
 
 public final class Logic 
 {
-	public static PointBlock3D getNearbyMushroomMate(AbstractMushroom mushroom, World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int[] searchIds)
+	public static Point3DBlock getNearbyMushroomMate(AbstractMushroom mushroom, World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int[] searchIds)
 	{
 		int movementX = 0 - maxDistanceAway;
 		int movementY = 1;
@@ -35,7 +35,7 @@ public final class Logic
 			{
 				if (blockId == foundId && worldObj.getBlockId(pointX, pointY + 1, pointZ) == 0)
 				{
-					return new PointBlock3D(pointX, pointY + 1, pointZ, mushroom.getOffspringId(foundId));
+					return new Point3DBlock(pointX, pointY + 1, pointZ, mushroom.getOffspringId(foundId));
 				}
 			}
 
@@ -66,7 +66,7 @@ public final class Logic
 		}
 	}
 
-	public static PointBlock3D getNearbyMushroomSpawn(World worldObj, int startX, int startY, int startZ, int maxDistanceAway)
+	public static Point3DBlock getNearbyMushroomSpawn(World worldObj, int startX, int startY, int startZ, int maxDistanceAway)
 	{
 		int movementX = 0 - maxDistanceAway;
 		int movementY = 1;
@@ -81,7 +81,7 @@ public final class Logic
 
 			if ((blockId == Block.grass.blockID || blockId == Block.dirt.blockID) && worldObj.getBlockId(pointX, pointY + 1, pointZ) == 0)
 			{
-				return new PointBlock3D(pointX, pointY + 1, pointZ, blockId);
+				return new Point3DBlock(pointX, pointY + 1, pointZ, blockId);
 			}
 
 			if (movementX == maxDistanceAway && movementZ == maxDistanceAway && movementY == -1)

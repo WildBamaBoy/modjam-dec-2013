@@ -16,7 +16,7 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.core.util.Logic;
-import spellbound.core.util.PointBlock3D;
+import spellbound.core.util.Point3DBlock;
 import spellbound.spells.AbstractSpell;
 
 public abstract class AbstractMushroom extends BlockFlower
@@ -45,12 +45,12 @@ public abstract class AbstractMushroom extends BlockFlower
 	@Override
 	public void updateTick(World world, int posX, int posY, int posZ, Random random)
 	{
-		final PointBlock3D nearbyPrimary = Logic.getNearbyMushroomMate(this, world, posX, posY, posZ, 1, this.getMateIds());
+		final Point3DBlock nearbyPrimary = Logic.getNearbyMushroomMate(this, world, posX, posY, posZ, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
 		{
 			//Try to get a spawn near the primary first.
-			PointBlock3D hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.posX, nearbyPrimary.posY, nearbyPrimary.posZ, 1);
+			Point3DBlock hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.posX, nearbyPrimary.posY, nearbyPrimary.posZ, 1);
 			
 			//Check to see if it succeeded.
 			if (hybridSpawn == null)

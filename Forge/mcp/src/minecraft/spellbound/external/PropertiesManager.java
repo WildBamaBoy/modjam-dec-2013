@@ -22,10 +22,10 @@ import spellbound.core.SpellboundCore;
 public class PropertiesManager 
 {
 	public PropertiesList propertiesList = new PropertiesList();
-
 	public File propertiesFile;
 	public File storageFolder;
-	private Properties properties;
+
+	private final Properties properties;
 
 	public PropertiesManager()
 	{
