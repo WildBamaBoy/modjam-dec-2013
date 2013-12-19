@@ -14,8 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
-import spellbound.core.util.Point3D;
 import spellbound.core.util.Logic;
+import spellbound.core.util.Point3D;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
