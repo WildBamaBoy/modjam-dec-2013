@@ -11,6 +11,7 @@ package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellFire;
@@ -44,26 +45,26 @@ public class SpellFireLvl3 extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		//TODO Check
 		if (entityHit == null)
+		{
+			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+		}
+
+		else
 		{
 			if (entityHit instanceof EntityPlayer)
 			{
 				if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellFireShield.class))
-				{							
-					worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+				{
+					worldObj.createExplosion(entityHit, (double)posX, (double)posY, (double)posZ, 8.0F, true);
 				}
 			}
 
 			else
 			{
-				worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+				entityHit.attackEntityFrom(DamageSource.magic, 20.0F);
+				worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, true);
 			}
-		}
-
-		else
-		{
-			worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, true);
 		}
 	}
 
