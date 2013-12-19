@@ -35,7 +35,7 @@ public class SpellDimensionDoor extends AbstractSpell
 		if (!caster.worldObj.isRemote)
 		{
 			final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			final int transportAmount = SpellboundCore.modRandom.nextInt(150) + 50;
+			final int transportAmount = SpellboundCore.modRandom.nextInt(200) + 100;
 
 			double newPlayerX = 0.0D;
 			double newPlayerY = 0.0D;
