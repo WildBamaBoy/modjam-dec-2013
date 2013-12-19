@@ -428,7 +428,7 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl2), 
 				"AOA", "BTB", "FFF", 'A', Item.arrow, 'O', Item.bow, 'B', Item.bone, 'T', itemTabletSummonLvl1, 'F', Item.rottenFlesh);
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl3),
-				"SOA", " T ", "HCL", 'S', Item.swordIron, 'O', Item.bow, 'A', Item.arrow, 'T', itemTabletSummonLvl2, 'H', Item.helmetIron, 'C', Item.plateIron, 'L', Item.legsIron);
+				"BSB", "BTB", "BBB", 'B', Item.bone, 'S', new ItemStack(Item.skull, 1, 1), 'T', itemTabletSummonLvl2);
 
 		//Protection
 		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfStone), 
