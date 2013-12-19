@@ -9,10 +9,13 @@
 
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumSpellRange;
 
 public abstract class AbstractSpellWall extends AbstractSpell
@@ -43,16 +46,25 @@ public abstract class AbstractSpellWall extends AbstractSpell
 			wallCenterY = MathHelper.floor_double(wallCenterY);
 			wallCenterZ = MathHelper.floor_double(wallCenterZ);
 
+			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, wallCenterX, wallCenterY, wallCenterZ));
 			for (int currentWidth = -3; currentWidth < 4; currentWidth++)
 			{
 				for (int currentHeight = 0; currentHeight < 3; currentHeight++)
 				{
 					switch (heading)
 					{
-					case 0: caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); break;
-					case 1: caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); break;
-					case 2: caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); break;
-					case 3: caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId()); break;
+					case 0: 
+						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId());
+						break;
+					case 1: 
+						caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); 
+						break;
+					case 2: 
+						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); 
+						break;
+					case 3: 
+						caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId());
+						break;
 					default: break;
 					}
 				}
@@ -73,4 +85,16 @@ public abstract class AbstractSpellWall extends AbstractSpell
 	}
 
 	public abstract int getWallBlockId();
+	
+	public static void addParticles(World world, double posX, double posY, double posZ)
+	{
+		double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+		double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+		double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+		
+		for (int i = 0; i < 6; i++)
+		{
+			world.spawnParticle("happyVillager", posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
+		}
+	}
 }

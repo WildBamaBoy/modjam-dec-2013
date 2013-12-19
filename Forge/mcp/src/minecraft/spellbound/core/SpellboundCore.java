@@ -103,7 +103,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"SB_LIGHTNING", "SB_CHATMESSAGE", "SB_FLIGHT"}, packetHandler = PacketHandler.class)
+channels={"SB_LIGHTNING", "SB_CHATMESSAGE", "SB_FLIGHT", "SB_WALLPARTICLES"}, packetHandler = PacketHandler.class)
 public class SpellboundCore
 {
 	@Instance("spellbound")
