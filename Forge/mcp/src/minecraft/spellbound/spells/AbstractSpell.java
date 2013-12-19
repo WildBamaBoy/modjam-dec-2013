@@ -54,7 +54,6 @@ public abstract class AbstractSpell
 		{
 			if (chanceOfSurge == 1 && SpellboundCore.modRandom.nextBoolean())
 			{
-				//Save
 				return null;
 			}
 			
