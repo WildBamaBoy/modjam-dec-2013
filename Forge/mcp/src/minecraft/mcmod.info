@@ -1,0 +1,13 @@
+[{
+  "modid": "spellbound",
+  "name": "Spellbound",
+  "description": "Adds over 40 different spells to the game, ranging from combat spells, to teleportation, and even time control!",
+  "version": "1.0.0",
+  "credits": "",
+  "logoFile" : "spellbound.png",
+  "mcversion": "1.6.4",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "WildBamaBoy", "SheWolfDeadly" ],
+  "dependencies": ["mod_MinecraftForge"]
+}]

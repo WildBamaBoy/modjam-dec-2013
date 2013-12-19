@@ -11,7 +11,7 @@ Forge/mcp/src/minecraft/forge_logo.png
 Forge/mcp/src/minecraft/Start.java
 
 #############
-## Ignore Folders
+## Ignore Items
 #############
 Forge/*.*
 Forge/mcp/CHANGELOG
@@ -34,3 +34,8 @@ Forge/mcp/src/minecraft/ibxm/*
 Forge/mcp/src/minecraft/net/*
 Forge/mcp/src/minecraft/paulscode/*
 Forge/mcp/temp/*
+
+#############
+## NotIgnore Items
+#############
+!Forge/mcp/src/minecraft/mcmod.info
