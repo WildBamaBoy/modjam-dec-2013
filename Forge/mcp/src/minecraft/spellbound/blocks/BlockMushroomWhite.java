@@ -1,3 +1,12 @@
+/**********************************************
+ * BlockMushroomWhite.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.blocks;
 
 import spellbound.core.SpellboundCore;
@@ -33,17 +42,17 @@ public class BlockMushroomWhite extends AbstractMushroom
 	{
 		return new int[]
 				{
-				SpellboundCore.instance.blockHybridMushroomBlack.blockID,
-				SpellboundCore.instance.blockHybridMushroomOrange.blockID,
-				SpellboundCore.instance.blockHybridMushroomWhite.blockID,
-				SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
-				SpellboundCore.instance.blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
-				SpellboundCore.instance.blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
-				SpellboundCore.instance.blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
-				SpellboundCore.instance.blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
-				SpellboundCore.instance.blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
-				SpellboundCore.instance.blockHybridMushroomBlack.blockID, //Blue Grey + Grey //2nd level
-				SpellboundCore.instance.blockHybridMushroomPurple.blockID
+				SpellboundCore.getInstance().blockHybridMushroomBlack.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomOrange.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomWhite.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
+				SpellboundCore.getInstance().blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
+				SpellboundCore.getInstance().blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
+				SpellboundCore.getInstance().blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
+				SpellboundCore.getInstance().blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
+				SpellboundCore.getInstance().blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
+				SpellboundCore.getInstance().blockHybridMushroomBlack.blockID, //Blue Grey + Grey //2nd level
+				SpellboundCore.getInstance().blockHybridMushroomPurple.blockID
 				};
 	}
 

@@ -1,6 +1,6 @@
 /**********************************************
- * SB.java
- * Copyright (c) 2013 MCA Dev Team.
+ * SpellboundCore.java
+ * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -36,7 +36,9 @@ import spellbound.blocks.BlockMushroomRainbow;
 import spellbound.blocks.BlockMushroomRedOrange;
 import spellbound.blocks.BlockMushroomWhite;
 import spellbound.blocks.BlockMushroomYellow;
-import spellbound.entity.EntityAllSeeingEye;
+import spellbound.core.forge.CommonProxy;
+import spellbound.core.forge.PacketHandler;
+import spellbound.core.util.SpellEntry;
 import spellbound.entity.EntityTargetSpellCold;
 import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.entity.EntityTargetSpellDivination;
@@ -83,7 +85,7 @@ import spellbound.spells.SpellSummonLvl2;
 import spellbound.spells.SpellSummonLvl3;
 import spellbound.spells.SpellSurgeShield;
 import spellbound.spells.SpellTransport;
-import spellbound.spells.SpellWailOfTheBanshee;
+import spellbound.spells.SpellWailOfTheSheWolf;
 import spellbound.spells.SpellWallOfBedrock;
 import spellbound.spells.SpellWallOfObsidian;
 import spellbound.spells.SpellWallOfStone;
@@ -98,53 +100,49 @@ import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-channels={"SB_LIGHTNING", "SB_GETNEXTEYE", "SB_NEXTEYE", "SB_DISMISSEYE", "SB_CHATMESSAGE", "SB_FLIGHT"},
-packetHandler = PacketHandler.class)
-public class SpellboundCore 
+channels={"SB_LIGHTNING", "SB_CHATMESSAGE", "SB_FLIGHT"}, packetHandler = PacketHandler.class)
+public class SpellboundCore
 {
-	@Instance("Spellbound")
-	public static SpellboundCore instance;
+	@Instance("spellbound")
+	private static SpellboundCore instance;
 
-	@SidedProxy(clientSide="spellbound.core.ClientProxy", serverSide="spellbound.core.CommonProxy")
+	@SidedProxy(clientSide="spellbound.core.forge.ClientProxy", serverSide="spellbound.core.forge.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Map<EntityPlayer, List<SpellEntry>> activeSpells = new LinkedHashMap<EntityPlayer, List<SpellEntry>>();
-
-	public static Random rand = new Random();
-	public static PropertiesManager propertiesManager;
-	public static String runningDirectory;
-
-	//	public static KeyBindHandler keyBindHandler;
-	//	public static KeyBinding keyNextEye;
-	//	public static KeyBinding keyPreviousEye;
-	//	public static KeyBinding keyDismissEye;
+	public static Random modRandom = new Random();
 
 	public CreativeTabs spellboundTab;
+	public PropertiesManager propertiesManager;
+	public String runningDirectory;
 
+	private final Map<EntityPlayer, List<SpellEntry>> activeSpells = new LinkedHashMap<EntityPlayer, List<SpellEntry>>();
+
+	//False blocks
 	public Block blockFalseObsidian;
 	public Block blockFalseBedrock;
 
+	//Mushrooms
 	public Block blockPrimaryMushroomRedOrange;
 	public Block blockPrimaryMushroomPinkOrange;
 	public Block blockPrimaryMushroomBlueGrey;
-
 	public Block blockHybridMushroomOrange;
 	public Block blockHybridMushroomWhite;
-	public Block blockHybridMushroomOrangeGrey; //Orange + BlueGrey
-	public Block blockHybridMushroomLightBlue; //GreyOrange + BlueGrey //COLD!
-	public Block blockHybridMushroomGrey; //GreyOrange + BlueGrey >>>Also
-	public Block blockHybridMushroomYellow; //OrangeGrey + Grey //LIGHTNING!
-	public Block blockHybridMushroomRainbow; //Red Orange + Yellow //RANDOM! //2nd LEVEL
-	public Block blockHybridMushroomGold; //Rainbow + Yellow //2nd level
-	public Block blockHybridMushroomBlack; //Blue Grey + Grey //2nd level
+	public Block blockHybridMushroomOrangeGrey;
+	public Block blockHybridMushroomLightBlue;
+	public Block blockHybridMushroomGrey;
+	public Block blockHybridMushroomYellow;
+	public Block blockHybridMushroomRainbow;
+	public Block blockHybridMushroomGold;
+	public Block blockHybridMushroomBlack;
 	public Block blockHybridMushroomPurple;
 	
+	//Book of Spells
 	public Item itemBookOfSpells;
+	
+	//Base
 	public Item itemTabletBase;
 	public Item itemTabletFireBase;
 	public Item itemTabletColdBase;
@@ -155,61 +153,61 @@ public class SpellboundCore
 	public Item itemTabletMundaneBase;
 	public Item itemTabletDisruptionBase;
 
+	//Offensive
 	public ItemSpellTablet itemTabletFireLvl1;
-	public ItemSpellTablet itemTabletColdLvl1;
-	public ItemSpellTablet itemTabletLightningLvl1;
-
 	public ItemSpellTablet itemTabletFireLvl2;
-	public ItemSpellTablet itemTabletColdLvl2;
-	public ItemSpellTablet itemTabletLightningLvl2;
-
 	public ItemSpellTablet itemTabletFireLvl3;
+	public ItemSpellTablet itemTabletColdLvl1;
+	public ItemSpellTablet itemTabletColdLvl2;
 	public ItemSpellTablet itemTabletColdLvl3;
+	public ItemSpellTablet itemTabletLightningLvl1;
+	public ItemSpellTablet itemTabletLightningLvl2;
 	public ItemSpellTablet itemTabletLightningLvl3;
 
+	//Summons
 	public ItemSpellTablet itemTabletSummonLvl1;
 	public ItemSpellTablet itemTabletSummonLvl2;
 	public ItemSpellTablet itemTabletSummonLvl3;
 
-	public ItemSpellTablet itemTabletUltWailOfTheBanshee;
-	public ItemSpellTablet itemTabletUltElementalFury;
-	public ItemSpellTablet itemTabletUltDisintegrate;
+	//Ultimate
+	public ItemSpellTablet itemTabletWailOfTheSheWolf;
+	public ItemSpellTablet itemTabletElementalFury;
+	public ItemSpellTablet itemTabletDisintegrate;
 
+	//Shields
 	public ItemSpellTablet itemTabletFireShield;
-	public ItemSpellTablet itemTabletIceShield;
+	public ItemSpellTablet itemTabletColdShield;
 	public ItemSpellTablet itemTabletLightningShield;
 	public ItemSpellTablet itemTabletSurgeShield;
 	public ItemSpellTablet itemTabletShieldOfInvulnerability;
 
+	//Protection
 	public ItemSpellTablet itemTabletWallOfStone;
 	public ItemSpellTablet itemTabletWallOfObsidian;
 	public ItemSpellTablet itemTabletWallOfBedrock;
-
 	public ItemSpellTablet itemTabletPush;
 	public ItemSpellTablet itemTabletColorSpray;
-	public ItemSpellTablet itemTabletGrease;
 	public ItemSpellTablet itemTabletBlink;
 
+	//Divination
 	public ItemSpellTablet itemTabletTransport;
 	public ItemSpellTablet itemTabletDimensionDoor;
 
+	//Mundane
 	public ItemSpellTablet itemTabletHaste;
+	public ItemSpellTablet itemTabletGrease;
 	public ItemSpellTablet itemTabletAdvanceTime;
 	public ItemSpellTablet itemTabletChangeWeather;
 	public ItemSpellTablet itemTabletFlight;
 	public ItemSpellTablet itemTabletFishForm;
 
-	//public ItemSpellTablet itemTabletMinorScrying;
-	//public ItemSpellTablet itemTabletGreaterScrying;
-	//public ItemSpellTablet itemTabletAllSeeingEye;
-
+	//Disruption
 	public ItemSpellTablet itemTabletBreach;
 	public ItemSpellTablet itemTabletMiscastMagic;
 	public ItemSpellTablet itemTabletChaos;
 
+	//Misc
 	public ItemSpellTablet itemTabletSummonChestFullOfCookies;
-
-	public int currentEyeIndex = -1;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -229,10 +227,7 @@ public class SpellboundCore
 		
 		proxy.registerRenderers();
 
-		GameRegistry.registerCraftingHandler(new CraftingHandler());
 		GameRegistry.registerWorldGenerator(new WorldGenMushrooms());
-
-		EntityRegistry.registerModEntity(EntityAllSeeingEye.class, EntityAllSeeingEye.class.getSimpleName(), 8, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellFire.class, EntityTargetSpellFire.class.getSimpleName(), 9, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellCold.class, EntityTargetSpellCold.class.getSimpleName(), 10, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellLightning.class, EntityTargetSpellLightning.class.getSimpleName(), 11, this, 50, 2, true);
@@ -240,20 +235,6 @@ public class SpellboundCore
 		EntityRegistry.registerModEntity(EntityTargetSpellDivination.class, EntityTargetSpellDivination.class.getSimpleName(), 13, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellMundane.class, EntityTargetSpellMundane.class.getSimpleName(), 14, this, 50, 2, true);
 	}
-
-	//	@EventHandler
-	//	public void init(FMLInitializationEvent event)
-	//	{
-	//		KeyBinding[] keys = new KeyBinding[]
-	//				{
-	//				keyNextEye = new KeyBinding("Spellbound - Next Eye", Keyboard.KEY_ADD),
-	//						keyPreviousEye = new KeyBinding("Spellbound - Previous Eye", Keyboard.KEY_SUBTRACT),
-	//						keyDismissEye = new KeyBinding("Spellbound - Dismiss Eye", Keyboard.KEY_L)
-	//				};
-	//
-	//		keyBindHandler = new KeyBindHandler(keys);
-	//		KeyBindingRegistry.registerKeyBinding(keyBindHandler);
-	//	}
 
 	private void registerCreativeTab()
 	{
@@ -271,10 +252,11 @@ public class SpellboundCore
 
 	private void registerItems()
 	{
+		//Book of Spells
 		itemBookOfSpells = new ItemBookOfSpells(propertiesManager.propertiesList.itemID_BookOfSpells);
 		
+		//Base
 		itemTabletBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletBase, "tabletbase", "Blank Tablet");
-
 		itemTabletFireBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletFireBase, "tabletfirebase", "Fire Tablet");
 		itemTabletColdBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletColdBase, "tabletcoldbase", "Cold Tablet");
 		itemTabletLightningBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletLightningBase, "tabletlightningbase", "Lightning Tablet");
@@ -283,6 +265,7 @@ public class SpellboundCore
 		itemTabletMundaneBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletMundaneBase, "tabletmundanebase", "Mundane Tablet");
 		itemTabletDisruptionBase = new SpellboundItem(propertiesManager.propertiesList.itemID_TabletDisruptionBase, "tabletdisruptionbase", "Disruption Tablet");
 
+		//Offensive
 		itemTabletFireLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl1, "tabletfirelvl1", new SpellFireLvl1(), 1);
 		itemTabletColdLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl1, "tabletcoldlvl1", new SpellColdLvl1(), 1);
 		itemTabletLightningLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl1, "tabletlightninglvl1", new SpellLightningLvl1(), 1);
@@ -292,17 +275,25 @@ public class SpellboundCore
 		itemTabletFireLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireLvl3, "tabletfirelvl3", new SpellFireLvl3(), 3);
 		itemTabletColdLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColdLvl3, "tabletcoldlvl3", new SpellColdLvl3(), 3);
 		itemTabletLightningLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningLvl3, "tabletlightninglvl3", new SpellLightningLvl3(), 3);
-		itemTabletUltWailOfTheBanshee = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateWailOfTheBanshee, "tabletwailofthebanshee", new SpellWailOfTheBanshee(), 4);
-		itemTabletUltElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateElementalFury, "tabletelementalfury", new SpellElementalFury(), 4);
-		itemTabletUltDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletUltimateDisintegrate, "tabletdisintegrate", new SpellDisintegrate(), 4);
+		
+		//Ultimate
+		itemTabletWailOfTheSheWolf = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWailOfTheSheWolf, "tabletwailoftheshewolf", new SpellWailOfTheSheWolf(), 4);
+		itemTabletElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletElementalFury, "tabletelementalfury", new SpellElementalFury(), 4);
+		itemTabletDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDisintegrate, "tabletdisintegrate", new SpellDisintegrate(), 4);
+		
+		//Summons
 		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl1, "tabletsummonlvl1", new SpellSummonLvl1(), 1);
 		itemTabletSummonLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl2, "tabletsummonlvl2", new SpellSummonLvl2(), 2);
 		itemTabletSummonLvl3 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl3, "tabletsummonlvl3", new SpellSummonLvl3(), 3);
+		
+		//Shields
 		itemTabletFireShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFireShield, "tabletfireshield", new SpellFireShield(), 1);
-		itemTabletIceShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletIceShield, "tableticeshield", new SpellColdShield(), 1);
+		itemTabletColdShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletIceShield, "tableticeshield", new SpellColdShield(), 1);
 		itemTabletLightningShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletLightningShield, "tabletlightningshield", new SpellLightningShield(), 1);
 		itemTabletSurgeShield = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSurgeShield, "tabletsurgeshield", new SpellSurgeShield(), 1);
 		itemTabletShieldOfInvulnerability = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletShieldOfInvulnerability, "tabletshieldofinvulnerability", new SpellShieldOfInvulnerability(), 4);
+		
+		//Protection
 		itemTabletWallOfStone = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfStone, "tabletwallofstone", new SpellWallOfStone(), 1);
 		itemTabletWallOfObsidian = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfObsidian, "tabletwallofobsidian", new SpellWallOfObsidian(), 2);
 		itemTabletWallOfBedrock = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWallOfBedrock, "tabletwallofbedrock", new SpellWallOfBedrock(), 3);
@@ -310,19 +301,24 @@ public class SpellboundCore
 		itemTabletColorSpray = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletColorSpray, "tabletcolorspray", new SpellColorSpray(), 1);
 		itemTabletGrease = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGrease, "tabletgrease", new SpellGrease(), 1);
 		itemTabletBlink = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBlink, "tabletblink", new SpellBlink(), 1);
+		
+		//Divination
 		itemTabletTransport = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletTransport, "tablettransport", new SpellTransport(), 1);
 		itemTabletDimensionDoor = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDimensionDoor, "tabletdimensiondoor", new SpellDimensionDoor(), 2);
+		
+		//Mundane
 		itemTabletHaste = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletHaste, "tablethaste", new SpellHaste(), 1);
 		itemTabletAdvanceTime = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAdvanceTime, "tabletadvancetime", new SpellAdvanceTime(), 1);
 		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new SpellChangeWeather(), 1);
 		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new SpellFlight(), 1);
 		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new SpellFishForm(), 1);
-		//itemTabletMinorScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMinorScrying, "tabletminorscrying", new SpellMinorScrying(), 1);
-		//itemTabletGreaterScrying = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletGreaterScrying, "tabletgreaterscrying", new SpellGreaterScrying(), 2);
-		//itemTabletAllSeeingEye = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAllSeeingEye, "tabletallseeingeye", new SpellAllSeeingEye(), 3);
+		
+		//Disruption
 		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new SpellBreach(), 1);
 		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new SpellMiscastMagic(), 2);
 		itemTabletChaos = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChaos, "tabletchaos", new SpellChaos(), 3);
+		
+		//Misc
 		itemTabletSummonChestFullOfCookies = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletCookies, "tabletsummonchestfullofcookies", new SpellSummonChestFullOfCookies(), 1);
 	}
 
@@ -336,13 +332,13 @@ public class SpellboundCore
 		blockPrimaryMushroomBlueGrey = new BlockMushroomBlueGrey(propertiesManager.propertiesList.blockID_MushroomBlueGrey);
 		blockHybridMushroomOrange = new BlockMushroomOrange(propertiesManager.propertiesList.blockID_MushroomOrange);
 		blockHybridMushroomWhite = new BlockMushroomWhite(propertiesManager.propertiesList.blockID_MushroomWhite);
-		blockHybridMushroomOrangeGrey = new BlockMushroomOrangeGrey(propertiesManager.propertiesList.blockID_MushroomOrangeGrey); //Orange + BlueGrey
-		blockHybridMushroomLightBlue = new BlockMushroomLightBlue(propertiesManager.propertiesList.blockID_MushroomLightBlue); //GreyOrange + BlueGrey //COLD!
-		blockHybridMushroomGrey = new BlockMushroomGrey(propertiesManager.propertiesList.blockID_MushroomGrey); //GreyOrange + BlueGrey >>>Also
-		blockHybridMushroomYellow = new BlockMushroomYellow(propertiesManager.propertiesList.blockID_MushroomYellow); //OrangeGrey + Grey //LIGHTNING!
-		blockHybridMushroomRainbow = new BlockMushroomRainbow(propertiesManager.propertiesList.blockID_MushroomRainbow); //Red Orange + Yellow //RANDOM! //2nd LEVEL
-		blockHybridMushroomGold = new BlockMushroomGold(propertiesManager.propertiesList.blockID_MushroomGold); //Rainbow + Yellow //2nd level
-		blockHybridMushroomBlack = new BlockMushroomBlack(propertiesManager.propertiesList.blockID_MushroomBlack); //Blue Grey + Grey //2nd level
+		blockHybridMushroomOrangeGrey = new BlockMushroomOrangeGrey(propertiesManager.propertiesList.blockID_MushroomOrangeGrey);
+		blockHybridMushroomLightBlue = new BlockMushroomLightBlue(propertiesManager.propertiesList.blockID_MushroomLightBlue);
+		blockHybridMushroomGrey = new BlockMushroomGrey(propertiesManager.propertiesList.blockID_MushroomGrey);
+		blockHybridMushroomYellow = new BlockMushroomYellow(propertiesManager.propertiesList.blockID_MushroomYellow);
+		blockHybridMushroomRainbow = new BlockMushroomRainbow(propertiesManager.propertiesList.blockID_MushroomRainbow);
+		blockHybridMushroomGold = new BlockMushroomGold(propertiesManager.propertiesList.blockID_MushroomGold);
+		blockHybridMushroomBlack = new BlockMushroomBlack(propertiesManager.propertiesList.blockID_MushroomBlack);
 		blockHybridMushroomPurple = new BlockMushroomPurple(propertiesManager.propertiesList.blockID_MushroomPurple);
 		
 		GameRegistry.registerBlock(blockPrimaryMushroomRedOrange, "RedOrangePrimary");
@@ -362,9 +358,11 @@ public class SpellboundCore
 
 	private void registerRecipes()
 	{
+		//Book of Spells
 		GameRegistry.addRecipe(new ItemStack(itemBookOfSpells),
 				" T ", "TBT", " T ", 'B', Item.book, 'T', itemTabletBase);
 		
+		//Base Tablets
 		GameRegistry.addRecipe(new ItemStack(itemTabletBase), 
 				" C ", "C C", " C ", 'C', Item.clay);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireBase), 
@@ -384,6 +382,7 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletDisruptionBase), 
 				" M ", "MTM", " M ", 'M', blockHybridMushroomGold, 'T', itemTabletBase);
 
+		//Offensive spells
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl1), 
 				" R ", "RTR", " R ", 'R', Item.redstone, 'T', itemTabletFireBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireLvl2), 
@@ -403,31 +402,27 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningLvl3), 
 				" L ", "LTL", " L ", 'L', new ItemStack(Block.blockLapis, 1), 'T', itemTabletLightningLvl2);
 
-		GameRegistry.addRecipe(new ItemStack(itemTabletUltElementalFury), 
+		//Ultimate Spells
+		GameRegistry.addRecipe(new ItemStack(itemTabletElementalFury), 
 				" F ", "CRL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone);
-		GameRegistry.addRecipe(new ItemStack(itemTabletUltWailOfTheBanshee), 
+		GameRegistry.addRecipe(new ItemStack(itemTabletWailOfTheSheWolf), 
 				" F ", "CRL", " E ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'E', Block.enderChest);
-		GameRegistry.addRecipe(new ItemStack(itemTabletUltDisintegrate), 
+		GameRegistry.addRecipe(new ItemStack(itemTabletDisintegrate), 
 				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
 
+		//Shields
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
-		GameRegistry.addRecipe(new ItemStack(itemTabletIceShield), 
+		GameRegistry.addRecipe(new ItemStack(itemTabletColdShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletColdBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletLightningShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletLightningBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletSurgeShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', Item.swordGold);
 		GameRegistry.addRecipe(new ItemStack(itemTabletShieldOfInvulnerability), 
-				" F ", "CRL", " S ", 'F', itemTabletFireShield, 'C', itemTabletIceShield, 'R', Item.redstone, 'L', itemTabletLightningShield, 'S', itemTabletSurgeShield);
+				" F ", "CRL", " S ", 'F', itemTabletFireShield, 'C', itemTabletColdShield, 'R', Item.redstone, 'L', itemTabletLightningShield, 'S', itemTabletSurgeShield);
 
-		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfStone), 
-				" B ", "BTB", " B ", 'T', itemTabletProtectionBase, 'B', Block.stone);
-		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfObsidian), 
-				" B ", "BTB", " B ", 'T', itemTabletWallOfStone, 'B', Block.obsidian);
-		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfBedrock), 
-				" Q ", "QTQ", " Q ", 'T', itemTabletWallOfObsidian, 'Q', Item.netherQuartz);
-
+		//Summons
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl1), 
 				"BMB", " T ", 'T', itemTabletSummonBase, 'B', Item.bone, 'M', Item.porkRaw);
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl2), 
@@ -435,6 +430,13 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonLvl3),
 				"SOA", " T ", "HCL", 'S', Item.swordIron, 'O', Item.bow, 'A', Item.arrow, 'T', itemTabletSummonLvl2, 'H', Item.helmetIron, 'C', Item.plateIron, 'L', Item.legsIron);
 
+		//Protection
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfStone), 
+				" B ", "BTB", " B ", 'T', itemTabletProtectionBase, 'B', Block.stone);
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfObsidian), 
+				" B ", "BTB", " B ", 'T', itemTabletWallOfStone, 'B', Block.obsidian);
+		GameRegistry.addRecipe(new ItemStack(itemTabletWallOfBedrock), 
+				" Q ", "QTQ", " Q ", 'T', itemTabletWallOfObsidian, 'Q', Item.netherQuartz);
 		GameRegistry.addRecipe(new ItemStack(itemTabletColorSpray), 
 				" R ", "BTY", " G ", 'T', itemTabletProtectionBase, 'R', new ItemStack(Item.dyePowder, 1, 1), 'B', new ItemStack(Item.dyePowder, 1, 4), 'Y', new ItemStack(Item.dyePowder, 1,11), 'G', new ItemStack(Item.dyePowder, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(itemTabletPush),
@@ -444,10 +446,13 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletBlink),
 				" E ", "GTG", " G ", 'E', Item.enderPearl, 'G', Block.thinGlass, 'T', itemTabletProtectionBase);
 
+		//Divination
 		GameRegistry.addRecipe(new ItemStack(itemTabletTransport),
 				"RRR", "RTR", "RRR", 'R', Block.rail, 'T', itemTabletDivinationBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDimensionDoor),
 				"OOO", "OTO", "OFO", 'O', Block.obsidian, 'T', itemTabletTransport, 'F', Item.flintAndSteel);
+		
+		//Mundane
 		GameRegistry.addRecipe(new ItemStack(itemTabletHaste),
 				" M ", "RT-", 'M', Item.minecartEmpty, 'R', Block.railPowered, 'T', itemTabletMundaneBase, '-', Block.torchRedstoneActive);
 		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
@@ -461,13 +466,7 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
 
-		//GameRegistry.addRecipe(new ItemStack(itemTabletMinorScrying),
-		//		" P ", "QTQ", " Q ", 'T', itemTabletDivinationBase, 'P', Item.enderPearl, 'Q', Item.netherQuartz);
-		//GameRegistry.addRecipe(new ItemStack(itemTabletGreaterScrying),
-		//		" P ", "QTQ", " Q ", 'T', itemTabletMinorScrying, 'P', Item.enderPearl, 'Q', Block.blockNetherQuartz);
-		//GameRegistry.addRecipe(new ItemStack(itemTabletAllSeeingEye),
-		//		" E ", "DTD", " B ", 'T', itemTabletGreaterScrying, 'E', Item.eyeOfEnder, 'D', Item.diamond, 'B', Item.blazeRod);
-
+		//Disruption
 		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),
 				" P ", "ATA", " A ", 'T', itemTabletDisruptionBase, 'P', itemTabletProtectionBase, 'A', Item.arrow);
 		GameRegistry.addRecipe(new ItemStack(itemTabletMiscastMagic),
@@ -475,6 +474,7 @@ public class SpellboundCore
 		GameRegistry.addRecipe(new ItemStack(itemTabletChaos),
 				" R ", "RTR", " R ", 'T', itemTabletMiscastMagic, 'R', Item.blazeRod);
 
+		//Misc
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
 				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
 	}
@@ -498,31 +498,31 @@ public class SpellboundCore
 
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
 	{
-		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+		final List<SpellEntry> activeSpells = this.getActiveSpells().get(caster);
 
-		if (activeSpellsForCaster == null)
+		if (activeSpells == null)
 		{
-			List<SpellEntry> entryList = new ArrayList<SpellEntry>();
+			final List<SpellEntry> entryList = new ArrayList<SpellEntry>();
 			entryList.add(new SpellEntry(spell, duration));
-			SpellboundCore.activeSpells.put(caster, entryList);
+			this.getActiveSpells().put(caster, entryList);
 		}
 
 		else
 		{
-			activeSpellsForCaster.add(new SpellEntry(spell, duration));
-			SpellboundCore.activeSpells.put(caster, activeSpellsForCaster);
+			activeSpells.add(new SpellEntry(spell, duration));
+			this.getActiveSpells().put(caster, activeSpells);
 		}
 	}
 
-	public boolean playerHasActiveSpell(EntityPlayer caster, String className)
+	public boolean playerHasActiveSpell(EntityPlayer caster, Class spellClass)
 	{
-		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
+		final List<SpellEntry> activeSpells = this.getActiveSpells().get(caster);
 
-		if (activeSpellsForCaster != null)
+		if (activeSpells != null)
 		{
-			for (SpellEntry entry : activeSpellsForCaster)
+			for (final SpellEntry entry : activeSpells)
 			{
-				if (entry.spell.getClass().getSimpleName().equals(className))
+				if (entry.spell.getClass().getSimpleName().equals(spellClass.getSimpleName()))
 				{
 					return true;
 				}
@@ -532,30 +532,30 @@ public class SpellboundCore
 		return false;
 	}
 
-	public void removeActiveSpellFromPlayer(EntityPlayer caster, String className)
+	public void removeActiveSpellFromPlayer(EntityPlayer caster, Class spellClass)
 	{
-		Map<EntityPlayer, Integer> badEntries = new HashMap<EntityPlayer, Integer>();
+		final Map<EntityPlayer, Integer> badEntries = new HashMap<EntityPlayer, Integer>();
+		final List<SpellEntry> activeSpells = this.getActiveSpells().get(caster);
 
-		List<SpellEntry> activeSpellsForCaster = SpellboundCore.activeSpells.get(caster);
-
-		int i = 0;
-		for (SpellEntry entry : activeSpellsForCaster)
+		int index = 0;
+		for (final SpellEntry entry : activeSpells)
 		{
-			if (entry.spell.getClass().getSimpleName().equals(className))
+			if (entry.spell.getClass().getSimpleName().equals(spellClass.getSimpleName()))
 			{
-				badEntries.put(caster, i);
+				badEntries.put(caster, index);
 			}
 
-			i++;
+			index++;
 		}
 
 		//Clean up old entries.
-		for (Map.Entry<EntityPlayer, Integer> badEntry : badEntries.entrySet())
+		for (final Map.Entry<EntityPlayer, Integer> badEntry : badEntries.entrySet())
 		{
-			List<SpellEntry> spells = SpellboundCore.activeSpells.get(badEntry.getKey());
-			AbstractSpell spell = spells.get(badEntry.getValue()).spell;
-			caster.addChatMessage(spell.getSpellDisplayName() + " has been dispelled!");
-			spells.remove(spells.get(badEntry.getValue()));
+			final List<SpellEntry> spells = this.getActiveSpells().get(badEntry.getKey());
+			final SpellEntry spellEntry = spells.get(badEntry.getValue());
+			
+			caster.addChatMessage(spellEntry.spell.getSpellDisplayName() + " has been dispelled!");
+			spells.remove(spellEntry);
 		}
 	}
 
@@ -572,6 +572,11 @@ public class SpellboundCore
 		}
 	}
 
+	public Map<EntityPlayer, List<SpellEntry>> getActiveSpells() 
+	{
+		return activeSpells;
+	}
+
 	public static boolean getBooleanWithProbability(int probability)
 	{
 		if (probability <= 0)
@@ -581,7 +586,12 @@ public class SpellboundCore
 
 		else
 		{
-			return rand.nextInt(100) + 1 <= probability;
+			return modRandom.nextInt(100) + 1 <= probability;
 		}
+	}
+
+	public static SpellboundCore getInstance()
+	{
+		return instance;
 	}
 }

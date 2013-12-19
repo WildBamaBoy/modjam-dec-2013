@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellColorSpray.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +18,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellColorSpray extends AbstractSpell
 {
@@ -46,7 +55,7 @@ public class SpellColorSpray extends AbstractSpell
 							
 							else if (obj instanceof EntityPlayer)
 							{
-								if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability"))
+								if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class))
 								{
 									EntityLivingBase hitEntity = (EntityLivingBase)obj;
 									hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));	
@@ -120,9 +129,9 @@ public class SpellColorSpray extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.FRONT;
+		return EnumSpellRange.FRONT;
 	}
 
 	@Override

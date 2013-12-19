@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellWailOfTheSheWolf.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import java.util.List;
@@ -10,9 +19,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
-public class SpellWailOfTheBanshee extends AbstractSpell
+public class SpellWailOfTheSheWolf extends AbstractSpell
 {
 	@Override
 	public String getSpellDisplayName() 
@@ -27,28 +36,25 @@ public class SpellWailOfTheBanshee extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "spellbound:banshee", 1.0F, 1.0F);
 
 		final List<Entity> entitiesInArea = caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - 20, caster.posY - 20, caster.posZ - 20, caster.posX + 20, caster.posY + 20, caster.posZ + 20));
-		
+
 		for (final Entity entity : entitiesInArea)
 		{
 			if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer))
 			{
 				entity.attackEntityFrom(DamageSource.magic, 500.0F);
 			}
-			
-			else if (entity instanceof EntityPlayer)
+
+			else if (entity instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class))
 			{
-				if (!SpellboundCore.instance.playerHasActiveSpell(caster, "SpellShieldOfInvulnerability"))
-				{
-					entity.attackEntityFrom(DamageSource.magic, 500.0F);
-				}
+				entity.attackEntityFrom(DamageSource.magic, 500.0F);
 			}
 		}
 	}
-	
+
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.AREA;
+		return EnumSpellRange.AREA;
 	}
 
 	@Override
@@ -56,7 +62,7 @@ public class SpellWailOfTheBanshee extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

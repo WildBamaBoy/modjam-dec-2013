@@ -1,6 +1,6 @@
 /**********************************************
  * PropertiesList.java
- * Copyright (c) 2013 MCA Dev Team.
+ * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -42,55 +42,59 @@ public class PropertiesList
 	public int itemID_TabletMundaneBase = 26754;
 	public int itemID_TabletDisruptionBase = 26755;
 	
-	public int itemID_TabletFireLvl1 = 26765;
-	public int itemID_TabletColdLvl1 = 26766;
-	public int itemID_TabletLightningLvl1 = 26767;
-	public int itemID_TabletFireLvl2 = 26768;
-	public int itemID_TabletColdLvl2 = 26769;
-	public int itemID_TabletLightningLvl2 = 26770;
-	public int itemID_TabletFireLvl3 = 26771;
-	public int itemID_TabletColdLvl3 = 26772;
-	public int itemID_TabletLightningLvl3 = 26773;
+	//Offensive
+	public int itemID_TabletFireLvl1 = 26761;
+	public int itemID_TabletColdLvl1 = 26762;
+	public int itemID_TabletLightningLvl1 = 26763;
+	public int itemID_TabletFireLvl2 = 26764;
+	public int itemID_TabletColdLvl2 = 26765;
+	public int itemID_TabletLightningLvl2 = 26766;
+	public int itemID_TabletFireLvl3 = 26767;
+	public int itemID_TabletColdLvl3 = 26768;
+	public int itemID_TabletLightningLvl3 = 26769;
+	
+	//Summons
 	public int itemID_TabletSummonLvl1 = 26774;
 	public int itemID_TabletSummonLvl2 = 26775;
 	public int itemID_TabletSummonLvl3 = 26776;
-	public int itemID_TabletUltimateWailOfTheBanshee = 26777;
-	public int itemID_TabletUltimateElementalFury = 26778;
-	public int itemID_TabletUltimateDisintegrate = 26779;
+	
+	//Ultimate
+	public int itemID_TabletWailOfTheSheWolf = 26781;
+	public int itemID_TabletElementalFury = 26782;
+	public int itemID_TabletDisintegrate = 26783;
 
-	public int itemID_TabletFireShield = 26780;
-	public int itemID_TabletIceShield = 26781;
-	public int itemID_TabletLightningShield = 26782; 
-	public int itemID_TabletSurgeShield = 26783;
-	public int itemID_TabletShieldOfInvulnerability = 26784;
+	//Shields
+	public int itemID_TabletFireShield = 26791;
+	public int itemID_TabletIceShield = 26792;
+	public int itemID_TabletLightningShield = 26793; 
+	public int itemID_TabletSurgeShield = 26794;
+	public int itemID_TabletShieldOfInvulnerability = 26795;
 
-	public int itemID_TabletWallOfStone = 26785;
-	public int itemID_TabletWallOfObsidian = 26786;
-	public int itemID_TabletWallOfBedrock = 26787;
-
-	public int itemID_TabletPush = 26788;
-	public int itemID_TabletColorSpray = 26789; 
-	public int itemID_TabletGrease = 26790;
-	public int itemID_TabletBlink = 26791;
+	//Protection
+	public int itemID_TabletWallOfStone = 26801;
+	public int itemID_TabletWallOfObsidian = 26802;
+	public int itemID_TabletWallOfBedrock = 26803;
+	public int itemID_TabletPush = 26804;
+	public int itemID_TabletColorSpray = 26805; 
+	public int itemID_TabletBlink = 26806;
 	
-	public int itemID_TabletTransport = 26792;
-	public int itemID_TabletDimensionDoor = 26793;
+	//Divination
+	public int itemID_TabletTransport = 26816;
+	public int itemID_TabletDimensionDoor = 26817;
 	
-	public int itemID_TabletHaste = 26794;
-	public int itemID_TabletAdvanceTime = 26795;
-	public int itemID_TabletChangeWeather = 26796;
-	public int itemID_TabletFlight = 26797;
-	public int itemID_TabletFishForm = 26798;
+	//Mundane
+	public int itemID_TabletHaste = 26827;
+	public int itemID_TabletGrease = 26828;
+	public int itemID_TabletAdvanceTime = 26829;
+	public int itemID_TabletChangeWeather = 26830;
+	public int itemID_TabletFlight = 26831;
+	public int itemID_TabletFishForm = 26832;
 	
-	public int itemID_TabletMinorScrying = 26805;
-	public int itemID_TabletGreaterScrying = 26806;
-	public int itemID_TabletAllSeeingEye = 26807;
+	//Disruptive
+	public int itemID_TabletBreach = 26842;
+	public int itemID_TabletMiscastMagic = 26843;
+	public int itemID_TabletChaos = 26844;
 	
-	//Disruptive Magic
-	public int itemID_TabletBreach = 26808;
-	public int itemID_TabletMiscastMagic = 26809;
-	public int itemID_TabletChaos = 26810;
-	
-	//Unique Magic
-	public int itemID_TabletCookies = 26825;
+	//Misc
+	public int itemID_TabletCookies = 26852;
 }

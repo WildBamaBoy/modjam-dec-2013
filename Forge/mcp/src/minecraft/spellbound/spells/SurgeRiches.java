@@ -1,3 +1,12 @@
+/**********************************************
+ * SurgeRiches.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +27,7 @@ public class SurgeRiches extends AbstractSurge
 	{
 		for (int i = 0; i < caster.inventory.mainInventory.length; i++)
 		{
-			if (SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean() && SpellboundCore.rand.nextBoolean())
+			if (SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean())
 			{
 				caster.inventory.setInventorySlotContents(i, new ItemStack(Item.ingotGold));
 			}

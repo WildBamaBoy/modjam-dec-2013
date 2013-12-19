@@ -1,3 +1,12 @@
+/**********************************************
+ * BlockMushroomGrey.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.blocks;
 
 import spellbound.core.SpellboundCore;
@@ -33,28 +42,28 @@ public class BlockMushroomGrey extends AbstractMushroom
 	{
 		return new int[]
 				{
-			SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID,
-			SpellboundCore.instance.blockPrimaryMushroomBlueGrey.blockID,
-			SpellboundCore.instance.blockHybridMushroomRainbow.blockID
+			SpellboundCore.getInstance().blockHybridMushroomOrangeGrey.blockID,
+			SpellboundCore.getInstance().blockPrimaryMushroomBlueGrey.blockID,
+			SpellboundCore.getInstance().blockHybridMushroomRainbow.blockID
 				};
 	}
 
 	@Override
 	public int getOffspringId(int mateId) 
 	{
-		if (mateId == SpellboundCore.instance.blockHybridMushroomOrangeGrey.blockID)
+		if (mateId == SpellboundCore.getInstance().blockHybridMushroomOrangeGrey.blockID)
 		{
-			return SpellboundCore.instance.blockHybridMushroomYellow.blockID;
+			return SpellboundCore.getInstance().blockHybridMushroomYellow.blockID;
 		}
 		
-		else if (mateId == SpellboundCore.instance.blockPrimaryMushroomBlueGrey.blockID)
+		else if (mateId == SpellboundCore.getInstance().blockPrimaryMushroomBlueGrey.blockID)
 		{
-			return SpellboundCore.instance.blockHybridMushroomBlack.blockID;
+			return SpellboundCore.getInstance().blockHybridMushroomBlack.blockID;
 		}
 		
-		else if (mateId == SpellboundCore.instance.blockHybridMushroomRainbow.blockID)
+		else if (mateId == SpellboundCore.getInstance().blockHybridMushroomRainbow.blockID)
 		{
-			return SpellboundCore.instance.blockHybridMushroomPurple.blockID;
+			return SpellboundCore.getInstance().blockHybridMushroomPurple.blockID;
 		}
 		
 		else

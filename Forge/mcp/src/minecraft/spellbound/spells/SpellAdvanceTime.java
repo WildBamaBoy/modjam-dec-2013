@@ -1,14 +1,23 @@
+/**********************************************
+ * SpellAdvanceTime.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
-import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
+import spellbound.core.util.Point3D;
+import spellbound.core.util.Logic;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
-import spellbound.util.Coordinates;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellAdvanceTime extends AbstractSpell
 {
@@ -25,23 +34,23 @@ public class SpellAdvanceTime extends AbstractSpell
 		
 		if (!caster.worldObj.isRemote)
 		{
-			final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.rand.nextInt(5000) + 5000;
+			final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.modRandom.nextInt(5000) + 5000;
 			caster.worldObj.setWorldTime(newWorldTime);
 
 			for (final int cropID : Constants.CROP_IDS)
 			{
-				for (final Coordinates c : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, Constants.RADIUS_ADVANCETIME, cropID))
+				for (final Point3D point : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, Constants.RAD_ADVANCETIME, cropID))
 				{
-					caster.worldObj.setBlockMetadataWithNotify(c.x, c.y, c.z, 7, 2);
+					caster.worldObj.setBlockMetadataWithNotify(point.posX, point.posY, point.posZ, 7, 2);
 				}
 			}
 		}
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.SELF;
+		return EnumSpellRange.SELF;
 	}
 
 	@Override

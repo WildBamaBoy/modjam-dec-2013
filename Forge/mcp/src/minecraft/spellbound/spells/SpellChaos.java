@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellChaos.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -6,7 +15,7 @@ import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellChaos extends AbstractSpell
 {
@@ -24,20 +33,17 @@ public class SpellChaos extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.TARGET;
+		return EnumSpellRange.TARGET;
 	}
 
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		if (entityHit != null && entityHit instanceof EntityPlayer)
+		if (entityHit instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
 		{
-			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability"))
-			{
-				SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 200);
-			}
+			SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
 		}
 	}
 

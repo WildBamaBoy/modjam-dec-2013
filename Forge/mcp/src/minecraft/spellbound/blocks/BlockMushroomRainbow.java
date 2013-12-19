@@ -1,3 +1,12 @@
+/**********************************************
+ * BlockMushroomRainbow.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.blocks;
 
 import spellbound.core.SpellboundCore;
@@ -33,22 +42,22 @@ public class BlockMushroomRainbow extends AbstractMushroom
 	{
 		return new int[]
 			{
-			SpellboundCore.instance.blockHybridMushroomYellow.blockID,
-			SpellboundCore.instance.blockHybridMushroomGrey.blockID
+			SpellboundCore.getInstance().blockHybridMushroomYellow.blockID,
+			SpellboundCore.getInstance().blockHybridMushroomGrey.blockID
 			};
 	}
 
 	@Override
 	public int getOffspringId(int mateId) 
 	{
-		if (mateId == SpellboundCore.instance.blockHybridMushroomYellow.blockID)
+		if (mateId == SpellboundCore.getInstance().blockHybridMushroomYellow.blockID)
 		{
-			return SpellboundCore.instance.blockHybridMushroomGold.blockID;
+			return SpellboundCore.getInstance().blockHybridMushroomGold.blockID;
 		}
 		
-		else if (mateId == SpellboundCore.instance.blockHybridMushroomGrey.blockID)
+		else if (mateId == SpellboundCore.getInstance().blockHybridMushroomGrey.blockID)
 		{
-			return SpellboundCore.instance.blockHybridMushroomPurple.blockID;
+			return SpellboundCore.getInstance().blockHybridMushroomPurple.blockID;
 		}
 		
 		else

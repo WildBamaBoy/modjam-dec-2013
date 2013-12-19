@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellElementalFury.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import java.util.List;
@@ -11,12 +20,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import spellbound.core.PacketHandler;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.entity.AbstractTargetSpell;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellElementalFury extends AbstractSpell 
@@ -41,9 +50,9 @@ public class SpellElementalFury extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.TARGET;
+		return EnumSpellRange.TARGET;
 	}
 
 	@Override
@@ -58,13 +67,13 @@ public class SpellElementalFury extends AbstractSpell
 			{
 				final EntityLivingBase livingEntity = (EntityLivingBase)obj;
 
-				if (SpellboundCore.rand.nextBoolean())
+				if (SpellboundCore.modRandom.nextBoolean())
 				{
 					livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
 					livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 				}
 
-				else if (SpellboundCore.rand.nextBoolean())
+				else if (SpellboundCore.modRandom.nextBoolean())
 				{
 					livingEntity.attackEntityFrom(DamageSource.magic, 10.0F);
 					livingEntity.setFire(15);
@@ -79,9 +88,7 @@ public class SpellElementalFury extends AbstractSpell
 					final double spawnY = livingEntity.posY;
 					final double spawnZ = livingEntity.posZ;
 
-					final EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
-					worldObj.spawnEntityInWorld(lightning);
-
+					worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
 					PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
 				}
 			}

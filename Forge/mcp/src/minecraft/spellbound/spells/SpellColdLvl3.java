@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellColdLvl3.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.block.Block;
@@ -11,7 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellColdLvl3 extends AbstractSpell
 {
@@ -54,7 +63,7 @@ public class SpellColdLvl3 extends AbstractSpell
 								
 								else if (obj instanceof EntityPlayer)
 								{
-									if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)obj, "SpellColdShield"))
+									if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
 									{							
 										EntityLivingBase hitEntity = (EntityLivingBase)obj;
 										hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
@@ -151,14 +160,15 @@ public class SpellColdLvl3 extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.FRONT;
+		return EnumSpellRange.FRONT;
 	}
 
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
+		//No target effect.
 	}
 	
 	@Override

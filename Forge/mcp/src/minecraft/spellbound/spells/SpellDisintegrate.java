@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellDisintegrate.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -10,7 +19,7 @@ import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellDisintegrate extends AbstractSpell
 {
@@ -30,9 +39,9 @@ public class SpellDisintegrate extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.TARGET;
+		return EnumSpellRange.TARGET;
 	}
 
 	@Override
@@ -40,11 +49,11 @@ public class SpellDisintegrate extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			if (SpellboundCore.rand.nextBoolean())
+			if (SpellboundCore.modRandom.nextBoolean())
 			{
 				if (entityHit instanceof EntityPlayer)
 				{
-					if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability"))
+					if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
 					{
 						entityHit.attackEntityFrom(DamageSource.magic, 100.0F);
 					}
@@ -53,8 +62,7 @@ public class SpellDisintegrate extends AbstractSpell
 				else
 				{
 					entityHit.setDead();
-					EntityItem item = new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.dyePowder, 1, 15));
-					worldObj.spawnEntityInWorld(item);
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.dyePowder, 1, 15)));
 				}
 			}
 

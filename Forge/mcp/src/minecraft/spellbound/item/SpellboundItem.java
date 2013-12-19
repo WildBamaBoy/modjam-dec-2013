@@ -14,9 +14,9 @@ public class SpellboundItem extends Item
 		LanguageRegistry.addName(this, displayName);
 		
 		//For easy init.
-		if (SpellboundCore.instance.spellboundTab != null)
+		if (SpellboundCore.getInstance().spellboundTab != null)
 		{
-			this.setCreativeTab(SpellboundCore.instance.spellboundTab);
+			this.setCreativeTab(SpellboundCore.getInstance().spellboundTab);
 		}
 	}
 }

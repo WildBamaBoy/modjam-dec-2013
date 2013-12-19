@@ -1,3 +1,12 @@
+/**********************************************
+ * AbstractTargetSpell.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.entity;
 
 import java.util.List;
@@ -24,16 +33,22 @@ public abstract class AbstractTargetSpell extends Entity
 	private int yTile = -1;
 	private int zTile = -1;
 	private int inTile;
-	private boolean inGround;
-	public EntityLivingBase shootingEntity;
 	private int ticksAlive;
 	private int ticksInAir;
+	private boolean inGround;
+	
+	public EntityLivingBase caster;
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
+	
 	private final AbstractSpell spell;
 
-	//For client rendering
+	/**
+	 * Constructor for client rendering.
+	 * 
+	 * @param 	worldObj	The world to render the object in.
+	 */
 	public AbstractTargetSpell(World worldObj)
 	{
 		super(worldObj);
@@ -72,34 +87,39 @@ public abstract class AbstractTargetSpell extends Entity
 
 			catch (NullPointerException e)
 			{
-				//Logout
+				//TODO Remove and test.
 			}
 		}
 
 		setDead();
 	}
 
-	protected void entityInit() {}
-
-	@SideOnly(Side.CLIENT)
+	@Override
+	protected void entityInit() 
+	{
+		// No init.
+	}
 
 	/**
 	 * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
 	 * length * 64 * renderDistanceWeight Args: distance
 	 */
-	public boolean isInRangeToRenderDist(double par1)
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean isInRangeToRenderDist(double distance)
 	{
-		double d1 = this.boundingBox.getAverageEdgeLength() * 4.0D;
-		d1 *= 64.0D;
-		return par1 < d1 * d1;
+		double weightedLength = this.boundingBox.getAverageEdgeLength() * 4.0D;
+		weightedLength *= 64.0D;
+		return distance < weightedLength * weightedLength;
 	}
 
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
-		if (!this.worldObj.isRemote && (this.shootingEntity != null && this.shootingEntity.isDead || !this.worldObj.blockExists((int)this.posX, (int)this.posY, (int)this.posZ)))
+		if (!this.worldObj.isRemote && (this.caster != null && this.caster.isDead || !this.worldObj.blockExists((int)this.posX, (int)this.posY, (int)this.posZ)))
 		{
 			this.setDead();
 		}
@@ -155,7 +175,7 @@ public abstract class AbstractTargetSpell extends Entity
 			{
 				Entity entity1 = (Entity)list.get(j);
 
-				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25))
+				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.caster) || this.ticksInAir >= 25))
 				{
 					float f = 0.3F;
 					AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f, (double)f, (double)f);
@@ -284,11 +304,13 @@ public abstract class AbstractTargetSpell extends Entity
 	/**
 	 * Returns true if other Entities should be prevented from moving through this Entity.
 	 */
+	@Override
 	public boolean canBeCollidedWith()
 	{
 		return true;
 	}
 
+	@Override
 	public float getCollisionBorderSize()
 	{
 		return 1.0F;
@@ -297,6 +319,7 @@ public abstract class AbstractTargetSpell extends Entity
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if (this.isEntityInvulnerable())
@@ -324,7 +347,7 @@ public abstract class AbstractTargetSpell extends Entity
 
 				if (par1DamageSource.getEntity() instanceof EntityLivingBase)
 				{
-					this.shootingEntity = (EntityLivingBase)par1DamageSource.getEntity();
+					this.caster = (EntityLivingBase)par1DamageSource.getEntity();
 				}
 
 				return true;
@@ -337,6 +360,7 @@ public abstract class AbstractTargetSpell extends Entity
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public float getShadowSize()
 	{
 		return 0.0F;
@@ -345,12 +369,14 @@ public abstract class AbstractTargetSpell extends Entity
 	/**
 	 * Gets how bright this entity is.
 	 */
+	@Override
 	public float getBrightness(float par1)
 	{
 		return 1.0F;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public int getBrightnessForRender(float par1)
 	{
 		return 15728880;

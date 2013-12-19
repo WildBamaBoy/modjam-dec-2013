@@ -1,5 +1,5 @@
 /**********************************************
- * SpellColdShield.java
+ * CommonProxy.java
  * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
@@ -7,27 +7,25 @@
  * http://www.gnu.org/licenses/gpl.html
  **********************************************/
 
-package spellbound.spells;
+package spellbound.core.forge;
 
-import spellbound.enums.EnumItemInUseTime;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
-public class SpellColdShield extends AbstractSpellShield
+public class CommonProxy 
 {
-	@Override
-	public String getSpellDisplayName() 
+	public void registerRenderers()
 	{
-		return "Cold Shield";
+		//Server-side.
 	}
 
-	@Override
-	public int getShieldDuration() 
+	public void registerTickHandlers()
 	{
-		return 1200;
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 	}
 
-	@Override
-	public EnumItemInUseTime getSpellCastDuration() 
+	public void registerSounds() 
 	{
-		return EnumItemInUseTime.ONE_SECOND;
+		//Server-side.
 	}
 }

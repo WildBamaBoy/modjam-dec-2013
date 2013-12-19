@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellColdLvl2.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.block.Block;
@@ -8,12 +17,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
-import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
+import spellbound.core.util.Point3D;
+import spellbound.core.util.Logic;
 import spellbound.entity.EntityTargetSpellCold;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
-import spellbound.util.Coordinates;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellColdLvl2 extends AbstractSpell
 {
@@ -35,9 +44,9 @@ public class SpellColdLvl2 extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.TARGET;
+		return EnumSpellRange.TARGET;
 	}
 
 	@Override
@@ -45,27 +54,27 @@ public class SpellColdLvl2 extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			for (final Coordinates c : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, Constants.BLOCKS_SUPPORTING_SNOW))
+			for (final Point3D point : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, Constants.SNOW_SUPPORTERS))
 			{
-				if (worldObj.getBlockId(c.x, c.y + 1, c.z) == 0)
+				if (worldObj.getBlockId(point.posX, point.posY + 1, point.posZ) == 0)
 				{
-					worldObj.setBlock(c.x, c.y + 1, c.z, Block.snow.blockID);
+					worldObj.setBlock(point.posX, point.posY + 1, point.posZ, Block.snow.blockID);
 				}
 			}
 
-			if (!(entityHit instanceof EntityPlayer))
+			if (entityHit instanceof EntityPlayer)
 			{
-				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
-				entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-			}
-
-			else
-			{
-				if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellColdShield"))
+				if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellColdShield.class))
 				{							
 					entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
 					entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 				}
+			}
+
+			else
+			{
+				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+				entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 			}
 		}
 	}

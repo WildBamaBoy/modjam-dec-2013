@@ -1,6 +1,6 @@
 /**********************************************
  * PropertiesManager.java
- * Copyright (c) 2013 MCA Dev Team.
+ * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -30,8 +30,8 @@ public class PropertiesManager
 	public PropertiesManager()
 	{
 		properties = new Properties();
-		storageFolder = new File(SpellboundCore.runningDirectory + "/config/Spellbound");
-		propertiesFile = new File(SpellboundCore.runningDirectory + "/config/Spellbound/ModProps.properties");
+		storageFolder = new File(SpellboundCore.getInstance().runningDirectory + "/config/Spellbound");
+		propertiesFile = new File(SpellboundCore.getInstance().runningDirectory + "/config/Spellbound/ModProps.properties");
 
 		if (!storageFolder.exists())
 		{
@@ -51,8 +51,6 @@ public class PropertiesManager
 
 	private void saveProperties()
 	{
-		//TODO
-		System.out.println(">>>>>>>>>>> SAVE");
 		try
 		{
 			properties.clear();
@@ -65,15 +63,16 @@ public class PropertiesManager
 				{
 					properties.put(f.getName(), f.get(propertiesList).toString());
 				}
-
-				//TODO EXTEND!!!
+				
+				else if (fieldType.contains("boolean"))
+				{
+					properties.put(f.getName(),  f.get(propertiesList).toString());
+				}
 			}
 			
 			FileOutputStream fos = new FileOutputStream(propertiesFile);
 			properties.store(fos, "Change item IDs");
 			fos.close();
-			
-			System.out.println("Saved :)");
 		}
 
 		catch (IllegalAccessException e)
@@ -114,8 +113,11 @@ public class PropertiesManager
 				{
 					f.set(propertiesList, properties.getProperty(f.getName()));
 				}
-
-				//TODO EXTEND!!!
+				
+				else if (fieldType.contains("boolean"))
+				{
+					f.set(propertiesList, properties.getProperty(f.getName()));
+				}
 			}
 		}
 

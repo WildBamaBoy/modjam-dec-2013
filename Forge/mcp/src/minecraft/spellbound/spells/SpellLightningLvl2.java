@@ -1,14 +1,23 @@
+/**********************************************
+ * SpellLightningLvl2.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import spellbound.core.PacketHandler;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellLightningLvl2 extends AbstractSpell
@@ -30,34 +39,30 @@ public class SpellLightningLvl2 extends AbstractSpell
 	}
 
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.TARGET;
+		return EnumSpellRange.TARGET;
 	}
 
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		double spawnX = entityHit != null ? entityHit.posX : posX;
-		double spawnY = entityHit != null ? entityHit.posY : posY;
-		double spawnZ = entityHit != null ? entityHit.posZ : posZ;
+		final double spawnX = entityHit == null ? posX : entityHit.posX;
+		final double spawnY = entityHit == null ? posY : entityHit.posY;
+		final double spawnZ = entityHit == null ? posZ : entityHit.posZ;
 
-		if (entityHit != null && entityHit instanceof EntityPlayer)
+		if (entityHit instanceof EntityPlayer)
 		{
-			if (!SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellShieldOfInvulnerability") && !SpellboundCore.instance.playerHasActiveSpell((EntityPlayer)entityHit, "SpellLightningShield"))
+			if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellLightningShield.class))
 			{
-				EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
-				worldObj.spawnEntityInWorld(lightning);
-
+				worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
 				PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
 			}
 		}
 
 		else
 		{
-			EntityLightningBolt lightning = new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ);
-			worldObj.spawnEntityInWorld(lightning);
-
+			worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
 			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
 		}
 	}

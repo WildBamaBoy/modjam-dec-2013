@@ -1,3 +1,12 @@
+/**********************************************
+ * AbstractMushroom.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.blocks;
 
 import java.util.Random;
@@ -5,10 +14,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
-import spellbound.core.Logic;
 import spellbound.core.SpellboundCore;
+import spellbound.core.util.Logic;
+import spellbound.core.util.PointBlock3D;
 import spellbound.spells.AbstractSpell;
-import spellbound.util.MushroomCoordinates;
 
 public abstract class AbstractMushroom extends BlockFlower
 {
@@ -17,7 +26,7 @@ public abstract class AbstractMushroom extends BlockFlower
 		super(itemId);
 		this.setBlockBounds(0.5F - 0.2F, 0.0F, 0.5F - 0.2F, 0.5F + 0.2F, 0.2F * 2.0F, 0.5F + 0.2F);
 		this.setTickRandomly(true);
-		this.setCreativeTab(SpellboundCore.instance.spellboundTab);
+		this.setCreativeTab(SpellboundCore.getInstance().spellboundTab);
 
 		this.setName();
 		this.setTexture();
@@ -33,39 +42,39 @@ public abstract class AbstractMushroom extends BlockFlower
 	
 	public abstract int getOffspringId(int mateId);
 	
-	public void updateTick(World world, int x, int y, int z, Random worldRandom)
+	@Override
+	public void updateTick(World world, int posX, int posY, int posZ, Random random)
 	{
-		MushroomCoordinates nearbyPrimary = Logic.getNearbyMushroomMate(this, world, x, y, z, 1, this.getMateIds());
+		final PointBlock3D nearbyPrimary = Logic.getNearbyMushroomMate(this, world, posX, posY, posZ, 1, this.getMateIds());
 
 		if (nearbyPrimary != null)
 		{
-			MushroomCoordinates hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.x, nearbyPrimary.y, nearbyPrimary.z, 1, Block.grass.blockID);
+			//Try to get a spawn near the primary first.
+			PointBlock3D hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.posX, nearbyPrimary.posY, nearbyPrimary.posZ, 1);
 			
+			//Check to see if it succeeded.
 			if (hybridSpawn == null)
 			{
-				hybridSpawn = Logic.getNearbyMushroomSpawn(world, x, y, z, 1, Block.grass.blockID);
+				//If it didn't, try to find a spot around this mushroom's position for the new mushroom to spawn.
+				hybridSpawn = Logic.getNearbyMushroomSpawn(world, posX, posY, posZ, 1);
 			}
 			
+			//Now test again to see if a spot was found around this mushroom and spawn the new mushroom if it was.
 			if (hybridSpawn != null)
 			{
-				world.setBlock(hybridSpawn.x, hybridSpawn.y, hybridSpawn.z, nearbyPrimary.spawnId);
+				world.setBlock(hybridSpawn.posX, hybridSpawn.posY, hybridSpawn.posZ, nearbyPrimary.blockId);
 			}
 		}
 	}
 
-	/**
-	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-	 */
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{		
-		int blockId = world.getBlockId(x, y - 1, z);
+	@Override
+	public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
+	{
+		final int blockId = world.getBlockId(posX, posY - 1, posZ);
 		return blockId == Block.grass.blockID || blockId == Block.dirt.blockID;
 	}
 
-	/**
-	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
-	 * blockID passed in. Args: blockID
-	 */
+	@Override
 	protected boolean canThisPlantGrowOnThisBlockID(int blockID)
 	{
 		return Block.opaqueCubeLookup[blockID];

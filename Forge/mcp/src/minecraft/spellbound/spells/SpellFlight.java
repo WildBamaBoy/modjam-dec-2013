@@ -1,12 +1,21 @@
+/**********************************************
+ * SpellFlight.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import spellbound.core.PacketHandler;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
@@ -28,14 +37,14 @@ public class SpellFlight extends AbstractSpell
 		caster.motionY += 1.0D;
 		caster.capabilities.isFlying = true;
 		
-		SpellboundCore.instance.addActiveSpellToPlayer(caster, this, 400);
+		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 400);
 		PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(true), (Player) caster);
 	}
 	
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.SELF;
+		return EnumSpellRange.SELF;
 	}
 
 	@Override

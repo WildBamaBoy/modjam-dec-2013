@@ -1,3 +1,12 @@
+/**********************************************
+ * SpellFireLvl1.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.spells;
 
 import net.minecraft.block.Block;
@@ -6,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.enums.EnumItemInUseTime;
-import spellbound.enums.EnumSpellType;
+import spellbound.enums.EnumSpellRange;
 
 public class SpellFireLvl1 extends AbstractSpell
 {
@@ -21,13 +30,13 @@ public class SpellFireLvl1 extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 		
-		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 		
 		if (heading == 0)
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
+				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
 					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i), Block.fire.blockID);
@@ -39,7 +48,7 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
+				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
 					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
@@ -51,7 +60,7 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
+				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
 					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i), Block.fire.blockID);
@@ -63,7 +72,7 @@ public class SpellFireLvl1 extends AbstractSpell
 		{
 			for (int i = 3; i < 10; i++)
 			{				
-				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
+				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
 				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
 				{
 					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
@@ -73,15 +82,15 @@ public class SpellFireLvl1 extends AbstractSpell
 	}
 	
 	@Override
-	public EnumSpellType getSpellType() 
+	public EnumSpellRange getSpellType() 
 	{
-		return EnumSpellType.FRONT;
+		return EnumSpellRange.FRONT;
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-		
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 	
 	@Override

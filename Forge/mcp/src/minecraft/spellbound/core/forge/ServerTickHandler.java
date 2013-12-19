@@ -1,4 +1,13 @@
-package spellbound.core;
+/**********************************************
+ * ServerTickHandler.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
+package spellbound.core.forge;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -6,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import spellbound.core.SpellboundCore;
+import spellbound.core.util.SpellEntry;
 import spellbound.spells.SpellFireShield;
 import spellbound.spells.SpellFlight;
 import spellbound.spells.SpellShieldOfInvulnerability;
@@ -19,6 +30,7 @@ public class ServerTickHandler implements ITickHandler
 	@Override
 	public void tickStart (EnumSet<TickType> type, Object... tickData)
 	{
+		//Do on tickEnd.
 	}
 
 	@Override
@@ -44,18 +56,18 @@ public class ServerTickHandler implements ITickHandler
 	
 	private void onTick()
 	{
-		Map<EntityPlayer, Integer> oldEntries = new HashMap<EntityPlayer, Integer>();
+		final Map<EntityPlayer, Integer> oldEntries = new HashMap<EntityPlayer, Integer>();
 		
-		for (Map.Entry<EntityPlayer,List<SpellEntry>> entrySet : SpellboundCore.activeSpells.entrySet())
+		for (final Map.Entry<EntityPlayer,List<SpellEntry>> entrySet : SpellboundCore.getInstance().getActiveSpells().entrySet())
 		{
-			EntityPlayer player = entrySet.getKey();
-			List<SpellEntry> entryList = entrySet.getValue();
+			final EntityPlayer player = entrySet.getKey();
+			final List<SpellEntry> entryList = entrySet.getValue();
 			
 			for (SpellEntry entry : entryList)
 			{
 				entry.durationCounter++;
 				
-				if (entry.durationCounter == (entry.maxDuration / 2))
+				if (entry.durationCounter == entry.maxDuration / 2)
 				{
 					player.addChatMessage(entry.spell.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
 				}
@@ -74,12 +86,11 @@ public class ServerTickHandler implements ITickHandler
 		}
 		
 		//Clean up old entries.
-		for (Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
+		for (final Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
 		{
-			List<SpellEntry> activeSpells = SpellboundCore.activeSpells.get(oldEntry.getKey());
-			
-			EntityPlayer entryPlayer = oldEntry.getKey();
-			SpellEntry entry = activeSpells.get(oldEntry.getValue());
+			final List<SpellEntry> activeSpells = SpellboundCore.getInstance().getActiveSpells().get(oldEntry.getKey());
+			final EntityPlayer entryPlayer = oldEntry.getKey();
+			final SpellEntry entry = activeSpells.get(oldEntry.getValue());
 
 			activeSpells.remove(entry);
 			

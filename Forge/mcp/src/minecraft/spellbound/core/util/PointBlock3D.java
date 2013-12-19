@@ -1,5 +1,5 @@
 /**********************************************
- * SurgeBackfire.java
+ * PointBlock3D.java
  * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
@@ -7,21 +7,20 @@
  * http://www.gnu.org/licenses/gpl.html
  **********************************************/
 
-package spellbound.spells;
+package spellbound.core.util;
 
-import net.minecraft.entity.player.EntityPlayer;
-
-public class SurgeBackfire extends AbstractSurge
+public class PointBlock3D 
 {
-	@Override
-	public String getSpellDisplayName() 
+	public int posX;
+	public int posY;
+	public int posZ;
+	public int blockId;
+	
+	public PointBlock3D(int posX, int posY, int posZ, int blockId)
 	{
-		return "Backfire";
-	}
-
-	@Override
-	public void doSpellCasterEffect(EntityPlayer caster) 
-	{
-		caster.setFire(10);
+		this.posX = posX;
+		this.posY = posY;
+		this.posZ = posZ;
+		this.blockId = blockId;
 	}
 }

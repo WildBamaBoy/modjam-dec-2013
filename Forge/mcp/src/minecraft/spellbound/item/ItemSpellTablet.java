@@ -1,3 +1,12 @@
+/**********************************************
+ * ItemSpellTablet.java
+ * Copyright (c) 2013 Wild Bama Boy.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ **********************************************/
+
 package spellbound.item;
 
 import java.util.List;
@@ -6,11 +15,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
 import spellbound.spells.AbstractSurge;
 import spellbound.spells.SpellFireLvl3;
-import spellbound.util.Color;
+import spellbound.spells.SpellMiscastMagic;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,9 +47,9 @@ public class ItemSpellTablet extends SpellboundItem
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List infoList, boolean unknown) 
 	{
-		infoList.add(Color.BLUE + "Lvl. " + level);
-		infoList.add(Color.BLUE + "@(" + spell.getSpellType() + ")");
-		infoList.add(Color.BLUE + "Cast Time: " + spell.getSpellCastDuration().getDisplayString());
+		infoList.add(Constants.COLOR_BLUE + "Lvl. " + level);
+		infoList.add(Constants.COLOR_BLUE + "@(" + spell.getSpellType() + ")");
+		infoList.add(Constants.COLOR_BLUE + "Cast Time: " + spell.getSpellCastDuration().getDisplayString());
 	}
 
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -85,30 +95,30 @@ public class ItemSpellTablet extends SpellboundItem
 			
 			if (!worldObj.isRemote)
 			{
-				AbstractSurge surge = spell.doMagicSurge(entityPlayer);
+				final AbstractSurge surge = spell.doMagicSurge(entityPlayer);
 				
-				if (SpellboundCore.instance.playerHasActiveSpell(entityPlayer, "SpellMiscastMagic"))
+				if (SpellboundCore.getInstance().playerHasActiveSpell(entityPlayer, SpellMiscastMagic.class))
 				{
-					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "You're under the effects of Miscast Magic!");
+					SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "You're under the effects of Miscast Magic!");
 				}
 				
-				else if (surge != null)
+				else if (surge == null)
 				{
-					SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Magic surge! " + surge.getSpellDisplayName());
-					surge.doSpellCasterEffect(entityPlayer);
-				}
-				
-				else
-				{
-					if (spell instanceof SpellFireLvl3 && SpellboundCore.propertiesManager.propertiesList.doDisableGreaterFireball)
+					if (spell instanceof SpellFireLvl3 && SpellboundCore.getInstance().propertiesManager.propertiesList.doDisableGreaterFireball)
 					{
-						SpellboundCore.instance.sendMessageToPlayer(entityPlayer, "Spell disabled by administrators.");
+						SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "Spell disabled by administrators.");
 					}
 					
 					else
 					{
 						spell.doSpellCasterEffect(entityPlayer);
 					}
+				}
+				
+				else
+				{
+					SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "Magic surge! " + surge.getSpellDisplayName());
+					surge.doSpellCasterEffect(entityPlayer);
 				}
 			}
 			
