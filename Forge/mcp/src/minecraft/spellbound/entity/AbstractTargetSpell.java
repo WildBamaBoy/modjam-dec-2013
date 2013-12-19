@@ -36,12 +36,12 @@ public abstract class AbstractTargetSpell extends Entity
 	private int ticksAlive;
 	private int ticksInAir;
 	private boolean inGround;
-	
+
 	public EntityLivingBase caster;
 	public double accelerationX;
 	public double accelerationY;
 	public double accelerationZ;
-	
+
 	private final AbstractSpell spell;
 
 	/**
@@ -63,31 +63,27 @@ public abstract class AbstractTargetSpell extends Entity
 
 		this.spell = spell;
 		this.setPosition(player.posX + vec.xCoord * 5, player.posY + 1 + vec.yCoord * 5, player.posZ + vec.zCoord * 5);
-		this.accelerationX = vec.xCoord * 0.3;
-		this.accelerationY = vec.yCoord * 0.3;
-		this.accelerationZ = vec.zCoord * 0.3;
+		this.accelerationX = vec.xCoord * 0.5;
+		this.accelerationY = vec.yCoord * 0.5;
+		this.accelerationZ = vec.zCoord * 0.5;
+		
+		this.motionX = accelerationX;
+		this.motionY = accelerationY;
+		this.motionZ = accelerationZ;
 	}
 
 	protected void onImpact(MovingObjectPosition pos) 
 	{
 		if (!worldObj.isRemote)
 		{
-			try
+			if (pos.entityHit != null && pos.entityHit instanceof EntityLivingBase)
 			{
-				if (pos.entityHit != null && pos.entityHit instanceof EntityLivingBase)
-				{
-					spell.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ, (EntityLivingBase)pos.entityHit);
-				}
-
-				else
-				{
-					spell.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ, null);
-				}
+				spell.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ, (EntityLivingBase)pos.entityHit);
 			}
 
-			catch (NullPointerException e)
+			else
 			{
-				//TODO Remove and test.
+				spell.doSpellTargetEffect(worldObj, pos.blockX, pos.blockY, pos.blockZ, null);
 			}
 		}
 
@@ -145,9 +141,9 @@ public abstract class AbstractTargetSpell extends Entity
 				}
 
 				this.inGround = false;
-				this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-				this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-				this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+				this.motionX = accelerationX; //(double)(this.rand.nextFloat() * 0.2F);
+				this.motionY = accelerationY; //(double)(this.rand.nextFloat() * 0.2F);
+				this.motionZ = accelerationZ; //(double)(this.rand.nextFloat() * 0.2F);
 				this.ticksAlive = 0;
 				this.ticksInAir = 0;
 			}
