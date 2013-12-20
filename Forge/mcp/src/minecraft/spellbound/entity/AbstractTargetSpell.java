@@ -62,19 +62,20 @@ public abstract class AbstractTargetSpell extends Entity
 
 		final Vec3 vec = player.getLookVec();
 
+		this.caster = player;
 		this.spell = spell;
 		this.setPosition(player.posX + vec.xCoord * 5, player.posY + 1 + vec.yCoord * 5, player.posZ + vec.zCoord * 5);
 		this.accelerationX = vec.xCoord * 0.5;
 		this.accelerationY = vec.yCoord * 0.5;
 		this.accelerationZ = vec.zCoord * 0.5;
-		
+
 		this.motionX = accelerationX;
 		this.motionY = accelerationY;
 		this.motionZ = accelerationZ;
 	}
 
 	protected abstract String getDisplayParticle();
-	
+
 	protected void onImpact(MovingObjectPosition pos) 
 	{
 		//Spell will be null when exiting while spell is in progress.
@@ -120,6 +121,15 @@ public abstract class AbstractTargetSpell extends Entity
 		else
 		{
 			super.onUpdate();
+
+			if (!this.worldObj.isRemote)
+			{
+				if (this.caster != null && this.getDistanceToEntity(caster) > 100.0D)
+				{
+					setDead();
+					return;
+				}
+			}
 
 			if (this.inGround)
 			{
@@ -244,7 +254,7 @@ public abstract class AbstractTargetSpell extends Entity
 			this.motionX *= (double)f2;
 			this.motionY *= (double)f2;
 			this.motionZ *= (double)f2;
-			
+
 			if (this.worldObj.isRemote)
 			{
 				for (int i = 0; i < 4; i++)
@@ -252,11 +262,11 @@ public abstract class AbstractTargetSpell extends Entity
 					double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 					double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 					double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-					
+
 					this.worldObj.spawnParticle(getDisplayParticle(), this.posX + SpellboundCore.modRandom.nextFloat(), this.posY + SpellboundCore.modRandom.nextFloat(), this.posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
 				}
 			}
-			
+
 			this.setPosition(this.posX, this.posY, this.posZ);
 		}
 	}
