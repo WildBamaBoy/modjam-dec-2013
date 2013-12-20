@@ -64,7 +64,7 @@ public abstract class AbstractTargetSpell extends Entity
 
 		this.caster = player;
 		this.spell = spell;
-		this.setPosition(player.posX + vec.xCoord * 5, player.posY + 1 + vec.yCoord * 5, player.posZ + vec.zCoord * 5);
+		this.setPosition(player.posX + vec.xCoord * 2, player.posY + 1 + vec.yCoord * 2, player.posZ + vec.zCoord * 2);
 		this.accelerationX = vec.xCoord * 0.5;
 		this.accelerationY = vec.yCoord * 0.5;
 		this.accelerationZ = vec.zCoord * 0.5;
