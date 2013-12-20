@@ -48,11 +48,15 @@ public class SpellTransport extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		if (!worldObj.isRemote && entityHit == null)
+		if (!worldObj.isRemote)
 		{
+			final double spawnX = entityHit == null ? (double)posX : entityHit.posX;
+			final double spawnY = entityHit == null ? (double)posY + 1 : entityHit.posY;
+			final double spawnZ = entityHit == null ? (double)posZ : entityHit.posZ;
+			
 			final EntityPlayerMP casterMP = (EntityPlayerMP)caster;
 			casterMP.mountEntity((Entity)null);
-			casterMP.playerNetServerHandler.setPlayerLocation(posX, posY, posZ, caster.rotationYaw, caster.rotationPitch);
+			casterMP.playerNetServerHandler.setPlayerLocation(spawnX, spawnY, spawnZ, caster.rotationYaw, caster.rotationPitch);
 			
 			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
 		}
