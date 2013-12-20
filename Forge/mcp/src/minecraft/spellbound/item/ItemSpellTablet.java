@@ -70,7 +70,10 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer) 
 	{
-		entityPlayer.worldObj.playSoundAtEntity(entityPlayer, spell.getSpellChargeSound(), 1.0F, 1.0F);
+		if (!entityPlayer.capabilities.isCreativeMode)
+		{
+			entityPlayer.worldObj.playSoundAtEntity(entityPlayer, spell.getSpellChargeSound(), 1.0F, 1.0F);
+		}
 		entityPlayer.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
 		return super.onItemRightClick(itemStack, worldObj, entityPlayer);
 	}
@@ -80,7 +83,7 @@ public class ItemSpellTablet extends SpellboundItem
 	{
 		super.onUsingItemTick(stack, player, count);
 
-		if (count == getMaxItemUseDuration(stack) - spell.getSpellCastDuration().getValue())
+		if (count == getMaxItemUseDuration(stack) - spell.getSpellCastDuration().getValue() && !player.capabilities.isCreativeMode)
 		{
 			player.worldObj.playSoundAtEntity(player, "random.orb", 1.0F, 1.0F);
 		}
@@ -89,9 +92,12 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer, int inUseCount)
 	{
-		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue())
+		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue() || entityPlayer.capabilities.isCreativeMode)
 		{
-			entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+			if (!entityPlayer.capabilities.isCreativeMode)
+			{
+				entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+			}
 			
 			if (!worldObj.isRemote)
 			{
