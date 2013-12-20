@@ -77,7 +77,8 @@ public abstract class AbstractTargetSpell extends Entity
 	
 	protected void onImpact(MovingObjectPosition pos) 
 	{
-		if (!worldObj.isRemote)
+		//Spell will be null when exiting while spell is in progress.
+		if (!worldObj.isRemote && spell != null)
 		{
 			if (pos.entityHit != null && pos.entityHit instanceof EntityLivingBase)
 			{
