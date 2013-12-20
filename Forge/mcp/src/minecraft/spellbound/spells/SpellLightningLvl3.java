@@ -41,8 +41,7 @@ public class SpellLightningLvl3 extends AbstractSpell
 				{
 					if (SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean())
 					{
-						//Save.
-						return;
+						continue;
 					}
 
 					else
