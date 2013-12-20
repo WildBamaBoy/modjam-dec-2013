@@ -100,10 +100,6 @@ public abstract class AbstractTargetSpell extends Entity
 		// No init.
 	}
 
-	/**
-	 * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
-	 * length * 64 * renderDistanceWeight Args: distance
-	 */
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isInRangeToRenderDist(double distance)
@@ -113,9 +109,6 @@ public abstract class AbstractTargetSpell extends Entity
 		return distance < weightedLength * weightedLength;
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -268,17 +261,11 @@ public abstract class AbstractTargetSpell extends Entity
 		}
 	}
 
-	/**
-	 * Return the motion factor for this projectile. The factor is multiplied by the original motion.
-	 */
 	protected float getMotionFactor()
 	{
 		return 0.95F;
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		par1NBTTagCompound.setShort("xTile", (short)this.xTile);
@@ -289,9 +276,6 @@ public abstract class AbstractTargetSpell extends Entity
 		par1NBTTagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		this.xTile = par1NBTTagCompound.getShort("xTile");
@@ -313,9 +297,6 @@ public abstract class AbstractTargetSpell extends Entity
 		}
 	}
 
-	/**
-	 * Returns true if other Entities should be prevented from moving through this Entity.
-	 */
 	@Override
 	public boolean canBeCollidedWith()
 	{
@@ -328,9 +309,6 @@ public abstract class AbstractTargetSpell extends Entity
 		return 1.0F;
 	}
 
-	/**
-	 * Called when the entity is attacked.
-	 */
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
