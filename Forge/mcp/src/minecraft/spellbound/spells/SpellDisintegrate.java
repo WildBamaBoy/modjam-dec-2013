@@ -11,6 +11,7 @@ package spellbound.spells;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -59,8 +60,11 @@ public class SpellDisintegrate extends AbstractSpell
 
 				else
 				{
+					final int dropAmount = SpellboundCore.modRandom.nextInt(5) + 3;
+					final ItemStack dropStack = entityHit instanceof EntitySlime ? new ItemStack(Item.slimeBall, dropAmount, 0) : new ItemStack(Item.dyePowder, dropAmount, 15);
+
 					entityHit.setDead();
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.dyePowder, 1, 15)));
+					worldObj.spawnEntityInWorld(new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, dropStack));
 				}
 			}
 
