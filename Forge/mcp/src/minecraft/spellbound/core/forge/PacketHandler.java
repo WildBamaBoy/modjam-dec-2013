@@ -15,11 +15,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpellWall;
+import spellbound.spells.SpellColdShield;
+import spellbound.spells.SpellShieldOfInvulnerability;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -50,6 +60,11 @@ public class PacketHandler implements IPacketHandler
 			else if (packet.channel.equals("SB_WALLPARTICLES"))
 			{
 				handleWallParticlesPacket(packet, entityPlayer);
+			}
+			
+			else if (packet.channel.equals("SB_COLDBLAST"))
+			{
+				handleColdBlastPacket(packet, entityPlayer);
 			}
 		}
 
@@ -317,6 +332,92 @@ public class PacketHandler implements IPacketHandler
 						AbstractSpellWall.addParticles(entityPlayer.worldObj, centerX - 1, centerY + currentHeight, centerZ - currentWidth);
 						break;
 					default: break;
+					}
+				}
+			}
+		}
+	}
+	
+	public static Packet250CustomPayload createColdBlastPacket(int heading, double casterX, double casterY, double casterZ)
+	{
+		try
+		{
+			//Initialize
+			final ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+			final ObjectOutputStream objectOutput = new ObjectOutputStream(byteOutput);
+			final Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = "SB_COLDBLAST";
+			//---------------------------------------------------------------------------------------
+
+			//Write data
+			objectOutput.writeObject(heading);
+			objectOutput.writeObject(casterX);
+			objectOutput.writeObject(casterY);
+			objectOutput.writeObject(casterZ);
+
+			//---------------------------------------------------------------------------------------
+
+			//Cleanup and return
+			packet.data = byteOutput.toByteArray();
+			packet.length = packet.data.length;
+			return packet;
+		}
+
+		catch (IOException exception)
+		{
+			exception.printStackTrace();
+			return null;
+		}
+	}
+
+	private void handleColdBlastPacket(Packet250CustomPayload packet, EntityPlayer entityPlayer) throws IOException, ClassNotFoundException
+	{
+		//Initialize
+		final ByteArrayInputStream input = new ByteArrayInputStream(packet.data);
+		final ObjectInputStream objectInput = new ObjectInputStream(input);
+		//---------------------------------------------------------------------------------------
+
+		//Read data
+		final int heading = (Integer)objectInput.readObject();
+		final double casterX = (Double)objectInput.readObject();
+		final double casterY = (Double)objectInput.readObject();
+		final double casterZ = (Double)objectInput.readObject();
+
+		//---------------------------------------------------------------------------------------
+		
+		//Process
+		final boolean addX = heading == 2 || heading == 3;
+		final boolean addZ = heading == 0 || heading == 3;
+
+		Integer width = 0;
+		Integer length = 0;
+		
+		for (width = -3; width < 6; width++)
+		{
+			for (length = 3; length < 14; length++)
+			{
+				final int flooredX = MathHelper.floor_double(casterX);
+				final int flooredZ = MathHelper.floor_double(casterZ);
+
+				final int xCounter = heading == 0 || heading == 2 ? width : length;
+				final int zCounter = heading == 0 || heading == 2 ? length : width;
+
+				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
+				final int posY = (int) casterY;
+				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+
+				final int blockId = entityPlayer.worldObj.getBlockId(posX, posY, posZ);
+
+				if (blockId == Block.snow.blockID || blockId == 0)
+				{
+					final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+					final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+					final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+
+					for (int i = 0; i < 6; i++)
+					{
+						entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
+						entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + 1 + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
 					}
 				}
 			}

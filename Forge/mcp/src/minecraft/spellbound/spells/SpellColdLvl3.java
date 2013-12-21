@@ -9,6 +9,7 @@
 
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +20,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
@@ -42,7 +44,7 @@ public class SpellColdLvl3 extends AbstractSpell
 
 		Integer width = 0;
 		Integer length = 0;
-
+		
 		for (width = -3; width < 6; width++)
 		{
 			for (length = 3; length < 14; length++)
@@ -84,6 +86,8 @@ public class SpellColdLvl3 extends AbstractSpell
 				}
 			}
 		}
+		
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdBlastPacket(heading, caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override
