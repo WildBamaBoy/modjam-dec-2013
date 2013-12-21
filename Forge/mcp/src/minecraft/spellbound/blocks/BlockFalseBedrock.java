@@ -11,11 +11,11 @@ package spellbound.blocks;
 
 import java.util.Random;
 
-import spellbound.core.SpellboundCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 
 public class BlockFalseBedrock extends Block
 {
