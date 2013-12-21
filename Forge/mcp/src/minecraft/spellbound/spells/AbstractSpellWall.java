@@ -9,6 +9,7 @@
 
 package spellbound.spells;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
@@ -25,79 +26,79 @@ public abstract class AbstractSpellWall extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.endermen.portal", 1.0F, 1.0F);
 
-		if (!caster.worldObj.isRemote)
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final boolean isOverhead = caster.rotationPitch <= -60.0D;
+		final boolean isUnderneath = caster.rotationPitch >= 60.0D;
+
+		double centerX = caster.posX;
+		double centerY = caster.posY;
+		double centerZ = caster.posZ;
+
+		if (isOverhead)
 		{
-			final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			final boolean isOverhead = caster.rotationPitch <= -60.0D;
-			final boolean isUnderneath = caster.rotationPitch >= 60.0D;
-
-			double wallCenterX = caster.posX;
-			double wallCenterY = caster.posY;
-			double wallCenterZ = caster.posZ;
-
-			if (isOverhead)
+			for (int currentWidth = -3; currentWidth < 2; currentWidth++)
 			{
-				for (int currentWidth = -3; currentWidth < 2; currentWidth++)
+				for (int currentHeight = -2; currentHeight < 3; currentHeight++)
 				{
-					for (int currentHeight = -2; currentHeight < 3; currentHeight++)
-					{
-						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + 3, (int)wallCenterZ + currentHeight, getWallBlockId());
-					}
+					caster.worldObj.setBlock((int)centerX + currentWidth, (int)centerY + 3, (int)centerZ + currentHeight, getWallBlockId());
 				}
 			}
-
-			else if (isUnderneath)
-			{
-				for (int currentWidth = -3; currentWidth < 2; currentWidth++)
-				{
-					for (int currentHeight = -2; currentHeight < 3; currentHeight++)
-					{
-						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY - 1, (int)wallCenterZ + currentHeight, getWallBlockId());
-					}
-				}
-			}
-
-			else
-			{
-				switch (heading)
-				{
-				case 0: wallCenterZ += 3; break;
-				case 1: wallCenterX -= 3; break;
-				case 2: wallCenterZ -= 3; break;
-				case 3: wallCenterX += 3; break;
-				default: break;
-				}
-
-				wallCenterX = MathHelper.floor_double(wallCenterX);
-				wallCenterY = MathHelper.floor_double(wallCenterY);
-				wallCenterZ = MathHelper.floor_double(wallCenterZ);
-
-				for (int currentWidth = -3; currentWidth < 4; currentWidth++)
-				{
-					for (int currentHeight = 0; currentHeight < 3; currentHeight++)
-					{
-						switch (heading)
-						{
-						case 0: 
-							caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId());
-							break;
-						case 1: 
-							caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); 
-							break;
-						case 2: 
-							caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); 
-							break;
-						case 3: 
-							caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId());
-							break;
-						default: break;
-						}
-					}
-				}
-			}
-			
-			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, wallCenterX, wallCenterY, wallCenterZ, isOverhead, isUnderneath));
 		}
+
+		else if (isUnderneath)
+		{
+			for (int currentWidth = -3; currentWidth < 2; currentWidth++)
+			{
+				for (int currentHeight = -2; currentHeight < 3; currentHeight++)
+				{
+					if (caster.worldObj.getBlockId((int)centerX + currentWidth, (int)centerY - 1, (int)centerZ + currentHeight) != Block.bedrock.blockID)
+					{
+						caster.worldObj.setBlock((int)centerX + currentWidth, (int)centerY - 1, (int)centerZ + currentHeight, getWallBlockId());
+					}
+				}
+			}
+		}
+
+		else
+		{
+			switch (heading)
+			{
+			case 0: centerZ += 3; break;
+			case 1: centerX -= 3; break;
+			case 2: centerZ -= 3; break;
+			case 3: centerX += 3; break;
+			default: break;
+			}
+
+			centerX = MathHelper.floor_double(centerX);
+			centerY = MathHelper.floor_double(centerY);
+			centerZ = MathHelper.floor_double(centerZ);
+
+			for (int currentWidth = -3; currentWidth < 4; currentWidth++)
+			{
+				for (int currentHeight = 0; currentHeight < 3; currentHeight++)
+				{
+					switch (heading)
+					{
+					case 0: 
+						caster.worldObj.setBlock((int)centerX + currentWidth, (int)centerY + currentHeight, (int)centerZ, getWallBlockId());
+						break;
+					case 1: 
+						caster.worldObj.setBlock((int)centerX, (int)centerY + currentHeight, (int)centerZ + currentWidth, getWallBlockId()); 
+						break;
+					case 2: 
+						caster.worldObj.setBlock((int)centerX + currentWidth, (int)centerY + currentHeight, (int)centerZ, getWallBlockId()); 
+						break;
+					case 3: 
+						caster.worldObj.setBlock((int)centerX, (int)centerY + currentHeight, (int)centerZ - currentWidth, getWallBlockId());
+						break;
+					default: break;
+					}
+				}
+			}
+		}
+
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, centerX, centerY, centerZ, isOverhead, isUnderneath));
 	}
 
 	@Override
