@@ -24,7 +24,6 @@ import spellbound.core.SpellboundCore;
 import spellbound.core.forge.PacketHandler;
 import spellbound.entity.AbstractTargetSpell;
 import spellbound.entity.EntityTargetSpellElementalFury;
-import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -63,8 +62,10 @@ public class SpellElementalFury extends AbstractSpell
 		{
 			if (obj instanceof EntityLivingBase)
 			{
-				boolean canAffectEntity = (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class)) || !(obj instanceof EntityPlayer) && (obj instanceof EntityLivingBase);
 				final EntityLivingBase livingEntity = (EntityLivingBase)obj;
+				final boolean canAffectEntity = 
+						obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class) 
+						|| !(obj instanceof EntityPlayer) && (obj instanceof EntityLivingBase);
 
 				if (canAffectEntity)
 				{
