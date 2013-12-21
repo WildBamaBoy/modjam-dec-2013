@@ -12,6 +12,7 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
@@ -30,10 +31,13 @@ public class SpellSummonLvl1 extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 
 		final EntityWolf wolf = new EntityWolf(caster.worldObj);
+		
 		wolf.setTamed(true);
 		wolf.setOwner(caster.username);
+        wolf.setHealth(20.0F);
+        wolf.worldObj.setEntityState(wolf, (byte)7);
 		wolf.setPosition(caster.posX, caster.posY, caster.posZ);
-
+		
 		caster.worldObj.spawnEntityInWorld(wolf);
 	}
 
