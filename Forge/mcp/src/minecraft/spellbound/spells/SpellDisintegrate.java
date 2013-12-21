@@ -51,7 +51,7 @@ public class SpellDisintegrate extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			if (SpellboundCore.modRandom.nextBoolean())
+			if (SpellboundCore.getBooleanWithProbability(60))
 			{
 				if (entityHit instanceof EntityPlayer)
 				{
