@@ -12,8 +12,13 @@ package spellbound.spells;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
@@ -29,54 +34,32 @@ public class SpellFireLvl1 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-		
+
 		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		
-		if (heading == 0)
+
+		final boolean addX = heading == 2 || heading == 3;
+		final boolean addZ = heading == 0 || heading == 3;
+
+		Integer dummy = 0;
+		Integer length = 0;
+
+		for (length = 3; length < 14; length++)
 		{
-			for (int i = 3; i < 10; i++)
-			{				
-				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
-				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
-				{
-					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i), Block.fire.blockID);
-				}
-			}
-		}
-		
-		if (heading == 1)
-		{
-			for (int i = 3; i < 10; i++)
-			{				
-				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
-				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
-				{
-					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
-				}
-			}
-		}
-		
-		if (heading == 2)
-		{
-			for (int i = 3; i < 10; i++)
-			{				
-				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
-				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
-				{
-					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i), Block.fire.blockID);
-				}
-			}
-		}
-		
-		if (heading == 3)
-		{
-			for (int i = 3; i < 10; i++)
-			{				
-				final int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
-				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.tallGrass.blockID)
-				{
-					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.fire.blockID);
-				}
+			final int flooredX = MathHelper.floor_double(caster.posX);
+			final int flooredZ = MathHelper.floor_double(caster.posZ);
+
+			final int xCounter = heading == 0 || heading == 2 ? dummy : length;
+			final int zCounter = heading == 0 || heading == 2 ? length : dummy;
+
+			final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
+			final int posY = (int) caster.posY;
+			final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+
+			final int blockId = caster.worldObj.getBlockId(posX, posY, posZ);
+
+			if (blockId == Block.snow.blockID || blockId == 0)
+			{
+				caster.worldObj.setBlock(posX, posY, posZ, Block.fire.blockID);
 			}
 		}
 	}
