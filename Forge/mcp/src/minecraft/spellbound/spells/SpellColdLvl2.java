@@ -36,11 +36,7 @@ public class SpellColdLvl2 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-
-		if (!caster.worldObj.isRemote)
-		{
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellCold(caster, this));
-		}
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellCold(caster, this));
 	}
 
 	@Override

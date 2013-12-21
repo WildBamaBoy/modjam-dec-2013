@@ -28,12 +28,8 @@ public class SpellChangeWeather extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			MinecraftServer.getServer().worldServers[0].toggleRain();
-			MinecraftServer.getServer().worldServers[0].getWorldInfo().setThundering(true);
-		}
+		MinecraftServer.getServer().worldServers[0].toggleRain();
+		MinecraftServer.getServer().worldServers[0].getWorldInfo().setThundering(true);
 	}
 
 	@Override
@@ -47,7 +43,7 @@ public class SpellChangeWeather extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

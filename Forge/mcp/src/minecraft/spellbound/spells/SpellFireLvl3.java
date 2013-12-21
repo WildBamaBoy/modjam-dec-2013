@@ -29,11 +29,8 @@ public class SpellFireLvl3 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		if (!caster.worldObj.isRemote)
-		{
-			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
-		}
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
 	}
 
 	@Override

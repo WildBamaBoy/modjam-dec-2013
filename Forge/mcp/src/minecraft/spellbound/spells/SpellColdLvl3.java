@@ -33,42 +33,39 @@ public class SpellColdLvl3 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		if (!caster.worldObj.isRemote)
+		caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
+
+		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+		if (heading == 0)
 		{
-			caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
-
-			int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-			if (heading == 0)
+			for (int j = -3; j < 6; j++)
 			{
-				for (int j = -3; j < 6; j++)
-				{
-					for (int i = 3; i < 14; i++)
-					{			
-						int blockId = caster.worldObj.getBlockId((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i);
-						if (blockId == Block.snow.blockID || blockId == 0)
+				for (int i = 3; i < 14; i++)
+				{			
+					int blockId = caster.worldObj.getBlockId((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i);
+					if (blockId == Block.snow.blockID || blockId == 0)
+					{
+						int radius = 2;
+
+						caster.worldObj.setBlock((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
+
+						for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
 						{
-							int radius = 2;
-
-							caster.worldObj.setBlock((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
-
-							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
+							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 							{
-								if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-								{
+								EntityLivingBase hitEntity = (EntityLivingBase)obj;
+								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+								hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+							}
+
+							else if (obj instanceof EntityPlayer)
+							{
+								if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
+								{							
 									EntityLivingBase hitEntity = (EntityLivingBase)obj;
 									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-								}
-								
-								else if (obj instanceof EntityPlayer)
-								{
-									if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-									{							
-										EntityLivingBase hitEntity = (EntityLivingBase)obj;
-										hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-										hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-									}
 								}
 							}
 						}
@@ -96,7 +93,7 @@ public class SpellColdLvl3 extends AbstractSpell
 									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 								}
 							}
-							
+
 							caster.worldObj.setBlock((int)caster.posX - i, (int)caster.posY, (int)caster.posZ - j, Block.snow.blockID);
 						}
 					}
@@ -123,7 +120,7 @@ public class SpellColdLvl3 extends AbstractSpell
 									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 								}
 							}
-							
+
 							caster.worldObj.setBlock((int)caster.posX + j, (int)caster.posY, (int)caster.posZ - i, Block.snow.blockID);
 						}
 					}
@@ -150,7 +147,7 @@ public class SpellColdLvl3 extends AbstractSpell
 									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 								}
 							}
-							
+
 							caster.worldObj.setBlock((int)caster.posX + i, (int)caster.posY, (int)caster.posZ + j, Block.snow.blockID);
 						}
 					}
@@ -170,7 +167,7 @@ public class SpellColdLvl3 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

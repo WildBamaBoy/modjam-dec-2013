@@ -31,16 +31,13 @@ public class SpellSummonLvl2 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			final EntityMob mob = SpellboundCore.modRandom.nextBoolean() ? new EntitySkeleton(caster.worldObj) : new EntityZombie(caster.worldObj);
-			mob.setPosition(caster.posX, caster.posY, caster.posZ);
 
-			caster.worldObj.spawnEntityInWorld(mob);
-		}
+		final EntityMob mob = SpellboundCore.modRandom.nextBoolean() ? new EntitySkeleton(caster.worldObj) : new EntityZombie(caster.worldObj);
+		mob.setPosition(caster.posX, caster.posY, caster.posZ);
+
+		caster.worldObj.spawnEntityInWorld(mob);
 	}
-	
+
 	@Override
 	public EnumSpellRange getSpellType() 
 	{
@@ -52,7 +49,7 @@ public class SpellSummonLvl2 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

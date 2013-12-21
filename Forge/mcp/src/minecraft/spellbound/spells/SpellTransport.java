@@ -29,14 +29,8 @@ public class SpellTransport extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		this.caster = caster;
-
-		if (!caster.worldObj.isRemote)
-		{
-			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDivination(caster, this));
-		}
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDivination(caster, this));
 	}
 
 	@Override
@@ -53,11 +47,11 @@ public class SpellTransport extends AbstractSpell
 			final double spawnX = entityHit == null ? (double)posX : entityHit.posX;
 			final double spawnY = entityHit == null ? (double)posY + 1 : entityHit.posY;
 			final double spawnZ = entityHit == null ? (double)posZ : entityHit.posZ;
-			
+
 			final EntityPlayerMP casterMP = (EntityPlayerMP)caster;
 			casterMP.mountEntity((Entity)null);
 			casterMP.playerNetServerHandler.setPlayerLocation(spawnX, spawnY, spawnZ, caster.rotationYaw, caster.rotationPitch);
-			
+
 			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
 		}
 	}

@@ -31,18 +31,15 @@ public class SpellAdvanceTime extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.modRandom.nextInt(5000) + 5000;
-			caster.worldObj.setWorldTime(newWorldTime);
 
-			for (final int cropID : Constants.CROP_IDS)
+		final long newWorldTime = caster.worldObj.getWorldTime() + SpellboundCore.modRandom.nextInt(5000) + 5000;
+		caster.worldObj.setWorldTime(newWorldTime);
+
+		for (final int cropID : Constants.CROP_IDS)
+		{
+			for (final Point3D point : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, cropID))
 			{
-				for (final Point3D point : Logic.getNearbyBlocks(caster.worldObj, (int)caster.posX, (int)caster.posY, (int)caster.posZ, 25, cropID))
-				{
-					caster.worldObj.setBlockMetadataWithNotify(point.posX, point.posY, point.posZ, 7, 2);
-				}
+				caster.worldObj.setBlockMetadataWithNotify(point.posX, point.posY, point.posZ, 7, 2);
 			}
 		}
 	}

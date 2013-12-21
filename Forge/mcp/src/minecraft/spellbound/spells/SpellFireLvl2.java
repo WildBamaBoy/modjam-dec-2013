@@ -29,19 +29,16 @@ public class SpellFireLvl2 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			final Vec3 vec = caster.getLookVec();
-			final EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
-			fireball.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
 
-			fireball.accelerationX = vec.xCoord * 0.3;
-			fireball.accelerationY = vec.yCoord * 0.3;
-			fireball.accelerationZ = vec.zCoord * 0.3;
+		final Vec3 vec = caster.getLookVec();
+		final EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
+		fireball.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
 
-			caster.worldObj.spawnEntityInWorld(fireball);
-		}
+		fireball.accelerationX = vec.xCoord * 0.3;
+		fireball.accelerationY = vec.yCoord * 0.3;
+		fireball.accelerationZ = vec.zCoord * 0.3;
+
+		caster.worldObj.spawnEntityInWorld(fireball);
 	}
 
 	@Override
@@ -55,7 +52,7 @@ public class SpellFireLvl2 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

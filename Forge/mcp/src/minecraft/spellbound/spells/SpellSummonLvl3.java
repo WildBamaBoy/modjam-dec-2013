@@ -28,15 +28,12 @@ public class SpellSummonLvl3 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			final EntitySkeleton witherSkeleton = new EntitySkeleton(caster.worldObj);
-			witherSkeleton.setSkeletonType(1);
-			witherSkeleton.setPosition(caster.posX, caster.posY, caster.posZ);
-			
-			caster.worldObj.spawnEntityInWorld(witherSkeleton);
-		}
+
+		final EntitySkeleton witherSkeleton = new EntitySkeleton(caster.worldObj);
+		witherSkeleton.setSkeletonType(1);
+		witherSkeleton.setPosition(caster.posX, caster.posY, caster.posZ);
+
+		caster.worldObj.spawnEntityInWorld(witherSkeleton);
 	}
 
 	@Override
@@ -50,7 +47,7 @@ public class SpellSummonLvl3 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

@@ -32,53 +32,50 @@ public class SpellDimensionDoor extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.endermen.portal", 1.0F, 1.0F);
 
-		if (!caster.worldObj.isRemote)
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int transportAmount = SpellboundCore.modRandom.nextInt(200) + 100;
+
+		double newPlayerX = 0.0D;
+		double newPlayerY = 0.0D;
+		double newPlayerZ = 0.0D;
+
+		if (heading == 0)
 		{
-			final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			final int transportAmount = SpellboundCore.modRandom.nextInt(200) + 100;
-
-			double newPlayerX = 0.0D;
-			double newPlayerY = 0.0D;
-			double newPlayerZ = 0.0D;
-
-			if (heading == 0)
-			{
-				newPlayerX = caster.posX;
-				newPlayerY = 255;
-				newPlayerZ = caster.posZ + transportAmount;
-			}
-
-			else if (heading == 1)
-			{
-				newPlayerX = caster.posX - transportAmount;
-				newPlayerY = 255;
-				newPlayerZ = caster.posZ;
-			}
-
-			else if (heading == 2)
-			{
-				newPlayerX = caster.posX;
-				newPlayerY = 255;
-				newPlayerZ = caster.posZ - transportAmount;
-			}
-
-			else if (heading == 3)
-			{
-				newPlayerX = caster.posX + transportAmount;
-				newPlayerY = 255;
-				newPlayerZ = caster.posZ;
-			}
-
-			while (caster.worldObj.getBlockId((int)newPlayerX, (int)newPlayerY, (int)newPlayerZ) == 0 && newPlayerY != 0)
-			{
-				newPlayerY--;
-			}
-
-			final EntityPlayerMP casterMP = (EntityPlayerMP)caster;
-			casterMP.mountEntity((Entity)null);
-			casterMP.playerNetServerHandler.setPlayerLocation(newPlayerX, newPlayerY + 1, newPlayerZ, caster.rotationYaw, caster.rotationPitch);
-			caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
+			newPlayerX = caster.posX;
+			newPlayerY = 255;
+			newPlayerZ = caster.posZ + transportAmount;
 		}
+
+		else if (heading == 1)
+		{
+			newPlayerX = caster.posX - transportAmount;
+			newPlayerY = 255;
+			newPlayerZ = caster.posZ;
+		}
+
+		else if (heading == 2)
+		{
+			newPlayerX = caster.posX;
+			newPlayerY = 255;
+			newPlayerZ = caster.posZ - transportAmount;
+		}
+
+		else if (heading == 3)
+		{
+			newPlayerX = caster.posX + transportAmount;
+			newPlayerY = 255;
+			newPlayerZ = caster.posZ;
+		}
+
+		while (caster.worldObj.getBlockId((int)newPlayerX, (int)newPlayerY, (int)newPlayerZ) == 0 && newPlayerY != 0)
+		{
+			newPlayerY--;
+		}
+
+		final EntityPlayerMP casterMP = (EntityPlayerMP)caster;
+		casterMP.mountEntity((Entity)null);
+		casterMP.playerNetServerHandler.setPlayerLocation(newPlayerX, newPlayerY + 1, newPlayerZ, caster.rotationYaw, caster.rotationPitch);
+		caster.worldObj.playSoundAtEntity(casterMP, "mob.endermen.portal", 1.0F, 1.0F);
 	}
 
 	@Override
@@ -92,7 +89,7 @@ public class SpellDimensionDoor extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

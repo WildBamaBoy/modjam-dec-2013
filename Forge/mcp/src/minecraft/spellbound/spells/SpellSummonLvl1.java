@@ -28,17 +28,14 @@ public class SpellSummonLvl1 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
-		
-		if (!caster.worldObj.isRemote)
-		{
-			final EntityWolf wolf = new EntityWolf(caster.worldObj);
-			wolf.setAngry(true);
-			wolf.setPosition(caster.posX, caster.posY, caster.posZ);
-			
-			caster.worldObj.spawnEntityInWorld(wolf);
-		}
+
+		final EntityWolf wolf = new EntityWolf(caster.worldObj);
+		wolf.setAngry(true);
+		wolf.setPosition(caster.posX, caster.posY, caster.posZ);
+
+		caster.worldObj.spawnEntityInWorld(wolf);
 	}
-	
+
 	@Override
 	public EnumSpellRange getSpellType() 
 	{
@@ -50,7 +47,7 @@ public class SpellSummonLvl1 extends AbstractSpell
 	{
 		//No target effect.
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

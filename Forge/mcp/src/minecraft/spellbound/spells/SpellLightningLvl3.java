@@ -33,35 +33,32 @@ public class SpellLightningLvl3 extends AbstractSpell
 	{
 		caster.worldObj.playSoundEffect(caster.posX, caster.posY, caster.posZ, "ambient.weather.thunder", 10000.0F, 1.0F);
 
-		if (!caster.worldObj.isRemote)
+		for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - 35, caster.posY - 15, caster.posZ - 35, caster.posX + 35, caster.posY + 15, caster.posZ + 35)))
 		{
-			for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(caster.posX - 35, caster.posY - 15, caster.posZ - 35, caster.posX + 35, caster.posY + 15, caster.posZ + 35)))
+			if (obj instanceof EntityLivingBase)
 			{
-				if (obj instanceof EntityLivingBase)
+				if (SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean())
 				{
-					if (SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean())
+					continue;
+				}
+
+				else
+				{
+					final EntityLivingBase entity = (EntityLivingBase)obj;
+
+					if (entity instanceof EntityPlayer)
 					{
-						continue;
-					}
-
-					else
-					{
-						final EntityLivingBase entity = (EntityLivingBase)obj;
-
-						if (entity instanceof EntityPlayer)
-						{
-							if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entity, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entity, SpellLightningShield.class))
-							{
-								caster.worldObj.spawnEntityInWorld(new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ));
-								PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
-							}
-						}
-
-						else
+						if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entity, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entity, SpellLightningShield.class))
 						{
 							caster.worldObj.spawnEntityInWorld(new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ));
 							PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
 						}
+					}
+
+					else
+					{
+						caster.worldObj.spawnEntityInWorld(new EntityLightningBolt(caster.worldObj, entity.posX, entity.posY, entity.posZ));
+						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(entity.posX, entity.posY, entity.posZ));
 					}
 				}
 			}

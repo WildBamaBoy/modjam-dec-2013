@@ -32,11 +32,8 @@ public class SpellGrease extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		if (!caster.worldObj.isRemote)
-		{
-			caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellMundane(caster, this));
-		}
+		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellMundane(caster, this));
 	}
 
 	@Override
@@ -54,7 +51,7 @@ public class SpellGrease extends AbstractSpell
 			worldObj.spawnEntityInWorld(new EntityItem(worldObj, entityHit.posX, entityHit.posY, entityHit.posZ, new ItemStack(Item.porkCooked, SpellboundCore.modRandom.nextInt(2) + 3, 15)));
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{

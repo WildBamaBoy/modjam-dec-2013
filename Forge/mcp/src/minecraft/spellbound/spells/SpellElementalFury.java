@@ -43,11 +43,8 @@ public class SpellElementalFury extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.spawn", 1.0F, 1.0F);
 		caster.worldObj.playSoundAtEntity(caster, "ambient.weather.thunder", 1.0F, 1.0F);
 
-		if (!caster.worldObj.isRemote)
-		{
-			final AbstractTargetSpell spell = new EntityTargetSpellElementalFury(caster, this);
-			caster.worldObj.spawnEntityInWorld(spell);
-		}
+		final AbstractTargetSpell spell = new EntityTargetSpellElementalFury(caster, this);
+		caster.worldObj.spawnEntityInWorld(spell);
 	}
 
 	@Override
@@ -95,7 +92,7 @@ public class SpellElementalFury extends AbstractSpell
 			}
 		}
 	}
-	
+
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{
