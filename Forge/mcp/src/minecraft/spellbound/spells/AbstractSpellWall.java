@@ -28,50 +28,78 @@ public abstract class AbstractSpellWall extends AbstractSpell
 		if (!caster.worldObj.isRemote)
 		{
 			final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			final boolean isOverhead = caster.rotationPitch <= -60.0D;
+			final boolean isUnderneath = caster.rotationPitch >= 60.0D;
 
 			double wallCenterX = caster.posX;
 			double wallCenterY = caster.posY;
 			double wallCenterZ = caster.posZ;
 
-			switch (heading)
+			if (isOverhead)
 			{
-			case 0: wallCenterZ += 3; break;
-			case 1: wallCenterX -= 3; break;
-			case 2: wallCenterZ -= 3; break;
-			case 3: wallCenterX += 3; break;
-			default: break;
-			}
-
-			wallCenterX = MathHelper.floor_double(wallCenterX);
-			wallCenterY = MathHelper.floor_double(wallCenterY);
-			wallCenterZ = MathHelper.floor_double(wallCenterZ);
-
-			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, wallCenterX, wallCenterY, wallCenterZ));
-			for (int currentWidth = -3; currentWidth < 4; currentWidth++)
-			{
-				for (int currentHeight = 0; currentHeight < 3; currentHeight++)
+				for (int currentWidth = -3; currentWidth < 2; currentWidth++)
 				{
-					switch (heading)
+					for (int currentHeight = -2; currentHeight < 3; currentHeight++)
 					{
-					case 0: 
-						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId());
-						break;
-					case 1: 
-						caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); 
-						break;
-					case 2: 
-						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); 
-						break;
-					case 3: 
-						caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId());
-						break;
-					default: break;
+						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + 3, (int)wallCenterZ + currentHeight, getWallBlockId());
 					}
 				}
 			}
+
+			else if (isUnderneath)
+			{
+				for (int currentWidth = -3; currentWidth < 2; currentWidth++)
+				{
+					for (int currentHeight = -2; currentHeight < 3; currentHeight++)
+					{
+						caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY - 1, (int)wallCenterZ + currentHeight, getWallBlockId());
+					}
+				}
+			}
+
+			else
+			{
+				switch (heading)
+				{
+				case 0: wallCenterZ += 3; break;
+				case 1: wallCenterX -= 3; break;
+				case 2: wallCenterZ -= 3; break;
+				case 3: wallCenterX += 3; break;
+				default: break;
+				}
+
+				wallCenterX = MathHelper.floor_double(wallCenterX);
+				wallCenterY = MathHelper.floor_double(wallCenterY);
+				wallCenterZ = MathHelper.floor_double(wallCenterZ);
+
+				for (int currentWidth = -3; currentWidth < 4; currentWidth++)
+				{
+					for (int currentHeight = 0; currentHeight < 3; currentHeight++)
+					{
+						switch (heading)
+						{
+						case 0: 
+							caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId());
+							break;
+						case 1: 
+							caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ + currentWidth, getWallBlockId()); 
+							break;
+						case 2: 
+							caster.worldObj.setBlock((int)wallCenterX + currentWidth, (int)wallCenterY + currentHeight, (int)wallCenterZ, getWallBlockId()); 
+							break;
+						case 3: 
+							caster.worldObj.setBlock((int)wallCenterX, (int)wallCenterY + currentHeight, (int)wallCenterZ - currentWidth, getWallBlockId());
+							break;
+						default: break;
+						}
+					}
+				}
+			}
+			
+			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, wallCenterX, wallCenterY, wallCenterZ, isOverhead, isUnderneath));
 		}
 	}
-	
+
 	@Override
 	public final EnumSpellRange getSpellType() 
 	{
@@ -85,13 +113,13 @@ public abstract class AbstractSpellWall extends AbstractSpell
 	}
 
 	public abstract int getWallBlockId();
-	
+
 	public static void addParticles(World world, double posX, double posY, double posZ)
 	{
 		double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 		double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 		double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-		
+
 		for (int i = 0; i < 6; i++)
 		{
 			world.spawnParticle("happyVillager", posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
