@@ -18,7 +18,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellDisintegrate;
-import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
