@@ -117,6 +117,7 @@ public class ItemSpellTablet extends SpellboundItem
 					
 					else
 					{
+						spell.caster = entityPlayer;
 						spell.doSpellCasterEffect(entityPlayer);
 					}
 				}
