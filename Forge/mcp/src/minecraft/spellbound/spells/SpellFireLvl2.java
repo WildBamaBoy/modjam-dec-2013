@@ -12,8 +12,11 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
+import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
@@ -29,16 +32,7 @@ public class SpellFireLvl2 extends AbstractSpell
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
-
-		final Vec3 vec = caster.getLookVec();
-		final EntityLargeFireball fireball = new EntityLargeFireball(caster.worldObj, caster, caster.posX, caster.posY, caster.posZ);
-		fireball.setPosition(caster.posX + vec.xCoord * 5, caster.posY + 1 + vec.yCoord * 5, caster.posZ + vec.zCoord * 5);
-
-		fireball.accelerationX = vec.xCoord * 0.3;
-		fireball.accelerationY = vec.yCoord * 0.3;
-		fireball.accelerationZ = vec.zCoord * 0.3;
-
-		caster.worldObj.spawnEntityInWorld(fireball);
+		caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
 	}
 
 	@Override
@@ -50,7 +44,27 @@ public class SpellFireLvl2 extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		//No target effect.
+		if (entityHit == null)
+		{
+			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 3.0F, true);
+		}
+
+		else
+		{
+			if (entityHit instanceof EntityPlayer)
+			{
+				if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellFireShield.class))
+				{
+					worldObj.createExplosion(entityHit, (double)posX, (double)posY, (double)posZ, 3.0F, true);
+				}
+			}
+
+			else
+			{
+				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
+				worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 3.0F, true);
+			}
+		}
 	}
 
 	@Override
