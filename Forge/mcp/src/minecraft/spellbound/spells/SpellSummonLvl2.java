@@ -14,6 +14,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
@@ -33,6 +35,12 @@ public class SpellSummonLvl2 extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 
 		final EntityMob mob = SpellboundCore.modRandom.nextBoolean() ? new EntitySkeleton(caster.worldObj) : new EntityZombie(caster.worldObj);
+		
+		if (mob instanceof EntitySkeleton)
+		{
+			mob.setCurrentItemOrArmor(0, new ItemStack(Item.bow, 1, 0));
+		}
+		
 		mob.setPosition(caster.posX, caster.posY, caster.posZ);
 
 		caster.worldObj.spawnEntityInWorld(mob);
