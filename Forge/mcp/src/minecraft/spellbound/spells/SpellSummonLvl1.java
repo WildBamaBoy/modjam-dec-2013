@@ -30,7 +30,8 @@ public class SpellSummonLvl1 extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 
 		final EntityWolf wolf = new EntityWolf(caster.worldObj);
-		wolf.setAngry(true);
+		wolf.setTamed(true);
+		wolf.setOwner(caster.username);
 		wolf.setPosition(caster.posX, caster.posY, caster.posZ);
 
 		caster.worldObj.spawnEntityInWorld(wolf);
