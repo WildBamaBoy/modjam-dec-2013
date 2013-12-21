@@ -32,6 +32,7 @@ public class SpellDisintegrate extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "mob.wither.spawn", 1.0F, 1.0F);
 		if (!caster.worldObj.isRemote)
 		{
 			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
