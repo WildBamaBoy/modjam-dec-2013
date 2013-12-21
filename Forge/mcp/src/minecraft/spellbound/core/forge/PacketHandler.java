@@ -16,26 +16,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
 import spellbound.core.util.Logic;
 import spellbound.core.util.Point3D;
 import spellbound.spells.AbstractSpellWall;
-import spellbound.spells.SpellColdShield;
-import spellbound.spells.SpellShieldOfInvulnerability;
 import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler

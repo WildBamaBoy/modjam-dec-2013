@@ -12,7 +12,6 @@ package spellbound.spells;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;

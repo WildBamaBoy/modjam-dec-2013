@@ -9,7 +9,6 @@
 
 package spellbound.spells;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +22,7 @@ import spellbound.core.SpellboundCore;
 import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellColdLvl3 extends AbstractSpell
 {
