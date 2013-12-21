@@ -9,6 +9,7 @@
 
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.core.util.Logic;
 import spellbound.core.util.Point3D;
 import spellbound.entity.EntityTargetSpellCold;
@@ -50,6 +52,8 @@ public class SpellColdLvl2 extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
+			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdParticlesPacket(2, 0, entityHit.posX, entityHit.posY, entityHit.posZ));
+			
 			for (final Point3D point : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, Constants.SNOW_SUPPORTERS))
 			{
 				if (worldObj.getBlockId(point.posX, point.posY + 1, point.posZ) == 0)

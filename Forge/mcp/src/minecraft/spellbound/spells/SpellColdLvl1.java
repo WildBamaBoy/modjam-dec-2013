@@ -9,6 +9,7 @@
 
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
@@ -34,136 +36,56 @@ public class SpellColdLvl1 extends AbstractSpell
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
-		caster.inventory.decrStackSize(caster.inventory.currentItem, 1);
 		caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
 
-		//TODO Redo.
-		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (heading == 0)
+		final boolean addX = heading == 2 || heading == 3;
+		final boolean addZ = heading == 0 || heading == 3;
+
+		Integer dummy = 0;
+		Integer length = 0;
+
+		for (length = 3; length < 14; length++)
 		{
-			for (int i = 3; i < 10; i++)
-			{				
-				int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i));
-				if (blockId == Block.snow.blockID || blockId == 0)
+			final int flooredX = MathHelper.floor_double(caster.posX);
+			final int flooredZ = MathHelper.floor_double(caster.posZ);
+
+			final int xCounter = heading == 0 || heading == 2 ? dummy : length;
+			final int zCounter = heading == 0 || heading == 2 ? length : dummy;
+
+			final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
+			final int posY = (int) caster.posY;
+			final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+
+			final int blockId = caster.worldObj.getBlockId(posX, posY, posZ);
+
+			if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.fire.blockID)
+			{
+				final int radius = 6;
+
+				caster.worldObj.setBlock(posX, posY, posZ, Block.snow.blockID);
+
+				for (final Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(posX - radius, posY - 3, posZ - radius, posX + radius, posY + 3, posZ + radius)))
 				{
-					int radius = 2;
-
-					caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ + i), Block.snow.blockID);
-
-					for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
+					if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 					{
-						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-							hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
-						}
-
-						else if (obj instanceof EntityPlayer)
-						{
-							if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-							{							
-								SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
-							}
-						}
-					}
-				}
-			}
-
-			if (heading == 1)
-			{
-				for (int i = 3; i < 10; i++)
-				{				
-					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
-					if (blockId == Block.snow.blockID || blockId == 0)
-					{
-						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX - i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.snow.blockID);
+						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+						hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+						hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 					}
 
-					int radius = 2;
-					for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - i, (int)caster.posY - 3, (int)caster.posZ - radius, (int)caster.posX - i + radius, (int)caster.posY + 3, (int)caster.posZ + radius)))
+					else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
 					{
-						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-							hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
-						}
-
-						else if (obj instanceof EntityPlayer)
-						{
-							if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-							{							
-								SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
-							}
-						}
-					}
-				}
-			}
-
-			if (heading == 2)
-			{
-				for (int i = 3; i < 10; i++)
-				{				
-					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i));
-					if (blockId == Block.snow.blockID || blockId == 0)
-					{
-						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ - i), Block.snow.blockID);
-
-						int radius = 2;
-						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX - radius, (int)caster.posY - 3, (int)caster.posZ - i - radius, (int)caster.posX + radius, (int)caster.posY + 3, (int)caster.posZ - i + radius)))
-						{
-							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-							{
-								EntityLivingBase hitEntity = (EntityLivingBase)obj;
-								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-								hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
-							}
-
-							else if (obj instanceof EntityPlayer)
-							{
-								if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-								{							
-									SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
-								}
-							}
-						}
-					}
-				}
-			}
-
-			if (heading == 3)
-			{
-				for (int i = 3; i < 10; i++)
-				{				
-					int blockId = caster.worldObj.getBlockId((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ));
-					if (blockId == Block.snow.blockID || blockId == 0)
-					{
-						caster.worldObj.setBlock((int)MathHelper.floor_double(caster.posX + i), (int)caster.posY, (int)MathHelper.floor_double(caster.posZ), Block.snow.blockID);
-
-						int radius = 2;
-						for (Object obj : caster.worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox((int)caster.posX + i - radius, (int)caster.posY - 3, (int)caster.posZ - radius, (int)caster.posX + i + radius, (int)caster.posY + 3, (int)caster.posZ + radius)))
-						{
-							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-							{
-								EntityLivingBase hitEntity = (EntityLivingBase)obj;
-								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-								hitEntity.attackEntityFrom(DamageSource.magic, 6.0F);
-							}
-
-							else if (obj instanceof EntityPlayer)
-							{
-								if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-								{							
-									SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
-								}
-							}
-						}
+						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+						hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+						hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 					}
 				}
 			}
 		}
+
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdParticlesPacket(1, heading, caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override

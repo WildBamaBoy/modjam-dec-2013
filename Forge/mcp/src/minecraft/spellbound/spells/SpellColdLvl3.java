@@ -61,7 +61,7 @@ public class SpellColdLvl3 extends AbstractSpell
 
 				final int blockId = caster.worldObj.getBlockId(posX, posY, posZ);
 
-				if (blockId == Block.snow.blockID || blockId == 0)
+				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.fire.blockID)
 				{
 					final int radius = 6;
 
@@ -87,7 +87,7 @@ public class SpellColdLvl3 extends AbstractSpell
 			}
 		}
 		
-		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdBlastPacket(heading, caster.posX, caster.posY, caster.posZ));
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdParticlesPacket(3, heading, caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override
