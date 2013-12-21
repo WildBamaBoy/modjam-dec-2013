@@ -35,120 +35,50 @@ public class SpellColdLvl3 extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "random.glass", 1.0F, 1.0F);
 
-		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (heading == 0)
+		final boolean addX = heading == 2 || heading == 3;
+		final boolean addZ = heading == 0 || heading == 3;
+
+		Integer width = 0;
+		Integer length = 0;
+
+		for (width = -3; width < 6; width++)
 		{
-			for (int j = -3; j < 6; j++)
+			for (length = 3; length < 14; length++)
 			{
-				for (int i = 3; i < 14; i++)
-				{			
-					int blockId = caster.worldObj.getBlockId((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i);
-					if (blockId == Block.snow.blockID || blockId == 0)
+				final int flooredX = MathHelper.floor_double(caster.posX);
+				final int flooredZ = MathHelper.floor_double(caster.posZ);
+
+				final int xCounter = heading == 0 || heading == 2 ? width : length;
+				final int zCounter = heading == 0 || heading == 2 ? length : width;
+
+				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
+				final int posY = (int) caster.posY;
+				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+
+				final int blockId = caster.worldObj.getBlockId(posX, posY, posZ);
+
+				if (blockId == Block.snow.blockID || blockId == 0)
+				{
+					final int radius = 6;
+
+					caster.worldObj.setBlock(posX, posY, posZ, Block.snow.blockID);
+
+					for (final Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(posX - radius, posY - 3, posZ - radius, posX + radius, posY + 3, posZ + radius)))
 					{
-						int radius = 2;
-
-						caster.worldObj.setBlock((int)caster.posX - j, (int)caster.posY, (int)caster.posZ + i, Block.snow.blockID);
-
-						for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
+						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 						{
-							if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-							{
-								EntityLivingBase hitEntity = (EntityLivingBase)obj;
-								hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-								hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-							}
-
-							else if (obj instanceof EntityPlayer)
-							{
-								if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
-								{							
-									EntityLivingBase hitEntity = (EntityLivingBase)obj;
-									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-								}
-							}
+							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 						}
-					}
-				}
-			}
 
-			if (heading == 1)
-			{
-				for (int j = -3; j < 6; j++)
-				{
-					for (int i = 3; i < 14; i++)
-					{				
-						int blockId = caster.worldObj.getBlockId((int)caster.posX - i, (int)caster.posY, (int)caster.posZ - j);
-						if (blockId == Block.snow.blockID || blockId == 0)
+						else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
 						{
-							int radius = 2;
-
-							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - i, (int)caster.posY - 3, (int)caster.posZ - j - radius, (int)caster.posX + radius - i, (int)caster.posY + 3, (int)caster.posZ - j + radius)))
-							{
-								if (obj instanceof EntityLivingBase)
-								{
-									EntityLivingBase hitEntity = (EntityLivingBase)obj;
-									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-								}
-							}
-
-							caster.worldObj.setBlock((int)caster.posX - i, (int)caster.posY, (int)caster.posZ - j, Block.snow.blockID);
-						}
-					}
-				}
-			}
-
-			if (heading == 2)
-			{
-				for (int j = -3; j < 6; j++)
-				{
-					for (int i = 3; i < 14; i++)
-					{					
-						int blockId = caster.worldObj.getBlockId((int)caster.posX + j, (int)caster.posY, (int)caster.posZ - i);
-						if (blockId == Block.snow.blockID || blockId == 0)
-						{
-							int radius = 2;
-
-							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + j, (int)caster.posY - 3, (int)caster.posZ - i - radius, (int)caster.posX + radius + j, (int)caster.posY + 3, (int)caster.posZ - i + radius)))
-							{
-								if (obj instanceof EntityLivingBase)
-								{
-									EntityLivingBase hitEntity = (EntityLivingBase)obj;
-									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-								}
-							}
-
-							caster.worldObj.setBlock((int)caster.posX + j, (int)caster.posY, (int)caster.posZ - i, Block.snow.blockID);
-						}
-					}
-				}
-			}
-
-			if (heading == 3)
-			{
-				for (int j = -3; j < 6; j++)
-				{
-					for (int i = 3; i < 14; i++)
-					{					
-						int blockId = caster.worldObj.getBlockId((int)caster.posX + i, (int)caster.posY, (int)caster.posZ + j);
-						if (blockId == Block.snow.blockID || blockId == 0)
-						{
-							int radius = 2;
-
-							for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + i, (int)caster.posY - 3, (int)caster.posZ + j - radius, (int)caster.posX + radius + i, (int)caster.posY + 3, (int)caster.posZ + j + radius)))
-							{
-								if (obj instanceof EntityLivingBase)
-								{
-									EntityLivingBase hitEntity = (EntityLivingBase)obj;
-									hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-									hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
-								}
-							}
-
-							caster.worldObj.setBlock((int)caster.posX + i, (int)caster.posY, (int)caster.posZ + j, Block.snow.blockID);
+							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 						}
 					}
 				}
