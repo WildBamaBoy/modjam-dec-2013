@@ -11,6 +11,7 @@ package spellbound.blocks;
 
 import java.util.Random;
 
+import spellbound.core.SpellboundCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,6 +35,9 @@ public class BlockFalseBedrock extends Block
 	@Override
 	public void updateTick(World world, int posX, int posY, int posZ, Random random) 
 	{
-		world.setBlock(posX, posY, posZ, 0);
+		if (SpellboundCore.modRandom.nextBoolean())
+		{
+			world.setBlock(posX, posY, posZ, 0);
+		}
 	}
 }
