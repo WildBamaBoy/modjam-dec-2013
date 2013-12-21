@@ -63,31 +63,35 @@ public class SpellElementalFury extends AbstractSpell
 		{
 			if (obj instanceof EntityLivingBase)
 			{
+				boolean canAffectEntity = (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class)) || !(obj instanceof EntityPlayer) && (obj instanceof EntityLivingBase);
 				final EntityLivingBase livingEntity = (EntityLivingBase)obj;
 
-				if (SpellboundCore.modRandom.nextBoolean())
+				if (canAffectEntity)
 				{
-					livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
-					livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
-				}
+					if (SpellboundCore.modRandom.nextBoolean())
+					{
+						livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
+						livingEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+					}
 
-				else if (SpellboundCore.modRandom.nextBoolean())
-				{
-					livingEntity.attackEntityFrom(DamageSource.magic, 10.0F);
-					livingEntity.setFire(15);
-					worldObj.createExplosion(livingEntity, livingEntity.posX, livingEntity.posY, livingEntity.posZ, 5.0F, false);
-				}
+					else if (SpellboundCore.modRandom.nextBoolean())
+					{
+						livingEntity.attackEntityFrom(DamageSource.magic, 10.0F);
+						livingEntity.setFire(15);
+						worldObj.createExplosion(livingEntity, livingEntity.posX, livingEntity.posY, livingEntity.posZ, 5.0F, false);
+					}
 
-				else
-				{
-					livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
+					else
+					{
+						livingEntity.attackEntityFrom(DamageSource.magic, 15.0F);
 
-					final double spawnX = livingEntity.posX;
-					final double spawnY = livingEntity.posY;
-					final double spawnZ = livingEntity.posZ;
+						final double spawnX = livingEntity.posX;
+						final double spawnY = livingEntity.posY;
+						final double spawnZ = livingEntity.posZ;
 
-					worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
-					PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+						worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
+						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));
+					}
 				}
 			}
 		}
