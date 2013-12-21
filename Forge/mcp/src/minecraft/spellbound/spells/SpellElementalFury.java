@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.core.forge.PacketHandler;
 import spellbound.entity.AbstractTargetSpell;
+import spellbound.entity.EntityTargetSpellElementalFury;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
@@ -44,7 +45,7 @@ public class SpellElementalFury extends AbstractSpell
 
 		if (!caster.worldObj.isRemote)
 		{
-			final AbstractTargetSpell spell = new EntityTargetSpellFire(caster, this);
+			final AbstractTargetSpell spell = new EntityTargetSpellElementalFury(caster, this);
 			caster.worldObj.spawnEntityInWorld(spell);
 		}
 	}

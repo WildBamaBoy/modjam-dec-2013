@@ -40,8 +40,10 @@ import spellbound.core.forge.CommonProxy;
 import spellbound.core.forge.PacketHandler;
 import spellbound.core.util.SpellEntry;
 import spellbound.entity.EntityTargetSpellCold;
+import spellbound.entity.EntityTargetSpellDisintegrate;
 import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.entity.EntityTargetSpellDivination;
+import spellbound.entity.EntityTargetSpellElementalFury;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.entity.EntityTargetSpellMundane;
@@ -234,6 +236,8 @@ public class SpellboundCore
 		EntityRegistry.registerModEntity(EntityTargetSpellDisruption.class, EntityTargetSpellDisruption.class.getSimpleName(), 12, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellDivination.class, EntityTargetSpellDivination.class.getSimpleName(), 13, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellMundane.class, EntityTargetSpellMundane.class.getSimpleName(), 14, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellElementalFury.class, EntityTargetSpellElementalFury.class.getSimpleName(), 15, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityTargetSpellDisintegrate.class, EntityTargetSpellDisintegrate.class.getSimpleName(), 16, this, 50, 2, true);
 	}
 
 	private void registerCreativeTab()

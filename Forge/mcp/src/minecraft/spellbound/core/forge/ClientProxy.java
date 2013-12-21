@@ -12,8 +12,10 @@ package spellbound.core.forge;
 import net.minecraftforge.common.MinecraftForge;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellCold;
+import spellbound.entity.EntityTargetSpellDisintegrate;
 import spellbound.entity.EntityTargetSpellDisruption;
 import spellbound.entity.EntityTargetSpellDivination;
+import spellbound.entity.EntityTargetSpellElementalFury;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.entity.EntityTargetSpellLightning;
 import spellbound.entity.EntityTargetSpellMundane;
@@ -32,7 +34,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellLightning.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletLightningBase));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellMundane.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletMundaneBase));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellDisruption.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletDisruptionBase));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellDivination.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletDivinationBase));		
+		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellDivination.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletDivinationBase));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellElementalFury.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletElementalFury));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTargetSpellDisintegrate.class, new RenderSpellTablet(SpellboundCore.getInstance().itemTabletDisintegrate));
 	}
 	
 	@Override

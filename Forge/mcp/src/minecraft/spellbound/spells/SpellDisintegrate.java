@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.entity.EntityTargetSpellDisintegrate;
 import spellbound.entity.EntityTargetSpellFire;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
@@ -35,7 +36,7 @@ public class SpellDisintegrate extends AbstractSpell
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.spawn", 1.0F, 1.0F);
 		if (!caster.worldObj.isRemote)
 		{
-			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellFire(caster, this));
+			caster.worldObj.spawnEntityInWorld(new EntityTargetSpellDisintegrate(caster, this));
 		}
 	}
 
