@@ -7,7 +7,7 @@
  * http://www.gnu.org/licenses/gpl.html
  **********************************************/
 
-package spellbound.spells;
+package spellbound.surges;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -22,6 +22,7 @@ public class SurgeBackfire extends AbstractSurge
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "spellbound:surge", 1.0F, 1.0F);
 		caster.setFire(10);
 	}
 }

@@ -7,7 +7,7 @@
  * http://www.gnu.org/licenses/gpl.html
  **********************************************/
 
-package spellbound.spells;
+package spellbound.surges;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,6 +25,8 @@ public class SurgeRiches extends AbstractSurge
 	@Override
 	public void doSpellCasterEffect(EntityPlayer caster) 
 	{
+		caster.worldObj.playSoundAtEntity(caster, "spellbound:surge", 1.0F, 1.0F);
+		
 		for (int i = 0; i < caster.inventory.mainInventory.length; i++)
 		{
 			if (SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean() && SpellboundCore.modRandom.nextBoolean())

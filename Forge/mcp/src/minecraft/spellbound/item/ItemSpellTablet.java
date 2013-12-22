@@ -18,9 +18,9 @@ import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
 import spellbound.spells.AbstractSpell;
-import spellbound.spells.AbstractSurge;
 import spellbound.spells.SpellFireLvl3;
 import spellbound.spells.SpellMiscastMagic;
+import spellbound.surges.AbstractSurge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

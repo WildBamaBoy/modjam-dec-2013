@@ -10,10 +10,14 @@
 package spellbound.core;
 
 import net.minecraft.block.Block;
-import spellbound.spells.AbstractSurge;
-import spellbound.spells.SurgeBackfire;
-import spellbound.spells.SurgeCow;
-import spellbound.spells.SurgeRiches;
+import spellbound.surges.AbstractSurge;
+import spellbound.surges.SurgeBackfire;
+import spellbound.surges.SurgeBlindness;
+import spellbound.surges.SurgeCow;
+import spellbound.surges.SurgePuppies;
+import spellbound.surges.SurgeRapidAging;
+import spellbound.surges.SurgeRiches;
+import spellbound.surges.SurgeSuperStrength;
 
 public final class Constants 
 {
@@ -23,7 +27,11 @@ public final class Constants
 			{
 		new SurgeRiches(),
 		new SurgeBackfire(),
-		new SurgeCow()
+		new SurgeCow(),
+		new SurgePuppies(),
+		new SurgeBlindness(),
+		new SurgeSuperStrength(),
+		new SurgeRapidAging()
 			};
 	
 	public static final String[] SPRAY_PARTICLES = new String[]

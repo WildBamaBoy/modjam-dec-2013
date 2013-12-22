@@ -16,6 +16,7 @@ import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import spellbound.surges.AbstractSurge;
 
 public abstract class AbstractSpell 
 {

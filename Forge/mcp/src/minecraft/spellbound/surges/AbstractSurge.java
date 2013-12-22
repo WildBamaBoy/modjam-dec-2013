@@ -7,12 +7,13 @@
  * http://www.gnu.org/licenses/gpl.html
  **********************************************/
 
-package spellbound.spells;
+package spellbound.surges;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import spellbound.spells.AbstractSpell;
 
 public abstract class AbstractSurge extends AbstractSpell
 {

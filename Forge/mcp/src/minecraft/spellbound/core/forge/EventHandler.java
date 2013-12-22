@@ -24,5 +24,6 @@ public class EventHandler
 		event.manager.soundPoolSounds.addSound("spellbound:spellcharge4seconds.ogg");
 		event.manager.soundPoolSounds.addSound("spellbound:spellcharge5seconds.ogg");
 		event.manager.soundPoolSounds.addSound("spellbound:shield.ogg");
+		event.manager.soundPoolSounds.addSound("spellbound:surge.ogg");
 	}
 }
