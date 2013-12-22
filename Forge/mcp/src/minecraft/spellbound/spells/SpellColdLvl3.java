@@ -74,6 +74,7 @@ public class SpellColdLvl3 extends AbstractSpell
 							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
 							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+							hitEntity.extinguish();
 						}
 
 						else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
@@ -81,6 +82,7 @@ public class SpellColdLvl3 extends AbstractSpell
 							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
 							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
 							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
+							hitEntity.extinguish();
 						}
 					}
 				}

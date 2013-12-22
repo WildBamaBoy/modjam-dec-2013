@@ -68,6 +68,7 @@ public class SpellColdLvl2 extends AbstractSpell
 				{							
 					entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
 					entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+					entityHit.extinguish();
 				}
 			}
 
@@ -75,6 +76,7 @@ public class SpellColdLvl2 extends AbstractSpell
 			{
 				entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
 				entityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+				entityHit.extinguish();
 			}
 		}
 	}
