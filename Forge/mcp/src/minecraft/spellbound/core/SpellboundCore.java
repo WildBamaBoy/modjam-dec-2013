@@ -631,6 +631,15 @@ public class SpellboundCore
 
 		else
 		{
+			for (SpellEntry entry : this.getActiveSpells().get(caster))
+			{
+				if (entry.spell.getClass().getSimpleName().equals(spell.getClass().getSimpleName()))
+				{
+					entry.durationCounter = 0;
+					return;
+				}
+			}
+			
 			activeSpells.add(new SpellEntry(spell, duration));
 			this.getActiveSpells().put(caster, activeSpells);
 		}
