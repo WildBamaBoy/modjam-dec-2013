@@ -81,7 +81,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("8", 
 				"White Mushroom"
-						+ "\n\nNotes: Breeds with all other mushrooms, making either the same color or another white mushroom."));
+						+ "\n\nNotes: Makes copies of all other mushrooms except itself."));
 
 		bookTagList.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
