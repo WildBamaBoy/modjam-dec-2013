@@ -40,17 +40,19 @@ public class PropertiesManager
 
 		if (propertiesFile.exists())
 		{
-			saveProperties();
+			loadProperties();
 		}
 
 		else
 		{
-			loadProperties();
+			saveProperties();
 		}
 	}
 
 	private void saveProperties()
 	{
+		SpellboundCore.getInstance().log("Saving Spellbound properties...");
+		
 		try
 		{
 			properties.clear();
@@ -71,32 +73,29 @@ public class PropertiesManager
 			}
 			
 			FileOutputStream fos = new FileOutputStream(propertiesFile);
-			properties.store(fos, "Change item IDs");
+			properties.store(fos, "Change item IDs and mod settings here.");
 			fos.close();
 		}
 
 		catch (IllegalAccessException e)
 		{
-			//TODO Crash handler
-			System.out.println("ILLEGAL ACCESS");
+			SpellboundCore.getInstance().quitWithException("IllegalAccessException while saving properties. This should not happen.", e);
 		}
 		
 		catch (FileNotFoundException e)
 		{
-			//TODO Crash handler
-			System.out.println("FILE NOT FOUND");
+			SpellboundCore.getInstance().quitWithException("FileNotFoundException while saving properties. This should not happen.", e);
 		} 
 		
 		catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SpellboundCore.getInstance().quitWithException("IOException while saving properties. This should not happen.", e);
 		}
 	}
 
 	private void loadProperties()
 	{
-		System.out.println(">>>>>>>>>>> LOAD");
+		SpellboundCore.getInstance().log("Loading Spellbound properties...");
 		
 		try
 		{
@@ -111,26 +110,31 @@ public class PropertiesManager
 
 				if (fieldType.contains("int"))
 				{
-					f.set(propertiesList, properties.getProperty(f.getName()));
+					f.set(propertiesList, Integer.parseInt(properties.getProperty(f.getName())));
 				}
 				
 				else if (fieldType.contains("boolean"))
 				{
-					f.set(propertiesList, properties.getProperty(f.getName()));
+					f.set(propertiesList, Boolean.parseBoolean(properties.getProperty(f.getName())));
 				}
 			}
 		}
 
+		catch (NumberFormatException e)
+		{
+			SpellboundCore.getInstance().log("NumberFormatException while reading properties. You edited the file incorrectly or a new property has been added. Properties will be reset.");
+			reset();
+		}
+		
 		catch (IOException e)
 		{
-			//When the file does not exist.
+			SpellboundCore.getInstance().log("IOException. Properties file does not exist.");
 			saveProperties();
 		}
 		
 		catch (IllegalAccessException e)
 		{
-			//TODO Crash handler
-			System.out.println("ILLEGAL ACCESS");
+			SpellboundCore.getInstance().quitWithException("IllegalAccessException while loading properties. This should not happen", e);
 		}
 	}
 	

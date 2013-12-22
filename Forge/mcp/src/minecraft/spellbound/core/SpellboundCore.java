@@ -9,18 +9,26 @@
 
 package spellbound.core;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import spellbound.blocks.BlockFalseBedrock;
 import spellbound.blocks.BlockFalseObsidian;
 import spellbound.blocks.BlockMushroomBlack;
@@ -91,6 +99,8 @@ import spellbound.spells.SpellWailOfTheSheWolf;
 import spellbound.spells.SpellWallOfBedrock;
 import spellbound.spells.SpellWallOfObsidian;
 import spellbound.spells.SpellWallOfStone;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -102,6 +112,8 @@ import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid="spellbound", name="Spellbound", version="1.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
@@ -117,6 +129,7 @@ public class SpellboundCore
 	public static CommonProxy proxy;
 
 	public static Random modRandom = new Random();
+	private static final Logger	logger = FMLLog.getLogger();
 
 	public CreativeTabs spellboundTab;
 	public PropertiesManager propertiesManager;
@@ -500,6 +513,99 @@ public class SpellboundCore
 		LanguageRegistry.addName(blockHybridMushroomGold, "Disruption Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomBlack, "Divination Mushroom");
 		LanguageRegistry.addName(blockHybridMushroomPurple, "Summon Mushroom");
+	}
+
+	/**
+	 * Writes the specified object's string representation to System.out.
+	 * 
+	 * @param 	obj	The object to write to System.out.
+	 */
+	public void log(Object obj)
+	{
+		Side side = FMLCommonHandler.instance().getEffectiveSide();
+
+		if (obj instanceof Throwable)
+		{
+			((Throwable)obj).printStackTrace();
+		}
+
+		try
+		{
+			logger.log(Level.FINER, "Spellbound " + side.toString() + ": " + obj.toString());
+			System.out.println("Spellbound " + side.toString() + ": " + obj.toString());
+
+			MinecraftServer server = MinecraftServer.getServer();
+
+			if (server != null)
+			{
+				if (server.isDedicatedServer())
+				{
+					MinecraftServer.getServer().logInfo("Spellbound: " + obj.toString());
+				}
+			}
+		}
+
+		catch (NullPointerException e)
+		{
+			logger.log(Level.FINER, "Spellbound " + side.toString() + ": null");
+			System.out.println("Spellbound: null");
+
+			MinecraftServer server = MinecraftServer.getServer();
+
+			if (server != null)
+			{
+				if (server.isDedicatedServer())
+				{
+					MinecraftServer.getServer().logDebug("Spellbound " + side.toString() + ": null");
+				}
+			}
+		}
+	}
+
+	/**
+	 * Stops the game and writes the error to the Forge crash log.
+	 * 
+	 * @param 	description	A string providing a short description of the problem.
+	 * @param 	e			The exception that caused this method to be called.
+	 */
+	@SideOnly(Side.CLIENT)
+	public void quitWithDescription(String description)
+	{
+		Writer stackTrace = new StringWriter();
+
+		Exception e = new Exception();
+		PrintWriter stackTraceWriter = new PrintWriter(stackTrace);
+		e.printStackTrace(stackTraceWriter);
+
+		logger.log(Level.FINER, "Spellbound: An exception occurred.\n>>>>>" + description + "<<<<<\n" + stackTrace.toString());
+		System.out.println("Spellbound: An exception occurred.\n>>>>>" + description + "<<<<<\n" + stackTrace.toString());
+
+		CrashReport crashReport = new CrashReport("Spellbound: " + description, e);
+		Minecraft.getMinecraft().crashed(crashReport);
+		Minecraft.getMinecraft().displayCrashReport(crashReport);
+	}
+	
+	/**
+	 * Stops the game and writes the error to the Forge crash log.
+	 * 
+	 * @param 	description	A string providing a short description of the problem.
+	 * @param 	e			The exception that caused this method to be called.
+	 */
+	@SideOnly(Side.CLIENT)
+	public void quitWithException(String description, Exception e)
+	{
+		Writer stackTrace = new StringWriter();
+
+		PrintWriter stackTraceWriter = new PrintWriter(stackTrace);
+		e.printStackTrace(stackTraceWriter);
+
+		logger.log(Level.FINER, "Spellbound: An exception occurred.\n>>>>>" + description + "<<<<<\n" + stackTrace.toString());
+		System.out.println("Spellbound: An exception occurred.\n>>>>>" + description + "<<<<<\n" + stackTrace.toString());
+
+		CrashReport crashReport = new CrashReport("Spellbound: " + description, e);
+		
+		Minecraft.getMinecraft().crashed(crashReport);
+		Minecraft.getMinecraft().displayCrashReport(crashReport);
 	}
 
 	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
