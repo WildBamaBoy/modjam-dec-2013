@@ -677,8 +677,7 @@ public class PacketHandler implements IPacketHandler
 				final int posY = (int) casterY;
 				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
 				
-				final String[] particles = new String[]{ "flame", "smoke", "happyVillager", "portal", "splash", "townaura", "reddust"};
-				final String particleName = particles[SpellboundCore.modRandom.nextInt(particles.length)];
+				final String particleName = Constants.SPRAY_PARTICLES[SpellboundCore.modRandom.nextInt(Constants.SPRAY_PARTICLES.length)];
 				
 				for (int i = 0; i < 12; i++)
 				{
