@@ -215,7 +215,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - B -   T = Fire Tab.\n\n"
 						+ "Protects from fire and fire spells."));
 
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n\n" + "(Note: Extinguishes fire.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Icy Grip (Lvl1)\n"
@@ -295,6 +295,13 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "     R = Redstone \n"
 						+ "     S = Surge Shld.\n"
 						+ "\nNo offensive spells can affect you, even those that disable shields."));
+		bookTagList.appendTag(new NBTTagString("25",
+				"Panic Room\n\n"
+						+ "  R T R\n"
+						+ "  T T T   R = Redstone\n"
+						+ "  R T R   T = Lvl3 Wall\n"
+						+ "\n\nYou are encased in a room made of false bedrock."));
+		
 		return bookTagList;
 	}
 	
@@ -308,7 +315,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - T -   M = Raw Pork\n"
 						+ "  - - -   T = Sum. Tab.\n"
 						+ "\n"
-						+ "\nAn angry wolf appears at your location."));
+						+ "\nA tamed wolf appears at your location."));
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Summon Mob (Lvl2)\n\n"
@@ -344,7 +351,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  O O O\n"
 						+ "  O T O   O = Obsidian\n"
 						+ "  O O O   T = Lvl1 Wall\n\n"
-						+ "Wall of Bedrock\n"
+						+ "Wall of Bedrock (Lvl3)\n"
 						+ "  - Q -\n"
 						+ "  Q T Q   Q = Quartz\n"
 						+ "  - Q -   T = Lvl2 Wall\n\n"));
@@ -420,10 +427,17 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "\n\nYou manipulate the weather, spawning a torrential downpour or brilliant sunshine."));
 
 		bookTagList.appendTag(new NBTTagString("25",
-				"Flight\n\n"
+				"Instant Levitation (Lvl1)\n\n"
 						+ "  - F -   \n"
 						+ "  F T F   T = Mund. Tab\n"
 						+ "  - F -   F = Feather\n"
+						+ "\n\nYou levitate above the ground for 1 second. Great for stopping falls!"));
+		
+		bookTagList.appendTag(new NBTTagString("25",
+				"Flight (Lvl2)\n\n"
+						+ "  F F F   \n"
+						+ "  F T F   T = Flht. Lvl1\n"
+						+ "  F F F   F = Feather\n"
 						+ "\n\nYou take flight for 20 seconds. Careful where you land!"));
 
 		bookTagList.appendTag(new NBTTagString("25",
@@ -462,7 +476,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "\n\nThe target can no longer cast spells for a short time. Can not effect players with Shield of Invulnerability."));
 
 		bookTagList.appendTag(new NBTTagString("25",
-				"Chaos\n\n"
+				"Chaos (Lvl 3)\n\n"
 						+ "  - R -   \n"
 						+ "  R T R   R = Blz. Rod\n"
 						+ "  - R -   T = Lvl2 Dis.\n"
@@ -479,7 +493,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - C -   C = Cookie\n"
 						+ "  C T C   T = Blank Tab.\n"
 						+ "  - H -   H = Chest\n"
-						+ "\n\nTired of farming & hunting? How about COOKIES!!!"));
+						+ "\n\nCOOKIES!?!?!?"));
 		return bookTagList;
 	}
 	
