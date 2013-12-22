@@ -39,30 +39,33 @@ public abstract class AbstractMushroom extends BlockFlower
 	public abstract void setTexture();
 
 	public abstract int[] getMateIds();
-	
+
 	public abstract int getOffspringId(int mateId);
-	
+
 	@Override
 	public void updateTick(World world, int posX, int posY, int posZ, Random random)
 	{
-		final Point3DBlock nearbyPrimary = Logic.getNearbyMushroomMate(this, world, posX, posY, posZ, 1, this.getMateIds());
-
-		if (nearbyPrimary != null)
+		if (random.nextBoolean())
 		{
-			//Try to get a spawn near the primary first.
-			Point3DBlock hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.posX, nearbyPrimary.posY, nearbyPrimary.posZ, 1);
-			
-			//Check to see if it succeeded.
-			if (hybridSpawn == null)
+			final Point3DBlock nearbyPrimary = Logic.getNearbyMushroomMate(this, world, posX, posY, posZ, 1, this.getMateIds());
+
+			if (nearbyPrimary != null)
 			{
-				//If it didn't, try to find a spot around this mushroom's position for the new mushroom to spawn.
-				hybridSpawn = Logic.getNearbyMushroomSpawn(world, posX, posY, posZ, 1);
-			}
-			
-			//Now test again to see if a spot was found around this mushroom and spawn the new mushroom if it was.
-			if (hybridSpawn != null)
-			{
-				world.setBlock(hybridSpawn.posX, hybridSpawn.posY, hybridSpawn.posZ, nearbyPrimary.blockId);
+				//Try to get a spawn near the primary first.
+				Point3DBlock hybridSpawn = Logic.getNearbyMushroomSpawn(world, nearbyPrimary.posX, nearbyPrimary.posY, nearbyPrimary.posZ, 1);
+
+				//Check to see if it succeeded.
+				if (hybridSpawn == null)
+				{
+					//If it didn't, try to find a spot around this mushroom's position for the new mushroom to spawn.
+					hybridSpawn = Logic.getNearbyMushroomSpawn(world, posX, posY, posZ, 1);
+				}
+
+				//Now test again to see if a spot was found around this mushroom and spawn the new mushroom if it was.
+				if (hybridSpawn != null)
+				{
+					world.setBlock(hybridSpawn.posX, hybridSpawn.posY, hybridSpawn.posZ, nearbyPrimary.blockId);
+				}
 			}
 		}
 	}
