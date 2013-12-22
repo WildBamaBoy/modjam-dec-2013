@@ -344,8 +344,8 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Surge Shield\n\n"
-						+ "  T T T   "
-						+ "  T B T   T = Blank Tab.\n"
+						+ "  T T T   \n"
+						+ "  T S T   T = Blank Tab.\n"
 						+ "  - T -   S = Gold Swd.\n"
 						+ "\n\nYou have a zero chance of being affected by a magical surge while the surge shield is active."));
 		
