@@ -2,7 +2,7 @@
 
 #-------------------------------------------------------------------------------
 # Assemble.py
-# Prepares Minecraft Comes Alive to be distributed by packaging the mod
+# Prepares Spellbound to be distributed by packaging the mod
 # archive and source archives.
 #
 # This file, both in source code form or as a compiled binary, is free and
