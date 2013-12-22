@@ -44,14 +44,13 @@ public class BlockMushroomWhite extends AbstractMushroom
 				{
 				SpellboundCore.getInstance().blockHybridMushroomBlack.blockID,
 				SpellboundCore.getInstance().blockHybridMushroomOrange.blockID,
-				SpellboundCore.getInstance().blockHybridMushroomWhite.blockID,
-				SpellboundCore.getInstance().blockHybridMushroomOrangeGrey.blockID, //Orange + BlueGrey
-				SpellboundCore.getInstance().blockHybridMushroomLightBlue.blockID, //GreyOrange + BlueGrey //COLD!
-				SpellboundCore.getInstance().blockHybridMushroomGrey.blockID, //GreyOrange + BlueGrey >>>Also
-				SpellboundCore.getInstance().blockHybridMushroomYellow.blockID, //OrangeGrey + Grey //LIGHTNING!
-				SpellboundCore.getInstance().blockHybridMushroomRainbow.blockID, //Red Orange + Yellow //RANDOM! //2nd LEVEL
-				SpellboundCore.getInstance().blockHybridMushroomGold.blockID, //Rainbow + Yellow //2nd level
-				SpellboundCore.getInstance().blockHybridMushroomBlack.blockID, //Blue Grey + Grey //2nd level
+				SpellboundCore.getInstance().blockHybridMushroomOrangeGrey.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomLightBlue.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomGrey.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomYellow.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomRainbow.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomGold.blockID,
+				SpellboundCore.getInstance().blockHybridMushroomBlack.blockID,
 				SpellboundCore.getInstance().blockHybridMushroomPurple.blockID
 				};
 	}
