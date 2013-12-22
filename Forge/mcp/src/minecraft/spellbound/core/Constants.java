@@ -26,6 +26,17 @@ public final class Constants
 		new SurgeCow()
 			};
 	
+	public static final String[] SPRAY_PARTICLES = new String[]
+			{
+		"flame", 
+		"smoke", 
+		"happyVillager", 
+		"portal", 
+		"splash", 
+		"townaura", 
+		"reddust"
+			};
+	
 	public static final int[] CROP_IDS = new int[]
 			{
 		Block.crops.blockID, 

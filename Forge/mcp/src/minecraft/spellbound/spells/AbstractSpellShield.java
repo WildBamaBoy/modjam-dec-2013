@@ -9,10 +9,12 @@
 
 package spellbound.spells;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumSpellRange;
 
 public abstract class AbstractSpellShield extends AbstractSpell
@@ -33,6 +35,7 @@ public abstract class AbstractSpellShield extends AbstractSpell
 		}
 		
 		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, getShieldDuration());
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createShieldGFXPacket(this.getClass(), caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public abstract class AbstractSpellWall extends AbstractSpell
 			}
 		}
 
-		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallParticlesPacket(heading, centerX, centerY, centerZ, isOverhead, isUnderneath));
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createWallGFXPacket(heading, centerX, centerY, centerZ, isOverhead, isUnderneath));
 	}
 
 	@Override

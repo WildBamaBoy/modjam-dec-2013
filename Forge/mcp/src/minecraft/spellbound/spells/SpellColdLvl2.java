@@ -52,7 +52,7 @@ public class SpellColdLvl2 extends AbstractSpell
 	{
 		if (entityHit != null)
 		{
-			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdParticlesPacket(2, 0, entityHit.posX, entityHit.posY, entityHit.posZ));
+			PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdGFXPacket(2, 0, entityHit.posX, entityHit.posY, entityHit.posZ));
 			
 			for (final Point3D point : Logic.getNearbyBlocks(worldObj, (int)entityHit.posX, (int)entityHit.posY, (int)entityHit.posZ, 3, Constants.SNOW_SUPPORTERS))
 			{

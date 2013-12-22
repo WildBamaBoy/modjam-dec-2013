@@ -17,8 +17,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellColorSpray extends AbstractSpell
 {
@@ -33,96 +35,47 @@ public class SpellColorSpray extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.ghast.fireball", 1.0F, 1.0F);
 
-		int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int heading = MathHelper.floor_double((double)(caster.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (heading == 0)
+		final boolean addX = heading == 2 || heading == 3;
+		final boolean addZ = heading == 0 || heading == 3;
+
+		Integer width = 0;
+		Integer length = 0;
+
+		for (width = -3; width < 6; width++)
 		{
-			for (int j = -3; j < 6; j++)
+			for (length = 3; length < 14; length++)
 			{
-				for (int i = 3; i < 14; i++)
-				{			
-					int radius = 2;
+				final int flooredX = MathHelper.floor_double(caster.posX);
+				final int flooredZ = MathHelper.floor_double(caster.posZ);
 
-					for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - j, (int)caster.posY - 3, (int)caster.posZ + i - radius, (int)caster.posX + radius - j, (int)caster.posY + 3, (int)caster.posZ + i + radius)))
+				final int xCounter = heading == 0 || heading == 2 ? width : length;
+				final int zCounter = heading == 0 || heading == 2 ? length : width;
+
+				final int radius = 6;
+				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
+				final int posY = (int) caster.posY;
+				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+
+				for (final Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(posX - radius, posY - 3, posZ - radius, posX + radius, posY + 3, posZ + radius)))
+				{
+					if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 					{
-						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));
-						}
+						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+						hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+					}
 
-						else if (obj instanceof EntityPlayer)
-						{
-							if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class))
-							{
-								EntityLivingBase hitEntity = (EntityLivingBase)obj;
-								hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 400));	
-							}
-						}
+					else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
+					{
+						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
+						hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
 					}
 				}
 			}
 		}
 
-		if (heading == 1)
-		{
-			for (int j = -3; j < 6; j++)
-			{
-				for (int i = 3; i < 14; i++)
-				{				
-					int radius = 2;
-
-					for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius - i, (int)caster.posY - 3, (int)caster.posZ - j - radius, (int)caster.posX + radius - i, (int)caster.posY + 3, (int)caster.posZ - j + radius)))
-					{
-						if (obj instanceof EntityLivingBase)
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 1200));
-						}
-					}
-				}
-			}
-		}
-
-		if (heading == 2)
-		{
-			for (int j = -3; j < 6; j++)
-			{
-				for (int i = 3; i < 14; i++)
-				{					
-					int radius = 2;
-
-					for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + j, (int)caster.posY - 3, (int)caster.posZ - i - radius, (int)caster.posX + radius + j, (int)caster.posY + 3, (int)caster.posZ - i + radius)))
-					{
-						if (obj instanceof EntityLivingBase)
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 1200));
-						}
-					}
-				}
-			}
-		}
-
-		if (heading == 3)
-		{
-			for (int j = -3; j < 6; j++)
-			{
-				for (int i = 3; i < 14; i++)
-				{					
-					int radius = 2;
-
-					for (Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox((int)caster.posX - radius + i, (int)caster.posY - 3, (int)caster.posZ + j - radius, (int)caster.posX + radius + i, (int)caster.posY + 3, (int)caster.posZ + j + radius)))
-					{
-						if (obj instanceof EntityLivingBase)
-						{
-							EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 1200));
-						}
-					}
-				}
-			}
-		}
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColorGFXPacket(heading, caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override
@@ -132,9 +85,9 @@ public class SpellColorSpray extends AbstractSpell
 	}
 
 	@Override
-	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) {
-		// TODO Auto-generated method stub
-
+	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
+	{
+		//No target effect.
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class SpellColdLvl3 extends AbstractSpell
 			}
 		}
 		
-		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdParticlesPacket(3, heading, caster.posX, caster.posY, caster.posZ));
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createColdGFXPacket(3, heading, caster.posX, caster.posY, caster.posZ));
 	}
 
 	@Override
