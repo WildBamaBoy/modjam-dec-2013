@@ -62,7 +62,8 @@ public class PropertiesList
 	public int itemID_TabletWailOfTheSheWolf = 26781;
 	public int itemID_TabletElementalFury = 26782;
 	public int itemID_TabletDisintegrate = 26783;
-
+	public int itemID_TabletPanicRoom = 26784;
+	
 	//Shields
 	public int itemID_TabletFireShield = 26791;
 	public int itemID_TabletIceShield = 26792;

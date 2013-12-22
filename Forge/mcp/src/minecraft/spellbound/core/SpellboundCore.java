@@ -88,6 +88,7 @@ import spellbound.spells.SpellLightningLvl2;
 import spellbound.spells.SpellLightningLvl3;
 import spellbound.spells.SpellLightningShield;
 import spellbound.spells.SpellMiscastMagic;
+import spellbound.spells.SpellPanicRoom;
 import spellbound.spells.SpellPush;
 import spellbound.spells.SpellShieldOfInvulnerability;
 import spellbound.spells.SpellSummonChestFullOfCookies;
@@ -191,6 +192,7 @@ public class SpellboundCore
 	public ItemSpellTablet itemTabletWailOfTheSheWolf;
 	public ItemSpellTablet itemTabletElementalFury;
 	public ItemSpellTablet itemTabletDisintegrate;
+	public ItemSpellTablet itemTabletPanicRoom;
 
 	//Shields
 	public ItemSpellTablet itemTabletFireShield;
@@ -301,6 +303,7 @@ public class SpellboundCore
 		itemTabletWailOfTheSheWolf = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletWailOfTheSheWolf, "tabletwailoftheshewolf", new SpellWailOfTheSheWolf(), 4);
 		itemTabletElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletElementalFury, "tabletelementalfury", new SpellElementalFury(), 4);
 		itemTabletDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDisintegrate, "tabletdisintegrate", new SpellDisintegrate(), 4);
+		itemTabletPanicRoom = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletPanicRoom, "tabletpanicroom", new SpellPanicRoom(), 4);
 		
 		//Summons
 		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl1, "tabletsummonlvl1", new SpellSummonLvl1(), 1);
@@ -431,7 +434,9 @@ public class SpellboundCore
 				" F ", "CRL", " E ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'E', Block.enderChest);
 		GameRegistry.addRecipe(new ItemStack(itemTabletDisintegrate), 
 				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
-
+		GameRegistry.addRecipe(new ItemStack(itemTabletPanicRoom), 
+				"RTR", "TTT", "RTR", 'R', Item.redstone, 'T', itemTabletWallOfBedrock);
+		
 		//Shields
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
 				"TTT", "TBT", " T ", 'T', itemTabletBase, 'B', itemTabletFireBase);
