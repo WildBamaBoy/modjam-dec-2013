@@ -108,7 +108,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("13", 
 				"Mundane Mushroom"
-						+ "\n+ Yellow = Disruption"
+						+ "\n+ Lightning = Disruption"
 						+ "\n+ Grey = Summon"
 						+ "\n\nNotes: N/A"));
 
@@ -193,7 +193,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 	
 	private NBTTagList putElementalRecipes(NBTTagList bookTagList)
 	{
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Fire Spells\n"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Fire Spells\n\n" + "(Note: Often causes explosions and fires. Caster immune to fire as well.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Flaming Hands (Lvl1)\n"
@@ -213,9 +213,9 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  B B B\n"
 						+ "  B T B   B = Blank Tab.\n"
 						+ "  - B -   T = Fire Tab.\n\n"
-						+ "Protects from fire and fire spells."));
+						+ "Protects from fire and fire spells. If you are struck by a fire spell with the fire shield active, it will have no effect."));
 
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n\n" + "(Note: Extinguishes fire.)"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n\n" + "(Note: Extinguishes fire and slows enemies down.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Icy Grip (Lvl1)\n"
@@ -235,9 +235,9 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  B B B\n"
 						+ "  B C B   B = Blank Tab.\n"
 						+ "  - B -   T = Cold Tab.\n\n"
-						+ "Protects from cold spells."));
+						+ "Protects from cold spells. If you are struck by a cold spell with the cold shield active, it will have no effect."));
 
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n     Lightning Spells\n"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n     Lightning Spells\n\n" + "(Note: Some spells seem to cause weakness.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Tazer (Lvl1)\n"
@@ -257,7 +257,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  B B B\n"
 						+ "  B C B   B = Blank Tab.\n"
 						+ "  - B -   T = Lght. Tab.\n\n"
-						+ "Protects from lightning spells."));
+						+ "Protects from lightning spells. If you are struck by a lightning spell with the lightning shield active, it will have no effect."));
 
 		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n     Ultimate Spells\n"));
 
@@ -342,6 +342,13 @@ public class ItemBookOfSpells extends ItemEditableBook
 	{
 		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n   Protection Spells\n"));
 
+		bookTagList.appendTag(new NBTTagString("25",
+				"Surge Shield\n\n"
+						+ "  T T T   "
+						+ "  T B T   T = Blank Tab.\n"
+						+ "  - T -   S = Gold Swd.\n"
+						+ "\n\nYou have a zero chance of being affected by a magical surge while the surge shield is active."));
+		
 		bookTagList.appendTag(new NBTTagString("24",
 				"Wall of Stone (Lvl1)\n"
 						+ "  S S S\n"
