@@ -32,9 +32,13 @@ public class SpellFlightLvl2 extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.enderdragon.wings", 1.0F, 1.0F);
 		
-		caster.capabilities.allowFlying = true;
+		if (caster.onGround)
+		{
+			caster.motionY += 1.0D;
+		}
+		
 		caster.fallDistance = 0;
-		caster.motionY += 1.0D;
+		caster.capabilities.allowFlying = true;
 		caster.capabilities.isFlying = true;
 		
 		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 400);

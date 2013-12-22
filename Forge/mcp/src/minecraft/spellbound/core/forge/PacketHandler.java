@@ -234,9 +234,13 @@ public class PacketHandler implements IPacketHandler
 		//Process
 		if (doEnable)
 		{
-			entityPlayer.capabilities.allowFlying = true;
+			if (entityPlayer.onGround)
+			{
+				entityPlayer.motionY += 1.0D;
+			}
+			
 			entityPlayer.fallDistance = 0;
-			entityPlayer.motionY += 1.0D;
+			entityPlayer.capabilities.allowFlying = true;
 			entityPlayer.capabilities.isFlying = true;
 		}
 
