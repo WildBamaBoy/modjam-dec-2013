@@ -16,14 +16,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
@@ -36,7 +32,6 @@ import spellbound.spells.SpellLightningShield;
 import spellbound.spells.SpellShieldOfInvulnerability;
 import spellbound.spells.SpellSurgeShield;
 import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler
@@ -692,7 +687,7 @@ public class PacketHandler implements IPacketHandler
 		}
 	}
 
-	public static Packet250CustomPayload createSummonGFXPacket(int spellLevel, int heading, double spawnX, double spawnY, double spawnZ)
+	public static Packet250CustomPayload createSummonGFXPacket(double spawnX, double spawnY, double spawnZ)
 	{
 		try
 		{
@@ -704,7 +699,6 @@ public class PacketHandler implements IPacketHandler
 			//---------------------------------------------------------------------------------------
 
 			//Write data
-			objectOutput.writeObject(spellLevel);
 			objectOutput.writeObject(spawnX);
 			objectOutput.writeObject(spawnY);
 			objectOutput.writeObject(spawnZ);
@@ -732,106 +726,21 @@ public class PacketHandler implements IPacketHandler
 		//---------------------------------------------------------------------------------------
 
 		//Read data
-		final int spellLevel = (Integer)objectInput.readObject();
-		final int heading = (Integer)objectInput.readObject();
-		final double pointX = (Double)objectInput.readObject();
-		final double pointY = (Double)objectInput.readObject();
-		final double pointZ = (Double)objectInput.readObject();
+		final double spawnX = (Double)objectInput.readObject();
+		final double spawnY = (Double)objectInput.readObject();
+		final double spawnZ = (Double)objectInput.readObject();
 
 		//---------------------------------------------------------------------------------------
 
 		//Process
-		if (spellLevel == 1)
+		for (int i = 0; i < 12; i++)
 		{
-			final boolean addX = heading == 2 || heading == 3;
-			final boolean addZ = heading == 0 || heading == 3;
-
-			Integer dummy = 0;
-			Integer length = 0;
-
-			for (length = 3; length < 14; length++)
-			{
-				final int flooredX = MathHelper.floor_double(pointX);
-				final int flooredZ = MathHelper.floor_double(pointZ);
-
-				final int xCounter = heading == 0 || heading == 2 ? dummy : length;
-				final int zCounter = heading == 0 || heading == 2 ? length : dummy;
-
-				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
-				final int posY = (int) pointY;
-				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
-
-				final int blockId = entityPlayer.worldObj.getBlockId(posX, posY, posZ);
-
-				if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.fire.blockID)
-				{
-					final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-					final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-					final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-
-					for (int i = 0; i < 6; i++)
-					{
-						entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-						entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + 1 + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-					}
-				}
-			}
-		}
-
-		else if (spellLevel == 2)
-		{
-			for (final Point3D point : Logic.getNearbyBlocks(entityPlayer.worldObj, (int)pointX, (int)pointY, (int)pointZ, 3, Constants.SNOW_SUPPORTERS))
-			{
-				final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-				final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-				final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-
-				for (int i = 0; i < 6; i++)
-				{
-					entityPlayer.worldObj.spawnParticle("snowballpoof", point.posX + SpellboundCore.modRandom.nextFloat(), point.posY + 1 + SpellboundCore.modRandom.nextFloat(), point.posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-					entityPlayer.worldObj.spawnParticle("snowballpoof", point.posX + SpellboundCore.modRandom.nextFloat(), point.posY + 2 + SpellboundCore.modRandom.nextFloat(), point.posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-				}
-			}
-		}
-
-		else if (spellLevel == 3)
-		{
-			final boolean addX = heading == 2 || heading == 3;
-			final boolean addZ = heading == 0 || heading == 3;
-
-			Integer width = 0;
-			Integer length = 0;
-
-			for (width = -3; width < 6; width++)
-			{
-				for (length = 3; length < 14; length++)
-				{
-					final int flooredX = MathHelper.floor_double(pointX);
-					final int flooredZ = MathHelper.floor_double(pointZ);
-
-					final int xCounter = heading == 0 || heading == 2 ? width : length;
-					final int zCounter = heading == 0 || heading == 2 ? length : width;
-
-					final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
-					final int posY = (int) pointY;
-					final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
-
-					final int blockId = entityPlayer.worldObj.getBlockId(posX, posY, posZ);
-
-					if (blockId == Block.snow.blockID || blockId == 0 || blockId == Block.fire.blockID)
-					{
-						final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-						final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-						final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-
-						for (int i = 0; i < 6; i++)
-						{
-							entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-							entityPlayer.worldObj.spawnParticle("snowballpoof", posX + SpellboundCore.modRandom.nextFloat(), posY + 1 + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
-						}
-					}
-				}
-			}
+			final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+			final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+			final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
+			
+			entityPlayer.worldObj.spawnParticle("townaura", spawnX + SpellboundCore.modRandom.nextFloat() / 2, spawnY + SpellboundCore.modRandom.nextFloat(), spawnZ + SpellboundCore.modRandom.nextFloat() / 2, velX, velY, velZ);
+			entityPlayer.worldObj.spawnParticle("townaura", spawnX + SpellboundCore.modRandom.nextFloat() / 2, spawnY + 1 + SpellboundCore.modRandom.nextFloat(), spawnZ + SpellboundCore.modRandom.nextFloat() / 2, velX, velY, velZ);
 		}
 	}
 }

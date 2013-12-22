@@ -18,8 +18,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellSummonLvl2 extends AbstractSpell
 {
@@ -44,6 +46,7 @@ public class SpellSummonLvl2 extends AbstractSpell
 		mob.setPosition(caster.posX, caster.posY, caster.posZ);
 
 		caster.worldObj.spawnEntityInWorld(mob);
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createSummonGFXPacket(mob.posX, mob.posY, mob.posZ));
 	}
 
 	@Override

@@ -13,8 +13,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellSummonLvl3 extends AbstractSpell
 {
@@ -34,6 +36,7 @@ public class SpellSummonLvl3 extends AbstractSpell
 		witherSkeleton.setPosition(caster.posX, caster.posY, caster.posZ);
 
 		caster.worldObj.spawnEntityInWorld(witherSkeleton);
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createSummonGFXPacket(witherSkeleton.posX, witherSkeleton.posY, witherSkeleton.posZ));
 	}
 
 	@Override

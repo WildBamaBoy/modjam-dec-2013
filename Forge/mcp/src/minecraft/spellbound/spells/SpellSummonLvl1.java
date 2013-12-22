@@ -13,8 +13,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import spellbound.core.forge.PacketHandler;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class SpellSummonLvl1 extends AbstractSpell
 {
@@ -38,6 +40,8 @@ public class SpellSummonLvl1 extends AbstractSpell
 		wolf.setPosition(caster.posX, caster.posY, caster.posZ);
 		
 		caster.worldObj.spawnEntityInWorld(wolf);
+		
+		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createSummonGFXPacket(wolf.posX, wolf.posY, wolf.posZ));
 	}
 
 	@Override
