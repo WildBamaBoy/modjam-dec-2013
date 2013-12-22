@@ -18,7 +18,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import spellbound.core.SpellboundCore;
 import spellbound.core.util.SpellEntry;
 import spellbound.spells.SpellFireShield;
-import spellbound.spells.SpellFlight;
+import spellbound.spells.SpellFlightLvl1;
+import spellbound.spells.SpellFlightLvl2;
 import spellbound.spells.SpellShieldOfInvulnerability;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -53,38 +54,38 @@ public class ServerTickHandler implements ITickHandler
 	{
 		return "Spellbound - ServerTickHandler";
 	}
-	
+
 	private void onTick()
 	{
 		final Map<EntityPlayer, Integer> oldEntries = new HashMap<EntityPlayer, Integer>();
-		
+
 		for (final Map.Entry<EntityPlayer,List<SpellEntry>> entrySet : SpellboundCore.getInstance().getActiveSpells().entrySet())
 		{
 			final EntityPlayer player = entrySet.getKey();
 			final List<SpellEntry> entryList = entrySet.getValue();
-			
+
 			for (SpellEntry entry : entryList)
 			{
 				entry.durationCounter++;
-				
+
 				if (entry.durationCounter == entry.maxDuration / 2)
 				{
 					player.addChatMessage(entry.spell.getSpellDisplayName() + " will dispel in " + entry.durationCounter / 20 + " seconds!");
 				}
-				
+
 				if (entry.durationCounter >= entry.maxDuration)
 				{
 					oldEntries.put(player, entryList.indexOf(entry));
 					player.addChatMessage(entry.spell.getSpellDisplayName() + " has dispelled!");
 				}
-				
+
 				if (entry.spell instanceof SpellFireShield || entry.spell instanceof SpellShieldOfInvulnerability)
 				{
 					player.extinguish();
 				}
 			}
 		}
-		
+
 		//Clean up old entries.
 		for (final Map.Entry<EntityPlayer, Integer> oldEntry : oldEntries.entrySet())
 		{
@@ -93,12 +94,15 @@ public class ServerTickHandler implements ITickHandler
 			final SpellEntry entry = activeSpells.get(oldEntry.getValue());
 
 			activeSpells.remove(entry);
-			
-			if (entry.spell instanceof SpellFlight)
+
+			if (entry.spell instanceof SpellFlightLvl1 || entry.spell instanceof SpellFlightLvl2)
 			{
-				entryPlayer.capabilities.allowFlying = false;
-				entryPlayer.capabilities.isFlying = false;
-				PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
+				if (!entryPlayer.capabilities.isCreativeMode)
+				{
+					entryPlayer.capabilities.allowFlying = false;
+					entryPlayer.capabilities.isFlying = false;
+					PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
+				}
 			}
 		}
 	}

@@ -79,7 +79,8 @@ import spellbound.spells.SpellFireLvl2;
 import spellbound.spells.SpellFireLvl3;
 import spellbound.spells.SpellFireShield;
 import spellbound.spells.SpellFishForm;
-import spellbound.spells.SpellFlight;
+import spellbound.spells.SpellFlightLvl1;
+import spellbound.spells.SpellFlightLvl2;
 import spellbound.spells.SpellGrease;
 import spellbound.spells.SpellHaste;
 import spellbound.spells.SpellLightningLvl1;
@@ -215,7 +216,8 @@ public class SpellboundCore
 	public ItemSpellTablet itemTabletGrease;
 	public ItemSpellTablet itemTabletAdvanceTime;
 	public ItemSpellTablet itemTabletChangeWeather;
-	public ItemSpellTablet itemTabletFlight;
+	public ItemSpellTablet itemTabletFlightLvl1;
+	public ItemSpellTablet itemTabletFlightLvl2;
 	public ItemSpellTablet itemTabletFishForm;
 
 	//Disruption
@@ -329,7 +331,8 @@ public class SpellboundCore
 		itemTabletHaste = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletHaste, "tablethaste", new SpellHaste(), 1);
 		itemTabletAdvanceTime = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletAdvanceTime, "tabletadvancetime", new SpellAdvanceTime(), 1);
 		itemTabletChangeWeather = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletChangeWeather, "tabletchangeweather", new SpellChangeWeather(), 1);
-		itemTabletFlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlight, "tabletflight", new SpellFlight(), 1);
+		itemTabletFlightLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlightLvl1, "tabletflightlvl1", new SpellFlightLvl1(), 1);
+		itemTabletFlightLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlightLvl2, "tabletflightlvl2", new SpellFlightLvl2(), 2);
 		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new SpellFishForm(), 1);
 		
 		//Disruption
@@ -480,8 +483,10 @@ public class SpellboundCore
 				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletChangeWeather),
 				" B ", "STS", " F ", 'B', Item.bucketWater, 'S', Block.blockSnow, 'T', itemTabletMundaneBase, 'F', Block.plantYellow);
-		GameRegistry.addRecipe(new ItemStack(itemTabletFlight),
+		GameRegistry.addRecipe(new ItemStack(itemTabletFlightLvl1),
 				" F ", "FTF", " F ", 'T', itemTabletMundaneBase, 'F', Item.feather);
+		GameRegistry.addRecipe(new ItemStack(itemTabletFlightLvl2),
+				"FFF", "FTF", "FFF", 'T', itemTabletFlightLvl1, 'F', Item.feather);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
 

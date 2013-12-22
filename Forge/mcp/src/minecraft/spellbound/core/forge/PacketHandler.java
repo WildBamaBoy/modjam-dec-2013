@@ -242,8 +242,11 @@ public class PacketHandler implements IPacketHandler
 
 		else
 		{
-			entityPlayer.capabilities.allowFlying = false;
-			entityPlayer.capabilities.isFlying = false;
+			if (!entityPlayer.capabilities.isCreativeMode)
+			{
+				entityPlayer.capabilities.allowFlying = false;
+				entityPlayer.capabilities.isFlying = false;
+			}
 		}
 	}
 
@@ -671,15 +674,15 @@ public class PacketHandler implements IPacketHandler
 				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
 				final int posY = (int) casterY;
 				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
-				
+
 				final String particleName = Constants.SPRAY_PARTICLES[SpellboundCore.modRandom.nextInt(Constants.SPRAY_PARTICLES.length)];
-				
+
 				for (int i = 0; i < 12; i++)
 				{
 					final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 					final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 					final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-					
+
 					entityPlayer.worldObj.spawnParticle(particleName, posX + SpellboundCore.modRandom.nextFloat(), posY + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
 					entityPlayer.worldObj.spawnParticle(particleName, posX + SpellboundCore.modRandom.nextFloat(), posY + 1 + SpellboundCore.modRandom.nextFloat(), posZ + SpellboundCore.modRandom.nextFloat(), velX, velY, velZ);
 				}
@@ -738,7 +741,7 @@ public class PacketHandler implements IPacketHandler
 			final double velX = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 			final double velY = SpellboundCore.modRandom.nextGaussian() * 0.02D;
 			final double velZ = SpellboundCore.modRandom.nextGaussian() * 0.02D;
-			
+
 			entityPlayer.worldObj.spawnParticle("townaura", spawnX + SpellboundCore.modRandom.nextFloat() / 2, spawnY + SpellboundCore.modRandom.nextFloat(), spawnZ + SpellboundCore.modRandom.nextFloat() / 2, velX, velY, velZ);
 			entityPlayer.worldObj.spawnParticle("townaura", spawnX + SpellboundCore.modRandom.nextFloat() / 2, spawnY + 1 + SpellboundCore.modRandom.nextFloat(), spawnZ + SpellboundCore.modRandom.nextFloat() / 2, velX, velY, velZ);
 		}

@@ -1,5 +1,5 @@
 /**********************************************
- * SpellFlight.java
+ * SpellFlightLvl1.java
  * Copyright (c) 2013 Wild Bama Boy.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
@@ -19,12 +19,12 @@ import spellbound.enums.EnumSpellRange;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
-public class SpellFlight extends AbstractSpell
+public class SpellFlightLvl1 extends AbstractSpell
 {
 	@Override
 	public String getSpellDisplayName() 
 	{
-		return "Flight";
+		return "Instant Levitation";
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class SpellFlight extends AbstractSpell
 		caster.motionY += 1.0D;
 		caster.capabilities.isFlying = true;
 		
-		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 400);
+		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 20);
 		PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(true), (Player) caster);
 	}
 	
@@ -56,6 +56,6 @@ public class SpellFlight extends AbstractSpell
 	@Override
 	public EnumItemInUseTime getSpellCastDuration() 
 	{
-		return EnumItemInUseTime.FOUR_SECONDS;
+		return EnumItemInUseTime.INSTANT;
 	}
 }

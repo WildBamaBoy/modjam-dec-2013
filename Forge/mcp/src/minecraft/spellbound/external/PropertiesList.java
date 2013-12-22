@@ -87,8 +87,9 @@ public class PropertiesList
 	public int itemID_TabletGrease = 26828;
 	public int itemID_TabletAdvanceTime = 26829;
 	public int itemID_TabletChangeWeather = 26830;
-	public int itemID_TabletFlight = 26831;
-	public int itemID_TabletFishForm = 26832;
+	public int itemID_TabletFlightLvl1 = 26831;
+	public int itemID_TabletFlightLvl2 = 26832;
+	public int itemID_TabletFishForm = 26833;
 	
 	//Disruptive
 	public int itemID_TabletBreach = 26842;
