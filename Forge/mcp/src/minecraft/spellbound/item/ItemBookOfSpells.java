@@ -46,37 +46,37 @@ public class ItemBookOfSpells extends ItemEditableBook
 	{
 		bookTagList.appendTag(new NBTTagString("2", 
 				"       Mushrooms \n\n"
-						+ "   Mushrooms are used in the crafting of base spell tablets. \n\nA spellcaster"
+						+ "   Mushrooms are used in the crafting of base spell tablets. \n\nA spellcaster "
 						+ "must find and breed mushrooms to produce the mushrooms that can be used in spells."));
 
 		bookTagList.appendTag(new NBTTagString("3", 
 				"There are three types of mushrooms found in the wilderness:"
 						+ "\n\n-Red with orange dots"
-						+ "\n-Red with pink dots"
+						+ "\n-Pink with orange dots"
 						+ "\n-Blue with grey dots"
 						+ "\n\nTo breed a mushroom, place it beside a valid mate, and a new hybrid mushroom will eventually form."));
 
 		bookTagList.appendTag(new NBTTagString("4", 
 				"Red Orange Mushroom"
-						+ "\n\n+ Pink Orange = Fire or White"
-						+ "\n+ Lightning = Mundane"
+						+ "\n\nw/Pink Orange = Fire or White"
+						+ "\nw/Lightning = Mundane"
 						+ "\n\nNotes: Spawns naturally."));
 
 		bookTagList.appendTag(new NBTTagString("5", 
 				"Pink Orange Mushroom"
-						+ "\n\n+ Red Orange = Fire or White"
+						+ "\n\nw/Red Orange = Fire or White"
 						+ "\n\nNotes: Spawns naturally."));
 
 		bookTagList.appendTag(new NBTTagString("6", 
 				"Blue Grey Mushroom"
-						+ "\n+ Protection = Divination"
-						+ "\n+ Orange Grey = Protection or Cold"
-						+ "\n+ Fire = Orange Grey"
+						+ "\nw/Protection = Divination"
+						+ "\nw/Orange Grey = Protection or Cold"
+						+ "\nw/Fire = Orange Grey"
 						+ "\n\nNotes: Spawns naturally."));
 
 		bookTagList.appendTag(new NBTTagString("7", 
 				"Fire Mushroom"
-						+ "\n+ Blue Grey = Orange Grey"
+						+ "\nw/Blue Grey = Orange Grey"
 						+ "\n\nNotes: Makes fire tablets."));
 
 		bookTagList.appendTag(new NBTTagString("8", 
@@ -85,7 +85,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("9", 
 				"Orange Grey Mushroom"
-						+ "\n+ Blue Grey = Protection or Cold"
+						+ "\nw/Blue Grey = Protection or Cold"
 						+ "\n\nNotes: N/A"));
 
 		bookTagList.appendTag(new NBTTagString("10", 
@@ -95,21 +95,21 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("11", 
 				"Protection Mushroom"
-						+ "\n+ Orange Grey = Lightning"
-						+ "\n+ Blue Grey = Divination"
-						+ "\n+ Mundane = Summon"
+						+ "\nw/Orange Grey = Lightning"
+						+ "\nw/Blue Grey = Divination"
+						+ "\nw/Mundane = Summon"
 						+ "\n\nNotes: N/A"));
 
 		bookTagList.appendTag(new NBTTagString("12", 
 				"Lightning Mushroom"
-						+ "\n+ Mundane = Disruption"
-						+ "\n+ Red Orange = Mundane"
+						+ "\nw/Mundane = Disruption"
+						+ "\nw/Red Orange = Mundane"
 						+ "\n\nNotes: Makes lightning tablets."));
 
 		bookTagList.appendTag(new NBTTagString("13", 
 				"Mundane Mushroom"
-						+ "\n+ Lightning = Disruption"
-						+ "\n+ Grey = Summon"
+						+ "\nw/Lightning = Disruption"
+						+ "\nw/Grey = Summon"
 						+ "\n\nNotes: N/A"));
 
 		bookTagList.appendTag(new NBTTagString("14", 
@@ -193,7 +193,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 	
 	private NBTTagList putElementalRecipes(NBTTagList bookTagList)
 	{
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Fire Spells\n\n" + "(Note: Often causes explosions and fires. Caster immune to fire as well.)"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Fire Spells\n\n" + "(Note: Often causes explosions and fires.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Flaming Hands (Lvl1)\n"

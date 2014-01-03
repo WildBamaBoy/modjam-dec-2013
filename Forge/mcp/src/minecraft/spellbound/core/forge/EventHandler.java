@@ -9,8 +9,12 @@
 
 package spellbound.core.forge;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import spellbound.core.SpellboundCore;
+import spellbound.spells.SpellShieldOfInvulnerability;
 
 public class EventHandler 
 {
@@ -25,5 +29,17 @@ public class EventHandler
 		event.manager.soundPoolSounds.addSound("spellbound:spellcharge5seconds.ogg");
 		event.manager.soundPoolSounds.addSound("spellbound:shield.ogg");
 		event.manager.soundPoolSounds.addSound("spellbound:surge.ogg");
+		event.manager.soundPoolSounds.addSound("spellbound:meteor.ogg");
+	}
+	
+	@ForgeSubscribe
+	public void onLivingHurt(LivingHurtEvent event)
+	{
+		if (event.entityLiving instanceof EntityPlayer && !event.source.isUnblockable() && !event.source.isProjectile() && !event.source.damageType.equals("player") &&
+				SpellboundCore.getInstance().entityHasActiveSpell(event.entityLiving, SpellShieldOfInvulnerability.class))
+		{
+			event.setCanceled(true);
+			event.ammount = 0.0F;
+		}
 	}
 }

@@ -44,7 +44,7 @@ public class SpellWailOfTheSheWolf extends AbstractSpell
 				entity.attackEntityFrom(DamageSource.magic, 500.0F);
 			}
 
-			else if (entity instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class))
+			else if (entity instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell(caster, SpellShieldOfInvulnerability.class))
 			{
 				entity.attackEntityFrom(DamageSource.magic, 500.0F);
 			}

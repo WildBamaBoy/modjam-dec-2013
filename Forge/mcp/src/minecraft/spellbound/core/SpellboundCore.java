@@ -25,6 +25,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,6 +48,7 @@ import spellbound.blocks.BlockMushroomYellow;
 import spellbound.core.forge.CommonProxy;
 import spellbound.core.forge.PacketHandler;
 import spellbound.core.util.SpellEntry;
+import spellbound.entity.EntityMeteor;
 import spellbound.entity.EntityTargetSpellCold;
 import spellbound.entity.EntityTargetSpellDisintegrate;
 import spellbound.entity.EntityTargetSpellDisruption;
@@ -62,6 +64,7 @@ import spellbound.item.ItemSpellTablet;
 import spellbound.item.SpellboundItem;
 import spellbound.spells.AbstractSpell;
 import spellbound.spells.SpellAdvanceTime;
+import spellbound.spells.SpellArchmagic;
 import spellbound.spells.SpellBlink;
 import spellbound.spells.SpellBreach;
 import spellbound.spells.SpellChangeWeather;
@@ -87,6 +90,7 @@ import spellbound.spells.SpellLightningLvl1;
 import spellbound.spells.SpellLightningLvl2;
 import spellbound.spells.SpellLightningLvl3;
 import spellbound.spells.SpellLightningShield;
+import spellbound.spells.SpellMeteor;
 import spellbound.spells.SpellMiscastMagic;
 import spellbound.spells.SpellPanicRoom;
 import spellbound.spells.SpellPush;
@@ -137,7 +141,7 @@ public class SpellboundCore
 	public PropertiesManager propertiesManager;
 	public String runningDirectory;
 
-	private final Map<EntityPlayer, List<SpellEntry>> activeSpells = new LinkedHashMap<EntityPlayer, List<SpellEntry>>();
+	private final Map<EntityLivingBase, List<SpellEntry>> activeSpells = new LinkedHashMap<EntityLivingBase, List<SpellEntry>>();
 
 	//False blocks
 	public Block blockFalseObsidian;
@@ -193,6 +197,8 @@ public class SpellboundCore
 	public ItemSpellTablet itemTabletElementalFury;
 	public ItemSpellTablet itemTabletDisintegrate;
 	public ItemSpellTablet itemTabletPanicRoom;
+	public ItemSpellTablet itemTabletArchmagic;
+	public ItemSpellTablet itemTabletMeteor;
 
 	//Shields
 	public ItemSpellTablet itemTabletFireShield;
@@ -257,6 +263,7 @@ public class SpellboundCore
 		EntityRegistry.registerModEntity(EntityTargetSpellMundane.class, EntityTargetSpellMundane.class.getSimpleName(), 14, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellElementalFury.class, EntityTargetSpellElementalFury.class.getSimpleName(), 15, this, 50, 2, true);
 		EntityRegistry.registerModEntity(EntityTargetSpellDisintegrate.class, EntityTargetSpellDisintegrate.class.getSimpleName(), 16, this, 50, 2, true);
+		EntityRegistry.registerModEntity(EntityMeteor.class, EntityMeteor.class.getSimpleName(), 17, this, 200, 2, true);
 	}
 
 	private void registerCreativeTab()
@@ -304,6 +311,8 @@ public class SpellboundCore
 		itemTabletElementalFury = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletElementalFury, "tabletelementalfury", new SpellElementalFury(), 4);
 		itemTabletDisintegrate = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletDisintegrate, "tabletdisintegrate", new SpellDisintegrate(), 4);
 		itemTabletPanicRoom = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletPanicRoom, "tabletpanicroom", new SpellPanicRoom(), 4);
+		itemTabletArchmagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletArchmagic, "tabletarchmagic", new SpellArchmagic(), 4);
+		itemTabletMeteor = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMeteor, "tabletmeteor", new SpellMeteor(), 4);
 		
 		//Summons
 		itemTabletSummonLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletSummonLvl1, "tabletsummonlvl1", new SpellSummonLvl1(), 1);
@@ -436,6 +445,10 @@ public class SpellboundCore
 				" F ", "CRL", " B ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'B', Item.bucketLava);		
 		GameRegistry.addRecipe(new ItemStack(itemTabletPanicRoom), 
 				"RTR", "TTT", "RTR", 'R', Item.redstone, 'T', itemTabletWallOfBedrock);
+		GameRegistry.addRecipe(new ItemStack(itemTabletArchmagic), 
+				" F ", "CRL", " S ", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'C', itemTabletColdLvl3, 'R', Item.redstone, 'S', itemTabletShieldOfInvulnerability);
+		GameRegistry.addRecipe(new ItemStack(itemTabletMeteor), 
+				"LFL", "FRF", "LFL", 'F', itemTabletFireLvl3, 'L', itemTabletLightningLvl3, 'R', Item.redstone);
 		
 		//Shields
 		GameRegistry.addRecipe(new ItemStack(itemTabletFireShield), 
@@ -484,8 +497,6 @@ public class SpellboundCore
 				" M ", "RT-", 'M', Item.minecartEmpty, 'R', Block.railPowered, 'T', itemTabletMundaneBase, '-', Block.torchRedstoneActive);
 		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
 				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
-		GameRegistry.addRecipe(new ItemStack(itemTabletAdvanceTime),
-				" C ", "RTR", " R ", 'C', Item.pocketSundial, 'R', Item.redstone, 'T', itemTabletMundaneBase);
 		GameRegistry.addRecipe(new ItemStack(itemTabletChangeWeather),
 				" B ", "STS", " F ", 'B', Item.bucketWater, 'S', Block.blockSnow, 'T', itemTabletMundaneBase, 'F', Block.plantYellow);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFlightLvl1),
@@ -505,7 +516,7 @@ public class SpellboundCore
 
 		//Misc
 		GameRegistry.addRecipe(new ItemStack(itemTabletSummonChestFullOfCookies), 
-				" C ", "CTC", " H ", 'T', itemTabletBase, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
+				"BBB", "CTC", " H ", 'T', itemTabletBase, 'B', Block.blockDiamond, 'C', new ItemStack(Item.dyePowder, 1, 3), 'H', Block.chest);
 	}
 
 	private void registerLocalizations()
@@ -618,20 +629,20 @@ public class SpellboundCore
 		Minecraft.getMinecraft().displayCrashReport(crashReport);
 	}
 
-	public void addActiveSpellToPlayer(EntityPlayer caster, AbstractSpell spell, int duration)
+	public void addActiveSpellToEntity(EntityLivingBase entity, AbstractSpell spell, int duration)
 	{
-		final List<SpellEntry> activeSpells = this.getActiveSpells().get(caster);
+		final List<SpellEntry> activeSpells = this.getActiveSpells().get(entity);
 
 		if (activeSpells == null)
 		{
 			final List<SpellEntry> entryList = new ArrayList<SpellEntry>();
 			entryList.add(new SpellEntry(spell, duration));
-			this.getActiveSpells().put(caster, entryList);
+			this.getActiveSpells().put(entity, entryList);
 		}
 
 		else
 		{
-			for (SpellEntry entry : this.getActiveSpells().get(caster))
+			for (SpellEntry entry : this.getActiveSpells().get(entity))
 			{
 				if (entry.spell.getClass().getSimpleName().equals(spell.getClass().getSimpleName()))
 				{
@@ -641,13 +652,13 @@ public class SpellboundCore
 			}
 			
 			activeSpells.add(new SpellEntry(spell, duration));
-			this.getActiveSpells().put(caster, activeSpells);
+			this.getActiveSpells().put(entity, activeSpells);
 		}
 	}
 
-	public boolean playerHasActiveSpell(EntityPlayer caster, Class spellClass)
+	public boolean entityHasActiveSpell(EntityLivingBase entity, Class spellClass)
 	{
-		final List<SpellEntry> activeSpells = this.getActiveSpells().get(caster);
+		final List<SpellEntry> activeSpells = this.getActiveSpells().get(entity);
 
 		if (activeSpells != null)
 		{
@@ -703,7 +714,7 @@ public class SpellboundCore
 		}
 	}
 
-	public Map<EntityPlayer, List<SpellEntry>> getActiveSpells() 
+	public Map<EntityLivingBase, List<SpellEntry>> getActiveSpells() 
 	{
 		return activeSpells;
 	}

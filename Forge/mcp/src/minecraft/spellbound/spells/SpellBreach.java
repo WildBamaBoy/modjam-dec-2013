@@ -9,8 +9,11 @@
 
 package spellbound.spells;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
 import spellbound.entity.EntityTargetSpellDisruption;
@@ -41,12 +44,23 @@ public class SpellBreach extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		if (entityHit instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
+		final int hitBlockId = worldObj.getBlockId(posX, posY, posZ);
+		
+		if (entityHit instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
 		{
 			SpellboundCore.getInstance().removeActiveSpellFromPlayer((EntityPlayer) entityHit, SpellFireShield.class);
 			SpellboundCore.getInstance().removeActiveSpellFromPlayer((EntityPlayer) entityHit, SpellColdShield.class);
 			SpellboundCore.getInstance().removeActiveSpellFromPlayer((EntityPlayer) entityHit, SpellLightningShield.class);
 			SpellboundCore.getInstance().removeActiveSpellFromPlayer((EntityPlayer) entityHit, SpellSurgeShield.class);
+		}
+		
+		else if (entityHit == null && hitBlockId != Block.bedrock.blockID && hitBlockId != SpellboundCore.getInstance().blockFalseBedrock.blockID)
+		{
+			final ItemStack dropStack = new ItemStack(worldObj.getBlockId(posX, posY, posZ), 1, worldObj.getBlockMetadata(posX, posY, posZ));
+			final EntityItem entityItem = new EntityItem(worldObj, posX, posY, posZ, dropStack);
+			
+			worldObj.setBlockToAir(posX, posY, posZ);
+			worldObj.spawnEntityInWorld(entityItem);
 		}
 	}
 

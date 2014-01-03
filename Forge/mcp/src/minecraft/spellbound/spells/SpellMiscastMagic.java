@@ -43,7 +43,7 @@ public class SpellMiscastMagic extends AbstractSpell
 	{
 		if (entityHit instanceof EntityPlayer)
 		{
-			SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
+			SpellboundCore.getInstance().addActiveSpellToEntity(caster, this, 200);
 		}
 	}
 	

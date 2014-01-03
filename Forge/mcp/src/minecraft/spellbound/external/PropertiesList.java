@@ -11,8 +11,6 @@ package spellbound.external;
 
 public class PropertiesList 
 {
-	public boolean doDisableGreaterFireball = false;
-	
 	public int blockID_BlockFalseObsidian = 3568;
 	public int blockID_BlockFalseBedrock = 3569;
 	
@@ -63,6 +61,8 @@ public class PropertiesList
 	public int itemID_TabletElementalFury = 26782;
 	public int itemID_TabletDisintegrate = 26783;
 	public int itemID_TabletPanicRoom = 26784;
+	public int itemID_TabletArchmagic = 26785;
+	public int itemID_TabletMeteor = 26786;
 	
 	//Shields
 	public int itemID_TabletFireShield = 26791;
@@ -99,4 +99,7 @@ public class PropertiesList
 	
 	//Misc
 	public int itemID_TabletCookies = 26852;
+	
+	//Boolean
+	public boolean doAllowSpellGreifing = true;
 }

@@ -41,12 +41,12 @@ public abstract class AbstractSpell
 		this.caster = caster;
 		int chanceOfSurge = 1;
 		
-		if (SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellChaos.class))
+		if (SpellboundCore.getInstance().entityHasActiveSpell(caster, SpellChaos.class))
 		{
 			chanceOfSurge = 80;
 		}
 		
-		if (SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellSurgeShield.class) || SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class))
+		if (SpellboundCore.getInstance().entityHasActiveSpell(caster, SpellSurgeShield.class) || SpellboundCore.getInstance().entityHasActiveSpell(caster, SpellShieldOfInvulnerability.class))
 		{
 			chanceOfSurge = 0;
 		}

@@ -9,7 +9,10 @@
 
 package spellbound.spells;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -57,6 +60,7 @@ public class SpellColorSpray extends AbstractSpell
 				final int posX = addX ? flooredX + xCounter : flooredX - xCounter;
 				final int posY = (int) caster.posY;
 				final int posZ = addZ ? flooredZ + zCounter : flooredZ - zCounter;
+				final int blockId = caster.worldObj.getBlockId(posX, posY, posZ);
 
 				for (final Object obj : caster.worldObj.getEntitiesWithinAABBExcludingEntity(caster, AxisAlignedBB.getBoundingBox(posX - radius, posY - 3, posZ - radius, posX + radius, posY + 3, posZ + radius)))
 				{
@@ -64,12 +68,26 @@ public class SpellColorSpray extends AbstractSpell
 					{
 						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
 						hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+
+						if (obj instanceof EntitySheep)
+						{
+							final EntitySheep entitySheep = (EntitySheep)obj;
+							entitySheep.setFleeceColor(BlockColored.getDyeFromBlock(SpellboundCore.modRandom.nextInt(16)));
+						}
 					}
 
-					else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
+					else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
 					{
 						final EntityLivingBase hitEntity = (EntityLivingBase)obj;
 						hitEntity.addPotionEffect(new PotionEffect(Potion.blindness.id, 200));
+					}
+				}
+
+				for (int movY = 0; movY < 3; movY++)
+				{
+					if (blockId == Block.cloth.blockID)
+					{
+						caster.worldObj.setBlockMetadataWithNotify(posX, posY + movY, posZ, SpellboundCore.modRandom.nextInt(16), 2);
 					}
 				}
 			}

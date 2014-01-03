@@ -44,23 +44,23 @@ public class SpellFireLvl3 extends AbstractSpell
 	{
 		if (entityHit == null)
 		{
-			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+			worldObj.createExplosion(null, (double)posX, (double)posY, (double)posZ, 8.0F, SpellboundCore.getInstance().propertiesManager.propertiesList.doAllowSpellGreifing);
 		}
 
 		else
 		{
 			if (entityHit instanceof EntityPlayer)
 			{
-				if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellFireShield.class))
+				if (!SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellFireShield.class))
 				{
-					worldObj.createExplosion(entityHit, (double)posX, (double)posY, (double)posZ, 8.0F, true);
+					worldObj.createExplosion(entityHit, (double)posX, (double)posY, (double)posZ, 8.0F, SpellboundCore.getInstance().propertiesManager.propertiesList.doAllowSpellGreifing);
 				}
 			}
 
 			else
 			{
 				entityHit.attackEntityFrom(DamageSource.magic, 20.0F);
-				worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, true);
+				worldObj.createExplosion(entityHit, entityHit.posX, entityHit.posY, entityHit.posZ, 8.0F, SpellboundCore.getInstance().propertiesManager.propertiesList.doAllowSpellGreifing);
 			}
 		}
 	}

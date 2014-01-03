@@ -59,8 +59,10 @@ public class PropertiesManager
 
 			for (Field f : PropertiesList.class.getFields())
 			{
+				
 				String fieldType = f.getType().toString();
-
+				System.out.println(fieldType);
+				
 				if (fieldType.contains("int"))
 				{
 					properties.put(f.getName(), f.get(propertiesList).toString());

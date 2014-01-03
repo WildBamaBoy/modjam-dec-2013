@@ -41,9 +41,9 @@ public class SpellChaos extends AbstractSpell
 	@Override
 	public void doSpellTargetEffect(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityHit) 
 	{
-		if (entityHit instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
+		if (entityHit instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
 		{
-			SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 200);
+			SpellboundCore.getInstance().addActiveSpellToEntity(caster, this, 200);
 		}
 	}
 

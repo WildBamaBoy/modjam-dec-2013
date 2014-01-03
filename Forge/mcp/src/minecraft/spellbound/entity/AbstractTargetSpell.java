@@ -43,7 +43,7 @@ public abstract class AbstractTargetSpell extends Entity
 	public double accelerationY;
 	public double accelerationZ;
 
-	private final AbstractSpell spell;
+	protected final AbstractSpell spell;
 
 	/**
 	 * Constructor for client rendering.
@@ -105,9 +105,17 @@ public abstract class AbstractTargetSpell extends Entity
 	@Override
 	public boolean isInRangeToRenderDist(double distance)
 	{
-		double weightedLength = this.boundingBox.getAverageEdgeLength() * 4.0D;
-		weightedLength *= 64.0D;
-		return distance < weightedLength * weightedLength;
+		if (this instanceof EntityMeteor)
+		{
+			return true;
+		}
+
+		else
+		{
+			double weightedLength = this.boundingBox.getAverageEdgeLength() * 4.0D;
+			weightedLength *= 64.0D;
+			return distance < weightedLength * weightedLength;
+		}
 	}
 
 	@Override
@@ -124,7 +132,7 @@ public abstract class AbstractTargetSpell extends Entity
 
 			if (!this.worldObj.isRemote)
 			{
-				if (this.caster != null && this.getDistanceToEntity(caster) > 100.0D)
+				if (this.caster != null && this.getDistanceToEntity(caster) > 150.0D && !(this instanceof EntityMeteor))
 				{
 					setDead();
 					return;

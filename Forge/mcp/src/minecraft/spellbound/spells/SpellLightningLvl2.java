@@ -50,7 +50,7 @@ public class SpellLightningLvl2 extends AbstractSpell
 
 		if (entityHit instanceof EntityPlayer)
 		{
-			if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellLightningShield.class))
+			if (!SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellLightningShield.class))
 			{
 				worldObj.spawnEntityInWorld(new EntityLightningBolt(worldObj, spawnX, spawnY, spawnZ));
 				PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createLightningPacket(spawnX, spawnY, spawnZ));

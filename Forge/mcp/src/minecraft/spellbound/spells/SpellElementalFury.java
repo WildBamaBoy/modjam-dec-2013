@@ -64,7 +64,7 @@ public class SpellElementalFury extends AbstractSpell
 			{
 				final EntityLivingBase livingEntity = (EntityLivingBase)obj;
 				final boolean canAffectEntity = 
-						obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell(caster, SpellShieldOfInvulnerability.class) 
+						obj instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell(caster, SpellShieldOfInvulnerability.class) 
 						|| !(obj instanceof EntityPlayer) && (obj instanceof EntityLivingBase);
 
 				if (canAffectEntity)

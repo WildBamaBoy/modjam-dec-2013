@@ -41,7 +41,7 @@ public class SpellFlightLvl2 extends AbstractSpell
 		caster.capabilities.allowFlying = true;
 		caster.capabilities.isFlying = true;
 		
-		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, 400);
+		SpellboundCore.getInstance().addActiveSpellToEntity(caster, this, 400);
 		PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(true), (Player) caster);
 	}
 	

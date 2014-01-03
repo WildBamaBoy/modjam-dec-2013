@@ -21,7 +21,7 @@ import spellbound.surges.SurgeSuperStrength;
 
 public final class Constants 
 {
-	public static final String VERSION = "1.0.0";
+	public static final String VERSION = "1.1.0";
 	
 	public static final AbstractSurge[] SURGES = new AbstractSurge[]
 			{
@@ -53,7 +53,7 @@ public final class Constants
 		Block.melonStem.blockID, 
 		Block.pumpkinStem.blockID
 			};
-
+	
 	public static final int[] SNOW_SUPPORTERS = new int[]
 			{
 		Block.grass.blockID, 

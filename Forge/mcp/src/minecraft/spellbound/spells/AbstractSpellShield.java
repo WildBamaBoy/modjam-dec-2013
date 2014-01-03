@@ -34,7 +34,7 @@ public abstract class AbstractSpellShield extends AbstractSpell
 			caster.worldObj.playSoundAtEntity(caster, "spellbound:shield", 1.0F, 1.0F);
 		}
 		
-		SpellboundCore.getInstance().addActiveSpellToPlayer(caster, this, getShieldDuration());
+		SpellboundCore.getInstance().addActiveSpellToEntity(caster, this, getShieldDuration());
 		PacketDispatcher.sendPacketToAllPlayers(PacketHandler.createShieldGFXPacket(this.getClass(), caster.posX, caster.posY, caster.posZ));
 	}
 

@@ -52,7 +52,7 @@ public class SpellDisintegrate extends AbstractSpell
 			{
 				if (entityHit instanceof EntityPlayer)
 				{
-					if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
+					if (!SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class))
 					{
 						entityHit.attackEntityFrom(DamageSource.magic, 100.0F);
 					}

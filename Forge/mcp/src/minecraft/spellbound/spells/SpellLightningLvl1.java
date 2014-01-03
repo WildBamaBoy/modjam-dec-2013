@@ -48,7 +48,7 @@ public class SpellLightningLvl1 extends AbstractSpell
 		{
 			if (entityHit instanceof EntityPlayer)
 			{
-				if (!SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)entityHit, SpellLightningShield.class))
+				if (!SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)entityHit, SpellLightningShield.class))
 				{						
 					entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
 					entityHit.addPotionEffect(new PotionEffect(Potion.weakness.id, 1200));					

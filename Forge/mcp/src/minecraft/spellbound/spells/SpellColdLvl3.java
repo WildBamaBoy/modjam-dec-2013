@@ -12,8 +12,6 @@ package spellbound.spells;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -72,15 +70,15 @@ public class SpellColdLvl3 extends AbstractSpell
 						if (obj instanceof EntityLivingBase && !(obj instanceof EntityPlayer))
 						{
 							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+							SpellboundCore.getInstance().addActiveSpellToEntity(hitEntity, this, 300);
 							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 							hitEntity.extinguish();
 						}
 
-						else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().playerHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
+						else if (obj instanceof EntityPlayer && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)obj, SpellShieldOfInvulnerability.class) && !SpellboundCore.getInstance().entityHasActiveSpell((EntityPlayer)obj, SpellColdShield.class))
 						{
 							final EntityLivingBase hitEntity = (EntityLivingBase)obj;
-							hitEntity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200));
+							SpellboundCore.getInstance().addActiveSpellToEntity(hitEntity, this, 300);
 							hitEntity.attackEntityFrom(DamageSource.magic, 12.0F);
 							hitEntity.extinguish();
 						}

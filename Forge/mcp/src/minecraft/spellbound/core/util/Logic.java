@@ -207,4 +207,51 @@ public final class Logic
 
 		return returnList;
 	}
+	
+	public static List<Point3D> getNearbyBlocksForMeteorHeat(World worldObj, int startX, int startY, int startZ, int maxDistanceAway, int beginY, int endY, int searchId)
+	{
+		final List<Point3D> returnList = new ArrayList<Point3D>();
+		int movementX = 0 - maxDistanceAway;
+		int movementY = beginY;
+		int movementZ = 0 - maxDistanceAway;
+
+		while (true)
+		{
+			final int pointX = startX + movementX;
+			final int pointY = startY + movementY;
+			final int pointZ = startZ + movementZ;
+			final int blockId = worldObj.getBlockId(pointX, pointY, pointZ);
+
+			if (blockId == searchId && worldObj.getBlockId(pointX, pointY - 1, pointZ) != 0)
+			{
+				returnList.add(new Point3D(pointX, pointY, pointZ));
+			}
+
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway && movementY == endY)
+			{
+				break;
+			}
+
+			if (movementX == maxDistanceAway && movementZ == maxDistanceAway)
+			{
+				//Reset for next level
+				movementX = 0 - maxDistanceAway;
+				movementY--;
+				movementZ = 0 - maxDistanceAway;
+
+				continue;
+			}
+
+			if (movementX == maxDistanceAway)
+			{
+				movementX = 0 - maxDistanceAway;
+				movementZ++;
+				continue;
+			}
+
+			movementX++;
+		}
+
+		return returnList;
+	}
 }

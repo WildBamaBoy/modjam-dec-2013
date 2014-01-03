@@ -17,8 +17,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import spellbound.core.Constants;
 import spellbound.core.SpellboundCore;
+import spellbound.enums.EnumItemInUseTime;
 import spellbound.spells.AbstractSpell;
-import spellbound.spells.SpellFireLvl3;
+import spellbound.spells.SpellArchmagic;
 import spellbound.spells.SpellMiscastMagic;
 import spellbound.surges.AbstractSurge;
 import cpw.mods.fml.relauncher.Side;
@@ -70,7 +71,7 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer) 
 	{
-		if (!entityPlayer.capabilities.isCreativeMode)
+		if (!entityPlayer.capabilities.isCreativeMode && !SpellboundCore.getInstance().entityHasActiveSpell(entityPlayer, SpellArchmagic.class))
 		{
 			entityPlayer.worldObj.playSoundAtEntity(entityPlayer, spell.getSpellChargeSound(), 1.0F, 1.0F);
 		}
@@ -83,7 +84,8 @@ public class ItemSpellTablet extends SpellboundItem
 	{
 		super.onUsingItemTick(stack, player, count);
 
-		if (count == getMaxItemUseDuration(stack) - spell.getSpellCastDuration().getValue() && !player.capabilities.isCreativeMode)
+		final int castDuration = SpellboundCore.getInstance().entityHasActiveSpell(player, SpellArchmagic.class) ? EnumItemInUseTime.INSTANT.getValue() : spell.getSpellCastDuration().getValue();
+		if (count == getMaxItemUseDuration(stack) - castDuration && !player.capabilities.isCreativeMode)
 		{
 			player.worldObj.playSoundAtEntity(player, "random.orb", 1.0F, 1.0F);
 		}
@@ -92,46 +94,40 @@ public class ItemSpellTablet extends SpellboundItem
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World worldObj, EntityPlayer entityPlayer, int inUseCount)
 	{
-		if (inUseCount <= getMaxItemUseDuration(itemStack) - spell.getSpellCastDuration().getValue() || entityPlayer.capabilities.isCreativeMode)
+		final int castDuration = SpellboundCore.getInstance().entityHasActiveSpell(entityPlayer, SpellArchmagic.class) ? EnumItemInUseTime.INSTANT.getValue() : spell.getSpellCastDuration().getValue();
+
+		if (inUseCount <= getMaxItemUseDuration(itemStack) - castDuration || entityPlayer.capabilities.isCreativeMode)
 		{
 			if (!entityPlayer.capabilities.isCreativeMode)
 			{
 				entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
 			}
-			
+
 			if (!worldObj.isRemote)
 			{
 				final AbstractSurge surge = spell.doMagicSurge(entityPlayer);
-				
-				if (SpellboundCore.getInstance().playerHasActiveSpell(entityPlayer, SpellMiscastMagic.class))
+
+				if (SpellboundCore.getInstance().entityHasActiveSpell(entityPlayer, SpellMiscastMagic.class))
 				{
 					SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "You're under the effects of Miscast Magic!");
 				}
-				
+
 				else if (surge == null)
 				{
-					if (spell instanceof SpellFireLvl3 && SpellboundCore.getInstance().propertiesManager.propertiesList.doDisableGreaterFireball)
-					{
-						SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "Spell disabled by administrators.");
-					}
-					
-					else
-					{
-						spell.caster = entityPlayer;
-						spell.doSpellCasterEffect(entityPlayer);
-					}
+					spell.caster = entityPlayer;
+					spell.doSpellCasterEffect(entityPlayer);
 				}
-				
+
 				else
 				{
 					SpellboundCore.getInstance().sendMessageToPlayer(entityPlayer, "Magic surge! " + surge.getSpellDisplayName());
 					surge.doSpellCasterEffect(entityPlayer);
 				}
 			}
-			
+
 			super.onPlayerStoppedUsing(itemStack, worldObj, entityPlayer, inUseCount);
 		}
-		
+
 		else
 		{
 			entityPlayer.worldObj.playSoundAtEntity(entityPlayer, "fire.ignite", 1.0F, 1.0F);
