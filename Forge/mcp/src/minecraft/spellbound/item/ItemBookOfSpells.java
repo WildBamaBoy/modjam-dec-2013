@@ -215,7 +215,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - B -   T = Fire Tab.\n\n"
 						+ "Protects from fire and fire spells. If you are struck by a fire spell with the fire shield active, it will have no effect."));
 
-		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n\n" + "(Note: Extinguishes fire and slows enemies down.)"));
+		bookTagList.appendTag(new NBTTagString("24", "\n\n\n\n\n        Cold Spells\n\n" + "(Note: Extinguishes fire and slows enemies down. Cold Blast freezes enemies.)"));
 
 		bookTagList.appendTag(new NBTTagString("24",
 				"Icy Grip (Lvl1)\n"
@@ -301,7 +301,20 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  T T T   R = Redstone\n"
 						+ "  R T R   T = Lvl3 Wall\n"
 						+ "\n\nYou are encased in a room made of false bedrock."));
-		
+		bookTagList.appendTag(new NBTTagString("25",
+				"Archmagic\n\n"
+						+ "  - F -   F = Lvl3 Fire\n"
+						+ "  C R L   C = Lvl3 Cold\n"
+						+ "  - S -   L = Lvl3 Lght.\n"
+						+ "     R = Redstone\n"
+						+ "     S = Shld. of Inv."
+						+ "\n\nAll spells can be cast instantly for 20 seconds."));		
+		bookTagList.appendTag(new NBTTagString("25",
+				"Meteor\n\n"
+						+ "  L F L   F = Lvl3 Fire\n"
+						+ "  F R F   R = Redstone\n"
+						+ "  L F L   L = Lvl3 Lght."
+						+ "\n\nA giant meteor falls from the sky and explodes. Intense heat causes fire!"));		
 		return bookTagList;
 	}
 	
@@ -376,7 +389,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - G -   Y = Yellow\n"
 						+ "     G = Green \n"
 						+ "     T = Prot Tab.\n"
-						+ "\nEnemies in front of you are blinded."));
+						+ "\nEnemies in front of you are blinded. Sheep's wool changes colors."));
 		bookTagList.appendTag(new NBTTagString("25",
 				"Blink\n\n"
 						+ "  - E -   E = End Pearl\n"
@@ -473,7 +486,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - P -   P = Prot Tab.\n"
 						+ "  A T A   T = Dis. Tab.\n"
 						+ "  - A -   A = Arrow\n"
-						+ "\n\nThe target's spell protections are removed. Can not effect players with Shield of Invulnerability."));
+						+ "\n\nThe target's spell protections are removed. Also harvests the block that it hits. Can not effect players with Shield of Invulnerability."));
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Miscast Magic (Lvl 2)\n\n"
@@ -497,9 +510,10 @@ public class ItemBookOfSpells extends ItemEditableBook
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Summon Chest Full of Cookies\n\n"
-						+ "  - C -   C = Cookie\n"
+						+ "  B B B   B = Dia.Blk.\n"
 						+ "  C T C   T = Blank Tab.\n"
 						+ "  - H -   H = Chest\n"
+						+ "     C = Cocoa"
 						+ "\n\nCOOKIES!?!?!?"));
 		return bookTagList;
 	}
