@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import spellbound.core.SpellboundCore;
 import spellbound.enums.EnumItemInUseTime;
 import spellbound.enums.EnumSpellRange;
 
@@ -30,6 +31,7 @@ public class SpellFishForm extends AbstractSpell
 	{
 		caster.worldObj.playSoundAtEntity(caster, "mob.wither.idle", 1.0F, 1.0F);
 		caster.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 1200));
+		SpellboundCore.getInstance().addActiveSpellToEntity(caster, this, 1200);
 	}
 	
 	@Override

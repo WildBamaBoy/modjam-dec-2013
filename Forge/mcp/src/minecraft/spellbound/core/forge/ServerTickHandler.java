@@ -14,12 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import spellbound.core.SpellboundCore;
 import spellbound.core.util.SpellEntry;
 import spellbound.spells.SpellColdLvl3;
 import spellbound.spells.SpellFireShield;
+import spellbound.spells.SpellFishForm;
 import spellbound.spells.SpellFlightLvl1;
 import spellbound.spells.SpellFlightLvl2;
 import spellbound.spells.SpellShieldOfInvulnerability;
@@ -87,6 +89,26 @@ public class ServerTickHandler implements ITickHandler
 				{
 					entityLiving.extinguish();
 				}
+
+				if (entry.spell instanceof SpellFishForm && !SpellboundCore.getInstance().entityHasActiveSpell(entityLiving, SpellFlightLvl2.class))
+				{
+					final EntityPlayer player = (EntityPlayer)entityLiving;
+					final int currentBlockId = player.worldObj.getBlockId((int)player.posX, (int)player.posY + 1, (int)player.posZ);
+	
+					if (currentBlockId == Block.waterStill.blockID || currentBlockId == Block.waterMoving.blockID)
+					{
+						player.capabilities.allowFlying = true;
+						player.capabilities.isFlying = true;
+						PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(true), (Player)player);
+					}
+					
+					else
+					{
+						player.capabilities.allowFlying = false;
+						player.capabilities.isFlying = false;
+						PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player)player);
+					}
+				}
 				
 				if (entry.spell instanceof SpellColdLvl3)
 				{
@@ -106,14 +128,30 @@ public class ServerTickHandler implements ITickHandler
 
 			activeSpells.remove(entry);
 
-			if (entryEntity instanceof EntityPlayer && (entry.spell instanceof SpellFlightLvl1 || entry.spell instanceof SpellFlightLvl2))
+			if (entryEntity instanceof EntityPlayer)
 			{
 				final EntityPlayer entryPlayer = (EntityPlayer)entryEntity;
-				if (!entryPlayer.capabilities.isCreativeMode)
+				
+				if (entry.spell instanceof SpellFlightLvl1 || entry.spell instanceof SpellFlightLvl2)
+				{	
+					if (!entryPlayer.capabilities.isCreativeMode)
+					{
+						entryPlayer.capabilities.allowFlying = false;
+						entryPlayer.capabilities.isFlying = false;
+						PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
+					}
+				}
+				
+				else if (entry.spell instanceof SpellFishForm)
 				{
-					entryPlayer.capabilities.allowFlying = false;
-					entryPlayer.capabilities.isFlying = false;
-					PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
+					final int currentBlockId = entryPlayer.worldObj.getBlockId((int)entryPlayer.posX, (int)entryPlayer.posY, (int)entryPlayer.posZ);
+	
+					if (currentBlockId == Block.waterStill.blockID || currentBlockId == Block.waterMoving.blockID)
+					{
+						entryPlayer.capabilities.allowFlying = false;
+						entryPlayer.capabilities.isFlying = false;
+						PacketDispatcher.sendPacketToPlayer(PacketHandler.createFlightPacket(false), (Player) entryPlayer);
+					}
 				}
 			}
 		}
