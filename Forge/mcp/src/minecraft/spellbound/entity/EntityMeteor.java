@@ -1,13 +1,10 @@
 package spellbound.entity;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import spellbound.core.SpellboundCore;
-import spellbound.core.forge.PacketHandler;
 import spellbound.core.util.Logic;
 import spellbound.core.util.Point3D;
 import spellbound.spells.AbstractSpell;
