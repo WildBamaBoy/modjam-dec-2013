@@ -300,7 +300,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  R T R\n"
 						+ "  T T T   R = Redstone\n"
 						+ "  R T R   T = Lvl3 Wall\n"
-						+ "\n\nYou are encased in a room made of false bedrock."));
+						+ "\n\nYou are encased in a room made of false bedrock. Pair with Dimension Door for the ultimate escape."));
 		bookTagList.appendTag(new NBTTagString("25",
 				"Archmagic\n\n"
 						+ "  - F -   F = Lvl3 Fire\n"
@@ -308,13 +308,13 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - S -   L = Lvl3 Lght.\n"
 						+ "     R = Redstone\n"
 						+ "     S = Shld. of Inv."
-						+ "\n\nAll spells can be cast instantly for 20 seconds."));		
+						+ "\n\nYou can cast any spell instantly for 20 seconds."));
 		bookTagList.appendTag(new NBTTagString("25",
 				"Meteor\n\n"
 						+ "  L F L   F = Lvl3 Fire\n"
 						+ "  F R F   R = Redstone\n"
 						+ "  L F L   L = Lvl3 Lght."
-						+ "\n\nA giant meteor falls from the sky and explodes. Intense heat causes fire!"));		
+						+ "\n\nA giant meteor falls from the sky and explodes. Intense heat causes fire!"));
 		return bookTagList;
 	}
 	
@@ -415,7 +415,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  O O O   O = Obsidian\n"
 						+ "  O T O   T = Lvl1 Div.\n"
 						+ "  O F O   F = Flnt/Stl.\n"
-						+ "\n\nYou create a Nether portal and step inside, only to appear out of the other side several hundred blocks away."));
+						+ "\n\nYou create a temporary Nether portal and step inside, only to appear out of the other side several hundred blocks away. You are always placed above ground, no matter where the spell is cast from."));
 		return bookTagList;
 	}
 	
@@ -436,7 +436,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - C -  C = Clock\n"
 						+ "  R T R  T = Mund. Tab\n"
 						+ "  - R -  R = Redstone\n"
-						+ "\n\nTime advances by a random amount, making crops grow instantly."));
+						+ "\n\nTime advances by a random amount, making crops and trees grow instantly."));
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Change Weather\n\n"
@@ -451,7 +451,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - F -   \n"
 						+ "  F T F   T = Mund. Tab\n"
 						+ "  - F -   F = Feather\n"
-						+ "\n\nYou levitate above the ground for 1 second. Great for stopping falls!"));
+						+ "\n\nYou levitate above the ground for 1 second. Useful for stopping long falls."));
 		
 		bookTagList.appendTag(new NBTTagString("25",
 				"Flight (Lvl2)\n\n"
@@ -465,7 +465,7 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - F -   F = Raw Fish\n"
 						+ "  F T F   T = Lvl1 Div.\n"
 						+ "  - W -   W = Water\n"
-						+ "\n\nYou can breathe underwater for a short time."));
+						+ "\n\nYou can breathe underwater and swim rapidly for 1 minute."));
 
 		bookTagList.appendTag(new NBTTagString("25",
 				"Grease\n\n"
