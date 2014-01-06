@@ -474,6 +474,13 @@ public class ItemBookOfSpells extends ItemEditableBook
 						+ "  - F -   C = Coal"
 						+ "      T = Mund. Tab\n"
 						+ "\n\nPigs are turned into cooked porkchops."));
+		
+		bookTagList.appendTag(new NBTTagString("25",
+				"Torchlight\n\n"
+						+ "  - O -   O = Torch\n"
+						+ "  F T F   F = Feather\n"
+						+ "  - F -   T = Mund. Tab"
+						+ "\n\nA torch appears at the target location.."));
 		return bookTagList;
 	}
 	

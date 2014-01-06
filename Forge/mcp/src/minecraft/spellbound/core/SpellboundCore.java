@@ -100,6 +100,7 @@ import spellbound.spells.SpellSummonLvl1;
 import spellbound.spells.SpellSummonLvl2;
 import spellbound.spells.SpellSummonLvl3;
 import spellbound.spells.SpellSurgeShield;
+import spellbound.spells.SpellTorchlight;
 import spellbound.spells.SpellTransport;
 import spellbound.spells.SpellWailOfTheSheWolf;
 import spellbound.spells.SpellWallOfBedrock;
@@ -227,6 +228,7 @@ public class SpellboundCore
 	public ItemSpellTablet itemTabletFlightLvl1;
 	public ItemSpellTablet itemTabletFlightLvl2;
 	public ItemSpellTablet itemTabletFishForm;
+	public ItemSpellTablet itemTabletTorchlight;
 
 	//Disruption
 	public ItemSpellTablet itemTabletBreach;
@@ -346,7 +348,8 @@ public class SpellboundCore
 		itemTabletFlightLvl1 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlightLvl1, "tabletflightlvl1", new SpellFlightLvl1(), 1);
 		itemTabletFlightLvl2 = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFlightLvl2, "tabletflightlvl2", new SpellFlightLvl2(), 2);
 		itemTabletFishForm = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletFishForm, "tabletfishform", new SpellFishForm(), 1);
-		
+		itemTabletTorchlight = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletTorchlight, "tablettorchlight", new SpellTorchlight(), 1);
+
 		//Disruption
 		itemTabletBreach = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletBreach, "tabletbreach", new SpellBreach(), 1);
 		itemTabletMiscastMagic = new ItemSpellTablet(propertiesManager.propertiesList.itemID_TabletMiscastMagic, "tabletmiscastmagic", new SpellMiscastMagic(), 2);
@@ -505,6 +508,8 @@ public class SpellboundCore
 				"FFF", "FTF", "FFF", 'T', itemTabletFlightLvl1, 'F', Item.feather);
 		GameRegistry.addRecipe(new ItemStack(itemTabletFishForm),
 				" F ", "FTF", " W ", 'T', itemTabletMundaneBase, 'F', Item.fishRaw, 'W', Item.bucketWater);
+		GameRegistry.addRecipe(new ItemStack(itemTabletTorchlight),
+				" O ", "FTF", " F ", 'T', itemTabletMundaneBase, 'F', Item.feather, 'O', Block.torchWood);
 
 		//Disruption
 		GameRegistry.addRecipe(new ItemStack(itemTabletBreach),

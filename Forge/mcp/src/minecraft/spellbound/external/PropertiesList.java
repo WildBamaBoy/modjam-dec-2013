@@ -91,6 +91,7 @@ public class PropertiesList
 	public int itemID_TabletFlightLvl1 = 26831;
 	public int itemID_TabletFlightLvl2 = 26832;
 	public int itemID_TabletFishForm = 26833;
+	public int itemID_TabletTorchlight = 26834;
 	
 	//Disruptive
 	public int itemID_TabletBreach = 26842;
